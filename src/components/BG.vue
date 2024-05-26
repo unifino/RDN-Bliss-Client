@@ -1,5 +1,5 @@
 <template>
-    <div id="curtain"></div>
+    <div id="bg_curtain"></div>
 </template>
 
 // -- =====================================================================================
@@ -29,10 +29,12 @@ export default class BG extends Vue {
 
 <style scoped>
 
-    #curtain{
+    #bg_curtain{
         background-color: rgb(44, 44, 52);
         margin: 0;
         padding: 0;
+        top: 0;
+        left: 0;
         height: 100%;
         width: 100%;
         position: absolute;

@@ -1,7 +1,8 @@
 <template>
-    <div id="flexBox_Home">
-        <Header />
-        <Main style="flex: 1" />
+    <div id="curtain">
+        <B_100 />
+        <B_010 />
+        <B_001 />
     </div>
 </template>
 
@@ -12,18 +13,19 @@
 // -- =====================================================================================
 
 import { Options, Vue } from 'vue-class-component';
-import Header                       from '@/components/Header.vue';
-import Main                         from '@/components/Main.vue';
+import B_100                        from '@/components/B_100.vue';
+import B_010                        from '@/components/B_010.vue';
+import B_001                        from '@/components/B_001.vue';
 
 // -- =====================================================================================
 
 @Options( {
     components: {
-        Header, Main
+        B_100, B_010, B_001
     }
 } )
 
-export default class Home extends Vue {
+export default class Main extends Vue {
 }
 
 // -- =====================================================================================
@@ -34,10 +36,9 @@ export default class Home extends Vue {
 
 <style scoped>
 
-    #flexBox_Home {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
+    #curtain{
+        background-color: #fbfbfb;
+        position: relative;
     }
 
 </style>

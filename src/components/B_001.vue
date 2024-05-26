@@ -1,24 +1,21 @@
 <template>
-    <BG msg="Nutirition"/>
-    <Home />
+    <div id="box"></div>
 </template>
 
 // -- =====================================================================================
 
 <script lang="ts">
 
-import { Options, Vue }             from 'vue-class-component';
-import BG                           from '@/components/BG.vue';
-import Home                         from '@/components/Home.vue';
+// -- =====================================================================================
+
+import { Options, Vue } from 'vue-class-component';
 
 // -- =====================================================================================
 
-@Options( {
-    components: {
-        BG, Home,
-    },
-} )
-export default class App extends Vue {}
+@Options( {} )
+
+export default class B_001 extends Vue {
+}
 
 // -- =====================================================================================
 
@@ -27,6 +24,17 @@ export default class App extends Vue {}
 // -- =====================================================================================
 
 <style scoped>
+
+    #box{
+        background-color: #dad7d714;
+        /* border: 2px solid #6fa5d3; */
+        border-radius: 23px;
+        height: 670px;
+        width: 480px;
+        margin: 45px;
+        position: relative;
+        float: left;
+    }
 
 </style>
 
