@@ -26,12 +26,12 @@ export default class B_010 extends Vue {
 <style scoped>
 
     #box{
-        background-color: #dad7d7;
+        background-color: #eeefec;
         /* border: 2px solid #6fa5d3; */
         border-radius: 23px;
-        height: 670px;
-        width: 480px;
-        margin: 45px;
+        height: 700px;
+        width: 560px;
+        margin: 30px 5px;
         position: relative;
         float: left;
     }

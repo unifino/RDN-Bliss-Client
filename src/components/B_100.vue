@@ -26,9 +26,11 @@ export default class B_100 extends Vue {
 <style scoped>
 
     #box{
-        background-color: rgb(230, 98, 3);
+        background-color: #e66203;
+        background-color: #393a3b;
         /* border: 2px solid #6fa5d3; */
-        box-shadow: 0 0 10px rgb(71, 21, 4) ;
+        box-shadow: 0 0 10px #471504 ;
+        box-shadow: 0 0 7px #0a2663 ;
         border-radius: 23px;
         height: 610px;
         width: 400px;
