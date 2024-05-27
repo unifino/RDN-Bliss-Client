@@ -1,5 +1,7 @@
 <template>
-    <div id="box"> Nutirition </div>
+    <div id="box">
+
+    </div>
 </template>
 
 // -- =====================================================================================
@@ -27,7 +29,8 @@ export default class Header extends Vue {
 
     #box{
         background-color: #f3f3f3;
-        border: 0 solid #6fa5d3;
+        /* background-color: #fbfbfb; */
+        /* border: 0 solid #6fa5d3; */
         border-bottom-width: 2px;
         height: 164px;
         width: 100%;
