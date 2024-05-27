@@ -11,9 +11,9 @@
 
 // -- =====================================================================================
 
-import { Options, Vue } from 'vue-class-component';
-import Header                       from '@/components/Header.vue';
-import Main                         from '@/components/Main.vue';
+import { Options, Vue }                 from 'vue-class-component';
+import Header                           from '@/components/Header.vue';
+import Main                             from '@/components/Main.vue';
 
 // -- =====================================================================================
 

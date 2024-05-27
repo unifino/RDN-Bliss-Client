@@ -12,10 +12,10 @@
 
 // -- =====================================================================================
 
-import { Options, Vue } from 'vue-class-component';
-import B_100                        from '@/components/B_100.vue';
-import B_010                        from '@/components/B_010.vue';
-import B_001                        from '@/components/B_001.vue';
+import { Options, Vue }                 from 'vue-class-component';
+import B_100                            from '@/components/B_100.vue';
+import B_010                            from '@/components/B_010.vue';
+import B_001                            from '@/components/B_001.vue';
 
 // -- =====================================================================================
 
