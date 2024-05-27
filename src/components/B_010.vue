@@ -27,7 +27,6 @@ export default class B_010 extends Vue {
 
     #box{
         background-color: #eeefec;
-        /* border: 2px solid #6fa5d3; */
         border-radius: 23px;
         height: 700px;
         width: 560px;

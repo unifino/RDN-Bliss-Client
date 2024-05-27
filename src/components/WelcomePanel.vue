@@ -25,7 +25,7 @@ import B_001                            from '@/components/B_001.vue';
     }
 } )
 
-export default class Main extends Vue {
+export default class WelcomePanel extends Vue {
 }
 
 // -- =====================================================================================

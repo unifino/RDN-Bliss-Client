@@ -1,7 +1,7 @@
 <template>
     <div id="flexBox_Home">
         <Header />
-        <Main style="flex: 1" />
+        <WelcomePanel style="flex: 1" />
     </div>
 </template>
 
@@ -13,13 +13,13 @@
 
 import { Options, Vue }                 from 'vue-class-component';
 import Header                           from '@/components/Header.vue';
-import Main                             from '@/components/Main.vue';
+import WelcomePanel                     from '@/components/WelcomePanel.vue';
 
 // -- =====================================================================================
 
 @Options( {
     components: {
-        Header, Main
+        Header, WelcomePanel
     }
 } )
 

@@ -35,6 +35,12 @@ export default class App extends Vue {}
         font-style          : normal;
     }
 
+    /* font-family: Fredericka the Great; */
+    /* font-family: Offside; */
+    /* font-family: NovaMono; */
+    /* font-family: Kite One; */
+    /* font-family: Edu NSW ACT Foundation; */
+
 </style>
 
 // -- =====================================================================================
