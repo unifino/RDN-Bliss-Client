@@ -1,6 +1,7 @@
 <template>
     <div id="box">
         <div id="title"></div>
+        <div id="sign-up">Haven't you an account yet? Sign up here</div>
     </div>
 </template>
 
@@ -51,6 +52,15 @@ export default class B_100 extends Vue {
         /* box-shadow: 0 0 17px #1d1405; */
         background-image: url('@/assets/Pics/login_banner.jpg');
         background-size: 100% auto;
+    }
+
+    #sign-up{
+        font-family: oswald;
+        font-size: 15px;
+        text-align: center;
+        margin-top: 350px;
+        color: whitesmoke;
+        cursor: pointer;
     }
 
 </style>
