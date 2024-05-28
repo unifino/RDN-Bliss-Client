@@ -13,7 +13,7 @@
 
 import { Options, Vue }                 from 'vue-class-component';
 import Header                           from '@/components/Header.vue';
-import WelcomePanel                     from '@/components/WelcomePanel.vue';
+import WelcomePanel                     from '@/components/wps/WelcomePanel.vue';
 
 // -- =====================================================================================
 

@@ -1,0 +1,74 @@
+<template>
+    <div id="wps">
+        <div id="wrapper">
+            <div class="w_xxx" id="w_100"><B_100 /></div>
+            <div class="w_xxx" id="w_010"><B_010 /></div>
+            <div class="w_xxx" id="w_001"><B_001 /></div>
+        </div>
+    </div>
+</template>
+
+// -- =====================================================================================
+
+<script lang="ts">
+
+// -- =====================================================================================
+
+import { Options, Vue }                 from 'vue-class-component';
+import B_100                            from '@/components/wps/B_100.vue';
+import B_010                            from '@/components/wps/B_010.vue';
+import B_001                            from '@/components/wps/B_001.vue';
+
+// -- =====================================================================================
+
+@Options( {
+    components: {
+        B_100, B_010, B_001
+    }
+} )
+
+export default class WelcomePanel extends Vue {
+}
+
+// -- =====================================================================================
+
+</script>
+
+// -- =====================================================================================
+
+<style scoped>
+
+    #wps{
+        bottom: 0;
+        background-color: #fbfbfb;
+        position: relative;
+    }
+
+    #wrapper{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+    }
+
+    .w_xxx{
+        height: 100%;
+        float: left;
+        overflow: hidden;
+    }
+
+    #w_001{
+        float: right;
+        width: 24%;
+    }
+
+    #w_010{
+        width: 48%
+    }
+
+    #w_100{
+        width: 28%;
+    }
+
+</style>
+
+// -- =====================================================================================

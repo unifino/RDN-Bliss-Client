@@ -1,6 +1,8 @@
 <template>
-    <BG msg="Nutirition"/>
-    <Home />
+    <div id="main_frame">
+        <BG msg="Nutirition"/>
+        <Home />
+    </div>
 </template>
 
 // -- =====================================================================================
@@ -26,7 +28,7 @@ export default class App extends Vue {}
 
 // -- =====================================================================================
 
-<style>
+<style scoped>
 
     @font-face {
         font-family         : 'PoiretOne';
@@ -40,6 +42,13 @@ export default class App extends Vue {}
     /* font-family: NovaMono; */
     /* font-family: Kite One; */
     /* font-family: Edu NSW ACT Foundation; */
+
+    #main_frame{
+        min-width: 1700px;
+        max-width: 2000px;
+        margin: auto;
+        position: relative;
+    }
 
 </style>
 
