@@ -34,6 +34,8 @@ export default defineComponent ( {
 
     #box{
         background-color: #f3f3f3;
+        background-image: url( "@/assets/Pics/RDN.png" );
+        background-size: auto 70%;
         border-bottom-width: 2px;
         height: 164px;
         width: 100%;
