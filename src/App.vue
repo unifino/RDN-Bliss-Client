@@ -9,9 +9,9 @@
 
 <script lang="ts">
 
-import { defineComponent }              from 'vue';
-import BG                               from '@/components/BG.vue';
-import My_Home                          from '@/components/Home.vue';
+import { defineComponent }                  from 'vue';
+import BG                                   from '@/components/BG.vue';
+import My_Home                              from '@/components/Home.vue';
 
 // -- ====================================================================================
 
@@ -36,6 +36,13 @@ export default defineComponent ( {
 // -- =====================================================================================
 
 <style scoped>
+
+    @font-face {
+        font-family         : 'oswald';
+        src                 : url('../src/assets/Fonts/Oswald-Regular.ttf') ;
+        font-weight         : normal;
+        font-style          : normal;
+    }
 
     @font-face {
         font-family         : 'PoiretOne';

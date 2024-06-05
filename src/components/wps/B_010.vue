@@ -2,16 +2,15 @@
     <div id="box">
 
         <div id="newsBox">
-            <img class="bg" src="../../assets/Pics/news/lettuce-8743189.jpg" />
+            <img class="bg" :src="bgPath()" />
             <div id="shadowBox_3" />
             <div id="shadowBox_2" />
             <div id="shadowBox_1" />
-            <div id="contentBox">
-                <div class="title">Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health</div>
-
-                <div class="content">A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans.
-
-                On September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University.</div>
+            <div id="shadoBox_main">
+                <div id="contentBox">
+                    <div class="title" v-html="context.title" />
+                    <div class="content" v-text="context.text" />
+                </div>
             </div>
         </div>
 
@@ -24,7 +23,7 @@
 
 // -- =====================================================================================
 
-import { defineComponent }              from 'vue';
+import { defineComponent }                  from 'vue';
 
 // -- =====================================================================================
 
@@ -33,6 +32,33 @@ export default defineComponent ( {
 // -- =====================================================================================
 
     name: "B_010",
+
+// -- =====================================================================================
+
+    setup () {
+
+// -- =====================================================================================
+
+        let context = { title: "", text: "" }
+        context.title = "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health";
+        context.text = "A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans. \n\n On September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University."
+
+// -- =====================================================================================
+
+        return { context }
+
+// -- =====================================================================================
+
+    },
+
+// -- =====================================================================================
+
+    methods: {
+        bgPath () {
+            return require( "@/assets/Pics/news/temp/2.jpg" )
+        }
+    }
+
 
 // -- =====================================================================================
 
@@ -72,7 +98,7 @@ export default defineComponent ( {
         z-index: 0;
     }
 
-    #contentBox, #shadowBox_1, #shadowBox_2, #shadowBox_3{
+    #shadoBox_main, #shadowBox_1, #shadowBox_2, #shadowBox_3{
         top: 0;
         left: 0;
         background-color: #eeefec;
@@ -112,6 +138,8 @@ export default defineComponent ( {
     .content{
         font-family: oswald;
         font-size: 18px;
+        max-width: 300px;
+        white-space: pre-line;
     }
 
 </style>

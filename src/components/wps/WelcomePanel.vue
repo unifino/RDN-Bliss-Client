@@ -14,10 +14,10 @@
 
 // -- =====================================================================================
 
-import { defineComponent }              from 'vue';
-import B_100                            from '@/components/wps/B_100.vue';
-import B_010                            from '@/components/wps/B_010.vue';
-import B_001                            from '@/components/wps/B_001.vue';
+import { defineComponent }                  from 'vue';
+import B_100                                from '@/components/wps/B_100.vue';
+import B_010                                from '@/components/wps/B_010.vue';
+import B_001                                from '@/components/wps/B_001.vue';
 
 // -- =====================================================================================
 

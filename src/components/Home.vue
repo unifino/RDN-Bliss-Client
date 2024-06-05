@@ -11,9 +11,9 @@
 
 // -- =====================================================================================
 
-import { defineComponent }              from 'vue';
-import Main_Header                      from '@/components/Header.vue';
-import Welcome_Panel                    from '@/components/wps/WelcomePanel.vue';
+import { defineComponent }                  from 'vue';
+import Main_Header                          from '@/components/Header.vue';
+import Welcome_Panel                        from '@/components/wps/WelcomePanel.vue';
 
 // -- =====================================================================================
 

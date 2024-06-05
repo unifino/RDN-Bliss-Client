@@ -1,6 +1,6 @@
 <template>
     <div id="box">
-
+        <div id="logo" />
     </div>
 </template>
 
@@ -10,11 +10,7 @@
 
 // -- =====================================================================================
 
-import { Options, Vue }                 from 'vue-class-component';
-
-// -- =====================================================================================
-
-import { defineComponent }              from 'vue';
+import { defineComponent }                  from 'vue';
 
 // -- =====================================================================================
 
@@ -43,6 +39,17 @@ export default defineComponent ( {
         width: 100%;
         margin: 0;
         position: relative;
+    }
+
+    #logo{
+        width: 220px;
+        height: 100px;
+        position: absolute;
+        right: 50px;
+        top: 30px;
+        background-image: url( "@/assets/Pics/logo.png" );
+        background-repeat: no-repeat;
+        background-size: auto 100%;
     }
 
 </style>

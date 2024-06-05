@@ -2,10 +2,22 @@
     <div id="box">
         <div id="title" />
         <div id="logBox">
-            <div class="icon"><span class="txt">I'm a Doctor</span></div>
-            <div class="icon"><span class="txt">I'm a Student</span></div>
+            
+            <div class="section">
+                <div class="icon"></div>
+                <div class="txt">I'm a Doctor</div>
+            </div>
+
+            <div class="section">
+                <div class="icon"></div>
+                <div class="txt">I'm a Student</div>
+            </div>
+
+            <div class="section mini">
+                <div class="icon mini"></div>
+                <div class="txt">Create a new Account</div>
+            </div>
         </div>
-        <div id="signUp">Haven't you an account yet ?  Sign up here</div>
     </div>
 </template>
 
@@ -15,7 +27,7 @@
 
 // -- =====================================================================================
 
-import { defineComponent }              from 'vue';
+import { defineComponent }                  from 'vue';
 
 // -- =====================================================================================
 
@@ -58,46 +70,49 @@ export default defineComponent ( {
         color: whitesmoke;
         height: 150px;
         line-height: 80px;
-        /* box-shadow: 0 0 17px #1d1405; */
         background-image: url('@/assets/Pics/login_banner.jpg');
         background-size: 100% auto;
     }
 
     #logBox{
-        height: 50%;
-        text-align: center;
-        margin: auto;
-        border-radius: 7px;
-        margin: 20% auto 3% auto;
+        padding-top: 10px;
     }
 
-    #signUp{
-        font-family: oswald;
-        font-size: 15px;
-        text-align: center;
-        color: whitesmoke;
-        white-space: nowrap;
+    .section{
+        height: 63px;
+        width: 230px;
+        margin: 44px auto;
+        color: #c6c3c0;
+        display: flex;
+    }
+    .section:hover{
+        color: #f1a116;
+        cursor: pointer;
+    }
+
+    .section> div{
+        align-self: flex-end;
     }
 
     .icon{
         font-family: fas;
         font-size: 60px;
-        height: auto;
-        width: 90%;
-        color: #c6c3c0;
-        margin: 50px 10px;
-        border-radius: 8px;
-    }
-    .icon:hover, #signUp:hover{
-        color: #f1a116;
-        cursor: pointer;
+        padding-left: 7px;
+        margin-right: 20px;
     }
 
     .txt{
         font-family: PoiretOne;
         font-size: 20px;
         font-weight: 900;
-        margin: 0px 0px 0px 15px;
+    }
+
+    .mini{
+        padding-left: 0;
+        font-size: 44px;
+    }
+    .mini .txt{
+        font-size: 15px;
     }
 
 </style>
