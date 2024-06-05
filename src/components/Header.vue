@@ -1,5 +1,6 @@
 <template>
     <div id="box">
+        <div id="rdn" />
         <div id="logo" />
     </div>
 </template>
@@ -41,6 +42,17 @@ export default defineComponent ( {
         width: 100%;
         margin: 0;
         position: relative;
+    }
+
+    #rdn{
+        width: 220px;
+        height: 60px;
+        position: absolute;
+        right: 144px;
+        top: 50px;
+        background-image: url( "@/assets/Pics/RDN_txt_logo.png" );
+        background-repeat: no-repeat;
+        background-size: auto 100%;
     }
 
     #logo{
