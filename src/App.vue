@@ -1,7 +1,7 @@
 <template>
     <div id="main_frame">
         <BG msg="Nutirition"/>
-        <Home />
+        <My_Home />
     </div>
 </template>
 
@@ -9,18 +9,25 @@
 
 <script lang="ts">
 
-import { Options, Vue }                 from 'vue-class-component';
+import { defineComponent }              from 'vue';
 import BG                               from '@/components/BG.vue';
-import Home                             from '@/components/Home.vue';
+import My_Home                          from '@/components/Home.vue';
+
+// -- ====================================================================================
+
+export default defineComponent ( {
 
 // -- =====================================================================================
 
-@Options( {
-    components: {
-        BG, Home,
-    },
+    name: "WelcomePanel",
+
+// -- =====================================================================================
+
+    components: { BG, My_Home }
+
+// -- =====================================================================================
+
 } )
-export default class App extends Vue {}
 
 // -- =====================================================================================
 
@@ -33,6 +40,20 @@ export default class App extends Vue {}
     @font-face {
         font-family         : 'PoiretOne';
         src                 : url('../src/assets/Fonts/PoiretOne-Regular.ttf') ;
+        font-weight         : normal;
+        font-style          : normal;
+    }
+
+    @font-face {
+        font-family         : 'far';
+        src                 : url('../src/assets/Fonts/fa-regular-400.ttf') ;
+        font-weight         : normal;
+        font-style          : normal;
+    }
+
+    @font-face {
+        font-family         : 'fas';
+        src                 : url('../src/assets/Fonts/fa-solid-900.ttf') ;
         font-weight         : normal;
         font-style          : normal;
     }

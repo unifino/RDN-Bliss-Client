@@ -1,7 +1,7 @@
 <template>
     <div id="flexBox_Home">
-        <Header />
-        <WelcomePanel style="flex: 1" />
+        <Main_Header />
+        <Welcome_Panel style="flex: 1" />
     </div>
 </template>
 
@@ -11,20 +11,23 @@
 
 // -- =====================================================================================
 
-import { Options, Vue }                 from 'vue-class-component';
-import Header                           from '@/components/Header.vue';
-import WelcomePanel                     from '@/components/wps/WelcomePanel.vue';
+import { defineComponent }              from 'vue';
+import Main_Header                      from '@/components/Header.vue';
+import Welcome_Panel                    from '@/components/wps/WelcomePanel.vue';
 
 // -- =====================================================================================
 
-@Options( {
-    components: {
-        Header, WelcomePanel
-    }
-} )
+export default defineComponent ( {
 
-export default class Home extends Vue {
-}
+// -- =====================================================================================
+
+    name: "My_Home",
+
+// -- =====================================================================================
+
+    components: { Main_Header, Welcome_Panel }
+
+} )
 
 // -- =====================================================================================
 

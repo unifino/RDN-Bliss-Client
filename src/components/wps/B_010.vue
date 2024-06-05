@@ -1,5 +1,21 @@
 <template>
-    <div id="box"></div>
+    <div id="box">
+
+        <div id="newsBox">
+            <img class="bg" src="../../assets/Pics/news/lettuce-8743189.jpg" />
+            <div id="shadowBox_3" />
+            <div id="shadowBox_2" />
+            <div id="shadowBox_1" />
+            <div id="contentBox">
+                <div class="title">Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health</div>
+
+                <div class="content">A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans.
+
+                On September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University.</div>
+            </div>
+        </div>
+
+</div>
 </template>
 
 // -- =====================================================================================
@@ -8,14 +24,19 @@
 
 // -- =====================================================================================
 
-import { Options, Vue }                 from 'vue-class-component';
+import { defineComponent }              from 'vue';
 
 // -- =====================================================================================
 
-@Options( {} )
+export default defineComponent ( {
 
-export default class B_010 extends Vue {
-}
+// -- =====================================================================================
+
+    name: "B_010",
+
+// -- =====================================================================================
+
+} )
 
 // -- =====================================================================================
 
@@ -32,6 +53,65 @@ export default class B_010 extends Vue {
         width: 90%;
         margin: 5% 1% auto 4%;
         position: relative;
+        overflow: hidden;
+    }
+
+    #newsBox{
+        width: 55%;
+        margin: 0 5%;
+        height: 80%;
+        padding: 10% 0;
+    }
+
+    .bg{
+        bottom: 0;
+        right: 0;
+        height: 95%;
+        width: auto;
+        position: absolute;
+        z-index: 0;
+    }
+
+    #contentBox, #shadowBox_1, #shadowBox_2, #shadowBox_3{
+        top: 0;
+        left: 0;
+        background-color: #eeefec;
+        width: 45%;
+        height: 60%;
+        padding: 90px 50% 30% 90px;
+        border-radius: 0 0 100% 0;
+        position: absolute;
+        z-index: 1;
+    }
+    #shadowBox_1{
+        top: 12px;
+        left: 12px;
+        background-color: #d0d1cf;
+        opacity: .8;
+    }
+    #shadowBox_2{
+        top: 27px;
+        left: 27px;
+        background-color: #adadad;
+        opacity: .6;
+    }
+    #shadowBox_3{
+        top: 72px;
+        left: 72px;
+        background-color: rgb(71, 71, 71);
+        opacity: .35;
+    }
+
+    .title{
+        font-family: PoiretOne;
+        font-weight: bold;
+        font-size: 25px;
+        margin-bottom: 52px;
+    }
+
+    .content{
+        font-family: oswald;
+        font-size: 18px;
     }
 
 </style>

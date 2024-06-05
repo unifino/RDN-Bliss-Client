@@ -1,7 +1,11 @@
 <template>
     <div id="box">
-        <div id="title"></div>
-        <div id="sign-up">Haven't you an account yet? Sign up here</div>
+        <div id="title" />
+        <div id="logBox">
+            <div class="icon"><span class="txt">I'm a Doctor</span></div>
+            <div class="icon"><span class="txt">I'm a Student</span></div>
+        </div>
+        <div id="signUp">Haven't you an account yet ?  Sign up here</div>
     </div>
 </template>
 
@@ -11,14 +15,19 @@
 
 // -- =====================================================================================
 
-import { Options, Vue }                 from 'vue-class-component';
+import { defineComponent }              from 'vue';
 
 // -- =====================================================================================
 
-@Options( {} )
+export default defineComponent ( {
 
-export default class B_100 extends Vue {
-}
+// -- =====================================================================================
+
+    name: "B_100",
+
+// -- =====================================================================================
+
+} )
 
 // -- =====================================================================================
 
@@ -54,13 +63,41 @@ export default class B_100 extends Vue {
         background-size: 100% auto;
     }
 
-    #sign-up{
+    #logBox{
+        height: 50%;
+        text-align: center;
+        margin: auto;
+        border-radius: 7px;
+        margin: 20% auto 3% auto;
+    }
+
+    #signUp{
         font-family: oswald;
         font-size: 15px;
         text-align: center;
-        margin-top: 350px;
         color: whitesmoke;
+        white-space: nowrap;
+    }
+
+    .icon{
+        font-family: fas;
+        font-size: 60px;
+        height: auto;
+        width: 90%;
+        color: #c6c3c0;
+        margin: 50px 10px;
+        border-radius: 8px;
+    }
+    .icon:hover, #signUp:hover{
+        color: #f1a116;
         cursor: pointer;
+    }
+
+    .txt{
+        font-family: PoiretOne;
+        font-size: 20px;
+        font-weight: 900;
+        margin: 0px 0px 0px 15px;
     }
 
 </style>
