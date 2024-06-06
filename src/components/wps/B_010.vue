@@ -19,50 +19,20 @@
 
 // -- =====================================================================================
 
-<script lang="ts">
+<script setup lang="ts">
 
 // -- =====================================================================================
 
-import { defineComponent }                  from 'vue';
+
+    let context = { title: "", text: "" }
+    context.title = "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health";
+    context.text = "A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans. \n\n On September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University."
 
 // -- =====================================================================================
 
-export default defineComponent ( {
-
-// -- =====================================================================================
-
-    name: "B_010",
-
-// -- =====================================================================================
-
-    setup () {
-
-// -- =====================================================================================
-
-        let context = { title: "", text: "" }
-        context.title = "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health";
-        context.text = "A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans. \n\n On September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University."
-
-// -- =====================================================================================
-
-        return { context }
-
-// -- =====================================================================================
-
-    },
-
-// -- =====================================================================================
-
-    methods: {
-        bgPath () {
-            return require( "@/assets/Pics/news/temp/2.jpg" )
-        }
+    const bgPath = () => {
+        return require( "@/assets/Pics/news/temp/2.jpg" )
     }
-
-
-// -- =====================================================================================
-
-} )
 
 // -- =====================================================================================
 

@@ -1,9 +1,8 @@
 import {
     ActionTree,
     GetterTree,
-    MutationTree ,
-    createStore,
-    useStore
+    MutationTree,
+    createStore
 }                                       from "vuex";
 import * as TS                          from "@/types/types"
 
@@ -31,8 +30,8 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
 // .. define Actions
 const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
-    [ TS.Acts.LanguageChange ] ( {commit}, payload ) { state.language = payload },
-    [ TS.Acts.OrtChange ] ( {commit}, payload ) { state.ort = payload }
+    [ TS.Acts.LanguageChange ] ( commit, payload ) { state.language = payload },
+    [ TS.Acts.OrtChange ] ( commit, payload ) { state.ort = payload }
 
 }
 
@@ -54,9 +53,3 @@ export const store: TS.Store = createStore( {
 } );
 
 // -- =====================================================================================
-
-export default {
-    setup () {
-        const store = useStore()
-    }
-}

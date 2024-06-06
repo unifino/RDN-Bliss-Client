@@ -11,59 +11,33 @@
 
 // -- =====================================================================================
 
-<script lang="ts">
+<script setup lang="ts">
 
 // -- =====================================================================================
 
-import { defineComponent, ref, reactive }             from 'vue';
+import { ref }                              from 'vue';
 import { useStore }                         from 'vuex'
-import * as VX                              from "@/store/store";
 import * as TS                              from "@/types/types";
 
 // -- =====================================================================================
 
-export default defineComponent ( {
+    const store = useStore();
 
-// -- =====================================================================================
+    const options = ref ( [ { code: 0, title: "", select: false, icon: "" } ] );
 
-    name: "Header_Icons",
+    options.value = [
+        { code:TS.Orts.Home,     title: "Home",      select: false, icon: "", },
+        { code:TS.Orts.OurGoals, title: "Our Goals", select: false, icon: "", },
+        { code:TS.Orts.News,     title: "News" ,     select: false, icon: "", },
+        { code:TS.Orts.FAQs,     title: "FAQs" ,     select: false, icon: "?", },
+        { code:TS.Orts.AboutUs,  title: "About Us",  select: false, icon: "", },
+    ]
 
-// -- =====================================================================================
-
-    components: {},
-
-// -- =====================================================================================
-
-    setup() {
-
-        const store = useStore();
-
-        const options = ref ( [ { code: 0, title: "", select: false, icon: "" } ] );
-
-        options.value = [
-            { code:TS.Orts.Home,     title: "Home",      select: false, icon: "", },
-            { code:TS.Orts.OurGoals, title: "Our Goals", select: false, icon: "", },
-            { code:TS.Orts.News,     title: "News" ,     select: false, icon: "", },
-            { code:TS.Orts.FAQs,     title: "FAQs" ,     select: false, icon: "?", },
-            { code:TS.Orts.AboutUs,  title: "About Us",  select: false, icon: "", },
-        ]
-
-        const changeOrt = ( ortCode: TS.Orts ) => {
-            store.dispatch( TS.Acts.OrtChange, ortCode );
-            for( let x of options.value ) x.select = x.code === ortCode;
-        }
-
-        return { options, changeOrt }
-
-    },
-
-    methods: {
-
+    const changeOrt = ( ortCode: TS.Orts ) => {
+        store.dispatch( TS.Acts.OrtChange, ortCode );
+        for( let x of options.value ) x.select = x.code === ortCode;
     }
 
-// -- =====================================================================================
-
-} )
 
 // -- =====================================================================================
 

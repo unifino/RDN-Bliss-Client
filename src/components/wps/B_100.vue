@@ -2,18 +2,18 @@
     <div id="box">
         <div id="title" />
         <div id="logBox">
-            
-            <div class="section">
+
+            <div class="section no_select">
                 <div class="icon"></div>
                 <div class="txt">I'm a Doctor</div>
             </div>
 
-            <div class="section">
+            <div class="section no_select">
                 <div class="icon"></div>
                 <div class="txt">I'm a Student</div>
             </div>
 
-            <div class="section mini">
+            <div class="section no_select mini">
                 <div class="icon mini"></div>
                 <div class="txt">Create a new Account</div>
             </div>
@@ -23,23 +23,7 @@
 
 // -- =====================================================================================
 
-<script lang="ts">
-
-// -- =====================================================================================
-
-import { defineComponent }                  from 'vue';
-
-// -- =====================================================================================
-
-export default defineComponent ( {
-
-// -- =====================================================================================
-
-    name: "B_100",
-
-// -- =====================================================================================
-
-} )
+<script setup lang="ts">
 
 // -- =====================================================================================
 

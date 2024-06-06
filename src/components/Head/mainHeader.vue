@@ -3,7 +3,7 @@
 
         <Header_Icons />
         <div id="divider" />
-        <Buttons />
+        <myButtons />
 
         <myLogo />
 
@@ -12,30 +12,16 @@
 
 // -- =====================================================================================
 
-<script lang="ts">
+<script setup lang="ts">
 
 // -- =====================================================================================
 
-import { defineComponent }                  from 'vue';
-import Header_Icons                         from '@/components/Head/Icons.vue'
-import Buttons                              from '@/components/Head/Buttons.vue'
+import Header_Icons                         from '@/components/Head/myIcons.vue'
+import myButtons                            from '@/components/Head/myButtons.vue'
 import myLogo                               from '@/components/Head/myLogo.vue'
 
 // -- =====================================================================================
 
-export default defineComponent ( {
-
-// -- =====================================================================================
-
-    name: "Main_Header",
-
-// -- =====================================================================================
-
-    components: { Header_Icons, Buttons, myLogo }
-
-// -- =====================================================================================
-
-} )
 
 // -- =====================================================================================
 
@@ -48,7 +34,7 @@ export default defineComponent ( {
     #Main_Header_Box{
         background-color: #f3f3f3;
         background-image: url( "@/assets/Pics/RDN.png" );
-        background-size: auto 70%;
+        background-size: auto 114px;
         border-bottom-width: 2px;
         height: 164px;
         width: 100%;
