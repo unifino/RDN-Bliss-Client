@@ -35,55 +35,40 @@ export default defineComponent ( {
 
 // -- =====================================================================================
 
+<style>
+
+    .no_select {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    @font-face {
+        font-family: 'oswald';
+        src: url('../src/assets/Fonts/Oswald-ExtraLight.ttf');
+    }
+
+    @font-face {
+        font-family : 'Manrope';
+        src : url('../src/assets/Fonts/Manrope.ttf');
+    }
+
+    @font-face {
+        font-family : 'PoiretOne';
+        src : url('../src/assets/Fonts/PoiretOne-Regular.ttf');
+    }
+
+    @font-face {
+        font-family : 'fas-6';
+        src : url('../src/assets/Fonts/fa-solid-6-900.ttf');
+    }
+
+</style>
+
 <style scoped>
-
-    @font-face {
-        font-family         : 'oswald';
-        src                 : url('../src/assets/Fonts/Oswald-ExtraLight.ttf') ;
-        font-weight         : normal;
-        font-style          : normal;
-    }
-
-    @font-face {
-        font-family         : 'Manrope';
-        src                 : url('../src/assets/Fonts/Manrope.ttf') ;
-        font-weight         : normal;
-        font-style          : normal;
-    }
-
-    @font-face {
-        font-family         : 'PoiretOne';
-        src                 : url('../src/assets/Fonts/PoiretOne-Regular.ttf') ;
-        font-weight         : normal;
-        font-style          : normal;
-    }
-
-    /* @font-face {
-        font-family         : 'far';
-        src                 : url('../src/assets/Fonts/fa-regular-400.ttf') ;
-        font-weight         : normal;
-        font-style          : normal;
-    }
-
-    @font-face {
-        font-family         : 'fas';
-        src                 : url('../src/assets/Fonts/fa-solid-900.ttf') ;
-        font-weight         : normal;
-        font-style          : normal;
-    } */
-
-    @font-face {
-        font-family         : 'fas-6';
-        src                 : url('../src/assets/Fonts/fa-solid-6-900.ttf') ;
-        font-weight         : normal;
-        font-style          : normal;
-    }
-
-    /* font-family: Fredericka the Great; */
-    /* font-family: Offside; */
-    /* font-family: NovaMono; */
-    /* font-family: Kite One; */
-    /* font-family: Edu NSW ACT Foundation; */
 
     #main_frame{
         min-width: 1700px;

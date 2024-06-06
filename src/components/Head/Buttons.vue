@@ -1,6 +1,6 @@
 <template>
     <div id="header_icons_box">
-        <div v-for="(opt,i) of options" :key=i class="optionBox">
+        <div v-for="(opt,i) of options" :key=i class="optionBox no_select">
             <div class="button">{{opt.icon}}</div>
             <div class="title">{{opt.title}}</div>
         </div>
