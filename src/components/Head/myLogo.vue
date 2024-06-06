@@ -1,7 +1,7 @@
 <template>
-    <div id="flexBox_Home">
-        <Main_Header />
-        <Welcome_Panel style="flex: 1" />
+    <div id="logo_box">
+        <div id="rdn" />
+        <div id="logo" />
     </div>
 </template>
 
@@ -12,8 +12,6 @@
 // -- =====================================================================================
 
 import { defineComponent }                  from 'vue';
-import Main_Header                          from '@/components/Head/Header.vue';
-import Welcome_Panel                        from '@/components/wps/WelcomePanel.vue';
 
 // -- =====================================================================================
 
@@ -21,11 +19,13 @@ export default defineComponent ( {
 
 // -- =====================================================================================
 
-    name: "My_Home",
+    name: "myLogo",
 
 // -- =====================================================================================
 
-    components: { Main_Header, Welcome_Panel }
+    components: {},
+
+// -- =====================================================================================
 
 } )
 
@@ -37,10 +37,30 @@ export default defineComponent ( {
 
 <style scoped>
 
-    #flexBox_Home {
-        display: flex;
-        min-height: 100vh;
-        flex-direction: column;
+    #logo_box{
+        width: 260px;
+        height: 100px;
+        top: 30px;
+        right: 63px;
+        position: absolute;
+    }
+
+    #logo_box> div{
+        height: 100px;
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        background-position: center;
+        float: left;
+    }
+
+    #rdn{
+        width: 100px;
+        background-image: url( "@/assets/Pics/RDN_txt_logo.png" );
+    }
+
+    #logo{
+        width: 160px;
+        background-image: url( "@/assets/Pics/logo.png" );
     }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div id="box">
-        <div id="rdn" />
-        <div id="logo" />
+        <Header_Icons />
+        <myLogo />
     </div>
 </template>
 
@@ -12,6 +12,8 @@
 // -- =====================================================================================
 
 import { defineComponent }                  from 'vue';
+import Header_Icons                         from '@/components/Head/Icons.vue'
+import myLogo                               from '@/components/Head/myLogo.vue'
 
 // -- =====================================================================================
 
@@ -20,6 +22,10 @@ export default defineComponent ( {
 // -- =====================================================================================
 
     name: "Main_Header",
+
+// -- =====================================================================================
+
+    components: { Header_Icons, myLogo }
 
 // -- =====================================================================================
 
@@ -42,28 +48,6 @@ export default defineComponent ( {
         width: 100%;
         margin: 0;
         position: relative;
-    }
-
-    #rdn{
-        width: 220px;
-        height: 60px;
-        position: absolute;
-        right: 144px;
-        top: 50px;
-        background-image: url( "@/assets/Pics/RDN_txt_logo.png" );
-        background-repeat: no-repeat;
-        background-size: auto 100%;
-    }
-
-    #logo{
-        width: 220px;
-        height: 100px;
-        position: absolute;
-        right: 50px;
-        top: 30px;
-        background-image: url( "@/assets/Pics/logo.png" );
-        background-repeat: no-repeat;
-        background-size: auto 100%;
     }
 
 </style>

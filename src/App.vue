@@ -39,7 +39,14 @@ export default defineComponent ( {
 
     @font-face {
         font-family         : 'oswald';
-        src                 : url('../src/assets/Fonts/Oswald-Regular.ttf') ;
+        src                 : url('../src/assets/Fonts/Oswald-ExtraLight.ttf') ;
+        font-weight         : normal;
+        font-style          : normal;
+    }
+
+    @font-face {
+        font-family         : 'Manrope';
+        src                 : url('../src/assets/Fonts/Manrope.ttf') ;
         font-weight         : normal;
         font-style          : normal;
     }
@@ -51,7 +58,7 @@ export default defineComponent ( {
         font-style          : normal;
     }
 
-    @font-face {
+    /* @font-face {
         font-family         : 'far';
         src                 : url('../src/assets/Fonts/fa-regular-400.ttf') ;
         font-weight         : normal;
@@ -61,6 +68,13 @@ export default defineComponent ( {
     @font-face {
         font-family         : 'fas';
         src                 : url('../src/assets/Fonts/fa-solid-900.ttf') ;
+        font-weight         : normal;
+        font-style          : normal;
+    } */
+
+    @font-face {
+        font-family         : 'fas-6';
+        src                 : url('../src/assets/Fonts/fa-solid-6-900.ttf') ;
         font-weight         : normal;
         font-style          : normal;
     }

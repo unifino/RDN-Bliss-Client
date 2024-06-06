@@ -95,7 +95,7 @@ export default defineComponent ( {
     }
 
     .icon{
-        font-family: fas;
+        font-family: fas-6;
         font-size: 60px;
         padding-left: 7px;
         margin-right: 20px;

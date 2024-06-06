@@ -138,6 +138,7 @@ export default defineComponent ( {
     .content{
         font-family: oswald;
         font-size: 18px;
+        font-weight: bold;
         max-width: 300px;
         white-space: pre-line;
     }
