@@ -1,13 +1,8 @@
 <template>
     <div id="header_icons_box">
         <div v-for="(opt,i) of options" :key=i class="optionBox">
-            <div
-                :class="opt.code===$store.state.ort ? 'selcted':''"
-                v-on:click="test(opt.code)"
-            >
-                <div class="icon">{{opt.icon}}</div>
-                <div class="title">{{opt.title}}</div>
-            </div>
+            <div class="button">{{opt.icon}}</div>
+            <div class="title">{{opt.title}}</div>
         </div>
     </div>
 </template>
@@ -19,8 +14,6 @@
 // -- =====================================================================================
 
 import { defineComponent, ref }             from 'vue';
-import * as VX                              from "@/store/store";
-import * as TS                              from "@/types/types";
 
 // -- =====================================================================================
 
@@ -28,7 +21,7 @@ export default defineComponent ( {
 
 // -- =====================================================================================
 
-    name: "Header_Icons",
+    name: "Header_Buttons",
 
 // -- =====================================================================================
 
@@ -39,23 +32,14 @@ export default defineComponent ( {
     setup() {
 
         const panel = ref<HTMLElement>();
-        const options =  ref ( [{ title: "",code:VX.store.state.ort, icon: "" }] );
+        const options =  ref ( [{ title: "", icon: "" }] );
 
         options.value = [
-            { title: "Home",      code:TS.Orts.Home,     icon: "", },
-            { title: "Our Goals", code:TS.Orts.OurGoals, icon: "", },
-            { title: "News" ,     code:TS.Orts.News,     icon: "", },
-            { title: "FAQs" ,     code:TS.Orts.FAQs,     icon: "?", },
-            { title: "About Us",  code:TS.Orts.AboutUs,  icon: "", },
+            { title: "Language" , icon: "", },
+            // { title: "Theme", icon: "", },
         ]
 
-        function test ( code: TS.Orts ) {
-            VX.store.dispatch( TS.Acts.OrtChange, code );
-            console.log(VX.store.state.ort);
-            
-        }
-
-        return { panel, options, test }
+        return { panel, options }
 
     }
 
@@ -75,7 +59,6 @@ export default defineComponent ( {
         height: 100px;
         width: 500px;
         margin-top: 35px;
-        margin-left: 44px;
     }
 
     .optionBox{
@@ -87,18 +70,21 @@ export default defineComponent ( {
         float: left;
     }
 
-    .icon{
+    .button{
         font-family: "fas-6";
-        font-size: 45px;
-        margin: 14px;
+        font-size: 35px;
+        margin: 25px 20px 10px 20px;
+        opacity: .7;
     }
 
     .title{
         font-family: Manrope;
-        opacity: 0.2;
+        font-weight: bold;
+        font-size: 12px;
+        opacity: 0.4;
     }
 
-    .optionBox:hover, .selcted{
+    .optionBox:hover{
         color: #42152f;
         cursor: pointer;
     }
