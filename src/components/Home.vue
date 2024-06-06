@@ -39,7 +39,8 @@ export default defineComponent ( {
 
     #flexBox_Home {
         display: flex;
-        min-height: 100vh;
+        min-height: 950px;
+        max-height: 1200px;
         flex-direction: column;
     }
 

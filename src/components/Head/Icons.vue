@@ -1,10 +1,7 @@
 <template>
     <div id="header_icons_box">
         <div v-for="(opt,i) of options" :key=i class="optionBox">
-            <div
-                :class="opt.code===$store.state.ort ? 'selcted':''"
-                v-on:click="test(opt.code)"
-            >
+            <div @click="changeOrt(opt.code)" :class="opt.select?'selcted':''">
                 <div class="icon">{{opt.icon}}</div>
                 <div class="title">{{opt.title}}</div>
             </div>
@@ -18,7 +15,8 @@
 
 // -- =====================================================================================
 
-import { defineComponent, ref }             from 'vue';
+import { defineComponent, ref, reactive }             from 'vue';
+import { useStore }                         from 'vuex'
 import * as VX                              from "@/store/store";
 import * as TS                              from "@/types/types";
 
@@ -38,24 +36,28 @@ export default defineComponent ( {
 
     setup() {
 
-        const panel = ref<HTMLElement>();
-        const options =  ref ( [{ title: "",code:VX.store.state.ort, icon: "" }] );
+        const store = useStore();
+
+        const options = ref ( [ { code: 0, title: "", select: false, icon: "" } ] );
 
         options.value = [
-            { title: "Home",      code:TS.Orts.Home,     icon: "", },
-            { title: "Our Goals", code:TS.Orts.OurGoals, icon: "", },
-            { title: "News" ,     code:TS.Orts.News,     icon: "", },
-            { title: "FAQs" ,     code:TS.Orts.FAQs,     icon: "?", },
-            { title: "About Us",  code:TS.Orts.AboutUs,  icon: "", },
+            { code:TS.Orts.Home,     title: "Home",      select: false, icon: "", },
+            { code:TS.Orts.OurGoals, title: "Our Goals", select: false, icon: "", },
+            { code:TS.Orts.News,     title: "News" ,     select: false, icon: "", },
+            { code:TS.Orts.FAQs,     title: "FAQs" ,     select: false, icon: "?", },
+            { code:TS.Orts.AboutUs,  title: "About Us",  select: false, icon: "", },
         ]
 
-        function test ( code: TS.Orts ) {
-            VX.store.dispatch( TS.Acts.OrtChange, code );
-            console.log(VX.store.state.ort);
-            
+        const changeOrt = ( ortCode: TS.Orts ) => {
+            store.dispatch( TS.Acts.OrtChange, ortCode );
+            for( let x of options.value ) x.select = x.code === ortCode;
         }
 
-        return { panel, options, test }
+        return { options, changeOrt }
+
+    },
+
+    methods: {
 
     }
 
@@ -98,14 +100,17 @@ export default defineComponent ( {
         opacity: 0.2;
     }
 
-    .optionBox:hover, .selcted{
-        color: #42152f;
+    .selcted, .selcted> .title, .optionBox:hover{
+        color: #521739;
+        cursor: pointer;
+        font-weight: bold;
+        font-weight: bold;
+        opacity: 1;
         cursor: pointer;
     }
 
-    .optionBox:hover> .title{
-        font-weight: bold;
-        opacity: 1;
+    .optionBox:hover{
+        color: #cc0f7e;
     }
 
 </style>
