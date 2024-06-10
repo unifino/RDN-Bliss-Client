@@ -1,8 +1,5 @@
 <template>
-    <div id="flexBox_Home">
-        <Main_Header />
-        <Welcome_Panel style="flex: 1" />
-    </div>
+    <div id="textBannerBox">{{ store.state.ort }}</div>
 </template>
 
 // -- =====================================================================================
@@ -11,8 +8,9 @@
 
 // -- =====================================================================================
 
-import Main_Header                          from '@/components/Head/mainHeader.vue'
-import Welcome_Panel                        from '@/components/wps/WelcomePanel.vue'
+import { useStore }                         from 'vuex'
+
+const store = useStore();
 
 // -- =====================================================================================
 
@@ -22,11 +20,17 @@ import Welcome_Panel                        from '@/components/wps/WelcomePanel.
 
 <style scoped>
 
-    #flexBox_Home {
-        display: flex;
-        min-height: 950px;
-        max-height: 1200px;
-        flex-direction: column;
+    #textBannerBox{
+        color: #3c3c3c;
+        font-family: PoiretOne;
+        font-size: 200px;
+        margin: 200px 100px;
+        padding: 0;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
     }
 
 </style>

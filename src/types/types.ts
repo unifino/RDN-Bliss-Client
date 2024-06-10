@@ -3,7 +3,7 @@ import {
     Store as VuexStore,
     CommitOptions,
     DispatchOptions,
-}                                       from "vuex";
+}                                       from 'vuex';
 
 // -- =====================================================================================
 
@@ -14,10 +14,20 @@ export enum Languages { "EN", "FA", "UR" }
 export enum DisplayMode { "Wide", "Packed" }
 
 // .. declare Places
-export enum Orts { "Home", "OurGoals", "News", "FAQs", "AboutUs" }
+export enum Orts {
+    Home = "Home",
+    OurGoals = "Our Goals",
+    News = "News",
+    FAQs = "FAQs",
+    AboutUs = "About Us"
+}
+
+// ..  declare Processes
+export enum Processes { "Standing", "Animating", "Waiting" }
 
 // .. declare State
 export type State = {
+    process: Processes,
     language: Languages,
     displayMode: DisplayMode,
     ort: Orts
@@ -37,33 +47,39 @@ type AAC = Omit< ActionContext<State, State>, "commit" > & {
 
 // .. declare Mutation-Options
 export enum Mutates {
-    LanguageChange  = "Change_Languge",
-    OrtChange       = "Chage_Ort"
+    ClearScreen     = "Clean_The_Screen",
+    LanguageChange  = "Change_The_Language",
+    OrtChange       = "Change_The_Ort"
 }
 
 // .. declare Mutations
 export type MyMutations<S = State> = {
-    [ Mutates.LanguageChange ] ( state: S, payload: Languages ): void;
+    [ Mutates.ClearScreen ]     ( state: S, payload: Processes ): void;
+    [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
+    [ Mutates.OrtChange ]       ( state: S, payload: Orts ): void;
 }
 
 // -- =====================================================================================
 
 // .. declare Action-Options
 export enum Acts {
-    LanguageChange  = "Change_Languge",
-    OrtChange       = "Chage_Ort"
+    ClearScreen     = "Clean_The_Screen",
+    LanguageChange  = "Change_The_Language",
+    OrtChange       = "Change_The_Ort"
 }
 
 // .. declare Action Interface
 export interface MyActions {
-    [ Acts.LanguageChange ]   ( {commit}: AAC, payload: Languages ): void;
-    [ Acts.OrtChange ]   ( {commit}: AAC, payload: Orts ): void;
+    [ Acts.ClearScreen ]        ( {dispatch}: AAC, payload: Processes ): void;
+    [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
+    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ): void;
 }
 
 // -- =====================================================================================
 
 // .. declare Getters Options
 export type MyGetters = {
+    process ( state: State ): Processes,
     ort ( state: State ): Orts
 }
 

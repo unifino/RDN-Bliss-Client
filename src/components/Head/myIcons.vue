@@ -1,9 +1,9 @@
 <template>
     <div id="header_icons_box">
-        <div v-for="(opt,i) of options" :key=i class="optionBox no_select">
-            <div @click="changeOrt(opt.code)" :class="opt.select?'selcted':''">
-                <div class="icon">{{opt.icon}}</div>
-                <div class="title">{{opt.title}}</div>
+        <div v-for="(x,i) of options" :key=i class="optionBox no_select">
+            <div @click="changeOrt(x.code)" :class="x.select?'selcted':''">
+                <div class="icon">{{x.icon}}</div>
+                <div class="title">{{x.code}}</div>
             </div>
         </div>
     </div>
@@ -15,29 +15,30 @@
 
 // -- =====================================================================================
 
-import { ref }                              from 'vue';
+import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
-import * as TS                              from "@/types/types";
+import * as TS                              from '@/types/types'
+const store = useStore();
 
 // -- =====================================================================================
 
-    const store = useStore();
-
-    const options = ref ( [ { code: 0, title: "", select: false, icon: "" } ] );
+    const options = ref ( [ { code: 0, select: false, icon: "" } ] );
 
     options.value = [
-        { code:TS.Orts.Home,     title: "Home",      select: true,  icon: "", },
-        { code:TS.Orts.OurGoals, title: "Our Goals", select: false, icon: "", },
-        { code:TS.Orts.News,     title: "News" ,     select: false, icon: "", },
-        { code:TS.Orts.FAQs,     title: "FAQs" ,     select: false, icon: "?", },
-        { code:TS.Orts.AboutUs,  title: "About Us",  select: false, icon: "", },
+        { code:TS.Orts.Home,     select: true,  icon: "", },
+        { code:TS.Orts.OurGoals, select: false, icon: "", },
+        { code:TS.Orts.News,     select: false, icon: "", },
+        { code:TS.Orts.FAQs,     select: false, icon: "?", },
+        { code:TS.Orts.AboutUs,  select: false, icon: "", },
     ]
 
-    const changeOrt = ( ortCode: TS.Orts ) => {
+    const changeOrt = async ( ortCode: TS.Languages ) => {
+
+        store.dispatch( TS.Acts.ClearScreen, TS.Processes.Animating );
         store.dispatch( TS.Acts.OrtChange, ortCode );
         for( let x of options.value ) x.select = x.code === ortCode;
-    }
 
+    }
 
 // -- =====================================================================================
 

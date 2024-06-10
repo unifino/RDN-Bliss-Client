@@ -3,13 +3,14 @@ import {
     GetterTree,
     MutationTree,
     createStore
-}                                       from "vuex";
-import * as TS                          from "@/types/types"
+}                                       from 'vuex';
+import * as TS                          from '@/types/types'
 
 // -- ==================================================================== TS.State =======
 
 // .. define  TS.State
 const state: TS.State = {
+    process: TS.Processes.Standing,
     language: TS.Languages.EN,
     displayMode: TS.DisplayMode.Wide,
     ort: TS.Orts.Home,
@@ -20,6 +21,7 @@ const state: TS.State = {
 // .. define Mutations
 const mutations: MutationTree<TS.State> & TS.MyMutations = {
 
+    [ TS.Mutates.ClearScreen ] ( state, payload ) { state.process = payload },
     [ TS.Mutates.LanguageChange ] ( state, payload ) { state.language = payload },
     [ TS.Mutates.OrtChange ] ( state, payload ) { state.ort = payload }
 
@@ -30,8 +32,17 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
 // .. define Actions
 const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
-    [ TS.Acts.LanguageChange ] ( commit, payload ) { state.language = payload },
-    [ TS.Acts.OrtChange ] ( commit, payload ) { state.ort = payload }
+    [ TS.Acts.ClearScreen ] ( commit, payload ) {
+        store.commit( TS.Mutates.ClearScreen, payload );
+    },
+
+    [ TS.Acts.LanguageChange ] ( commit, payload ) {
+        store.commit( TS.Mutates.LanguageChange, payload );
+    },
+
+    [ TS.Acts.OrtChange ] ( commit, payload ) {
+        store.commit( TS.Mutates.OrtChange, payload )
+    }
 
 }
 
@@ -39,7 +50,8 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
 // .. define Getters
 const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
-    ort: state => state.ort
+    process: (state) => (state.process),
+    ort: (state) => (state.ort)
 }
 
 // -- ======================================================================= Setup =======
