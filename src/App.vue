@@ -54,8 +54,6 @@ import My_Home                              from '@/components/myHome.vue';
 <style scoped>
 
     #main_frame{
-        min-width: 1700px;
-        max-width: 2000px;
         margin: auto;
         position: relative;
     }

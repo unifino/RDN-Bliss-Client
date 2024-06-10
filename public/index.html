@@ -8,7 +8,16 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="icon" href="<%= BASE_URL %>favicon.ico">
         <title><%= htmlWebpackPlugin.options.title %></title>
-        <style>body, #app{ margin: 0px; padding: 0px; }</style>
+        <style>body, #app{
+            margin: 0px auto;
+            padding: 0px;
+            /* height: 110vh; */
+            overflow: hidden;
+            min-width: 1600px;
+            max-width: 2000px;
+            min-height: 700px;
+            max-height: 1200px;
+        }</style>
     </head>
 
     <body>
