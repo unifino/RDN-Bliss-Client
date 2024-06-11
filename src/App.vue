@@ -1,7 +1,10 @@
 <template>
     <div id="main_frame">
         <BG msg="Nutirition"/>
-        <My_Home />
+        <div id="MainBox_Flex">
+            <Main_Header />
+            <MainPanel style="flex: 1" />
+        </div>
     </div>
 </template>
 
@@ -10,7 +13,8 @@
 <script setup lang="ts">
 
 import BG                                   from '@/components/BG.vue'
-import My_Home                              from '@/components/Home/myHome.vue'
+import Main_Header                          from '@/components/Head/mainHeader.vue'
+import MainPanel                            from '@/components/MainPanel.vue'
 
 // -- ====================================================================================
 
@@ -56,6 +60,13 @@ import My_Home                              from '@/components/Home/myHome.vue'
     #main_frame{
         margin: auto;
         position: relative;
+    }
+
+    #MainBox_Flex {
+        display: flex;
+        min-height: 1000px;
+        max-height: 1200px;
+        flex-direction: column;
     }
 
 </style>
