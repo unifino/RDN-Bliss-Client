@@ -17,7 +17,7 @@ import { ref }                              from 'vue'
 
 // -- =====================================================================================
 
-    const options =  ref ( [{ title: "", icon: "" }] );
+    const options =  ref ( [{ title: "", icon: "" }] )
 
     options.value = [
         { title: "Language" , icon: "", },

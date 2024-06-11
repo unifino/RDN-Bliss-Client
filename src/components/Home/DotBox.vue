@@ -39,7 +39,7 @@
         position: relative;
         display: inline-block;
         top: 12%;
-        left: 70%;
+        left: 65%;
         rotate: -54deg;
     }
 

@@ -22,7 +22,7 @@ const store = useStore();
 
 // -- =====================================================================================
 
-    const options = ref ( [ { code: 0, select: false, icon: "" } ] );
+    const options = ref ( [ { code: TS.Orts.Home, select: false, icon: "" } ] )
 
     options.value = [
         { code:TS.Orts.Home,     select: true,  icon: "", },
@@ -32,11 +32,11 @@ const store = useStore();
         { code:TS.Orts.AboutUs,  select: false, icon: "", },
     ]
 
-    const changeOrt = async ( ortCode: TS.Languages ) => {
+    const changeOrt = async ( ortCode: TS.Orts ) => {
 
-        store.dispatch( TS.Acts.ClearScreen, TS.Processes.Animating );
-        store.dispatch( TS.Acts.OrtChange, ortCode );
-        for( let x of options.value ) x.select = x.code === ortCode;
+        store.dispatch( TS.Acts.ClearScreen, TS.Processes.Animating )
+        store.dispatch( TS.Acts.OrtChange, ortCode )
+        for( let x of options.value ) x.select = x.code === ortCode
 
     }
 

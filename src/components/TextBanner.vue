@@ -10,7 +10,7 @@
 
 import { useStore }                         from 'vuex'
 
-const store = useStore();
+const store = useStore()
 
 // -- =====================================================================================
 

@@ -1,5 +1,5 @@
 <template>
-    <img id="BOX_001" ref="BOX_001" :src="bgPath()" />
+    <img id="BOX_001" ref="BOX_001" :src="bgPath()[ picIndex ]" />
 </template>
 
 // -- =====================================================================================
@@ -16,28 +16,29 @@ const store = useStore();
 
 // -- =====================================================================================
 
+    // eslint-disable-next-line
     const BOX_001 = ref<HTMLElement>( null as any )
+    let picIndex = ref(0)
 
-    // let bgPath = () => {
-    //     return store.getters.ort === TS.Orts.Home ?
-    //         require( "@/assets/Pics/plant.jpg" ) :
-    //         require( "@/assets/Pics/news/temp/1.jpg" );
-    // }
-
-    let bgPath = () => {
-        return require( "@/assets/Pics/plant.jpg" ) 
+    const bgPath = () => {
+        return [
+            require( "@/assets/Pics/plant.jpg" ),
+            require( "@/assets/Pics/flower.jpg" )
+        ]
     }
+
+
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.process,
-        ( nV ) => {
-            if( nV === TS.Processes.Animating ) {
-                bgPath = () => {
-                    return require( "@/assets/Pics/login_banner.jpg" )
-                }
-            }
-
+        getters => getters.ort,
+        async ( nV ) => {
+            await new Promise( _ => setTimeout( _, 100 ) )
+            BOX_001.value.className = "fadeOut_B001"
+            await new Promise( _ => setTimeout( _, 700 ) )
+            picIndex.value = nV === TS.Orts.Home ? 0 : 1
+            await new Promise( _ => setTimeout( _, 500 ) )
+            BOX_001.value.className = "fadeIn_B001"
         }
     )
 
@@ -51,30 +52,28 @@ const store = useStore();
 <style scoped>
 
     #BOX_001{
-        /* background-image: url( '@/assets/Pics/plant.jpg' ); */
-        background-repeat: no-repeat;
-        background-size: 140% auto;
-        background-position: 0px 0px;
-        border-radius: 23px;
         height: 100%;
-        position: relative;
-    }
-
-    .fadeOut_B001, .fadeIn_B001 {
-        animation           : fade_B001 .8s;
+        position: absolute;
     }
 
     .fadeOut_B001 {
-        animation-fill-mode : forwards;
+        animation           : fadeOut_B001 .8s;
+        animation-fill-mode : both;
     }
 
     .fadeIn_B001 {
-        animation-fill-mode : backwards;
+        animation           : fadeIn_B001 .8s;
+        animation-fill-mode : both;
     }
 
-    @keyframes fade_B001 {
+    @keyframes fadeOut_B001 {
         0%{ opacity: 1; }
         100%{ opacity: 0; }
+    }
+
+    @keyframes fadeIn_B001 {
+        0%{ opacity: 0; }
+        100%{ opacity: 1; }
     }
 
 </style>

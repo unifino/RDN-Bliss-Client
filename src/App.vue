@@ -10,7 +10,7 @@
 <script setup lang="ts">
 
 import BG                                   from '@/components/BG.vue'
-import My_Home                              from '@/components/myHome.vue'
+import My_Home                              from '@/components/Home/myHome.vue'
 
 // -- ====================================================================================
 
