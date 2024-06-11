@@ -3,6 +3,7 @@
         <div id="mainPanelWrapper">
             <DecorPanel />
             <HomePanel />
+            <AboutUsPanel />
         </div>
     </div>
 </template>
@@ -13,8 +14,9 @@
 
 // -- =====================================================================================
 
-import HomePanel                            from '@/components/Home/HomePanel.vue'
 import DecorPanel                           from '@/components/Decor/DecorPanel.vue'
+import HomePanel                            from '@/components/Home/HomePanel.vue'
+import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
 
 // -- =====================================================================================
 

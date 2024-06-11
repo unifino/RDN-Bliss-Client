@@ -1,7 +1,7 @@
 <template>
     <div id="homePanel">
-        <div id="h_100" class="x_xxx" ref="h_100"><H_100 /></div>
-        <div id="h_010" class="x_xxx" ref="h_010"><H_010 /></div>
+        <div id="a_100" class="x_xxx init" ref="a_100"><A_100 /></div>
+        <div id="a_010" class="x_xxx init" ref="a_010"><A_010 /></div>
     </div>
 </template>
 
@@ -11,8 +11,8 @@
 
 // -- =====================================================================================
 
-import H_100                                from '@/components/Home/H_100.vue'
-import H_010                                from '@/components/Home/H_010.vue'
+import A_100                                from '@/components/About Us/A_100.vue'
+import A_010                                from '@/components/About Us/A_010.vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
@@ -21,8 +21,8 @@ const store = useStore()
 
 // -- =====================================================================================
 
-    const h_100 = ref<HTMLElement>( {} as HTMLElement )
-    const h_010 = ref<HTMLElement>( {} as HTMLElement )
+    const a_100 = ref<HTMLElement>( {} as HTMLElement )
+    const a_010 = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
@@ -30,13 +30,13 @@ const store = useStore()
 // -- =====================================================================================
             case "In":
                 await new Promise( _ => setTimeout( _, 900 + 860 ) )
-                h_100.value.className = "x_xxx " + "fallIn_H100"
-                h_010.value.className = "x_xxx " + "fallIn_H010"
+                a_100.value.className = "x_xxx " + "fallIn_A100"
+                a_010.value.className = "x_xxx " + "fallIn_A010"
                 break;
 // -- =====================================================================================
             case "Out":
-                h_100.value.className = "x_xxx " + "fallOut_H100"
-                h_010.value.className = "x_xxx " + "fallOut_H010"
+                a_100.value.className = "x_xxx " + "fallOut_A100"
+                a_010.value.className = "x_xxx " + "fallOut_A010"
                 break;
 // -- =====================================================================================
     } }
@@ -45,7 +45,7 @@ const store = useStore()
 
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => { if ( nV !== oV ) slider( nV === TS.Orts.Home ? "In" : "Out" ) }
+        ( nV, oV ) => { if ( nV !== oV ) slider( nV === TS.Orts.AboutUs ? "In" : "Out" ) }
     )
 
 // -- =====================================================================================
@@ -55,6 +55,15 @@ const store = useStore()
 // -- =====================================================================================
 
 <style scoped>
+
+    #a_100.init{
+        transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
+    }
+
+    #a_010.init{
+        transform: translate(0px, 1000px) scale(0.2);
+        opacity: 0;
+    }
 
     #homePanel{
         height: 100%;
@@ -69,11 +78,11 @@ const store = useStore()
         overflow: hidden;
     }
 
-    #h_100{
+    #a_100{
         width: 28%;
     }
 
-    #h_010{
+    #a_010{
         width: 850px;
         left: 28%;
         /* margin: auto;
@@ -81,12 +90,12 @@ const store = useStore()
         right: 0; */
     }
 
-    .fallOut_H100 {
-        animation           : fallOut_H100 1.9s;
+    .fallOut_A100 {
+        animation           : fallOut_A100 1.9s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallOut_H100 {
+    @keyframes fallOut_A100 {
         14%{
             transform: rotate(3deg) scale(1.07);
         }
@@ -98,12 +107,12 @@ const store = useStore()
         }
     }
 
-    .fallOut_H010 {
-        animation           : fallOut_H010 1.9s;
+    .fallOut_A010 {
+        animation           : fallOut_A010 1.9s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallOut_H010 {
+    @keyframes fallOut_A010 {
         14%{
             transform: translate(0px, 20px) scale(0.9);
             opacity: .3;
@@ -116,13 +125,13 @@ const store = useStore()
         }
     }
 
-    .fallIn_H100 {
-        transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
-        animation           : fallIn_H100 1.7s;
+    .fallIn_A100 {
+        transform           : translate(-700px, 1000px) rotate(-70deg) scale(0.2);
+        animation           : fallIn_A100 1.7s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallIn_H100 {
+    @keyframes fallIn_A100 {
         66%{
             transform: translate(0px, 0px) rotate(3deg) scale(1.07);
         }
@@ -134,13 +143,13 @@ const store = useStore()
         }
     }
 
-    .fallIn_H010 {
-        transform: translate(0px, 1000px) scale(0.2);
-        animation           : fallIn_H010 1.2s;
+    .fallIn_A010 {
+        transform           : translate(0px, 1000px) scale(0.2);
+        animation           : fallIn_A010 1.2s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallIn_H010 {
+    @keyframes fallIn_A010 {
         14%{
             opacity: .2;
             transform: translate(0px, 1000px) scale(0.2);

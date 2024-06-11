@@ -1,7 +1,7 @@
 <template>
     <div id="decorPanel">
-        <div class="x_xxx" id="d_txt" ref="d_txt"><D_TXT /></div>
-        <div class="x_xxx" id="d_cor" ref="d_cor"><D_COR /></div>
+        <div id="d_txt" class="x_xxx" ref="d_txt"><D_TXT /></div>
+        <div id="d_cor" class="x_xxx" ref="d_cor"><D_COR /></div>
     </div>
 </template>
 
