@@ -1,5 +1,5 @@
 <template>
-    <div id="homePanel">
+    <div id="aboutUsPanel" :style="`z-index: ${+(store.state.ort === TS.Orts.AboutUs)}`">
         <div id="a_100" class="x_xxx init" ref="a_100"><A_100 /></div>
         <div id="a_010" class="x_xxx init" ref="a_010"><A_010 /></div>
     </div>
@@ -65,7 +65,7 @@ const store = useStore()
         opacity: 0;
     }
 
-    #homePanel{
+    #aboutUsPanel{
         height: 100%;
         width: 100%;
         bottom: 0;
