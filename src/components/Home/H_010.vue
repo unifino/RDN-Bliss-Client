@@ -1,5 +1,5 @@
 <template>
-    <div id="box">
+    <div id="H_010_Box">
         <DotBox />
 
         <div id="newsBox">
@@ -46,7 +46,7 @@ import DotBox                               from '@/components/Home/DotBox.vue'
 
 <style scoped>
 
-    #box{
+    #H_010_Box{
         background-color: #eeefec;
         border-radius: 23px;
         height: 87%;

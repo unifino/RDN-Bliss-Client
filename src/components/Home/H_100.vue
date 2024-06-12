@@ -1,5 +1,5 @@
 <template>
-    <div id="box">
+    <div id="H_100_Box">
         <div id="title" />
         <div id="logBox">
 
@@ -33,7 +33,7 @@
 
 <style scoped>
 
-    #box{
+    #H_100_Box{
         background-color: #393a3b;
         height: 550px;
         width: 350px;

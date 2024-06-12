@@ -1,10 +1,13 @@
 <template>
-    <div id="box">
-
+    <div id="A_010_Box">
         <div id="newsBox">
-            test
+            Success Stories<br><br>
+            We've helped hundreds of companies around the world achieve remarkable digital sales and marketing results. Below, we invite you to learn about their stories of incredible business growth and success, in their words.
+            Ready to talk about how you can achieve similar results?
+            <br><br>
+            Ryan DeLettre, Davy Clay, and Josh Smith founded Dental ClaimSupport to solve an all too common problem: Dental offices spend too much time on insurance and paperwork, pulling resources away from patient care.  They knew they had a great product and a winning business plan. They just needed to figure out how they could scale.
         </div>
-</div>
+    </div>
 </template>
 
 // -- =====================================================================================
@@ -31,74 +34,23 @@
 
 <style scoped>
 
-    #box{
-        background-color: #eeefec;
+    #A_010_Box{
+        background-color: #fbfbfb;
         border-radius: 23px;
         height: 87%;
-        width: 90%;
-        margin: 5% 1% auto 4%;
+        width: 100%;
+        margin: 5% 0% auto 0%;
         position: relative;
         overflow: hidden;
     }
 
     #newsBox{
-        width: 55%;
+        width: 77%;
         margin: 0 5%;
         height: 80%;
         padding: 10% 0;
-    }
-
-    .bg{
-        bottom: 0;
-        right: 0;
-        height: 95%;
-        width: auto;
-        position: absolute;
-        z-index: 0;
-    }
-
-    #shadoBox_main, #shadowBox_1, #shadowBox_2, #shadowBox_3{
-        top: 0;
-        left: 0;
-        background-color: #eeefec;
-        width: 45%;
-        height: 60%;
-        padding: 90px 50% 30% 90px;
-        border-radius: 0 0 100% 0;
-        position: absolute;
-        z-index: 1;
-    }
-    #shadowBox_1{
-        top: 12px;
-        left: 12px;
-        background-color: #d0d1cf;
-        opacity: .8;
-    }
-    #shadowBox_2{
-        top: 27px;
-        left: 27px;
-        background-color: #adadad;
-        opacity: .6;
-    }
-    #shadowBox_3{
-        top: 72px;
-        left: 72px;
-        background-color: rgb(71, 71, 71);
-        opacity: .35;
-    }
-
-    .title{
-        font-family: PoiretOne;
-        font-weight: bold;
-        font-size: 25px;
-        margin-bottom: 52px;
-    }
-
-    .content{
-        font-family: oswald;
-        font-size: 18px;
-        font-weight: bold;
-        max-width: 300px;
+        font-family: Oswald;
+        font-size: 23px;
         white-space: pre-line;
     }
 
