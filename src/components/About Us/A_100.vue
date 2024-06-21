@@ -40,13 +40,17 @@
         color: whitesmoke;
         height: auto;
         width: 65%;
-        /* background-color: red; */
-        padding: 20px;
-        margin: 10px auto;
+        padding: 5px 20px;
+        margin: 25px auto;
+        cursor: pointer;
     }
 
     .section.selected{
         text-decoration: underline 2px orange;
+    }
+
+    .section:hover{
+        color: orange;
     }
 
 </style>

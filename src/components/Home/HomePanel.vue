@@ -15,6 +15,7 @@ import H_100                                from '@/components/Home/H_100.vue'
 import H_010                                from '@/components/Home/H_010.vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as Tools                           from '@/mixins/Tools'
 import { ref }                              from 'vue'
 
 const store = useStore()
@@ -26,26 +27,10 @@ const store = useStore()
 
 // -- =====================================================================================
 
-    const slider = async function ( phase: "In" | "Out" ) { switch ( phase ) {
-// -- =====================================================================================
-            case "In":
-                await new Promise( _ => setTimeout( _, 900 + 860 ) )
-                h_100.value.className = "x_xxx " + "fallIn_H100"
-                h_010.value.className = "x_xxx " + "fallIn_H010"
-                break;
-// -- =====================================================================================
-            case "Out":
-                h_100.value.className = "x_xxx " + "fallOut_H100"
-                h_010.value.className = "x_xxx " + "fallOut_H010"
-                break;
-// -- =====================================================================================
-    } }
-
-// -- =====================================================================================
-
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => { if ( nV !== oV ) slider( nV === TS.Orts.Home ? "In" : "Out" ) }
+        ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )
+
     )
 
 // -- =====================================================================================
@@ -81,12 +66,12 @@ const store = useStore()
         right: 0; */
     }
 
-    .fallOut_H100 {
-        animation           : fallOut_H100 1.9s;
+    .fallOut_X100 {
+        animation           : fallOut_X100 1.9s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallOut_H100 {
+    @keyframes fallOut_X100 {
         14%{
             transform: rotate(3deg) scale(1.07);
         }
@@ -98,12 +83,12 @@ const store = useStore()
         }
     }
 
-    .fallOut_H010 {
-        animation           : fallOut_H010 1.9s;
+    .fallOut_X010 {
+        animation           : fallOut_X010 1.9s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallOut_H010 {
+    @keyframes fallOut_X010 {
         14%{
             transform: translate(0px, 20px) scale(0.9);
             opacity: .3;
@@ -116,13 +101,13 @@ const store = useStore()
         }
     }
 
-    .fallIn_H100 {
+    .fallIn_X100 {
         transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
-        animation           : fallIn_H100 1.7s;
+        animation           : fallIn_X100 1.7s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallIn_H100 {
+    @keyframes fallIn_X100 {
         66%{
             transform: translate(0px, 0px) rotate(3deg) scale(1.07);
         }
@@ -134,13 +119,13 @@ const store = useStore()
         }
     }
 
-    .fallIn_H010 {
+    .fallIn_X010 {
         transform: translate(0px, 1000px) scale(0.2);
-        animation           : fallIn_H010 1.2s;
+        animation           : fallIn_X010 1.2s;
         animation-fill-mode : both;
     }
 
-    @keyframes fallIn_H010 {
+    @keyframes fallIn_X010 {
         14%{
             opacity: .2;
             transform: translate(0px, 1000px) scale(0.2);
