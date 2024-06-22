@@ -32,6 +32,21 @@ const store = useStore()
         ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )
     )
 
+    store.watch(
+        getters => getters.process,
+        nV => {
+            // .. entring register window
+            if ( nV === TS.Processes.Registring )
+                Tools.reg_Phase_A( nV, [ h_100, h_010 ] )
+            // .. exiting back to the Home
+            else
+                Tools.mainCA(
+                    [ null as any, TS.Orts.Home, TS.Orts.Home ],
+                    [ h_100, h_010 ]
+                )
+        }
+    )
+
 // -- =====================================================================================
 
 </script>

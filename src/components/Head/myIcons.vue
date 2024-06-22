@@ -34,7 +34,7 @@ const store = useStore();
 
     const changeOrt = async ( ortCode: TS.Orts ) => {
 
-        store.dispatch( TS.Acts.ClearScreen, TS.Processes.Animating )
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, ortCode )
         for( let x of options.value ) x.select = x.code === ortCode
 

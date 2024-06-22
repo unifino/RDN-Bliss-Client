@@ -15,6 +15,8 @@ import D_COR                                from '@/components/Decor/D_COR.vue'
 import D_TXT                                from '@/components/Decor/D_TXT.vue'
 import { useStore }                         from 'vuex'
 import { ref }                              from 'vue'
+import * as Anime                           from '@/mixins/AnimationCenter'
+import * as TS                              from '@/types/types'
 
 const store = useStore()
 
@@ -25,26 +27,23 @@ const store = useStore()
 
 // -- =====================================================================================
 
-    const slider = async function () {
-
-        // .. delay of .9s ... slide in TEXT
-        await new Promise( _ => setTimeout( _, 900 ) )
-        d_txt.value.className = "x_xxx " + "slideIn_DTXT"
-
-        await new Promise( _ => setTimeout( _, 860 ) )
-        // .. wait untill it slides in completly
-        await new Promise( _ => setTimeout( _, 1500 ) )
-
-        // .. reset it Class
-        d_txt.value.className = "x_xxx"
-
-    }
-
-// -- =====================================================================================
-
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => { if ( nV !== oV ) slider() }
+        ( nV, oV ) => {
+            if (
+                nV !== oV ||
+                (
+                    nV === TS.Orts.Home &&
+                    store.getters.process === TS.Processes.Registring
+                )
+            )
+                Anime.textSlider( d_txt )
+        }
+    )
+
+    store.watch(
+        getters => getters.process,
+        nV => Anime.textSlider( d_txt )
     )
 
 // -- =====================================================================================

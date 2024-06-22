@@ -10,7 +10,7 @@ import * as TS                          from '@/types/types'
 
 // .. define  TS.State
 const state: TS.State = {
-    process: TS.Processes.Standing,
+    process: TS.Processes.Reading,
     language: TS.Languages.EN,
     displayMode: TS.DisplayMode.Wide,
     ort: TS.Orts.Home,
@@ -21,7 +21,7 @@ const state: TS.State = {
 // .. define Mutations
 const mutations: MutationTree<TS.State> & TS.MyMutations = {
 
-    [ TS.Mutates.ClearScreen ] ( state, payload ) { state.process = payload },
+    [ TS.Mutates.ProcessChange ] ( state, payload ) { state.process = payload },
     [ TS.Mutates.LanguageChange ] ( state, payload ) { state.language = payload },
     [ TS.Mutates.OrtChange ] ( state, payload ) { state.ort = payload }
 
@@ -32,8 +32,8 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
 // .. define Actions
 const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
-    [ TS.Acts.ClearScreen ] ( commit, payload ) {
-        store.commit( TS.Mutates.ClearScreen, payload );
+    [ TS.Acts.ProcessChange ] ( commit, payload ) {
+        store.commit( TS.Mutates.ProcessChange, payload );
     },
 
     [ TS.Acts.LanguageChange ] ( commit, payload ) {

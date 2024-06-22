@@ -15,7 +15,7 @@
 
             <div class="section no_select mini">
                 <div class="icon mini"></div>
-                <div class="txt">Create a new Account</div>
+                <div class="txt" @click="reg">Create a new Account</div>
             </div>
         </div>
     </div>
@@ -24,6 +24,19 @@
 // -- =====================================================================================
 
 <script setup lang="ts">
+
+// -- =====================================================================================
+
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+
+const store = useStore();
+
+// -- =====================================================================================
+
+    const reg = () => {
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registring )
+    }
 
 // -- =====================================================================================
 

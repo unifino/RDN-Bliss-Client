@@ -23,7 +23,7 @@ export enum Orts {
 }
 
 // ..  declare Processes
-export enum Processes { "Standing", "Animating", "Waiting" }
+export enum Processes { "Reading", "Registring", "Loging"  }
 
 // .. declare State
 export type State = {
@@ -47,14 +47,14 @@ type AAC = Omit< ActionContext<State, State>, "commit" > & {
 
 // .. declare Mutation-Options
 export enum Mutates {
-    ClearScreen     = "Clean_The_Screen",
+    ProcessChange   = "Change_The_Process",
     LanguageChange  = "Change_The_Language",
     OrtChange       = "Change_The_Ort"
 }
 
 // .. declare Mutations
 export type MyMutations<S = State> = {
-    [ Mutates.ClearScreen ]     ( state: S, payload: Processes ): void;
+    [ Mutates.ProcessChange ]   ( state: S, payload: Processes ): void;
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
     [ Mutates.OrtChange ]       ( state: S, payload: Orts ): void;
 }
@@ -63,14 +63,14 @@ export type MyMutations<S = State> = {
 
 // .. declare Action-Options
 export enum Acts {
-    ClearScreen     = "Clean_The_Screen",
+    ProcessChange   = "Change_The_Process",
     LanguageChange  = "Change_The_Language",
     OrtChange       = "Change_The_Ort"
 }
 
 // .. declare Action Interface
 export interface MyActions {
-    [ Acts.ClearScreen ]        ( {dispatch}: AAC, payload: Processes ): void;
+    [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ): void;
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
     [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ): void;
 }

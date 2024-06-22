@@ -11,6 +11,7 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as Anime                           from '@/mixins/AnimationCenter'
+import * as TS                              from '@/types/types'
 
 const store = useStore();
 
@@ -26,7 +27,9 @@ const store = useStore();
             require( "@/assets/Pics/beauty.jpg" ),
             require( "@/assets/Pics/books.jpg" ),
             require( "@/assets/Pics/magazine.jpg" ),
-            require( "@/assets/Pics/flower.jpg" )
+            require( "@/assets/Pics/flower.jpg" ),
+            // .. 5
+            require( "@/assets/Pics/whimsical.jpg" ),
         ]
     }
 
@@ -34,9 +37,18 @@ const store = useStore();
 
     store.watch(
         getters => getters.ort,
-        nV => Anime.decor( nV, BOX_001, picIndex )
+        nV => Anime.imgDecor( nV, BOX_001, picIndex )
     )
 
+    store.watch(
+        getters => getters.process,
+        nV => Anime.imgDecor(
+            TS.Orts.Home,
+            BOX_001,
+            picIndex,
+            nV === TS.Processes.Registring ? 5 : null
+        )
+    )
 
 // -- =====================================================================================
 

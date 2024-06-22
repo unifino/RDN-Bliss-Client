@@ -1,5 +1,5 @@
 <template>
-    <div id="textBannerBox">{{ store.state.ort }}</div>
+    <div id="textBannerBox">{{ myText }}</div>
 </template>
 
 // -- =====================================================================================
@@ -9,8 +9,27 @@
 // -- =====================================================================================
 
 import { useStore }                         from 'vuex'
+import { ref }                              from 'vue'
+import * as TS                              from '@/types/types'
 
 const store = useStore()
+
+// -- =====================================================================================
+
+    const d_cor = ref<HTMLElement>( {} as HTMLElement )
+    const myText = ref<string>()
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.ort,
+        nV => myText.value = nV
+    )
+
+    store.watch(
+        getters => getters.process,
+        nV => myText.value = nV === TS.Processes.Registring ? "Welcome" : store.getters.ort
+    )
 
 // -- =====================================================================================
 
