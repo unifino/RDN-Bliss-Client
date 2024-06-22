@@ -21,7 +21,7 @@ const store = useStore()
 <style scoped>
 
     #textBannerBox{
-        color: #3c3c3c;
+        color: #34282F;
         font-family: PoiretOne;
         font-size: 200px;
         margin: 200px 100px;

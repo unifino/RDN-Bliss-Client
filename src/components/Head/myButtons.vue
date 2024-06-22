@@ -50,7 +50,7 @@ import { ref }                              from 'vue'
 
     .button{
         font-family: "fas-6";
-        font-size: 35px;
+        font-size: 31px;
         margin: 25px 20px 10px 20px;
         opacity: .7;
     }
@@ -63,7 +63,7 @@ import { ref }                              from 'vue'
     }
 
     .optionBox:hover{
-        color: #42152f;
+        color: #a33474;
         cursor: pointer;
     }
 

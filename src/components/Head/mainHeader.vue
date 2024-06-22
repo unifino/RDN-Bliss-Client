@@ -48,9 +48,9 @@ import myLogo                               from '@/components/Head/myLogo.vue'
 
     #divider{
         height: 99px;
-        margin: 40px;
+        margin: 25px 27px 25px 20px;
         margin-top: 35px;
-        border-right: dashed 3px gray;
+        border-right: dashed 2.5px gray;
     }
 
 </style>

@@ -59,14 +59,14 @@ const store = useStore();
         text-align: center;
         color: #29363a;
         height: 80px;
-        width: 100px;
+        width: 95px;
         position: relative;
         float: left;
     }
 
     .icon{
         font-family: "fas-6";
-        font-size: 45px;
+        font-size: 40px;
         margin: 14px;
     }
 
@@ -85,7 +85,7 @@ const store = useStore();
     }
 
     .optionBox:hover{
-        color: #cc0f7e;
+        color: #a33474;
     }
 
 </style>

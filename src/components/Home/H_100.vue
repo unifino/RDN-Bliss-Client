@@ -5,12 +5,12 @@
 
             <div class="section no_select">
                 <div class="icon"></div>
-                <div class="txt">I'm a Doctor</div>
+                <div class="txt">I'm a Dietition</div>
             </div>
 
             <div class="section no_select">
-                <div class="icon"></div>
-                <div class="txt">I'm a Student</div>
+                <div class="icon"></div>
+                <div class="txt">I'm a Paitent</div>
             </div>
 
             <div class="section no_select mini">
