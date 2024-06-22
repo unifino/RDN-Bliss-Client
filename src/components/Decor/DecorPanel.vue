@@ -1,7 +1,7 @@
 <template>
     <div id="decorPanel">
-        <div id="d_txt" class="x_xxx" ref="d_txt"><D_TXT /></div>
         <div id="d_cor" class="x_xxx" ref="d_cor"><D_COR /></div>
+        <div id="d_txt" class="x_xxx" ref="d_txt"><D_TXT /></div>
     </div>
 </template>
 
@@ -27,12 +27,10 @@ const store = useStore()
 
     const slider = async function () {
 
-        // .. PART OUT
         // .. delay of .9s ... slide in TEXT
         await new Promise( _ => setTimeout( _, 900 ) )
-        d_txt.value.className += "x_xxx " + "slideIn_DTXT"
+        d_txt.value.className = "x_xxx " + "slideIn_DTXT"
 
-        // .. PART IN
         await new Promise( _ => setTimeout( _, 860 ) )
         // .. wait untill it slides in completly
         await new Promise( _ => setTimeout( _, 1500 ) )
@@ -68,19 +66,20 @@ const store = useStore()
         height: 100%;
         position: absolute;
         overflow: hidden;
+        transform: translateX(-5%);
     }
 
     #d_txt{
         top: 0;
         width: 100%;
-        transform: translateX(-5%);
         opacity: 0;
     }
 
     #d_cor{
         bottom: 0;
-        width: 24%;
         right: 0;
+        width: 100%;
+        transform: translateX(0);
     }
 
     .slideIn_DTXT {

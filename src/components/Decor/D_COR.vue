@@ -1,5 +1,5 @@
 <template>
-    <img id="BOX_001" ref="BOX_001" :src="bgPath()[ picIndex ]" />
+    <img id="BOX_001" ref="BOX_001" :src="pics()[ picIndex ]" />
 </template>
 
 // -- =====================================================================================
@@ -10,7 +10,7 @@
 
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
-import * as TS                              from '@/types/types'
+import * as Anime                           from '@/mixins/AnimationCenter'
 
 const store = useStore();
 
@@ -18,28 +18,23 @@ const store = useStore();
 
     // eslint-disable-next-line
     const BOX_001 = ref<HTMLElement>( null as any )
-    let picIndex = ref(0)
+    const picIndex = ref(0)
 
-    const bgPath = () => {
+    const pics = () => {
         return [
             require( "@/assets/Pics/plant.jpg" ),
+            require( "@/assets/Pics/beauty.jpg" ),
+            require( "@/assets/Pics/books.jpg" ),
+            require( "@/assets/Pics/magazine.jpg" ),
             require( "@/assets/Pics/flower.jpg" )
         ]
     }
-
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.ort,
-        async ( nV ) => {
-            await new Promise( _ => setTimeout( _, 100 ) )
-            BOX_001.value.className = "fadeOut_B001"
-            await new Promise( _ => setTimeout( _, 700 ) )
-            picIndex.value = nV === TS.Orts.Home ? 0 : 1
-            await new Promise( _ => setTimeout( _, 500 ) )
-            BOX_001.value.className = "fadeIn_B001"
-        }
+        nV => Anime.decor( nV, BOX_001, picIndex )
     )
 
 
@@ -53,6 +48,7 @@ const store = useStore();
 
     #BOX_001{
         height: 100%;
+        right: 0;
         position: absolute;
     }
 

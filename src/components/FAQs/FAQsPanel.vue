@@ -1,7 +1,6 @@
 <template>
-    <div id="homePanel" :style="`z-index: ${+(store.state.ort === TS.Orts.Home)}`">
-        <div id="h_100" class="x_xxx" ref="h_100"><H_100 /></div>
-        <div id="h_010" class="x_xxx" ref="h_010"><H_010 /></div>
+    <div id="FAQsPanel" :style="`z-index: ${+(store.state.ort === TS.Orts.FAQs)}`">
+        <div id="f_100" class="x_xxx init" ref="f_100"><F_100 /></div>
     </div>
 </template>
 
@@ -11,25 +10,23 @@
 
 // -- =====================================================================================
 
-import H_100                                from '@/components/Home/H_100.vue'
-import H_010                                from '@/components/Home/H_010.vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools'
 import { ref }                              from 'vue'
+import F_100                                from '@/components/FAQs/F_100.vue'
 
 const store = useStore()
 
 // -- =====================================================================================
 
-    const h_100 = ref<HTMLElement>( {} as HTMLElement )
-    const h_010 = ref<HTMLElement>( {} as HTMLElement )
+    const f_100 = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )
+        ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.FAQs ], [ null, f_100 ] )
     )
 
 // -- =====================================================================================
@@ -40,7 +37,16 @@ const store = useStore()
 
 <style scoped>
 
-    #homePanel{
+    #f_100.init{
+        transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
+    }
+
+    #f_010.init{
+        transform: translate(0px, 1000px) scale(0.2);
+        opacity: 0;
+    }
+
+    #FAQsPanel{
         height: 100%;
         width: 100%;
         bottom: 0;
@@ -53,11 +59,11 @@ const store = useStore()
         overflow: hidden;
     }
 
-    #h_100{
-        width: 28%;
+    #f_100{
+        width: 63%;
     }
 
-    #h_010{
+    #f_010{
         width: 850px;
         left: 28%;
         /* margin: auto;
