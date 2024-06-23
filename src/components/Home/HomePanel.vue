@@ -95,11 +95,11 @@ const store = useStore()
 
     #h_reg{
         height: 85%;
-        margin-top: 2.5%;
-        margin-left: 2.5%;
+        margin-top: 44px;
+        margin-left: 55px;
         width: 1200px;
-        /* background-color: darkslategray; */
-        border: solid 2px darkslategray;
+        border: solid 2px rgb(161 161 161);
+        box-shadow: 0 0 10px 1px rgb(130 157 176);
         border-radius: 20px;
         transform: scale(0);
         opacity: 0;
@@ -180,7 +180,7 @@ const store = useStore()
     }
 
     .fallIn_XReg {
-        animation           : fallIn_XReg .5s;
+        animation           : fallIn_XReg .7s;
         animation-fill-mode : both;
     }
 

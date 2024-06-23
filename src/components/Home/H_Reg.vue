@@ -26,6 +26,10 @@
 <!-- ================================================================================== -->
         <div id="p3" class="part"></div>
 <!-- ================================================================================== -->
+        <div id="p4" class="part"></div>
+<!-- ================================================================================== -->
+        <div id="p5" class="part"></div>
+<!-- ================================================================================== -->
     </div>
 </template>
 
@@ -57,10 +61,12 @@ import { ref }                              from 'vue'
 
     #H_Reg_Box {
         display: grid;
-        grid-template-columns: 350px auto;
-        grid-template-rows: 440px auto ;
-        min-height: 690px;
+        grid-template-columns: 350px auto auto;
+        grid-template-rows: 340px 100px auto ;
+        min-height: 650px;
+        height: 100%;
         max-height: 1200px;
+        background-color: #F0F0F0;
     }
 
     .part{
@@ -68,18 +74,35 @@ import { ref }                              from 'vue'
     }
 
     #p1{
+        grid-row-start: 1;
+        grid-row-end: 3;
         border-right: 2px dashed darkslategray;
+        border-left: 1px solid  rgb(118 118 118);
+        border-top: 1px solid  rgb(118 118 118);
         background-color: #73A7CB;
     }
 
     #p2{
-
+        grid-row-start: 1;
+        grid-row-end: 3;
     }
 
     #p3{
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+
+    #p4{
         grid-row-start: 2;
+        grid-row-end: 3;
+        grid-column-start: 3;
+        grid-column-end: 4;
+    }
+
+    #p5{
+        grid-row-start: 3;
         grid-column-start: 1;
-        grid-column-end: 3;
+        grid-column-end: 4;
         border-top: 2px dashed darkslategray;
     }
 
