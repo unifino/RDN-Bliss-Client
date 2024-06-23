@@ -28,7 +28,9 @@ const store = useStore()
 
     store.watch(
         getters => getters.process,
-        nV => myText.value = nV === TS.Processes.Registring ? "Welcome" : store.getters.ort
+        nV => myText.value = nV === TS.Processes.Registring ? 
+            "Hey there!" :
+            store.getters.ort
     )
 
 // -- =====================================================================================
@@ -42,7 +44,8 @@ const store = useStore()
     #textBannerBox{
         color: #34282F;
         font-family: PoiretOne;
-        font-size: 200px;
+        font-size: 140px;
+        /* font-weight: 600; */
         margin: 200px 100px;
         padding: 0;
         top: 0;

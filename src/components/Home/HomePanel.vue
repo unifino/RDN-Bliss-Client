@@ -39,7 +39,7 @@ const store = useStore()
             if ( nV === TS.Processes.Registring )
                 Tools.reg_Phase_A( nV, [ h_100, h_010 ] )
             // .. exiting back to the Home
-            else
+            else if ( store.getters.ort === TS.Orts.Home )
                 Tools.mainCA(
                     [ null as any, TS.Orts.Home, TS.Orts.Home ],
                     [ h_100, h_010 ]
