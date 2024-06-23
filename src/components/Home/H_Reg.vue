@@ -26,7 +26,9 @@
 <!-- ================================================================================== -->
         <div id="p3" class="part"></div>
 <!-- ================================================================================== -->
-        <div id="p4" class="part"></div>
+        <div id="p4" class="part">
+            <div id="regButton">Register</div>
+        </div>
 <!-- ================================================================================== -->
         <div id="p5" class="part"></div>
 <!-- ================================================================================== -->
@@ -85,6 +87,8 @@ import { ref }                              from 'vue'
     #p2{
         grid-row-start: 1;
         grid-row-end: 3;
+        background-image: url( "@/assets/Pics/RDN.png" );
+        background-size: auto 114px;
     }
 
     #p3{
@@ -177,6 +181,27 @@ import { ref }                              from 'vue'
         color: #081E2F;
         font-weight: bold;
         background-color: #F0F0F0;
+    }
+
+    #regButton{
+        right: 50px;
+        width: 160px;
+        height: 44px;
+        font-size: 23px;
+        line-height: 43px;
+        text-align: center;
+        font-family: PoiretOne;
+        font-weight: bold;
+        background-color: #214663;
+        color: #F0F0F0;
+        border-radius: 7px;
+        position: absolute;
+        cursor: pointer;
+    }
+
+    #regButton:hover{
+        background-color: #DDA516;
+        color: #131313;
     }
 
 </style>
