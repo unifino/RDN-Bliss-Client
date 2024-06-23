@@ -2,6 +2,7 @@
     <div id="homePanel" :style="`z-index: ${+(store.state.ort === TS.Orts.Home)}`">
         <div id="h_100" class="x_xxx" ref="h_100"><H_100 /></div>
         <div id="h_010" class="x_xxx" ref="h_010"><H_010 /></div>
+        <div id="h_reg" class="x_xxx" ref="h_reg"><H_Reg /></div>
     </div>
 </template>
 
@@ -13,6 +14,7 @@
 
 import H_100                                from '@/components/Home/H_100.vue'
 import H_010                                from '@/components/Home/H_010.vue'
+import H_Reg                                from '@/components/Home/H_Reg.vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools'
@@ -24,26 +26,35 @@ const store = useStore()
 
     const h_100 = ref<HTMLElement>( {} as HTMLElement )
     const h_010 = ref<HTMLElement>( {} as HTMLElement )
+    const h_reg = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )
+        ( nV, oV ) => {
+            Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )
+
+        }
     )
 
     store.watch(
         getters => getters.process,
         nV => {
-            // .. entring register window
-            if ( nV === TS.Processes.Registring )
-                Tools.reg_Phase_A( nV, [ h_100, h_010 ] )
-            // .. exiting back to the Home
-            else if ( store.getters.ort === TS.Orts.Home )
-                Tools.mainCA(
-                    [ null as any, TS.Orts.Home, TS.Orts.Home ],
-                    [ h_100, h_010 ]
-                )
+            // .. Enter -> register mode
+            if ( nV === TS.Processes.Registring ) {
+                Tools.reg_Phase_A( "In", h_reg )
+                Tools.mainCA( [ "Home", null as any, "Home" ], [ h_100, h_010 ] )
+            }
+            // .. Exit <- Register Mode
+            else {
+                Tools.reg_Phase_A( "Out", h_reg )
+                // .. exiting back to the Home
+                if ( store.getters.ort === TS.Orts.Home ) {
+                    Tools.mainCA( [ null as any, "Home", "Home" ], [ h_100, h_010 ] )
+                }
+            }
+
         }
     )
 
@@ -78,6 +89,18 @@ const store = useStore()
         /* margin: auto;
         left: 0;
         right: 0; */
+    }
+
+    #h_reg{
+        height: 85%;
+        margin-top: 2.5%;
+        margin-left: 2.5%;
+        width: 1200px;
+        /* background-color: darkslategray; */
+        border: solid 2px darkslategray;
+        border-radius: 20px;
+        transform: scale(0);
+        opacity: 0;
     }
 
     .fallOut_X100 {
@@ -151,6 +174,34 @@ const store = useStore()
         100%{
             opacity: 1;
             transform: translate(0px, 0px) scale(1);
+        }
+    }
+
+    .fallIn_XReg {
+        animation           : fallIn_XReg .5s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes fallIn_XReg {
+        100%{
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .fallOut_XReg {
+        animation           : fallOut_XReg .5s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes fallOut_XReg {
+        0%{
+            transform: scale(1);
+            opacity: 1;
+        }
+        100%{
+            transform: scale(0);
+            opacity: 0;
         }
     }
 

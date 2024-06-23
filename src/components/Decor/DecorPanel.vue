@@ -88,11 +88,11 @@ const store = useStore()
 
     @keyframes slideIn_DTXT {
         30%{
-            transform: translate(0%, 0px);
+            transform: translate(2.3%, 0px);
             opacity: .6;
         }
         40%{
-            transform: translate(0%, 0px);
+            transform: translate(2.3%, 0px);
             opacity: .8;
         }
         100%{
