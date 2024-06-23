@@ -44,6 +44,7 @@ const store = useStore()
             // .. Enter -> register mode
             if ( nV === TS.Processes.Registring ) {
                 Tools.reg_Phase_A( "In", h_reg )
+                // eslint-disable-next-line
                 Tools.mainCA( [ "Home", null as any, "Home" ], [ h_100, h_010 ] )
             }
             // .. Exit <- Register Mode
@@ -51,6 +52,7 @@ const store = useStore()
                 Tools.reg_Phase_A( "Out", h_reg )
                 // .. exiting back to the Home
                 if ( store.getters.ort === TS.Orts.Home ) {
+                    // eslint-disable-next-line
                     Tools.mainCA( [ null as any, "Home", "Home" ], [ h_100, h_010 ] )
                 }
             }

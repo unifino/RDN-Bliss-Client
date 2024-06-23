@@ -69,9 +69,6 @@ const store = useStore()
     #a_010{
         width: 850px;
         left: 28%;
-        /* margin: auto;
-        left: 0;
-        right: 0; */
     }
 
     .fallOut_X100 {

@@ -1,9 +1,6 @@
 import * as TS                              from '@/types/types'
 import * as Anime                           from '@/mixins/AnimationCenter'
-import { useStore }                         from 'vuex'
 import { Ref }                              from 'vue';
-
-const store = useStore();
 
 // -- =====================================================================================
 

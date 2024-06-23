@@ -43,7 +43,7 @@ const store = useStore()
 
     store.watch(
         getters => getters.process,
-        nV => Anime.textSlider( d_txt )
+        () => Anime.textSlider( d_txt )
     )
 
 // -- =====================================================================================
