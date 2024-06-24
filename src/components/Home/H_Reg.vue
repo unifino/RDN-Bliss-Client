@@ -1,7 +1,7 @@
 <template>
     <div id="H_Reg_Box">
 <!-- ================================================================================== -->
-        <div id="p1" class="part">
+        <div id="p1" class="part" ref="part_1">
             <div id="sectionWrapper">
                 <div
                     v-for="(x,i) of userMode"
@@ -18,16 +18,22 @@
 <!-- ================================================================================== -->
         <div id="p2" class="part">
             <div id="inputWrapper">
-                <input type="text" class="input" placeholder="e-mail" />
-                <input type="text" class="input" placeholder="username" />
-                <input type="password" class="input" placeholder="password" />
+                <input ref="e_mail" type="text" class="input" placeholder="e-mail" />
+                <input ref="usrnme" type="text" class="input" placeholder="username" />
+                <input ref="passwd" type="password" class="input" placeholder="password" />
             </div>
         </div>
 <!-- ================================================================================== -->
         <div id="p3" class="part"></div>
 <!-- ================================================================================== -->
         <div id="p4" class="part">
-            <div id="regButton" class="no_select">Register</div>
+            <div
+                id="regButton"
+                class="no_select"
+                @click="submit()"
+            >
+                Register
+            </div>
         </div>
 <!-- ================================================================================== -->
         <div id="p5" class="part"></div>
@@ -43,14 +49,54 @@ import { ref }                              from 'vue'
 
 // -- =====================================================================================
 
+    const part_1 = ref<HTMLElement>( {} as HTMLElement )
+    const e_mail = ref<HTMLElement>( {} as HTMLElement )
+    const usrnme = ref<HTMLElement>( {} as HTMLElement )
+    const passwd = ref<HTMLElement>( {} as HTMLElement )
+
+// -- =====================================================================================
+
     const userMode = ref ( [
         { icon: "", text: "I'm a Dietition", selected: false },
         { icon: "", text: "I'm a Paitent", selected: false }
     ] )
 
+// -- =====================================================================================
+
     const selectUserMode = (idx: number) => {
         // userMode.value[0].selected = true
         userMode.value.forEach( (x,i) => x.selected = i === idx );
+    }
+
+// -- =====================================================================================
+
+    const submit = () => {
+
+        // ..  check Form
+        let parts = []
+
+        if ( !userMode.value[0].selected && !userMode.value[1].selected )
+            parts.push( part_1 )
+
+        if (
+              !( e_mail.value as any ).value
+            || ( e_mail.value as any ).value.indexOf( "@" ) < 1
+            || ( e_mail.value as any ).value.indexOf( "." ) < 3
+        )
+            parts.push( e_mail )
+
+        if ( ( usrnme.value as any ).value.length < 4 ) parts.push( usrnme )
+
+        if ( ( passwd.value as any ).value.length < 4 ) parts.push( passwd )
+
+        // .. apply alert animatation
+        parts.forEach( async (x,i) => {
+            await new Promise( _ => setTimeout( _, i*100 ) )
+            x.value.className += " alert"
+            await new Promise( _ => setTimeout( _, 700 ) )
+            x.value.className = x.value.className.replace( /alert/g , '' )
+        } )
+
     }
 
 // -- =====================================================================================
@@ -202,6 +248,43 @@ import { ref }                              from 'vue'
     #regButton:hover{
         background-color: #DDA516;
         color: #131313;
+    }
+
+    #p1.alert {
+        animation           : alert_part_1 .7s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes alert_part_1 {
+        0%{
+            background-color: #73A7CB;
+            transform: scale(1);
+        }
+        50%{
+            background-color: #CC0808;
+            transform: scale(1.07);
+        }
+        100%{
+            background-color: #73A7CB;
+        }
+    }
+
+    .alert {
+        animation           : alert .7s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes alert {
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            background-color: #FB1111;
+            color: black;
+            transform: scale(1.07);
+        }
+        100%{
+        }
     }
 
 </style>
