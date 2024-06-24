@@ -3,7 +3,7 @@
         <DotBox />
 
         <div id="newsBox">
-            <img class="bg" :src="bgPath()" />
+            <img class="bg no_select" :src="bgPath()" />
             <div id="shadowBox_3" />
             <div id="shadowBox_2" />
             <div id="shadowBox_1" />

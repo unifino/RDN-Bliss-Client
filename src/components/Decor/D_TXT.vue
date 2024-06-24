@@ -1,5 +1,5 @@
 <template>
-    <div id="textBannerBox">{{ myText }}</div>
+    <div id="textBannerBox" class="no_select">{{ myText }}</div>
 </template>
 
 // -- =====================================================================================

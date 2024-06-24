@@ -27,7 +27,7 @@
         <div id="p3" class="part"></div>
 <!-- ================================================================================== -->
         <div id="p4" class="part">
-            <div id="regButton">Register</div>
+            <div id="regButton" class="no_select">Register</div>
         </div>
 <!-- ================================================================================== -->
         <div id="p5" class="part"></div>
@@ -161,10 +161,10 @@ import { ref }                              from 'vue'
     }
 
     #inputWrapper{
-        height: 180px;
-        width: 350px;
+        height: auto;
+        width: 300px;
         top: 40px;
-        right: 30px;
+        right: 50px;
         position: absolute;
     }
 
@@ -174,7 +174,7 @@ import { ref }                              from 'vue'
         border-radius: 7px;
         border: solid gray 1px;
         box-shadow: 0 0 1px 0px rgb(88 88 91);
-        margin: 13px;
+        margin: 13px 0;
         font-family: oswald;
         font-size: 20px;
         padding: 10px 20px;
@@ -184,7 +184,7 @@ import { ref }                              from 'vue'
     }
 
     #regButton{
-        right: 50px;
+        right: 65px;
         width: 160px;
         height: 44px;
         font-size: 23px;

@@ -62,6 +62,12 @@ const store = useStore();
         height: 100%;
         right: 0;
         position: absolute;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     .fadeOut_B001 {

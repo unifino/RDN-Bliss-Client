@@ -1,5 +1,5 @@
 <template>
-    <div id="A_100_Box">
+    <div id="A_100_Box" class="no_select">
         <div class="section selected">Institute</div>
         <div class="section">Our Team</div>
         <div class="section">Certified Coach</div>

@@ -101,8 +101,9 @@ const store = useStore()
         border: solid 2px rgb(161 161 161);
         box-shadow: 0 0 10px 1px rgb(130 157 176);
         border-radius: 20px;
-        transform: scale(0);
+        transform: scale(.4);
         opacity: 0;
+        visibility: hidden;
     }
 
     .fallOut_X100 {
@@ -185,9 +186,17 @@ const store = useStore()
     }
 
     @keyframes fallIn_XReg {
+        0%{
+            visibility: visible;
+        }
+        80%{
+            transform: scale(.9);
+            opacity: .9;
+        }
         100%{
-            transform: scale(1);
+            transform: scale(.85);
             opacity: 1;
+            visibility: visible;
         }
     }
 
@@ -198,12 +207,18 @@ const store = useStore()
 
     @keyframes fallOut_XReg {
         0%{
-            transform: scale(1);
+            transform: scale(.85);
             opacity: 1;
+            visibility: visible;
+        }
+        20%{
+            transform: scale(.9);
+            opacity: .9;
         }
         100%{
-            transform: scale(0);
+            transform: scale(.4);
             opacity: 0;
+            visibility: hidden;
         }
     }
 
