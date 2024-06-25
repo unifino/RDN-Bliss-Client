@@ -94,13 +94,11 @@ const store = useStore()
     }
 
     #h_reg{
-        height: 85%;
-        margin-top: 44px;
-        margin-left: 55px;
-        width: 1200px;
-        border: solid 2px rgb(161 161 161);
-        box-shadow: 0 0 10px 1px rgb(130 157 176);
-        border-radius: 20px;
+        height: 600px;
+        width: 1000px;
+        margin-top: 98px;
+        margin-left: 140px;
+        overflow: visible;
         transform: scale(.4);
         opacity: 0;
         visibility: hidden;
@@ -190,33 +188,33 @@ const store = useStore()
             visibility: visible;
         }
         80%{
-            transform: scale(.9);
+            transform: scale(1.1);
             opacity: .9;
         }
         100%{
-            transform: scale(.85);
+            transform: scale(1);
             opacity: 1;
             visibility: visible;
         }
     }
 
     .fallOut_XReg {
-        animation           : fallOut_XReg .5s;
+        animation           : fallOut_XReg .6s;
         animation-fill-mode : both;
     }
 
     @keyframes fallOut_XReg {
         0%{
-            transform: scale(.85);
+            transform: scale(1);
             opacity: 1;
             visibility: visible;
         }
-        20%{
-            transform: scale(.9);
+        40%{
+            transform: scale(1.1);
             opacity: .9;
         }
         100%{
-            transform: scale(.4);
+            transform: scale(.5);
             opacity: 0;
             visibility: hidden;
         }

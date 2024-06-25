@@ -1,5 +1,5 @@
 <template>
-    <div id="H_Reg_Box">
+    <div id="H_Reg_Box" ref="HRGBox">
 <!-- ================================================================================== -->
         <div id="p1" class="part" ref="part_1">
             <div id="sectionWrapper">
@@ -36,7 +36,20 @@
             </div>
         </div>
 <!-- ================================================================================== -->
-        <div id="p5" class="part"></div>
+        <div id="p5" class="part">
+
+            <div id="optional">⬇ optional ⬇</div>
+
+            <div class="subpart">
+                <input ref="" type="text" class="input" placeholder="First Name" />
+                <input ref="" type="text" class="input" placeholder="Last Name" />
+            </div>
+            <div class="subpart">
+                <input ref="" type="text" class="input" placeholder="Birth Day" />
+                <input ref="" type="text" class="input" placeholder="Gender" />
+            </div>
+
+        </div>
 <!-- ================================================================================== -->
     </div>
 </template>
@@ -46,9 +59,14 @@
 <script setup lang="ts">
 
 import { ref }                              from 'vue'
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+
+const store = useStore()
 
 // -- =====================================================================================
 
+    const HRGBox = ref<HTMLElement>( {} as HTMLElement )
     const part_1 = ref<HTMLElement>( {} as HTMLElement )
     const e_mail = ref<HTMLElement>( {} as HTMLElement )
     const usrnme = ref<HTMLElement>( {} as HTMLElement )
@@ -102,7 +120,29 @@ import { ref }                              from 'vue'
             x.value.className = x.value.className.replace( /alert/g , '' )
         } )
 
+        if ( !parts.length ) registering()
+
     }
+
+// -- =====================================================================================
+
+    const registering = async () => {
+        ( HRGBox.value as any ).className += " send";
+        await new Promise( _ => setTimeout( _, 1000 ) )
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
+        store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+    }
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.process,
+        nV => {
+            // .. Enter -> register mode
+            if ( nV === TS.Processes.Registering )
+                ( HRGBox.value as any ).className = "";
+        }
+    )
 
 // -- =====================================================================================
 
@@ -114,12 +154,14 @@ import { ref }                              from 'vue'
 
     #H_Reg_Box {
         display: grid;
-        grid-template-columns: 350px auto auto;
-        grid-template-rows: 340px 100px auto ;
-        min-height: 650px;
+        grid-template-columns: 300px auto auto;
+        grid-template-rows: 300px 70px auto ;
         height: 100%;
-        max-height: 1200px;
         background-color: #F0F0F0;
+        border: solid 2px rgb(161 161 161);
+        box-shadow: 0 0 10px 1px rgb(130 157 176);
+        border-radius: 20px;
+        overflow: hidden;
     }
 
     .part{
@@ -165,13 +207,13 @@ import { ref }                              from 'vue'
         position: relative;
         top: 50%;
         transform: translateY(-50%);
-        margin: -50px auto;
+        margin: -40px auto;
     }
 
     .section{
-        height: 63px;
-        width: 270px;
-        margin: 50px auto;
+        height: 60px;
+        width: 230px;
+        margin: 30px auto 40px auto;
         color: #103855;
         color: whitesmoke;
         display: flex;
@@ -188,21 +230,21 @@ import { ref }                              from 'vue'
 
     .icon{
         font-family: fas-6;
-        font-size: 60px;
-        padding-left: 7px;
-        margin-right: 10px;
+        font-size: 50px;
+        padding-left: 5px;
+        margin-right: 7px;
     }
 
     .check{
         font-family: fas-6;
-        font-size: 30px;
-        padding-right: 7px;
+        font-size: 25px;
+        padding-right: 5px;
         position: relative;
     }
 
     .txt{
         font-family: PoiretOne;
-        font-size: 25px;
+        font-size: 22px;
         padding-left: 10px;
         font-weight: bold;
     }
@@ -213,21 +255,21 @@ import { ref }                              from 'vue'
 
     #inputWrapper{
         height: auto;
-        width: 300px;
+        width: 250px;
         top: 40px;
         right: 50px;
         position: absolute;
     }
 
     .input{
-        height: 34px;
-        width: 260px;
+        height: 25px;
+        width: 210px;
         border-radius: 7px;
         border: solid gray 1px;
         box-shadow: 0 0 1px 0px rgb(88 88 91);
-        margin: 13px 0;
+        margin: 10px 0;
         font-family: oswald;
-        font-size: 20px;
+        font-size: 17px;
         padding: 10px 20px;
         color: #081E2F;
         font-weight: bold;
@@ -235,11 +277,12 @@ import { ref }                              from 'vue'
     }
 
     #regButton{
-        right: 65px;
-        width: 160px;
-        height: 44px;
-        font-size: 23px;
-        line-height: 43px;
+        right: 52px;
+        width: 140px;
+        height: 40px;
+        font-size: 20px;
+        line-height: 40px;
+        margin-top: -30px;
         text-align: center;
         font-family: PoiretOne;
         font-weight: bold;
@@ -289,6 +332,40 @@ import { ref }                              from 'vue'
             transform: scale(1.07);
         }
         100%{
+        }
+    }
+
+    .subpart{
+        width: 30%;
+        float: left;
+        text-align: right;
+        height: 170px;
+        transform: translateY(25%);
+    }
+
+    #optional{
+        float: right;
+        background-color: #F0F0F0;
+        font-family: Manrope;
+        font-size: 21px;
+        padding: 0 10px;
+        color: green;
+        height: 60px;
+        line-height: 60px;
+        margin: -32px 60px 0 0;
+    }
+
+    .send {
+        animation           : send .8s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes send {
+        100%{
+            transform: translate(0%,-25%) rotate(-540deg) scale(.2);
+            border-width: 10px;
+            border-radius: 100px;
+            opacity: 0;
         }
     }
 
