@@ -1,6 +1,6 @@
 <template>
     <div id="main_frame">
-        <BG msg="Nutirition"/>
+        <BG msg="Nutrition"/>
         <div id="MainBox_Flex">
             <Main_Header />
             <MainPanel style="flex: 1" />

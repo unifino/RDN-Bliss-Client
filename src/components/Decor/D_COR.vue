@@ -46,7 +46,7 @@ const store = useStore();
             TS.Orts.Home,
             BOX_001,
             picIndex,
-            nV === TS.Processes.Registring ? 5 : null
+            nV === TS.Processes.Registering ? 5 : null
         )
     )
 

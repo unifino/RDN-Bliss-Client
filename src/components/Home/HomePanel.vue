@@ -42,7 +42,7 @@ const store = useStore()
         getters => getters.process,
         nV => {
             // .. Enter -> register mode
-            if ( nV === TS.Processes.Registring ) {
+            if ( nV === TS.Processes.Registering ) {
                 Tools.reg_Phase_A( "In", h_reg )
                 // eslint-disable-next-line
                 Tools.mainCA( [ "Home", null as any, "Home" ], [ h_100, h_010 ] )

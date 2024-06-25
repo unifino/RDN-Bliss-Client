@@ -7,12 +7,12 @@
 <!-- ================================================================================== -->
             <div class="section no_select">
                 <div class="icon"></div>
-                <div class="txt">I'm a Dietition</div>
+                <div class="txt">I'm a Dietitian</div>
             </div>
 <!-- ================================================================================== -->
             <div class="section no_select">
                 <div class="icon"></div>
-                <div class="txt">I'm a Paitent</div>
+                <div class="txt">I'm a Patient</div>
             </div>
 <!-- ================================================================================== -->
             <div class="section no_select mini" @click="headToRegistration">
@@ -38,7 +38,7 @@ const store = useStore();
 // -- =====================================================================================
 
     const headToRegistration = () => {
-        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registring )
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registering )
     }
 
 // -- =====================================================================================

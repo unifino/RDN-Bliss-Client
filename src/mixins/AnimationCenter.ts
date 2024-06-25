@@ -27,7 +27,7 @@ export const textSlider = async function ( el:Ref<HTMLElement> ) {
     el.value.className = "x_xxx " + "slideIn_DTXT"
 
     await new Promise( _ => setTimeout( _, 860 ) )
-    // .. wait untill it slides in completly
+    // .. wait until it slides in complexly
     await new Promise( _ => setTimeout( _, 1500 ) )
 
     // .. reset it Class

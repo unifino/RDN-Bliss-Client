@@ -57,8 +57,8 @@ import { ref }                              from 'vue'
 // -- =====================================================================================
 
     const userMode = ref ( [
-        { icon: "", text: "I'm a Dietition", selected: false },
-        { icon: "", text: "I'm a Paitent", selected: false }
+        { icon: "", text: "I'm a Dietitian", selected: false },
+        { icon: "", text: "I'm a Patient", selected: false }
     ] )
 
 // -- =====================================================================================
@@ -79,17 +79,22 @@ import { ref }                              from 'vue'
             parts.push( part_1 )
 
         if (
+            // eslint-disable-next-line
               !( e_mail.value as any ).value
+            // eslint-disable-next-line
             || ( e_mail.value as any ).value.indexOf( "@" ) < 1
+            // eslint-disable-next-line
             || ( e_mail.value as any ).value.indexOf( "." ) < 3
         )
             parts.push( e_mail )
 
+        // eslint-disable-next-line
         if ( ( usrnme.value as any ).value.length < 4 ) parts.push( usrnme )
 
+        // eslint-disable-next-line
         if ( ( passwd.value as any ).value.length < 4 ) parts.push( passwd )
 
-        // .. apply alert animatation
+        // .. apply alert animation
         parts.forEach( async (x,i) => {
             await new Promise( _ => setTimeout( _, i*100 ) )
             x.value.className += " alert"

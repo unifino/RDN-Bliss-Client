@@ -23,7 +23,7 @@ export enum Orts {
 }
 
 // ..  declare Processes
-export enum Processes { "Reading", "Registring", "Loging"  }
+export enum Processes { "Reading", "Registering", "Login"  }
 
 // .. declare State
 export type State = {

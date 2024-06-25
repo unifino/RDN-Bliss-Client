@@ -26,7 +26,8 @@ const store = useStore()
 
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.FAQs ], [ null, f_100 ] )
+        // eslint-disable-next-line
+        ( nV, oV ) => Tools.mainCA( [ oV, nV, TS.Orts.FAQs ], [ null as any, f_100 ] )
     )
 
 // -- =====================================================================================

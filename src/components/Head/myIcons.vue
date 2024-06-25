@@ -1,7 +1,7 @@
 <template>
     <div id="header_icons_box">
         <div v-for="(x,i) of options" :key=i class="optionBox no_select">
-            <div @click="changeOrt(x.code)" :class="x.select?'selcted':''">
+            <div @click="changeOrt(x.code)" :class="x.select?'selected':''">
                 <div class="icon">{{x.icon}}</div>
                 <div class="title">{{x.code}}</div>
             </div>
@@ -75,7 +75,7 @@ const store = useStore();
         opacity: 0.2;
     }
 
-    .selcted, .selcted> .title, .optionBox:hover{
+    .selected, .selected> .title, .optionBox:hover{
         color: #521739;
         cursor: pointer;
         font-weight: bold;

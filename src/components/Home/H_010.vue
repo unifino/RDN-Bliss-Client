@@ -7,7 +7,7 @@
             <div id="shadowBox_3" />
             <div id="shadowBox_2" />
             <div id="shadowBox_1" />
-            <div id="shadoBox_main">
+            <div id="shadowBox_main">
                 <div id="contentBox">
                     <div class="title" v-html="context.title" />
                     <div class="content" v-text="context.text" />
@@ -72,7 +72,7 @@ import DotBox                               from '@/components/Home/DotBox.vue'
         z-index: 0;
     }
 
-    #shadoBox_main, #shadowBox_1, #shadowBox_2, #shadowBox_3{
+    #shadowBox_main, #shadowBox_1, #shadowBox_2, #shadowBox_3{
         top: 0;
         left: 0;
         background-color: #eeefec;

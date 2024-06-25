@@ -34,7 +34,7 @@ const store = useStore()
                 nV !== oV ||
                 (
                     nV === TS.Orts.Home &&
-                    store.getters.process === TS.Processes.Registring
+                    store.getters.process === TS.Processes.Registering
                 )
             )
                 Anime.textSlider( d_txt )
