@@ -125,12 +125,12 @@ const store = useStore()
             transform: translateX(0);
             opacity: 0;
         }
-        30%{
-            transform: translateX(150px);
+        35%{
+            transform: translateX(135px);
             opacity: .6;
         }
-        40%{
-            transform: translateX(150px);
+        45%{
+            transform: translateX(135px);
             opacity: .8;
         }
         100%{
