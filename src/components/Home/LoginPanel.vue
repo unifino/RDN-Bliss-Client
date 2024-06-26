@@ -39,12 +39,12 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
         if ( ( passwd.value as any ).value.length < 4 ) parts.push( passwd )
 
         // .. apply alert animation
-        parts.forEach( async (x,i) => {
-            await new Promise( _ => setTimeout( _, i*100 ) )
-            x.value.className += " alert"
-            await new Promise( _ => setTimeout( _, 700 ) )
-            x.value.className = x.value.className.replace( /alert/g , '' )
-        } )
+        // parts.forEach( async (x,i) => {
+            // await new Promise( _ => setTimeout( _, i*100 ) )
+            // x.value.className += " alert"
+            // await new Promise( _ => setTimeout( _, 700 ) )
+            // x.value.className = x.value.className.replace( /alert/g , '' )
+        // } )
 
         if ( !parts.length ) logging()
 
@@ -54,6 +54,7 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
 
     const logging = () => {
         store.dispatch( TS.Acts.Flag_logged_in, true )
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
         loginBox.value.className = "out"
     }

@@ -1,5 +1,5 @@
 <template>
-    <img id="BOX_001" ref="BOX_001" :src="pics()[ picIndex ]" />
+    <img id="D_COR" ref="d_cor" :src="pics()[ picIndex ]" />
 </template>
 
 // -- =====================================================================================
@@ -8,15 +8,13 @@
 
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
-import * as Anime                           from '@/mixins/AnimationCenter'
 import * as TS                              from '@/types/types'
 
 const store = useStore();
 
 // -- =====================================================================================
 
-    // eslint-disable-next-line
-    const BOX_001 = ref<HTMLElement>( null as any )
+    const d_cor = ref<HTMLElement>( {} as HTMLElement )
     const picIndex = ref(0)
 
     const pics = () => {
@@ -36,38 +34,39 @@ const store = useStore();
 
 // -- =====================================================================================
 
-    store.watch(
-        getters => getters.ort,
-        nV => Anime.imgDecor( BOX_001, picIndex, nV )
-    )
+    const idxFinder = () => {
 
-    store.watch(
-        getters => getters.Flag_logged_in,
-        // .. logOut
-        nV => { if (!nV) Anime.imgDecor( BOX_001, picIndex, TS.Orts.Home ) }
-    )
+        let idx = store.getters.ort;
 
-    store.watch(
-        getters => getters.process,
-        nV => {
-
-            let idx: number;
-
-            switch (nV) {
-                case TS.Processes.Registering:  idx = 6; break;
-                case TS.Processes.Login:        idx = 7; break;
-                default:        idx = store.getters.ort; break;
-            }
-
-            Anime.imgDecor(
-                BOX_001,
-                picIndex,
-                idx,
-                100
-            )
-
+        switch ( store.getters.process ) {
+            case TS.Processes.Reading:     return idx
+            case TS.Processes.Registering: return idx = 6
+            case TS.Processes.Login:       return idx = 7
         }
-    )
+
+    }
+
+// -- =====================================================================================
+
+    const imgDecor = async () => {
+        await new Promise( _ => setTimeout( _, 10 ) )
+        d_cor.value.className = "fadeOut_D_COR"
+        await new Promise( _ => setTimeout( _, 700 ) )
+        // .. set pic by idx or by Ort-Index
+        picIndex.value = idxFinder()
+        let delay = store.getters.process === TS.Processes.Login ? 100 : 500;
+        await new Promise( _ => setTimeout( _, delay ) )
+        d_cor.value.className = "fadeIn_D_COR"
+    }
+
+// -- =====================================================================================
+
+    // .. 0-5
+    store.watch( getters => getters.ort, () => imgDecor() )
+    // .. 6-7
+    store.watch( getters => getters.process, () => imgDecor() )
+    // .. logOut
+    store.watch( getters => getters.Flag_logged_in, nV => { if (!nV) imgDecor() } )
 
 // -- =====================================================================================
 
@@ -77,7 +76,7 @@ const store = useStore();
 
 <style scoped>
 
-    #BOX_001{
+    #D_COR{
         height: 100%;
         right: 0;
         position: absolute;
@@ -89,22 +88,22 @@ const store = useStore();
         user-select: none;
     }
 
-    .fadeOut_B001 {
-        animation           : fadeOut_B001 .8s;
+    .fadeOut_D_COR {
+        animation           : fadeOut_D_COR .8s;
         animation-fill-mode : both;
     }
 
-    .fadeIn_B001 {
-        animation           : fadeIn_B001 .8s;
+    .fadeIn_D_COR {
+        animation           : fadeIn_D_COR .8s;
         animation-fill-mode : both;
     }
 
-    @keyframes fadeOut_B001 {
+    @keyframes fadeOut_D_COR {
         0%{ opacity: 1; }
         100%{ opacity: 0; }
     }
 
-    @keyframes fadeIn_B001 {
+    @keyframes fadeIn_D_COR {
         0%{ opacity: 0; }
         100%{ opacity: 1; }
     }
