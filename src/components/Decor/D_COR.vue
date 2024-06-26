@@ -57,7 +57,8 @@ const store = useStore();
                 TS.Orts.Home,
                 BOX_001,
                 picIndex,
-                idx
+                idx,
+                100
             )
 
         }

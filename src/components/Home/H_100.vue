@@ -5,14 +5,14 @@
 <!-- ================================================================================== -->
         <div id="logBox">
 <!-- ================================================================================== -->
-            <div class="section no_select" @click="prepareToLogin" ref="H100Box">
+            <div
+                v-for="(x,i) of options"
+                :key=i
+                :class="'section no_select ' + ( x.selected? 'selected' : '' )"
+                @click="prepareToLogin(i)"
+            >
                 <div class="icon"></div>
-                <div class="txt">I'm a Dietitian</div>
-            </div>
-<!-- ================================================================================== -->
-            <div class="section no_select" @click="prepareToLogin">
-                <div class="icon"></div>
-                <div class="txt">I'm a Patient</div>
+                <div class="txt">{{ x.text }}</div>
             </div>
 <!-- ================================================================================== -->
             <div class="section no_select mini" @click="headToRegistration">
@@ -42,15 +42,33 @@ const store = useStore();
 
 // -- =====================================================================================
 
+    const options = ref ( [ { text: "", selected: false, icon: "" } ] )
+
+    options.value = [
+        { text: "I'm a Dietitian", selected: false,  icon: "", },
+        { text: "I'm a Patient", selected: false, icon: "", },
+    ]
+
     const headToRegistration = () => {
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registering )
     }
 
 // -- =====================================================================================
 
-    const prepareToLogin = () => {
+    const prepareToLogin = ( idx: number ) => {
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
+        options.value.forEach( (x,i) => x.selected = i === idx )
     }
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.process,
+        nV => {
+            if ( nV !== TS.Processes.Login ) 
+                options.value.forEach( x => x.selected = false )
+        }
+    )
 
 // -- =====================================================================================
 
@@ -124,6 +142,10 @@ const store = useStore();
     }
     .mini .txt{
         font-size: 15px;
+    }
+
+    .selected, .selected:hover{
+        color: #5AA2AF;
     }
 
 </style>

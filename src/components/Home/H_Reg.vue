@@ -18,9 +18,9 @@
 <!-- ================================================================================== -->
         <div id="p2" class="part">
             <div id="inputWrapper">
-                <input ref="e_mail" type="text" class="input" placeholder="e-mail" />
-                <input ref="usrnme" type="text" class="input" placeholder="username" />
-                <input ref="passwd" type="password" class="input" placeholder="password" />
+                <input ref="e_mail" type="text" placeholder="e-mail" />
+                <input ref="usrnme" type="text" placeholder="username" />
+                <input ref="passwd" type="password" placeholder="password" />
             </div>
         </div>
 <!-- ================================================================================== -->
@@ -41,12 +41,12 @@
             <div id="optional">⬇ optional ⬇</div>
 
             <div class="subpart">
-                <input ref="" type="text" class="input" placeholder="First Name" />
-                <input ref="" type="text" class="input" placeholder="Last Name" />
+                <input ref="" type="text" placeholder="First Name" />
+                <input ref="" type="text" placeholder="Last Name" />
             </div>
             <div class="subpart">
-                <input ref="" type="text" class="input" placeholder="Birth Day" />
-                <input ref="" type="text" class="input" placeholder="Gender" />
+                <input ref="" type="text" placeholder="Birth Day" />
+                <input ref="" type="text" placeholder="Gender" />
             </div>
 
         </div>
@@ -127,7 +127,7 @@ const store = useStore()
 // -- =====================================================================================
 
     const registering = async () => {
-        ( HRGBox.value as any ).className += " send";
+        HRGBox.value.className += " send";
         await new Promise( _ => setTimeout( _, 1000 ) )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
@@ -139,8 +139,7 @@ const store = useStore()
         getters => getters.process,
         nV => {
             // .. Enter -> register mode
-            if ( nV === TS.Processes.Registering )
-                ( HRGBox.value as any ).className = "";
+            if ( nV === TS.Processes.Registering ) HRGBox.value.className = "";
         }
     )
 
@@ -261,7 +260,7 @@ const store = useStore()
         position: absolute;
     }
 
-    .input{
+    input{
         height: 25px;
         width: 210px;
         border-radius: 7px;

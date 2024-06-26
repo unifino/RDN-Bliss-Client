@@ -8,14 +8,15 @@ export const imgDecor = async (
     nV: TS.Orts,
     el:Ref<HTMLElement>,
     pics: Ref<number>,
-    idx: number|null = null
+    idx: number|null = null,
+    delay = 500
 ) => {
-    await new Promise( _ => setTimeout( _, 100 ) )
+    await new Promise( _ => setTimeout( _, 10 ) )
     el.value.className = "fadeOut_B001"
     await new Promise( _ => setTimeout( _, 700 ) )
     // .. set pic by idx or by Ort-Index
     pics.value = idx !== null ? idx : Object.values( TS.Orts ).indexOf( nV )
-    await new Promise( _ => setTimeout( _, 500 ) )
+    await new Promise( _ => setTimeout( _, delay ) )
     el.value.className = "fadeIn_B001"
 }
 

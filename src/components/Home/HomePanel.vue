@@ -1,5 +1,6 @@
 <template>
     <div id="homePanel" :style="`z-index: ${+(store.state.ort === TS.Orts.Home)}`">
+        <div id="loginPanel"                     ><Login /></div>
         <div id="h_100" class="x_xxx" ref="h_100"><H_100 /></div>
         <div id="h_010" class="x_xxx" ref="h_010"><H_010 /></div>
         <div id="h_reg" class="x_xxx" ref="h_reg"><H_Reg /></div>
@@ -15,6 +16,7 @@
 import H_100                                from '@/components/Home/H_100.vue'
 import H_010                                from '@/components/Home/H_010.vue'
 import H_Reg                                from '@/components/Home/H_Reg.vue'
+import Login                                from '@/components/Home/LoginPanel.vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools'
@@ -279,6 +281,16 @@ const store = useStore()
             opacity: 1;
             transform: translate(0%, 0%) rotate(0deg);
         }
+    }
+
+    #loginPanel{
+        height: 300px;
+        width: 350px;
+        margin: auto;
+        margin-top: 220px;
+        right: 0;
+        left: 0;
+        position: absolute;
     }
 
 </style>
