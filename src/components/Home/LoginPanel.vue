@@ -54,6 +54,8 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
 
     const logging = () => {
         store.dispatch( TS.Acts.Flag_logged_in, true )
+        store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
+        loginBox.value.className = "out"
     }
 
 // -- =====================================================================================

@@ -26,7 +26,9 @@ const store = useStore();
             require( "@/assets/Pics/books.jpg" ),
             require( "@/assets/Pics/magazine.jpg" ),
             require( "@/assets/Pics/flower.jpg" ),
-            // .. 5
+            // .. user
+            require( "@/assets/Pics/office-lobby.jpg" ),
+            // .. 6
             require( "@/assets/Pics/whimsical.jpg" ),
             require( "@/assets/Pics/blue-tit.jpg" ),
         ]
@@ -36,23 +38,28 @@ const store = useStore();
 
     store.watch(
         getters => getters.ort,
-        nV => Anime.imgDecor( nV, BOX_001, picIndex )
+        nV => Anime.imgDecor( BOX_001, picIndex, nV )
+    )
+
+    store.watch(
+        getters => getters.Flag_logged_in,
+        // .. logOut
+        nV => { if (!nV) Anime.imgDecor( BOX_001, picIndex, TS.Orts.Home ) }
     )
 
     store.watch(
         getters => getters.process,
         nV => {
 
-            let idx: number|null;
+            let idx: number;
 
             switch (nV) {
-                case TS.Processes.Registering:  idx = 5; break;
-                case TS.Processes.Login:        idx = 6; break;
-                default:                     idx = null; break;
+                case TS.Processes.Registering:  idx = 6; break;
+                case TS.Processes.Login:        idx = 7; break;
+                default:        idx = store.getters.ort; break;
             }
 
             Anime.imgDecor(
-                TS.Orts.Home,
                 BOX_001,
                 picIndex,
                 idx,

@@ -1,6 +1,11 @@
 <template>
     <div id="header_icons_box">
-        <div v-for="(opt,i) of options" :key=i class="optionBox no_select">
+        <div
+            v-for="(opt,i) of options"
+            :key=i
+            class="optionBox no_select"
+            @click="opt.fnc"
+        >
             <div class="button">{{opt.icon}}</div>
             <div class="title">{{opt.title}}</div>
         </div>
@@ -12,16 +17,30 @@
 <script setup lang="ts">
 
 import { ref }                              from 'vue'
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+const store = useStore();
 
 // -- =====================================================================================
 
-    const options =  ref ( [{ title: "", icon: "" }] )
+    const lang = () => { console.log() }
+    const logOut = () => { 
+        store.dispatch( TS.Acts.Flag_logged_in, false )
+        if ( store.getters.ort === TS.Orts.UserPanel )
+            store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+
+    }
+
+// -- =====================================================================================
+
+    // eslint-disable-next-line
+    const options =  ref ( [{ title: "", icon: "", fnc: ()=>{} }] )
 
     options.value = [
-        { title: "Language" , icon: "", },
-        // { title: "Theme", icon: "", },
+        { title: "Language" , icon: "", fnc: lang },
+        // { title: "Theme", icon: "", theme },
+        { title: "Exit", icon: "", fnc: logOut },
     ]
-
 
 // -- =====================================================================================
 

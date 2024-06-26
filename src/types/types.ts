@@ -14,13 +14,7 @@ export enum Languages { "EN", "FA", "UR" }
 export enum DisplayMode { "Wide", "Packed" }
 
 // .. declare Places
-export enum Orts {
-    Home = "Home",
-    OurGoals = "Our Goals",
-    News = "News",
-    FAQs = "FAQs",
-    AboutUs = "About Us"
-}
+export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, }
 
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }

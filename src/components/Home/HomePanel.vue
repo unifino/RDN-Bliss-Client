@@ -31,6 +31,14 @@ const store = useStore()
 // -- =====================================================================================
 
     store.watch(
+        getters => getters.Flag_logged_in,
+        () => Tools.mainCA (
+            [ TS.Orts.Home, TS.Orts.UserPanel, TS.Orts.Home ],
+            [ h_100, h_010 ] 
+        )
+    )
+
+    store.watch(
         getters => getters.ort,
         ( nV, oV ) => {
             Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )

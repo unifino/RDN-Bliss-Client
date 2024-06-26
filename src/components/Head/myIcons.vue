@@ -1,9 +1,11 @@
 <template>
     <div id="header_icons_box">
         <div v-for="(x,i) of options" :key=i class="optionBox no_select">
-            <div @click="changeOrt(x.code)" :class="x.select?'selected':''">
-                <div class="icon">{{x.icon}}</div>
-                <div class="title">{{x.code}}</div>
+            <div @click="changeOrt(x.code)" :class="x.select ? 'selected' : ''">
+                <div :class="'icon ' + CD.OrtData[ x.code ].text">{{x.icon}}</div>
+                <div :class="'title ' + CD.OrtData[ x.code ].text">
+                    {{CD.OrtData[ x.code ].text}}
+                </div>
             </div>
         </div>
     </div>
@@ -16,6 +18,8 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CD                              from '@/mixins/commonData'
+
 const store = useStore();
 
 // -- =====================================================================================
@@ -33,6 +37,8 @@ const store = useStore();
 
     const changeOrt = async ( ortCode: TS.Orts ) => {
 
+        // .. prevent double animation EXcept for Home as return to Base
+        if ( store.getters.ort === ortCode && ortCode !== TS.Orts.Home ) return
         if ( !fuse ) return
 
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
@@ -44,6 +50,16 @@ const store = useStore();
         fuse = true
 
     }
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.Flag_logged_in,
+        nV => {
+            options.value[0].code = nV ? TS.Orts.UserPanel : TS.Orts.Home
+            // options.value[0].icon = ""
+        }
+    )
 
 // -- =====================================================================================
 
@@ -77,7 +93,7 @@ const store = useStore();
 
     .title{
         font-family: Manrope;
-        opacity: 0.2;
+        opacity: 0.4;
     }
 
     .selected, .selected> .title, .optionBox:hover{
@@ -91,6 +107,26 @@ const store = useStore();
 
     .optionBox:hover{
         color: #a33474;
+    }
+
+    .Welcome {
+        animation           : Welcome 1s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes Welcome {
+        0%  { color: #521739 }
+        100%{ color: #64a334; opacity: 1; }
+    }
+
+    .Home {
+        animation           : Home 1s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes Home {
+        0%  { color: #64a334 }
+        100%{ color: #521739; opacity: 1; }
     }
 
 </style>

@@ -51,6 +51,11 @@ const store = useStore()
         }
     )
 
+    store.watch(
+        getters => getters.Flag_logged_in,
+        nV => { if (!nV) Anime.textSlider( d_txt ) }
+    )
+
 // -- =====================================================================================
 
 </script>

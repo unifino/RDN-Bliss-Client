@@ -7,8 +7,6 @@
             <FAQsPanel />
             <AboutUsPanel />
 
-            <UserPanel ref='userPanel' id="userPanel" />
-
         </div>
     </div>
 </template>
@@ -21,12 +19,10 @@ import DecorPanel                           from '@/components/Decor/DecorPanel.
 import HomePanel                            from '@/components/Home/HomePanel.vue'
 import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
 import FAQsPanel                            from '@/components/FAQs/FAQsPanel.vue'
-import UserPanel                            from '@/components/UserPanel/UserPanel.vue'
 import { ref }                              from 'vue'
+import { useStore }                         from 'vuex'
 
-// -- =====================================================================================
-
-    const userPanel = ref<HTMLElement>( {} as HTMLElement )
+const store = useStore()
 
 // -- =====================================================================================
 
@@ -50,14 +46,6 @@ import { ref }                              from 'vue'
     }
 
     #mainPanelWrapper{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-    }
-
-    #userPanel{
-        /* transform: translateY(100%); */
-        background: red;
         width: 100%;
         height: 100%;
         position: absolute;

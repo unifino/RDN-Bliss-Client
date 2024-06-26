@@ -1,21 +1,19 @@
-import * as TS                              from '@/types/types'
 import { Ref }                              from 'vue'
 import { store }                            from '@/store/store'
 
 // -- =====================================================================================
 
 export const imgDecor = async (
-    nV: TS.Orts,
     el:Ref<HTMLElement>,
-    pics: Ref<number>,
-    idx: number|null = null,
+    picIndex: Ref<number>,
+    idx: number,
     delay = 500
 ) => {
     await new Promise( _ => setTimeout( _, 10 ) )
     el.value.className = "fadeOut_B001"
     await new Promise( _ => setTimeout( _, 700 ) )
     // .. set pic by idx or by Ort-Index
-    pics.value = idx !== null ? idx : Object.values( TS.Orts ).indexOf( nV )
+    picIndex.value = idx
     await new Promise( _ => setTimeout( _, delay ) )
     el.value.className = "fadeIn_B001"
 }

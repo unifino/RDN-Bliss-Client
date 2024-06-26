@@ -9,6 +9,7 @@
 import { useStore }                         from 'vuex'
 import { ref }                              from 'vue'
 import * as TS                              from '@/types/types'
+import * as CD                              from '@/mixins/commonData'
 
 const store = useStore()
 
@@ -20,13 +21,20 @@ const store = useStore()
 
     store.watch(
         getters => getters.ort,
-        nV => myText.value = nV
+        // eslint-disable-next-line
+        nV => myText.value = ( CD.OrtData as any )[ nV ].text
     )
 
     store.watch(
         getters => getters.process,
         nV => myText.value = nV === TS.Processes.Registering ?
-            "Hey there!" : store.getters.ort
+        // eslint-disable-next-line
+            "Hey there!" : ( CD.OrtData as any )[ store.getters.ort ].text
+    )
+
+    store.watch(
+        getters => getters.Flag_logged_in,
+        nV => { if (!nV) myText.value = ( CD.OrtData as any )[ store.getters.ort ].text }
     )
 
 // -- =====================================================================================
