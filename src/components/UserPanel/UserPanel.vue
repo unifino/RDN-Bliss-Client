@@ -1,5 +1,7 @@
 <template>
-    <div id="textBannerBox" class="no_select">{{ myText }}</div>
+    <div id="userPanelBox" :style="`z-index: ${+(store.state.Flag_logged_in)}`">
+        
+    </div>
 </template>
 
 // -- =====================================================================================
@@ -7,26 +9,23 @@
 <script setup lang="ts">
 
 import { useStore }                         from 'vuex'
-import { ref }                              from 'vue'
-import * as TS                              from '@/types/types'
+// import * as TS                              from '@/types/types'
+// import * as Tools                           from '@/mixins/Tools'
+// import { ref }                              from 'vue'
 
 const store = useStore()
 
 // -- =====================================================================================
 
-    const myText = ref<string>()
+    // const userPanel = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.ort,
-        nV => myText.value = nV
-    )
-
-    store.watch(
-        getters => getters.process,
-        nV => myText.value = nV === TS.Processes.Registering ?
-            "Hey there!" : store.getters.ort
+        getters => getters.Flag_logged_in,
+        nV => {
+            console.log(nV);
+        }
     )
 
 // -- =====================================================================================
@@ -37,15 +36,8 @@ const store = useStore()
 
 <style scoped>
 
-    #textBannerBox{
-        color: #34282F;
-        font-family: PoiretOne;
-        font-size: 140px;
-        /* font-weight: 600; */
-        margin: 200px 100px;
-        padding: 0;
-        top: 0;
-        left: 0;
+    #userPanelBox{
+        background-color: red;
         height: 100%;
         width: 100%;
         position: absolute;

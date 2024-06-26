@@ -9,8 +9,6 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import D_COR                                from '@/components/Decor/D_COR.vue'
 import D_TXT                                from '@/components/Decor/D_TXT.vue'
 import { useStore }                         from 'vuex'

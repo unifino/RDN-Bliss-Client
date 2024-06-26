@@ -8,8 +8,6 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools'

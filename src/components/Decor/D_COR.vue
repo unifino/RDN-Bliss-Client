@@ -6,8 +6,6 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as Anime                           from '@/mixins/AnimationCenter'

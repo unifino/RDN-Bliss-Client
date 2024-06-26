@@ -14,8 +14,6 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import Header_Icons                         from '@/components/Head/myIcons.vue'
 import myButtons                            from '@/components/Head/myButtons.vue'
 import myLogo                               from '@/components/Head/myLogo.vue'

@@ -11,8 +11,6 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import H_100                                from '@/components/Home/H_100.vue'
 import H_010                                from '@/components/Home/H_010.vue'
 import H_Reg                                from '@/components/Home/H_Reg.vue'

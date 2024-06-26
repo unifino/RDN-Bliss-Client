@@ -34,6 +34,7 @@ export type State = {
 
     // .. declare Flags
     Flag_plan_B: boolean
+    Flag_logged_in: boolean
 }
 
 // -- =====================================================================================
@@ -53,7 +54,8 @@ export enum Mutates {
     ProcessChange           = "Change_The_Process",
     LanguageChange          = "Change_The_Language",
     OrtChange               = "Change_The_Ort",
-    Flag_plan_B             = "Change_Animation_Plan_B"
+    Flag_plan_B             = "Change_Animation_Plan_B",
+    Flag_logged_in          = "Change_View_mode",
 }
 
 // .. declare Mutations
@@ -62,6 +64,7 @@ export type MyMutations<S = State> = {
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
     [ Mutates.OrtChange ]       ( state: S, payload: Orts ): void;
     [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ): void;
+    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ): void;
 }
 
 // -- =====================================================================================
@@ -71,7 +74,8 @@ export enum Acts {
     ProcessChange   = "Change_The_Process",
     LanguageChange  = "Change_The_Language",
     OrtChange       = "Change_The_Ort",
-    Flag_plan_B     = "Change_Animation_Plan_B"
+    Flag_plan_B     = "Change_Animation_Plan_B",
+    Flag_logged_in  = "Change_View_mode",
 }
 
 // .. declare Action Interface
@@ -80,6 +84,7 @@ export interface MyActions {
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
     [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ): void;
     [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ): void;
+    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ): void;
 }
 
 // -- =====================================================================================
@@ -89,6 +94,7 @@ export type MyGetters = {
     process ( state: State ): Processes,
     ort ( state: State ): Orts,
     Flag_plan_B ( state: State ): boolean
+    Flag_logged_in ( state: State ): boolean
 }
 
 // -- =====================================================================================

@@ -9,8 +9,6 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import A_100                                from '@/components/About Us/A_100.vue'
 import A_010                                from '@/components/About Us/A_010.vue'
 import { useStore }                         from 'vuex'

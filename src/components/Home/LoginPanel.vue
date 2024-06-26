@@ -10,19 +10,50 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import { useStore }                         from 'vuex'
 import { ref }                              from 'vue'
 import * as TS                              from '@/types/types'
 
 const store = useStore()
+
+// -- =====================================================================================
+
 const loginBox = ref<HTMLElement>( {} as HTMLElement )
+const usrmil = ref<HTMLElement>( {} as HTMLElement )
+const passwd = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     const login = () => {
-        console.log();
+
+        // ! remove i
+        logging()
+
+        // ..  checking the Form
+        let parts = []
+
+        // eslint-disable-next-line
+        if ( ( usrmil.value as any ).value.length < 4 ) parts.push( usrmil )
+
+        // eslint-disable-next-line
+        if ( ( passwd.value as any ).value.length < 4 ) parts.push( passwd )
+
+        // .. apply alert animation
+        parts.forEach( async (x,i) => {
+            await new Promise( _ => setTimeout( _, i*100 ) )
+            x.value.className += " alert"
+            await new Promise( _ => setTimeout( _, 700 ) )
+            x.value.className = x.value.className.replace( /alert/g , '' )
+        } )
+
+        if ( !parts.length ) logging()
+
+    }
+
+// -- =====================================================================================
+
+    const logging = () => {
+        store.dispatch( TS.Acts.Flag_logged_in, true )
     }
 
 // -- =====================================================================================
@@ -102,6 +133,24 @@ const loginBox = ref<HTMLElement>( {} as HTMLElement )
     @keyframes out {
         0%  { opacity: 1; transform: scale(1); }
         100%{ opacity: 0; transform: scale(.3); }
+    }
+
+    .alert {
+        animation           : alert .7s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes alert {
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            background-color: #FB1111;
+            color: black;
+            transform: scale(1.07);
+        }
+        100%{
+        }
     }
 
 </style>

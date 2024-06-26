@@ -28,17 +28,11 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
 
 const store = useStore();
-
-// -- =====================================================================================
-
-    const H100Box = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
@@ -48,6 +42,8 @@ const store = useStore();
         { text: "I'm a Dietitian", selected: false,  icon: "", },
         { text: "I'm a Patient", selected: false, icon: "", },
     ]
+
+// -- =====================================================================================
 
     const headToRegistration = () => {
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registering )

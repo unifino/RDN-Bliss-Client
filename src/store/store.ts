@@ -15,8 +15,8 @@ const state: TS.State = {
     displayMode: TS.DisplayMode.Wide,
     ort: TS.Orts.Home,
 
-    Flag_plan_B: false
-
+    Flag_plan_B: false,
+    Flag_logged_in: false,
 }
 
 // -- =================================================================== Mutations =======
@@ -24,10 +24,11 @@ const state: TS.State = {
 // .. define Mutations
 const mutations: MutationTree<TS.State> & TS.MyMutations = {
 
-    [ TS.Mutates.ProcessChange ] ( state, payload ) { state.process = payload },
-    [ TS.Mutates.LanguageChange ] ( state, payload ) { state.language = payload },
-    [ TS.Mutates.OrtChange ] ( state, payload ) { state.ort = payload },
-    [ TS.Mutates.Flag_plan_B ] ( state, payload ) { state.Flag_plan_B = payload }
+    [ TS.Mutates.ProcessChange ]    ( state, payload ) { state.process = payload },
+    [ TS.Mutates.LanguageChange ]   ( state, payload ) { state.language = payload },
+    [ TS.Mutates.OrtChange ]        ( state, payload ) { state.ort = payload },
+    [ TS.Mutates.Flag_plan_B ]      ( state, payload ) { state.Flag_plan_B = payload },
+    [ TS.Mutates.Flag_logged_in ]   ( state, payload ) { state.Flag_logged_in = payload },
 
 }
 
@@ -50,7 +51,11 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
     [ TS.Acts.Flag_plan_B ] ( commit, payload ) {
         store.commit( TS.Mutates.Flag_plan_B, payload )
-    }
+    },
+
+    [ TS.Acts.Flag_logged_in ] ( commit, payload ) {
+        store.commit( TS.Mutates.Flag_logged_in, payload )
+    },
 
 }
 
@@ -60,7 +65,8 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     process: (state) => (state.process),
     ort: (state) => (state.ort),
-    Flag_plan_B: (state) => (state.Flag_plan_B)
+    Flag_plan_B: (state) => (state.Flag_plan_B),
+    Flag_logged_in: (state) => (state.Flag_logged_in),
 }
 
 // -- ======================================================================= Setup =======

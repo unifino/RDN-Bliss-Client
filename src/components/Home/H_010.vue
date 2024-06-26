@@ -21,12 +21,9 @@
 
 <script setup lang="ts">
 
-// -- =====================================================================================
-
 import DotBox                               from '@/components/Home/DotBox.vue'
 
 // -- =====================================================================================
-
 
     let context = { title: "", text: "" }
     context.title = "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health";
