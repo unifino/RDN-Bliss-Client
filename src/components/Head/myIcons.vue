@@ -22,6 +22,7 @@ const store = useStore();
 
 // -- =====================================================================================
 
+    let fuse = true;
     const options = ref ( [ { code: TS.Orts.Home, select: false, icon: "" } ] )
 
     options.value = [
@@ -34,9 +35,15 @@ const store = useStore();
 
     const changeOrt = async ( ortCode: TS.Orts ) => {
 
+        if ( !fuse ) return
+
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, ortCode )
         for( let x of options.value ) x.select = x.code === ortCode
+
+        fuse = false
+        await new Promise( _ => setTimeout( _, 1700 ) )
+        fuse = true
 
     }
 

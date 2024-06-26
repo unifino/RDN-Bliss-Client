@@ -30,7 +30,10 @@ export type State = {
     process: Processes,
     language: Languages,
     displayMode: DisplayMode,
-    ort: Orts
+    ort: Orts,
+
+    // .. declare Flags
+    Flag_plan_B: boolean
 }
 
 // -- =====================================================================================
@@ -47,9 +50,10 @@ type AAC = Omit< ActionContext<State, State>, "commit" > & {
 
 // .. declare Mutation-Options
 export enum Mutates {
-    ProcessChange   = "Change_The_Process",
-    LanguageChange  = "Change_The_Language",
-    OrtChange       = "Change_The_Ort"
+    ProcessChange           = "Change_The_Process",
+    LanguageChange          = "Change_The_Language",
+    OrtChange               = "Change_The_Ort",
+    Flag_plan_B             = "Change_Animation_Plan_B"
 }
 
 // .. declare Mutations
@@ -57,6 +61,7 @@ export type MyMutations<S = State> = {
     [ Mutates.ProcessChange ]   ( state: S, payload: Processes ): void;
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
     [ Mutates.OrtChange ]       ( state: S, payload: Orts ): void;
+    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ): void;
 }
 
 // -- =====================================================================================
@@ -65,7 +70,8 @@ export type MyMutations<S = State> = {
 export enum Acts {
     ProcessChange   = "Change_The_Process",
     LanguageChange  = "Change_The_Language",
-    OrtChange       = "Change_The_Ort"
+    OrtChange       = "Change_The_Ort",
+    Flag_plan_B     = "Change_Animation_Plan_B"
 }
 
 // .. declare Action Interface
@@ -73,6 +79,7 @@ export interface MyActions {
     [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ): void;
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
     [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ): void;
+    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ): void;
 }
 
 // -- =====================================================================================
@@ -80,7 +87,8 @@ export interface MyActions {
 // .. declare Getters Options
 export type MyGetters = {
     process ( state: State ): Processes,
-    ort ( state: State ): Orts
+    ort ( state: State ): Orts,
+    Flag_plan_B ( state: State ): boolean
 }
 
 // -- =====================================================================================

@@ -14,6 +14,9 @@ const state: TS.State = {
     language: TS.Languages.EN,
     displayMode: TS.DisplayMode.Wide,
     ort: TS.Orts.Home,
+
+    Flag_plan_B: false
+
 }
 
 // -- =================================================================== Mutations =======
@@ -23,7 +26,8 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
 
     [ TS.Mutates.ProcessChange ] ( state, payload ) { state.process = payload },
     [ TS.Mutates.LanguageChange ] ( state, payload ) { state.language = payload },
-    [ TS.Mutates.OrtChange ] ( state, payload ) { state.ort = payload }
+    [ TS.Mutates.OrtChange ] ( state, payload ) { state.ort = payload },
+    [ TS.Mutates.Flag_plan_B ] ( state, payload ) { state.Flag_plan_B = payload }
 
 }
 
@@ -42,6 +46,10 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
     [ TS.Acts.OrtChange ] ( commit, payload ) {
         store.commit( TS.Mutates.OrtChange, payload )
+    },
+
+    [ TS.Acts.Flag_plan_B ] ( commit, payload ) {
+        store.commit( TS.Mutates.Flag_plan_B, payload )
     }
 
 }
@@ -51,7 +59,8 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 // .. define Getters
 const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     process: (state) => (state.process),
-    ort: (state) => (state.ort)
+    ort: (state) => (state.ort),
+    Flag_plan_B: (state) => (state.Flag_plan_B)
 }
 
 // -- ======================================================================= Setup =======

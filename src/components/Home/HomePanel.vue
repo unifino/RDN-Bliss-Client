@@ -34,13 +34,13 @@ const store = useStore()
         getters => getters.ort,
         ( nV, oV ) => {
             Tools.mainCA( [ oV, nV, TS.Orts.Home ], [ h_100, h_010 ] )
-
+            store.dispatch( TS.Acts.Flag_plan_B, false )
         }
     )
 
     store.watch(
         getters => getters.process,
-        nV => {
+        ( nV, oV ) => {
             // .. Enter -> register mode
             if ( nV === TS.Processes.Registering ) {
                 Tools.reg_Phase_A( "In", h_reg )
@@ -48,7 +48,7 @@ const store = useStore()
                 Tools.mainCA( [ "Home", null as any, "Home" ], [ h_100, h_010 ] )
             }
             // .. Exit <- Register Mode
-            else {
+            else if ( oV === TS.Processes.Registering ) {
                 Tools.reg_Phase_A( "Out", h_reg )
                 // .. exiting back to the Home
                 if ( store.getters.ort === TS.Orts.Home ) {
@@ -56,6 +56,19 @@ const store = useStore()
                     Tools.mainCA( [ null as any, "Home", "Home" ], [ h_100, h_010 ] )
                 }
             }
+
+            // .. Enter -> Login mode
+            else if ( nV === TS.Processes.Login ) {
+                h_010.value.className = "x_xxx LoginPosition"
+                store.dispatch( TS.Acts.Flag_plan_B, true )
+            }
+            // .. Exit <- Login Mode
+            else if ( oV === TS.Processes.Login )
+                // .. exiting back to the Home
+                if ( store.getters.ort === TS.Orts.Home ) {
+                    h_010.value.className = "x_xxx StandardPosition"
+                    store.dispatch( TS.Acts.Flag_plan_B, false )
+                }
 
         }
     )
@@ -139,13 +152,29 @@ const store = useStore()
         }
     }
 
+    .fallOut_X010_planB {
+        animation           : fallOut_X010_planB 1.9s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes fallOut_X010_planB {
+        0%{
+            transform: translate(0%, 82%) rotate(90deg);
+        }
+        100%{
+            transform: translate(0px, 1000px) scale(0.2) rotate(90deg);
+        }
+    }
+
     .fallIn_X100 {
-        transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
         animation           : fallIn_X100 1.7s;
         animation-fill-mode : both;
     }
 
     @keyframes fallIn_X100 {
+        0%{
+            transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
+        }
         66%{
             transform: translate(0px, 0px) rotate(3deg) scale(1.07);
         }
@@ -158,12 +187,14 @@ const store = useStore()
     }
 
     .fallIn_X010 {
-        transform: translate(0px, 1000px) scale(0.2);
         animation           : fallIn_X010 1.2s;
         animation-fill-mode : both;
     }
 
     @keyframes fallIn_X010 {
+        0%{
+            transform: translate(0px, 1000px) scale(0.2);
+        }
         14%{
             opacity: .2;
             transform: translate(0px, 1000px) scale(0.2);
@@ -217,6 +248,36 @@ const store = useStore()
             transform: scale(.5);
             opacity: 0;
             visibility: hidden;
+        }
+    }
+
+    .LoginPosition {
+        animation           : LoginPosition .8s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes LoginPosition {
+        0%{
+            transform: translate(0px, 0px) scale(1);
+        }
+        100%{
+            opacity: 1;
+            transform: translate(0%, 82%) rotate(90deg);
+        }
+    }
+
+    .StandardPosition {
+        animation           : StandardPosition .8s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes StandardPosition {
+        0%{
+            transform: translate(0%, 82%) rotate(90deg);
+        }
+        100%{
+            opacity: 1;
+            transform: translate(0%, 0%) rotate(0deg);
         }
     }
 

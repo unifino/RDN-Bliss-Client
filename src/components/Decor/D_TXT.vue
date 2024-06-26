@@ -27,9 +27,8 @@ const store = useStore()
 
     store.watch(
         getters => getters.process,
-        nV => myText.value = nV === TS.Processes.Registering ? 
-            "Hey there!" :
-            store.getters.ort
+        nV => myText.value = nV === TS.Processes.Registering ?
+            "Hey there!" : store.getters.ort
     )
 
 // -- =====================================================================================

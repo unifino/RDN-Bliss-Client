@@ -30,6 +30,7 @@ const store = useStore();
             require( "@/assets/Pics/flower.jpg" ),
             // .. 5
             require( "@/assets/Pics/whimsical.jpg" ),
+            require( "@/assets/Pics/blue-tit.jpg" ),
         ]
     }
 
@@ -42,12 +43,24 @@ const store = useStore();
 
     store.watch(
         getters => getters.process,
-        nV => Anime.imgDecor(
-            TS.Orts.Home,
-            BOX_001,
-            picIndex,
-            nV === TS.Processes.Registering ? 5 : null
-        )
+        nV => {
+
+            let idx: number|null;
+
+            switch (nV) {
+                case TS.Processes.Registering:  idx = 5; break;
+                case TS.Processes.Login:        idx = 6; break;
+                default:                     idx = null; break;
+            }
+
+            Anime.imgDecor(
+                TS.Orts.Home,
+                BOX_001,
+                picIndex,
+                idx
+            )
+
+        }
     )
 
 // -- =====================================================================================

@@ -1,5 +1,6 @@
 import * as TS                              from '@/types/types'
-import { Ref } from 'vue'
+import { Ref }                              from 'vue'
+import { store }                            from '@/store/store'
 
 // -- =====================================================================================
 
@@ -39,6 +40,7 @@ export const textSlider = async function ( el:Ref<HTMLElement> ) {
 
 // eslint-disable-next-line
 export const MainTransition = async function ( phase: "In"|"Out", [X100,X010]: any ) {
+
     switch ( phase ) {
 
         case "In":
@@ -49,7 +51,10 @@ export const MainTransition = async function ( phase: "In"|"Out", [X100,X010]: a
 
         case "Out":
             if( X100 ) X100.value.className = "x_xxx " + "fallOut_X100"
-            if( X010 ) X010.value.className = "x_xxx " + "fallOut_X010"
+            if( X010 ) {
+                X010.value.className = "x_xxx " + "fallOut_X010"
+                if ( store.getters.Flag_plan_B ) X010.value.className += "_planB"
+            }
             break;
 
     }

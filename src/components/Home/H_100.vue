@@ -5,12 +5,12 @@
 <!-- ================================================================================== -->
         <div id="logBox">
 <!-- ================================================================================== -->
-            <div class="section no_select">
+            <div class="section no_select" @click="prepareToLogin" ref="H100Box">
                 <div class="icon"></div>
                 <div class="txt">I'm a Dietitian</div>
             </div>
 <!-- ================================================================================== -->
-            <div class="section no_select">
+            <div class="section no_select" @click="prepareToLogin">
                 <div class="icon"></div>
                 <div class="txt">I'm a Patient</div>
             </div>
@@ -32,13 +32,24 @@
 
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import { ref }                              from 'vue'
 
 const store = useStore();
 
 // -- =====================================================================================
 
+    const H100Box = ref<HTMLElement>( {} as HTMLElement )
+
+// -- =====================================================================================
+
     const headToRegistration = () => {
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registering )
+    }
+
+// -- =====================================================================================
+
+    const prepareToLogin = () => {
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
     }
 
 // -- =====================================================================================

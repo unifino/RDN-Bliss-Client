@@ -43,7 +43,14 @@ const store = useStore()
 
     store.watch(
         getters => getters.process,
-        () => Anime.textSlider( d_txt )
+        ( nV, oV ) => {
+            if ( nV !== TS.Processes.Login )
+                if (
+                    store.getters.ort !== TS.Orts.Home ||
+                    nV !== TS.Processes.Reading || oV !== TS.Processes.Login
+                )
+                    Anime.textSlider( d_txt )
+        }
     )
 
 // -- =====================================================================================
