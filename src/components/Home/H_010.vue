@@ -104,7 +104,7 @@ const store = useStore();
         height: 700px;
         width: 790px;
         border-radius: 23px;
-        margin: 35px auto 0 auto;
+        margin: 45px auto 0 auto;
         position: absolute;
         overflow: hidden;
     }

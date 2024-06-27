@@ -64,7 +64,7 @@ const store = useStore();
         width: 790px;
         right: 0;
         left: 0;
-        margin: 35px auto 0 auto;
+        margin: 45px auto 0 auto;
         position: absolute;
         overflow: hidden;
     }

@@ -7,6 +7,8 @@
             <FAQsPanel />
             <AboutUsPanel />
 
+            <UserPanel />
+
         </div>
     </div>
 </template>
@@ -19,6 +21,7 @@ import DecorPanel                           from '@/components/Decor/DecorPanel.
 import HomePanel                            from '@/components/Home/HomePanel.vue'
 import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
 import FAQsPanel                            from '@/components/FAQs/FAQsPanel.vue'
+import UserPanel                            from '@/components/UserPanel/UserPanel.vue'
 
 
 // -- =====================================================================================
