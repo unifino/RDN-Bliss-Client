@@ -2,7 +2,7 @@ import * as TS                              from '@/types/types'
 
 // -- =====================================================================================
 
-export const OrtData = {
+export const OrtData: TS.OrtData = {
     [TS.Orts.Home]      : { name: "Home", text: "Home" },
     [TS.Orts.News]      : { name: "News", text: "News" },
     [TS.Orts.OurGoals]  : { name: "Our Goals", text: "Our Goals" },

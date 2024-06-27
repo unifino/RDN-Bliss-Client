@@ -1,14 +1,12 @@
-import * as TS                              from '@/types/types'
-import * as Anime                           from '@/mixins/AnimationCenter'
 import { Ref }                              from 'vue';
 
 // -- =====================================================================================
 
-// eslint-disable-next-line
-export const mainCA = ( [ oV, nV, ort ]: TS.Orts[], [X100,X010]: Ref<HTMLElement>[] ) => {
-    if ( nV !== oV )
-        if ( [ oV, nV ].includes( ort ) )
-            Anime.MainTransition( nV === ort ? "In" : "Out", [ X100, X010 ] )
+export const MainAnimation = async function ( 
+    el: Ref<HTMLElement>, target: "X100"|"X010", phase: "In"|"Out", delay= 0, opt = ""
+) {
+    await new Promise( _ => setTimeout( _, delay ) )
+    el.value.className = "x_xxx " + target + "_fall_" + phase + opt
 }
 
 // -- =====================================================================================

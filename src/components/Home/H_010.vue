@@ -1,5 +1,5 @@
 <template>
-    <div id="H_010_Box">
+    <div id="H_010_Box" ref="h_010">
         <DotBox />
 
         <div id="newsBox">
@@ -22,8 +22,16 @@
 <script setup lang="ts">
 
 import DotBox                               from '@/components/Home/DotBox.vue'
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+import { ref }                              from 'vue'
+import * as Tools                           from '@/mixins/Tools'
+
+const store = useStore();
 
 // -- =====================================================================================
+
+    const h_010 = ref<HTMLElement>( {} as HTMLElement )
 
     let context = { title: "", text: "" }
     context.title = "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health";
@@ -37,6 +45,52 @@ import DotBox                               from '@/components/Home/DotBox.vue'
 
 // -- =====================================================================================
 
+    const _out = async ( opt?: string ) => {
+        if ( opt ) await new Promise( _ => setTimeout( _, 1 ) )
+        Tools.MainAnimation( h_010, "X010", "Out", 0, opt )
+    };
+    const _in = () => Tools.MainAnimation( h_010, "X010", "In", 900+860 );
+    const _login = ( phase: "Login"|"Standard" ) => h_010.value.className = phase + "Pos"
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.ort,
+        ( nV, oV ) => {
+            if( oV === TS.Orts.Home ) _out()
+            if( nV === TS.Orts.Home ) _in()
+        }
+    )
+
+    store.watch(
+        getters => getters.process,
+        ( nV, oV ) => {
+            if ( nV === TS.Processes.Login ) _login( "Login" )
+            if ( nV === TS.Processes.Registering ) _out()
+            // .. Exit from Home to other Orts from Registering State
+            if ( oV === TS.Processes.Login && store.getters.ort !== TS.Orts.Home )
+                _out( "_planB" )
+            // .. Exit back to Home from Registering
+            if
+            ( 
+                nV === TS.Processes.Reading && 
+                store.getters.ort === TS.Orts.Home && 
+                oV !== TS.Processes.Login 
+            )
+                _in()
+            // .. Exit back to Home from Login
+            if
+            ( 
+                nV === TS.Processes.Reading && 
+                store.getters.ort === TS.Orts.Home && 
+                oV === TS.Processes.Login 
+            )
+                _login( "Standard" )
+        }
+    )
+
+// -- =====================================================================================
+
 </script>
 
 // -- =====================================================================================
@@ -45,11 +99,13 @@ import DotBox                               from '@/components/Home/DotBox.vue'
 
     #H_010_Box{
         background-color: #eeefec;
+        right: 0;
+        left: 0;
+        height: 700px;
+        width: 790px;
         border-radius: 23px;
-        height: 87%;
-        width: 90%;
-        margin: 5% 1% auto 4%;
-        position: relative;
+        margin: 35px auto 0 auto;
+        position: absolute;
         overflow: hidden;
     }
 
@@ -112,6 +168,34 @@ import DotBox                               from '@/components/Home/DotBox.vue'
         font-weight: bold;
         max-width: 300px;
         white-space: pre-line;
+    }
+
+    .LoginPos {
+        animation           : LoginPos .8s;
+        animation-fill-mode : both;
+    }
+    @keyframes LoginPos {
+        0%  { transform: translateY(0) scale(1) }
+        100%{ opacity: 1; transform: translateY(720px) rotate(90deg) }
+    }
+
+    .StandardPos {
+        animation           : StandardPos .8s;
+        animation-fill-mode : both;
+    }
+    @keyframes StandardPos {
+        0%  { transform: translateY(720px) rotate(90deg) }
+        100%{ opacity: 1; transform: translateY(0) rotate(0deg) }
+    }
+
+    .X010_fall_Out_planB {
+        animation           : X010_fall_Out_planB 1.9s;
+        animation-fill-mode : both;
+    }
+
+    @keyframes X010_fall_Out_planB {
+        0%  { transform: translateY(720px) rotate(90deg) }
+        100%{ transform: translate(0px, 1000px) scale(0.2) rotate(90deg) }
     }
 
 </style>

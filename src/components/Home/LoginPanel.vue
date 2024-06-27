@@ -1,8 +1,10 @@
 <template>
-    <div id="inputWrapper" ref="loginBox">
-        <input ref="usrmil" type="text" placeholder="username / e-mail" />
-        <input ref="passwd" type="password" placeholder="password" />
-        <div id="loginButton" class="no_select" @click="login()">Log in</div>
+    <div id="LoginPanelWrapper">
+        <div id="LoginPanel" class="init" ref="loginBox">
+            <input ref="usrmil" type="text" placeholder="username / e-mail" />
+            <input ref="passwd" type="password" placeholder="password" />
+            <div id="loginButton" class="no_select" @click="login()">Log in</div>
+        </div>
     </div>
 </template>
 
@@ -19,25 +21,25 @@ const store = useStore()
 // -- =====================================================================================
 
 const loginBox = ref<HTMLElement>( {} as HTMLElement )
-const usrmil = ref<HTMLElement>( {} as HTMLElement )
-const passwd = ref<HTMLElement>( {} as HTMLElement )
+const usrmil = ref<HTMLInputElement>( {} as HTMLInputElement )
+const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
 // -- =====================================================================================
 
     const login = () => {
 
-        // ! remove i
+        // ! remove it
         logging()
 
         // ..  checking the Form
         let parts = []
 
-        // eslint-disable-next-line
-        if ( ( usrmil.value as any ).value.length < 4 ) parts.push( usrmil )
+        if ( usrmil.value.value.length < 4 ) parts.push( usrmil )
 
         // eslint-disable-next-line
-        if ( ( passwd.value as any ).value.length < 4 ) parts.push( passwd )
+        if ( passwd.value.value.length < 4 ) parts.push( passwd )
 
+        // ! remove it
         // .. apply alert animation
         // parts.forEach( async (x,i) => {
             // await new Promise( _ => setTimeout( _, i*100 ) )
@@ -56,14 +58,19 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
         store.dispatch( TS.Acts.Flag_logged_in, true )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
-        loginBox.value.className = "out"
+        loginBox.value.className = "Out"
     }
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.process,
-        nV => loginBox.value.className = nV === TS.Processes.Login ? "in" : "out"
+        ( nV, oV ) => {
+            // .. Enter -> register mode
+            if ( nV === TS.Processes.Login ) loginBox.value.className = "In"
+            // .. Exit <- Register Mode
+            else if ( oV === TS.Processes.Login ) loginBox.value.className = "Out"
+        }
     )
 
 // -- =====================================================================================
@@ -74,11 +81,26 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
 
 <style scoped>
 
-    #inputWrapper{
+    #LoginPanelWrapper{
+        height: 300px;
+        width: 350px;
+        right: 0;
+        left: 0;
+        margin: auto;
+        margin-top: 220px;
+        position: absolute;
+        z-index: 2;
+    }
+
+    #LoginPanel{
+        height: 300px;
         width: 250px;
-        float: lef;
-        transform: scale(.3);
-        opacity: 0;
+        position: absolute;
+    }
+
+    #LoginPanel.init{
+        transform: scale(.4);
+        opacity: 0;  
     }
 
     input{
@@ -102,7 +124,7 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
         height: 40px;
         font-size: 20px;
         line-height: 40px;
-        margin: 25PX auto;
+        margin: 25px 60px;
         text-align: center;
         font-family: PoiretOne;
         font-weight: bold;
@@ -117,25 +139,25 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
         color: #131313;
     }
 
-    .in {
-        animation           : in .8s;
+    .In {
+        animation           : In .8s;
         animation-fill-mode : both;
     }
 
-    @keyframes in {
-        0%  { opacity: 0; transform: scale(.3); }
-        50%  { opacity: 0; transform: scale(.3); }
-        100%{ opacity: 1; transform: scale(1); }
+    @keyframes In {
+        0%  { opacity: 0; transform: scale(.4); }
+        50% { opacity: 0; transform: scale(.4); }
+        100%{ opacity: 1; transform: scale(1);  }
     }
 
-    .out {
-        animation           : out .7s;
+    .Out {
+        animation           : Out .22s;
         animation-fill-mode : both;
     }
 
-    @keyframes out {
+    @keyframes Out {
         0%  { opacity: 1; transform: scale(1); }
-        100%{ opacity: 0; transform: scale(.3); }
+        100%{ opacity: 0; transform: scale(.4); }
     }
 
     .alert {
@@ -144,16 +166,9 @@ const passwd = ref<HTMLElement>( {} as HTMLElement )
     }
 
     @keyframes alert {
-        0%{
-            transform: scale(1);
-        }
-        50%{
-            background-color: #FB1111;
-            color: black;
-            transform: scale(1.07);
-        }
-        100%{
-        }
+        0%{ transform: scale(1) }
+        50%{ background-color: #FB1111; color: black; transform: scale(1.07) }
+        100%{}
     }
 
 </style>

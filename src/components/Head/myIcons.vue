@@ -46,7 +46,7 @@ const store = useStore();
         for( let x of options.value ) x.select = x.code === ortCode
 
         fuse = false
-        await new Promise( _ => setTimeout( _, 1700 ) )
+        await new Promise( _ => setTimeout( _, 900+ 860 ) )
         fuse = true
 
     }

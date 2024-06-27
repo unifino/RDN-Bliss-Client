@@ -40,30 +40,33 @@ const store = useStore()
     // .. Home - About Us
     store.watch(
         getters => getters.ort,
-        // eslint-disable-next-line
-        nV => myText.value = ( CD.OrtData as any )[ nV ].text
+        ( nV: TS.Orts ) => myText.value = CD.OrtData[ nV ].text
     )
 
     // .. Registering - Exit
     store.watch(
         getters => getters.process,
-        nV => myText.value = nV === TS.Processes.Registering ?
-        // eslint-disable-next-line
-            "Hey there!" : ( CD.OrtData as any )[ store.getters.ort ].text
+        ( nV: TS.Processes ) => myText.value = nV === TS.Processes.Registering ?
+            "Hey there!" : CD.OrtData[ store.getters.ort as TS.Orts ].text
     )
 
     // .. logOut
     store.watch(
         getters => getters.Flag_logged_in,
-        // eslint-disable-next-line
-        nV => { if (!nV) myText.value = ( CD.OrtData as any )[ store.getters.ort ].text }
+        async ( nV: boolean, oV: boolean ) => { 
+            if (!nV) myText.value = CD.OrtData[ store.getters.ort as TS.Orts ].text 
+            if (oV) {
+                await new Promise( _ => setTimeout( _, 10 ) )
+                myText.value = "Bye :)"
+            }
+        }
     )
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.ort,
-        ( nV, oV ) => {
+        ( nV: TS.Orts, oV: TS.Orts ) => {
             if (
                 nV !== oV ||
                 (
@@ -77,7 +80,7 @@ const store = useStore()
 
     store.watch(
         getters => getters.process,
-        ( nV, oV ) => {
+        ( nV: TS.Processes, oV: TS.Processes ) => {
             if ( nV !== TS.Processes.Login )
                 if (
                     store.getters.ort !== TS.Orts.Home ||
@@ -89,7 +92,7 @@ const store = useStore()
 
     store.watch(
         getters => getters.Flag_logged_in,
-        nV => { if (!nV) textSlider() }
+        ( nV: boolean ) => { if (!nV) textSlider() }
     )
 
 // -- =====================================================================================

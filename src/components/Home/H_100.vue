@@ -1,5 +1,5 @@
 <template>
-    <div id="H_100_Box">
+    <div id="H_100_Box" ref="h_100">
 <!-- ================================================================================== -->
         <div id="title" />
 <!-- ================================================================================== -->
@@ -31,11 +31,13 @@
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
+import * as Tools                           from '@/mixins/Tools'
 
 const store = useStore();
 
 // -- =====================================================================================
 
+    const h_100 = ref<HTMLElement>( {} as HTMLElement )
     const options = ref ( [ { text: "", selected: false, icon: "" } ] )
 
     options.value = [
@@ -58,11 +60,39 @@ const store = useStore();
 
 // -- =====================================================================================
 
+    const _out = () => Tools.MainAnimation( h_100, "X100", "Out" )
+    const _in = () => Tools.MainAnimation( h_100, "X100", "In", 900+860 )
+    const reset = () => options.value.forEach( x => x.selected = false )
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.ort,
+        ( nV, oV ) => {
+            if( oV === TS.Orts.Home ) _out()
+            if( nV === TS.Orts.Home ) _in()
+        }
+    )
+
     store.watch(
         getters => getters.process,
-        nV => {
-            if ( nV !== TS.Processes.Login ) 
-                options.value.forEach( x => x.selected = false )
+        ( nV, oV ) => {
+            if( nV === TS.Processes.Registering ) _out()
+        }
+    )
+
+    store.watch(
+        getters => getters.process,
+        ( nV, oV ) => {
+            if ( oV === TS.Processes.Login ) reset()
+            // .. Exit back to Home from Registering
+            if
+            ( 
+                nV === TS.Processes.Reading && 
+                store.getters.ort === TS.Orts.Home && 
+                oV !== TS.Processes.Login 
+            )
+                _in()
         }
     )
 
@@ -80,9 +110,8 @@ const store = useStore();
         width: 350px;
         border-radius: 23px;
         box-shadow: 0 0 7px #676a74 ;
-        margin: auto;
-        margin-top: 25%;
-        position: relative;
+        margin: 120px 0 0 100px;
+        position: absolute;
         overflow: hidden;
     }
 

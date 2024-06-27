@@ -65,8 +65,7 @@ const store = useStore();
     store.watch( getters => getters.ort, () => imgDecor() )
     // .. 6-7
     store.watch( getters => getters.process, () => imgDecor() )
-    // .. logOut
-    store.watch( getters => getters.Flag_logged_in, nV => { if (!nV) imgDecor() } )
+
 
 // -- =====================================================================================
 

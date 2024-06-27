@@ -1,16 +1,52 @@
 <template>
-    <div id="A_100_Box" class="no_select">
-        <div class="section selected">Institute</div>
-        <div class="section">Our Team</div>
-        <div class="section">Certified Coach</div>
-        <div class="section">Careers</div>
-        <div class="section">Contact Us</div>
+    <div id="A_100_Box" class="no_select init" ref="a_100">
+        <div id="sections_wrapper">
+            <div class="section selected">Institute</div>
+            <div class="section">Our Team</div>
+            <div class="section">Certified Coach</div>
+            <div class="section">Careers</div>
+            <div class="section">Contact Us</div>
+        </div>
     </div>
 </template>
 
 // -- =====================================================================================
 
 <script setup lang="ts">
+
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+import { ref }                              from 'vue'
+import * as Tools                           from '@/mixins/Tools'
+
+const store = useStore();
+
+// -- =====================================================================================
+
+    const a_100 = ref<HTMLElement>( {} as HTMLElement )
+
+// -- =====================================================================================
+
+    const _out = () => Tools.MainAnimation( a_100, "X100", "Out" )
+    const _in = () => Tools.MainAnimation( a_100, "X100", "In", 900+860 )
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.ort,
+        ( nV: TS.Orts, oV: TS.Orts ) => {
+            if( oV === TS.Orts.AboutUs ) _out()
+            if( nV === TS.Orts.AboutUs ) _in()
+        }
+    )
+
+    store.watch(
+        getters => getters.Flag_logged_in,
+        // .. Bye Bye
+        ( nV: boolean, oV: boolean ) => { 
+            if( oV && store.getters.ort === TS.Orts.AboutUs ) { _out(); _in() } 
+        }
+    )
 
 // -- =====================================================================================
 
@@ -22,15 +58,24 @@
 
     #A_100_Box{
         background-color: #151f29;
-        height: 65%;
+        height: 650px;
         width: 400px;
         border-radius: 23px;
         box-shadow: 0 0 7px #676a74 ;
-        margin: auto;
-        margin-top: 12%;
-        position: relative;
+        margin: 72px 0 0 72px;
+        position: absolute;
         overflow: hidden;
-        padding-top: 15%;
+    }
+    
+    #sections_wrapper{
+        top: 50%;
+        padding: 50px 0;
+        position: relative;
+        transform: translateY(-50%);
+    }
+
+    .init{
+        transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2);
     }
 
     .section{

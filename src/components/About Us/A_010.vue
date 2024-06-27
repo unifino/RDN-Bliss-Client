@@ -1,5 +1,5 @@
 <template>
-    <div id="A_010_Box">
+    <div id="A_010_Box" class="init" ref="a_010">
         <div id="newsBox">
             Success Stories<br><br>
             We've helped hundreds of companies around the world achieve remarkable digital sales and marketing results. Below, we invite you to learn about their stories of incredible business growth and success, in their words.
@@ -14,12 +14,40 @@
 
 <script setup lang="ts">
 
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+import { ref }                              from 'vue'
+import * as Tools                           from '@/mixins/Tools'
+
+const store = useStore();
+
+// -- =====================================================================================
+
+    const a_010 = ref<HTMLElement>( {} as HTMLElement )
+
 // -- =====================================================================================
 
 
+    const _out = () => Tools.MainAnimation( a_010, "X010", "Out" )
+    const _in = () => Tools.MainAnimation( a_010, "X010", "In", 900+860 )
+
 // -- =====================================================================================
 
+    store.watch(
+        getters => getters.ort,
+        ( nV, oV ) => {
+            if( oV === TS.Orts.AboutUs ) _out()
+            if( nV === TS.Orts.AboutUs ) _in()
+        }
+    )
 
+    store.watch(
+        getters => getters.Flag_logged_in,
+        // .. Bye Bye
+        ( nV: boolean, oV: boolean ) => { 
+            if( oV && store.getters.ort === TS.Orts.AboutUs ) { _out(); _in() } 
+        }
+    )
 
 // -- =====================================================================================
 
@@ -32,11 +60,18 @@
     #A_010_Box{
         background-color: #fbfbfb;
         border-radius: 23px;
-        height: 87%;
-        width: 100%;
-        margin: 5% 0% auto 0%;
-        position: relative;
+        height: 700px;
+        width: 790px;
+        right: 0;
+        left: 0;
+        margin: 35px auto 0 auto;
+        position: absolute;
         overflow: hidden;
+    }
+
+    .init{
+        transform: translate(0px, 1000px) scale(0.2);
+        opacity: 0;
     }
 
     #newsBox{

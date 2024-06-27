@@ -16,6 +16,8 @@ export enum DisplayMode { "Wide", "Packed" }
 // .. declare Places
 export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, }
 
+export type OrtData = {[ K in Orts ]: { name: string, text: string } }
+
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
@@ -94,7 +96,7 @@ export type MyGetters = {
 // -- =====================================================================================
 
 // .. declare Store
-export type Store = Omit< VuexStore<State>, "commit"|"dispatch"|"getters" > & {
+export type Store = Omit< VuexStore<State>, "commit"|"dispatch"|"getters"|"watch" > & {
 
     commit < K extends keyof MyMutations, P extends Parameters<MyMutations[K]>[1] > (
         key: K,
@@ -108,7 +110,10 @@ export type Store = Omit< VuexStore<State>, "commit"|"dispatch"|"getters" > & {
         options?: DispatchOptions
     ): ReturnType<MyActions[K]>;
 
-    getters: { [K in keyof MyGetters]: ReturnType<MyGetters[K]> };
+    getters <K extends keyof MyGetters > ( 
+        key: K
+    ): ReturnType<MyGetters[K]>;
+    // getters: { [K in keyof MyGetters]: ReturnType<MyGetters[K]> };
 
 };
 

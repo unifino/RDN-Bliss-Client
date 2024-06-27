@@ -28,7 +28,13 @@ const store = useStore();
         store.dispatch( TS.Acts.Flag_logged_in, false )
         if ( store.getters.ort === TS.Orts.UserPanel )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
-
+    }
+    const logIn = async () => { 
+        if ( store.getters.ort !== TS.Orts.Home ) {
+            store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+            await new Promise( _ => setTimeout( _, 900+ 860+ 1500 ) )
+        } 
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
     }
 
 // -- =====================================================================================
@@ -39,8 +45,24 @@ const store = useStore();
     options.value = [
         { title: "Language" , icon: "", fnc: lang },
         // { title: "Theme", icon: "", theme },
-        { title: "Exit", icon: "", fnc: logOut },
     ]
+
+    const loggingRelated = [
+        { title: "Log in", icon: "", fnc: logIn },
+        { title: "Exit", icon: "", fnc: logOut },
+    ]
+
+    options.value.push( loggingRelated[0] )
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.Flag_logged_in,
+        (nV: boolean) => {
+            options.value.pop()
+            options.value.push( loggingRelated[ nV ? 1 : 0] )
+        }
+    )
 
 // -- =====================================================================================
 
