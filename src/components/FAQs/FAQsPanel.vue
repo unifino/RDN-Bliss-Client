@@ -1,5 +1,5 @@
 <template>
-    <div id="FAQsPanel" :style="`z-index: ${+(store.state.ort === TS.Orts.FAQs)}`">
+    <div id="FAQsPanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.FAQs)}`">
         <F_100 />
     </div>
 </template>

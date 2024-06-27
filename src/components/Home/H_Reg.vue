@@ -98,9 +98,6 @@ const store = useStore()
 
     const submit = () => {
 
-        // ! remove it
-        registering()
-
         // ..  check Form
         let parts = []
 

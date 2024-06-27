@@ -102,7 +102,7 @@ const store = useStore();
     }
 
     .optionBox:hover{
-        color: #a33474;
+        color: #169f01;
         cursor: pointer;
     }
 

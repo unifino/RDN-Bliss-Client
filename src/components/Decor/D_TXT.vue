@@ -57,7 +57,7 @@ const store = useStore()
             if (!nV) myText.value = CD.OrtData[ store.getters.ort as TS.Orts ].text 
             if (oV) {
                 await new Promise( _ => setTimeout( _, 10 ) )
-                myText.value = "Bye :)"
+                myText.value = "Bye Bye"
             }
         }
     )

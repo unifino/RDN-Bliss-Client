@@ -1,5 +1,5 @@
 <template>
-    <div id="homePanel" :style="`z-index: ${+(store.state.ort === TS.Orts.Home)}`">
+    <div id="homePanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.Home)}`">
         <Login />
         <H_100 />
         <H_010 />

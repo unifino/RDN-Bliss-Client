@@ -1,5 +1,8 @@
 <template>
-    <div id="LoginPanelWrapper">
+    <div
+        id="LoginPanelWrapper"
+        :style="`z-index: ${+(store.getters.process === TS.Processes.Login)}`"
+    >
         <div id="LoginPanel" class="init" ref="loginBox">
             <input ref="usrmil" type="text" placeholder="username / e-mail" />
             <input ref="passwd" type="password" placeholder="password" />
