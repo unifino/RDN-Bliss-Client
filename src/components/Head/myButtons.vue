@@ -6,7 +6,7 @@
             class="optionBox no_select"
             @click="opt.fnc"
         >
-            <div class="button">{{opt.icon}}</div>
+            <div class="icon" ref="test">{{opt.icon}}</div>
             <div class="title">{{opt.title}}</div>
         </div>
     </div>
@@ -23,7 +23,14 @@ const store = useStore();
 
 // -- =====================================================================================
 
-    const lang = () => { console.log() }
+    const test = ref<HTMLElement>( {} as HTMLElement )
+
+// -- =====================================================================================
+
+    const lang = () => {
+        ( test as any ).value[1].className = "icon " +
+            ( (test as any).value[1].className.includes( "test" ) ? "" : "test" )
+    }
     const logOut = () => {
         store.dispatch( TS.Acts.Flag_logged_in, false )
         if ( store.getters.ort === TS.Orts.UserPanel )
@@ -44,6 +51,7 @@ const store = useStore();
 
     options.value = [
         { title: "Language" , icon: "", fnc: lang },
+        { title: "Animation" , icon: "", fnc: lang },
         // { title: "Theme", icon: "", theme },
     ]
 
@@ -87,11 +95,15 @@ const store = useStore();
         float: left;
     }
 
-    .button{
+    .icon{
         font-family: "fas-6";
         font-size: 31px;
         margin: 25px 20px 10px 20px;
         opacity: .7;
+    }
+
+    .test {
+        transform: scaleX(-1)
     }
 
     .title{

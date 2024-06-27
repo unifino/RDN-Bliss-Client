@@ -113,7 +113,6 @@ const store = useStore();
         animation           : Welcome 1s;
         animation-fill-mode : both;
     }
-
     @keyframes Welcome {
         0%  { color: #521739 }
         100%{ color: #64a334; opacity: 1; }
@@ -123,7 +122,6 @@ const store = useStore();
         animation           : Home 1s;
         animation-fill-mode : both;
     }
-
     @keyframes Home {
         0%  { color: #64a334 }
         100%{ color: #521739; opacity: 1; }
