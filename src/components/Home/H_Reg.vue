@@ -1,5 +1,5 @@
 <template>
-    <div id="H_Reg_Box" ref="HRGBox">
+    <div id="H_Reg_Box" class="init" ref="HRGBox">
 <!-- ================================================================================== -->
         <div id="p1" class="part" ref="part_1">
             <div id="sectionWrapper">
@@ -68,9 +68,9 @@ const store = useStore()
 
     const HRGBox = ref<HTMLElement>( {} as HTMLElement )
     const part_1 = ref<HTMLElement>( {} as HTMLElement )
-    const e_mail = ref<HTMLElement>( {} as HTMLElement )
-    const usrnme = ref<HTMLElement>( {} as HTMLElement )
-    const passwd = ref<HTMLElement>( {} as HTMLElement )
+    const e_mail = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const usrnme = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
 // -- =====================================================================================
 
@@ -82,13 +82,24 @@ const store = useStore()
 // -- =====================================================================================
 
     const selectUserMode = (idx: number) => {
-        // userMode.value[0].selected = true
         userMode.value.forEach( (x,i) => x.selected = i === idx );
     }
 
 // -- =====================================================================================
 
+    const regSlider = async function ( phase: "In"|"Out" ) {
+
+        if ( phase === "In" ) await new Promise( _ => setTimeout( _, 900+ 860 + 500 ) )
+        HRGBox.value.className = "XReg_fall_" + phase
+
+    }
+
+// -- =====================================================================================
+
     const submit = () => {
+
+        // ! remove it
+        registering()
 
         // ..  check Form
         let parts = []
@@ -97,20 +108,15 @@ const store = useStore()
             parts.push( part_1 )
 
         if (
-            // eslint-disable-next-line
-              !( e_mail.value as any ).value
-            // eslint-disable-next-line
-            || ( e_mail.value as any ).value.indexOf( "@" ) < 1
-            // eslint-disable-next-line
-            || ( e_mail.value as any ).value.indexOf( "." ) < 3
+              !e_mail.value.value
+            || e_mail.value.value.indexOf( "@" ) < 1
+            || e_mail.value.value.indexOf( "." ) < 3
         )
             parts.push( e_mail )
 
-        // eslint-disable-next-line
-        if ( ( usrnme.value as any ).value.length < 4 ) parts.push( usrnme )
+        if ( usrnme.value.value.length < 4 ) parts.push( usrnme )
 
-        // eslint-disable-next-line
-        if ( ( passwd.value as any ).value.length < 4 ) parts.push( passwd )
+        if ( passwd.value.value.length < 4 ) parts.push( passwd )
 
         // .. apply alert animation
         parts.forEach( async (x,i) => {
@@ -127,19 +133,21 @@ const store = useStore()
 // -- =====================================================================================
 
     const registering = async () => {
-        HRGBox.value.className += " send";
-        await new Promise( _ => setTimeout( _, 1000 ) )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+        await new Promise( _ => setTimeout( _, 10 ) )
+        HRGBox.value.className = "send";
     }
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.process,
-        nV => {
+        ( nV, oV ) => {
             // .. Enter -> register mode
-            if ( nV === TS.Processes.Registering ) HRGBox.value.className = "";
+            if ( nV === TS.Processes.Registering ) regSlider( "In" )
+            // .. Exit <- Register Mode
+            else if ( oV === TS.Processes.Registering ) regSlider( "Out" )
         }
     )
 
@@ -152,15 +160,40 @@ const store = useStore()
 <style scoped>
 
     #H_Reg_Box {
-        display: grid;
-        grid-template-columns: 300px auto auto;
-        grid-template-rows: 300px 70px auto ;
-        height: 100%;
+        height: 600px;
+        width: 1000px;
+        margin-top: 98px;
+        margin-left: 140px;
         background-color: #F0F0F0;
         border: solid 2px rgb(161 161 161);
         box-shadow: 0 0 10px 1px rgb(130 157 176);
         border-radius: 20px;
+        display: grid;
+        grid-template-columns: 300px auto auto;
+        grid-template-rows: 300px 70px auto ;
         overflow: hidden;
+    }
+
+    #H_Reg_Box.init{ transform: scale(.4); opacity: 0; visibility: hidden }
+
+    .XReg_fall_In {
+        animation           : XReg_fall_In .7s;
+        animation-fill-mode : both;
+    }
+    @keyframes XReg_fall_In {
+        0%  { transform: scale(.4);  opacity: 0;  visibility: hidden  }
+        80% { transform: scale(1.1); opacity: .9; visibility: visible }
+        100%{ transform: scale(1);   opacity: 1;  visibility: visible }
+    }
+
+    .XReg_fall_Out {
+        animation           : XReg_fall_Out .6s;
+        animation-fill-mode : both;
+    }
+    @keyframes XReg_fall_Out {
+        0%  { transform: scale(1);   opacity: 1;  visibility: visible }
+        40% { transform: scale(1.1); opacity: .9; visibility: visible }
+        100%{ transform: scale(.5);   opacity: 0; visibility: hidden  }
     }
 
     .part{
@@ -301,37 +334,19 @@ const store = useStore()
         animation           : alert_part_1 .7s;
         animation-fill-mode : both;
     }
-
     @keyframes alert_part_1 {
-        0%{
-            background-color: #73A7CB;
-            transform: scale(1);
-        }
-        50%{
-            background-color: #CC0808;
-            transform: scale(1.07);
-        }
-        100%{
-            background-color: #73A7CB;
-        }
+        0%  { background-color: #73A7CB; transform: scale(1)    }
+        50% { background-color: #CC0808; transform: scale(1.07) }
+        100%{ background-color: #73A7CB; transform: scale(1)    }
     }
 
     .alert {
         animation           : alert .7s;
         animation-fill-mode : both;
     }
-
     @keyframes alert {
-        0%{
-            transform: scale(1);
-        }
-        50%{
-            background-color: #FB1111;
-            color: black;
-            transform: scale(1.07);
-        }
-        100%{
-        }
+        0%{ transform: scale(1) }
+        50%{ background-color: #FB1111; color: black; transform: scale(1.07) }
     }
 
     .subpart{
@@ -361,7 +376,7 @@ const store = useStore()
 
     @keyframes send {
         100%{
-            transform: translate(0%,-25%) rotate(-540deg) scale(.2);
+            transform: translate(0%,-25%) rotate(540deg) scale(.2);
             border-width: 10px;
             border-radius: 100px;
             opacity: 0;

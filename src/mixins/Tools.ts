@@ -12,10 +12,3 @@ export const mainCA = ( [ oV, nV, ort ]: TS.Orts[], [X100,X010]: Ref<HTMLElement
 }
 
 // -- =====================================================================================
-
-// eslint-disable-next-line
-export const reg_Phase_A = ( phase: "In"|"Out", XReg: Ref<HTMLElement> ) => {
-    Anime.regSlider( phase, XReg )
-}
-
-// -- =====================================================================================

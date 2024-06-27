@@ -26,24 +26,3 @@ export const MainTransition = async function ( phase: "In"|"Out", [X100,X010]: a
 }
 
 // -- =====================================================================================
-
-export const regSlider = async function ( phase: "In"|"Out", el:Ref<HTMLElement> ) {
-
-    switch ( phase ) {
-
-        case "In":
-            await new Promise( _ => setTimeout( _, 900+ 860 + 500 ) )
-            el.value.className = "x_xxx " + "fallIn_XReg"
-            break;
-
-        case "Out":
-            el.value.className = "x_xxx " + "fallOut_XReg"
-            await new Promise( _ => setTimeout( _, 900+ 860 ) )
-            el.value.className = "x_xxx "
-            break;
-
-    }
-
-}
-
-// -- =====================================================================================

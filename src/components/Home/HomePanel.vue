@@ -3,7 +3,7 @@
         <div id="loginPanel"                     ><Login /></div>
         <div id="h_100" class="x_xxx" ref="h_100"><H_100 /></div>
         <div id="h_010" class="x_xxx" ref="h_010"><H_010 /></div>
-        <div id="h_reg" class="x_xxx" ref="h_reg"><H_Reg /></div>
+        <H_Reg />
     </div>
 </template>
 
@@ -51,13 +51,11 @@ const store = useStore()
         ( nV, oV ) => {
             // .. Enter -> register mode
             if ( nV === TS.Processes.Registering ) {
-                Tools.reg_Phase_A( "In", h_reg )
                 // eslint-disable-next-line
                 Tools.mainCA( [ "Home", null as any, "Home" ], [ h_100, h_010 ] )
             }
             // .. Exit <- Register Mode
             else if ( oV === TS.Processes.Registering ) {
-                Tools.reg_Phase_A( "Out", h_reg )
                 // .. exiting back to the Home
                 if ( store.getters.ort === TS.Orts.Home ) {
                     // eslint-disable-next-line
@@ -112,17 +110,6 @@ const store = useStore()
         /* margin: auto;
         left: 0;
         right: 0; */
-    }
-
-    #h_reg{
-        height: 600px;
-        width: 1000px;
-        margin-top: 98px;
-        margin-left: 140px;
-        overflow: visible;
-        transform: scale(.4);
-        opacity: 0;
-        visibility: hidden;
     }
 
     .fallOut_X100 {
@@ -214,48 +201,6 @@ const store = useStore()
         100%{
             opacity: 1;
             transform: translate(0px, 0px) scale(1);
-        }
-    }
-
-    .fallIn_XReg {
-        animation           : fallIn_XReg .7s;
-        animation-fill-mode : both;
-    }
-
-    @keyframes fallIn_XReg {
-        0%{
-            visibility: visible;
-        }
-        80%{
-            transform: scale(1.1);
-            opacity: .9;
-        }
-        100%{
-            transform: scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-    }
-
-    .fallOut_XReg {
-        animation           : fallOut_XReg .6s;
-        animation-fill-mode : both;
-    }
-
-    @keyframes fallOut_XReg {
-        0%{
-            transform: scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-        40%{
-            transform: scale(1.1);
-            opacity: .9;
-        }
-        100%{
-            transform: scale(.5);
-            opacity: 0;
-            visibility: hidden;
         }
     }
 
