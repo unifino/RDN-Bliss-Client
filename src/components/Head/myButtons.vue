@@ -6,7 +6,7 @@
             class="optionBox no_select"
             @click="opt.fnc"
         >
-            <div class="icon" ref="test">{{opt.icon}}</div>
+            <div :class="'icon ' + opt.class">{{opt.icon}}</div>
             <div class="title">{{opt.title}}</div>
         </div>
     </div>
@@ -23,14 +23,15 @@ const store = useStore();
 
 // -- =====================================================================================
 
-    const test = ref<HTMLElement>( {} as HTMLElement )
 
-// -- =====================================================================================
-
-    const lang = () => {
-        ( test as any ).value[1].className = "icon " +
-            ( (test as any).value[1].className.includes( "test" ) ? "" : "test" )
+    const lang = () => { console.log() }
+    const speed = () => {
+        if ( store.getters.animationSpeed === TS.Speeds.Normal )
+            store.dispatch( TS.Acts.SpeedChange, TS.Speeds.Fast )
+        else if ( store.getters.animationSpeed === TS.Speeds.Fast )
+            store.dispatch( TS.Acts.SpeedChange, TS.Speeds.Normal )
     }
+
     const logOut = () => {
         store.dispatch( TS.Acts.Flag_logged_in, false )
         if ( store.getters.ort === TS.Orts.UserPanel )
@@ -47,17 +48,17 @@ const store = useStore();
 // -- =====================================================================================
 
     // eslint-disable-next-line
-    const options =  ref ( [{ title: "", icon: "", fnc: ()=>{} }] )
+    const options =  ref ( [{ title: "", icon: "", class: "", fnc: ()=>{} }] )
 
     options.value = [
-        { title: "Language" , icon: "", fnc: lang },
-        { title: "Animation" , icon: "", fnc: lang },
-        // { title: "Theme", icon: "", theme },
+        { title: "Language" , icon: "", class: "", fnc: lang },
+        { title: "Normal\nAnimation", icon: "", class: "Normal", fnc: speed },
+        { title: "Theme"    , icon: "", class: "", fnc: lang },
     ]
 
     const loggingRelated = [
-        { title: "Log in", icon: "", fnc: logIn },
-        { title: "Exit", icon: "", fnc: logOut },
+        { title: "Log in",    icon: "", class: "", fnc: logIn },
+        { title: "Exit"  ,    icon: "", class: "", fnc: logOut },
     ]
 
     options.value.push( loggingRelated[0] )
@@ -69,6 +70,20 @@ const store = useStore();
         (nV: boolean) => {
             options.value.pop()
             options.value.push( loggingRelated[ nV ? 1 : 0] )
+        }
+    )
+
+    store.watch(
+        getters => getters.animationSpeed,
+        (nV: TS.Speeds) => {
+            if ( nV === TS.Speeds.Normal ) {
+                options.value[1].class = "Normal"
+                options.value[1].title = "Normal\nAnimation"
+            }
+            if ( nV === TS.Speeds.Fast ) {
+                options.value[1].class = "Fast"
+                options.value[1].title = "Fast\nAnimation"
+            }
         }
     )
 
@@ -90,7 +105,7 @@ const store = useStore();
         text-align: center;
         color: #29363a;
         height: 80px;
-        width: 100px;
+        width: 105px;
         position: relative;
         float: left;
     }
@@ -102,9 +117,8 @@ const store = useStore();
         opacity: .7;
     }
 
-    .test {
-        transform: scaleX(-1)
-    }
+    .icon.Normal { transform: scaleX(-1) }
+    .icon.Fast   { transform: scaleX(1)  }
 
     .title{
         font-family: Manrope;

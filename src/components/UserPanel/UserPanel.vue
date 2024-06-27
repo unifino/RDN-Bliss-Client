@@ -1,5 +1,5 @@
 <template>
-    <div id="userPanelBox" :style="`z-index: ${+(store.getters.Flag_logged_in)}`">
+    <div id="userPanelBox" :style="`z-index: ${+(store.getters.Flag_logged_in)}; visibility: ${store.getters.Flag_logged_in?'visible':'hidden'}`">
         <UserButtons />
     </div>
 </template>

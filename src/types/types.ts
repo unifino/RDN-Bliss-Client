@@ -21,12 +21,15 @@ export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
+export enum Speeds { "Normal", "Fast" }
+
 // .. declare State
 export type State = {
     process: Processes,
     language: Languages,
     displayMode: DisplayMode,
     ort: Orts,
+    animationSpeed: Speeds
 
     // .. declare Flags
     Flag_plan_B: boolean
@@ -50,6 +53,7 @@ export enum Mutates {
     ProcessChange           = "Change_The_Process",
     LanguageChange          = "Change_The_Language",
     OrtChange               = "Change_The_Ort",
+    SpeedChange             = "Change_Animation_Speed",
     Flag_plan_B             = "Change_Animation_Plan_B",
     Flag_logged_in          = "Change_View_mode",
 }
@@ -59,6 +63,7 @@ export type MyMutations<S = State> = {
     [ Mutates.ProcessChange ]   ( state: S, payload: Processes ): void;
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
     [ Mutates.OrtChange ]       ( state: S, payload: Orts ): void;
+    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ): void;
     [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ): void;
     [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ): void;
 }
@@ -70,6 +75,7 @@ export enum Acts {
     ProcessChange   = "Change_The_Process",
     LanguageChange  = "Change_The_Language",
     OrtChange       = "Change_The_Ort",
+    SpeedChange     = "Change_Animation_Speed",
     Flag_plan_B     = "Change_Animation_Plan_B",
     Flag_logged_in  = "Change_View_mode",
 }
@@ -79,6 +85,7 @@ export interface MyActions {
     [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ): void;
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
     [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ): void;
+    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ): void;
     [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ): void;
     [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ): void;
 }
@@ -89,6 +96,7 @@ export interface MyActions {
 export type MyGetters = {
     process ( state: State ): Processes,
     ort ( state: State ): Orts,
+    animationSpeed ( state: State ): Speeds,
     Flag_plan_B ( state: State ): boolean
     Flag_logged_in ( state: State ): boolean
 }
