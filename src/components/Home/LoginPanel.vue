@@ -39,7 +39,6 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
         if ( usrmil.value.value.length < 4 ) parts.push( usrmil )
 
-        // eslint-disable-next-line
         if ( passwd.value.value.length < 4 ) parts.push( passwd )
 
         // ! remove it

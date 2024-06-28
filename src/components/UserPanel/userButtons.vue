@@ -1,5 +1,5 @@
 <template>
-    <div id="user_buttons_box">
+    <div id="user_buttons_box" ref="u_100">
         <div
             v-for="(opt,i) of options"
             :key=i
@@ -19,16 +19,31 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as Tools                           from '@/mixins/Tools';
+
 const store: TS.Store = useStore()
+
+// -- =====================================================================================
+
+    const u_100 = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     const lang = () => { console.log() }
 
+    const _out = () => myAnimation( "Out" )
+    const _in = () => myAnimation( "In" )
+
 // -- =====================================================================================
 
-    // eslint-disable-next-line
-    const options =  ref ( [{ title: "", icon: "", fnc: ()=>{} }] )
+    const myAnimation = async ( phase: "In"|"Out" ) => {
+        if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed() ) )
+        u_100.value.className = "U100_fall_" + phase
+    }
+
+// -- =====================================================================================
+
+    const options =  ref ( [{ title: "", icon: "", fnc: ()=>{true} }] )
 
     options.value = [
         { title: "Patients" , icon: "", fnc: lang },
@@ -40,6 +55,14 @@ const store: TS.Store = useStore()
     ]
 
 // -- =====================================================================================
+
+    store.watch(
+        getters => getters.ort,
+        ( nV: TS.Orts, oV: TS.Orts ) => {
+            if( oV === TS.Orts.UserPanel ) _out()
+            if( nV === TS.Orts.UserPanel ) _in()
+        }
+    )
 
     store.watch(
         getters => getters.Flag_logged_in,
@@ -61,7 +84,7 @@ const store: TS.Store = useStore()
         height: auto;
         width: 95px;
         top: 50%;
-        transform: translateY(-53%);
+        transform: translate(-200px,-53%) scale(1);
         padding: 40px 20px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #818181;
@@ -105,6 +128,28 @@ const store: TS.Store = useStore()
     .optionBox:hover> .title{
         font-weight: bold;
         opacity: 1;
+    }
+
+</style>
+
+<style Fast>
+
+    .Fast> .U100_fall_Out {
+        animation           : U100_fall_Out_Fast .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes U100_fall_Out_Fast {
+        0%  { transform: translate(0,-53%) scale(1) }
+        100%{ transform: translate(-200px,-53%) scale(.4) }
+    }
+
+    .Fast> .U100_fall_In {
+        animation           : U100_fall_In_Fast .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes U100_fall_In_Fast {
+        0%  { transform: translate(-200px,-53%) scale(1) }
+        100%{ transform: translate(0,-53%) scale(1) }
     }
 
 </style>

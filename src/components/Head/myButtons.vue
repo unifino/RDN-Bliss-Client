@@ -49,8 +49,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    // eslint-disable-next-line
-    const options =  ref ( [{ title: "", icon: "", class: "", fnc: ()=>{} }] )
+    const options =  ref ( [{ title: "", icon: "", class: "", fnc: ()=>{true} }] )
 
     options.value = [
         { title: "Language" , icon: "", class: "", fnc: lang },
@@ -82,7 +81,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.animationSpeed,
-        (nV: TS.Speeds) => {
+        () => {
             options.value[1].class = store.getters.animationSpeed
             options.value[1].title = store.getters.animationSpeed + "Animation"
         }
