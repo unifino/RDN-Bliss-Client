@@ -19,7 +19,9 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
-const store = useStore();
+import * as Tools                           from '@/mixins/Tools'
+
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -40,7 +42,7 @@ const store = useStore();
     const logIn = async () => {
         if ( store.getters.ort !== TS.Orts.Home ) {
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
-            await new Promise( _ => setTimeout( _, 900+ 860+ 1500 ) )
+            await new Promise( _ => setTimeout( _, Tools.speed()+ 1500 ) )
         }
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
     }

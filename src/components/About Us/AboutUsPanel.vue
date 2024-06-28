@@ -14,7 +14,7 @@ import A_010                                from '@/components/About Us/A_010.vu
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 

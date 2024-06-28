@@ -12,7 +12,7 @@ import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import F_100                                from '@/components/FAQs/F_100.vue'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 

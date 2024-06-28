@@ -27,7 +27,7 @@ import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
 import * as Tools                           from '@/mixins/Tools'
 
-const store = useStore();
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -49,7 +49,7 @@ const store = useStore();
         if ( opt ) await new Promise( _ => setTimeout( _, 1 ) )
         Tools.MainAnimation( h_010, "X010", "Out", 0, opt )
     };
-    const _in = () => Tools.MainAnimation( h_010, "X010", "In", 900+860 );
+    const _in = () => Tools.MainAnimation( h_010, "X010", "In", Tools.speed() );
     const _login = ( phase: "Login"|"Standard" ) => h_010.value.className = phase + "Pos"
 
 // -- =====================================================================================

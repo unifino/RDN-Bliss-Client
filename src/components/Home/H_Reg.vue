@@ -61,8 +61,9 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as Tools                           from '@/mixins/Tools'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -89,7 +90,7 @@ const store = useStore()
 
     const regSlider = async function ( phase: "In"|"Out" ) {
 
-        if ( phase === "In" ) await new Promise( _ => setTimeout( _, 900+ 860 + 500 ) )
+        if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed()+ 500 ) )
         HRGBox.value.className = "XReg_fall_" + phase
 
     }

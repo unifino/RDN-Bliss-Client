@@ -18,7 +18,7 @@ import Login                                from '@/components/Home/LoginPanel.v
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 

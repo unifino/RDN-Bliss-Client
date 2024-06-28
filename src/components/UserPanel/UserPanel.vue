@@ -9,9 +9,10 @@
 <script setup lang="ts">
 
 import UserButtons                          from '@/components/UserPanel/userButtons.vue'
+import * as TS                              from '@/types/types'
 import { useStore }                         from 'vuex'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 

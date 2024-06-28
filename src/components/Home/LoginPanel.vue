@@ -19,7 +19,7 @@ import { useStore }                         from 'vuex'
 import { ref }                              from 'vue'
 import * as TS                              from '@/types/types'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 

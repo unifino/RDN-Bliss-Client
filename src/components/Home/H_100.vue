@@ -33,7 +33,7 @@ import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
 import * as Tools                           from '@/mixins/Tools'
 
-const store = useStore();
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -61,7 +61,7 @@ const store = useStore();
 // -- =====================================================================================
 
     const _out = () => Tools.MainAnimation( h_100, "X100", "Out" )
-    const _in = () => Tools.MainAnimation( h_100, "X100", "In", 900+860 )
+    const _in = () => Tools.MainAnimation( h_100, "X100", "In", Tools.speed() )
     const reset = () => options.value.forEach( x => x.selected = false )
 
 // -- =====================================================================================
@@ -76,7 +76,7 @@ const store = useStore();
 
     store.watch(
         getters => getters.process,
-        ( nV, oV ) => {
+        nV => {
             if( nV === TS.Processes.Registering ) _out()
         }
     )

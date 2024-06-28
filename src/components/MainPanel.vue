@@ -24,7 +24,7 @@ import UserPanel                            from '@/components/UserPanel/UserPan
 import * as TS                              from '@/types/types'
 import { useStore }                         from 'vuex'
 
-const store = useStore();
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 

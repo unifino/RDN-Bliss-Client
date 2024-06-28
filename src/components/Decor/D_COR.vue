@@ -10,7 +10,7 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 
-const store = useStore();
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -36,7 +36,7 @@ const store = useStore();
 
     const idxFinder = () => {
 
-        let idx = store.getters.ort;
+        let idx: number = store.getters.ort;
 
         switch ( store.getters.process ) {
             case TS.Processes.Reading:     return idx
@@ -48,15 +48,26 @@ const store = useStore();
 
 // -- =====================================================================================
 
+    const mySpeed = () => {
+        let speed = 0;
+        switch (store.getters.animationSpeed) {
+            case TS.Speeds.Normal: speed = 700; break;
+            case TS.Speeds.Fast: speed = 400; break;
+        }
+        return speed
+    }
+
+// -- =====================================================================================
+
     const imgDecor = async () => {
         await new Promise( _ => setTimeout( _, 10 ) )
-        d_cor.value.className = "fadeOut_D_COR"
-        await new Promise( _ => setTimeout( _, 700 ) )
+        d_cor.value.className = "D_COR_fade_Out"
+        await new Promise( _ => setTimeout( _, mySpeed() ) )
         // .. set pic by idx or by Ort-Index
         picIndex.value = idxFinder()
-        let delay = store.getters.process === TS.Processes.Login ? 100 : 500;
+        let delay = store.getters.process === TS.Processes.Login ? 100 : (mySpeed() - 150);
         await new Promise( _ => setTimeout( _, delay ) )
-        d_cor.value.className = "fadeIn_D_COR"
+        d_cor.value.className = "D_COR_fade_In"
     }
 
 // -- =====================================================================================
@@ -87,25 +98,32 @@ const store = useStore();
         user-select: none;
     }
 
-    .fadeOut_D_COR {
-        animation           : fadeOut_D_COR .8s;
+    .D_COR_fade_Out {
+        animation           : D_COR_fade_Out .8s;
         animation-fill-mode : both;
     }
+    @keyframes D_COR_fade_Out { 0%{ opacity: 1 } 100%{ opacity: 0 } }
 
-    .fadeIn_D_COR {
-        animation           : fadeIn_D_COR .8s;
+    .D_COR_fade_In {
+        animation           : D_COR_fade_In .8s;
         animation-fill-mode : both;
     }
+    @keyframes D_COR_fade_In  { 0%{ opacity: 0 } 100%{ opacity: 1 } }
 
-    @keyframes fadeOut_D_COR {
-        0%{ opacity: 1; }
-        100%{ opacity: 0; }
-    }
+</style>
 
-    @keyframes fadeIn_D_COR {
-        0%{ opacity: 0; }
-        100%{ opacity: 1; }
+<style Fast>
+    .Fast .D_COR_fade_Out {
+        animation           : D_COR_fade_Out .3s;
+        animation-fill-mode : both;
     }
+    @keyframes D_COR_fade_Out { 0%{ opacity: 1 } 100%{ opacity: 0 } }
+
+    .Fast .D_COR_fade_In {
+        animation           : D_COR_fade_In .44s;
+        animation-fill-mode : both;
+    }
+    @keyframes D_COR_fade_In  { 0%{ opacity: 0 } 100%{ opacity: 1 } }
 
 </style>
 

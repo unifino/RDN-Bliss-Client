@@ -19,8 +19,9 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as CD                              from '@/mixins/commonData'
+import * as Tools                           from '@/mixins/Tools'
 
-const store = useStore();
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -46,7 +47,7 @@ const store = useStore();
         for( let x of options.value ) x.select = x.code === ortCode
 
         fuse = false
-        await new Promise( _ => setTimeout( _, 900+ 860 ) )
+        await new Promise( _ => setTimeout( _, Tools.speed() ) )
         fuse = true
 
     }

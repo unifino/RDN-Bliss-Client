@@ -11,7 +11,7 @@ import { ref }                              from 'vue'
 import * as TS                              from '@/types/types'
 import * as CD                              from '@/mixins/commonData'
 
-const store = useStore()
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -20,15 +20,26 @@ const store = useStore()
 
 // -- =====================================================================================
 
+    const speed = () => {
+        let speed = 0;
+        switch (store.getters.animationSpeed) {
+            case TS.Speeds.Normal: speed = 900; break;
+            case TS.Speeds.Fast: speed = 100; break;
+        }
+        return speed
+    }
+
+// -- =====================================================================================
+
     const textSlider = async function () {
 
         // .. delay of .9s ... slide in TEXT
-        await new Promise( _ => setTimeout( _, 900 ) )
+        await new Promise( _ => setTimeout( _, speed() ) )
         d_txt.value.className = "x_xxx " + "slideIn_DTXT"
 
         await new Promise( _ => setTimeout( _, 860 ) )
         // .. wait until it slides in complexly
-        await new Promise( _ => setTimeout( _, 1500 ) )
+        await new Promise( _ => setTimeout( _, 400 + speed() ) )
 
         // .. reset it Class
         d_txt.value.className = "x_xxx"
@@ -122,24 +133,26 @@ const store = useStore()
         animation           : slideIn_DTXT 1.5s;
         animation-fill-mode : both;
     }
-
     @keyframes slideIn_DTXT {
-        0%{
-            transform: translateX(0);
-            opacity: 0;
-        }
-        35%{
-            transform: translateX(135px);
-            opacity: .6;
-        }
-        45%{
-            transform: translateX(135px);
-            opacity: .8;
-        }
-        100%{
-            transform: translateX(300px);
-            opacity: 0;
-        }
+        0%  { transform: translateX(0); opacity: 0 }
+        35% { transform: translateX(135px); opacity: .6 }
+        45% { transform: translateX(135px); opacity: .8 }
+        100%{ transform: translateX(300px); opacity: 0 }
+    }
+
+</style>
+
+<style Fast>
+
+    .Fast .slideIn_DTXT {
+        animation           : slideIn_DTXT .8s;
+        animation-fill-mode : both;
+    }
+    @keyframes slideIn_DTXT {
+        0%  { transform: translateX(0); opacity: 0 }
+        35% { transform: translateX(135px); opacity: .6 }
+        45% { transform: translateX(135px); opacity: .8 }
+        100%{ transform: translateX(300px); opacity: 0 }
     }
 
 </style>

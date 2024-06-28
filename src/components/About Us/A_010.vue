@@ -19,7 +19,7 @@ import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
 import * as Tools                           from '@/mixins/Tools'
 
-const store = useStore();
+const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
@@ -27,9 +27,8 @@ const store = useStore();
 
 // -- =====================================================================================
 
-
     const _out = () => Tools.MainAnimation( a_010, "X010", "Out" )
-    const _in = () => Tools.MainAnimation( a_010, "X010", "In", 900+860 )
+    const _in = () => Tools.MainAnimation( a_010, "X010", "In", Tools.speed() )
 
 // -- =====================================================================================
 

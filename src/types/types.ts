@@ -4,6 +4,8 @@ import {
     CommitOptions,
     DispatchOptions,
 }                                       from 'vuex';
+import { WatchOptions }                 from "vue";
+
 
 // -- =====================================================================================
 
@@ -118,10 +120,14 @@ export type Store = Omit< VuexStore<State>, "commit"|"dispatch"|"getters"|"watch
         options?: DispatchOptions
     ): ReturnType<MyActions[K]>;
 
-    getters <K extends keyof MyGetters > ( 
-        key: K
-    ): ReturnType<MyGetters[K]>;
-    // getters: { [K in keyof MyGetters]: ReturnType<MyGetters[K]> };
+    // getters <K extends keyof MyGetters > ( key: K): ReturnType<MyGetters[K]>;
+    getters: { [K in keyof MyGetters]: ReturnType<MyGetters[K]> };
+    
+    watch <T> (
+        getter: (state: State, getters: MyGetters) => T,
+        cb: (value: T, oldValue: T) => void,
+        options?: WatchOptions
+    ): () => void;
 
 };
 
