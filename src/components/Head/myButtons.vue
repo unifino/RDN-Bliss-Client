@@ -54,7 +54,12 @@ const store: TS.Store = useStore()
 
     options.value = [
         { title: "Language" , icon: "", class: "", fnc: lang },
-        { title: "Normal\nAnimation", icon: "", class: "Normal", fnc: speed },
+        {
+            title: store.getters.animationSpeed + " Animation", 
+            icon: "", 
+            class: store.getters.animationSpeed, 
+            fnc: speed
+        },
         { title: "Theme"    , icon: "", class: "", fnc: lang },
     ]
 
@@ -78,14 +83,8 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.animationSpeed,
         (nV: TS.Speeds) => {
-            if ( nV === TS.Speeds.Normal ) {
-                options.value[1].class = "Normal"
-                options.value[1].title = "Normal\nAnimation"
-            }
-            if ( nV === TS.Speeds.Fast ) {
-                options.value[1].class = "Fast"
-                options.value[1].title = "Fast\nAnimation"
-            }
+            options.value[1].class = store.getters.animationSpeed
+            options.value[1].title = store.getters.animationSpeed + "Animation"
         }
     )
 

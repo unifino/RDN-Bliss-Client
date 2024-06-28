@@ -14,7 +14,7 @@ const state: TS.State = {
     language: TS.Languages.EN,
     displayMode: TS.DisplayMode.Wide,
     ort: TS.Orts.Home,
-    animationSpeed: TS.Speeds.Normal,
+    animationSpeed: TS.Speeds.Fast,
 
     Flag_plan_B: false,
     Flag_logged_in: false,

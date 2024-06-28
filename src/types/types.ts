@@ -23,7 +23,10 @@ export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
-export enum Speeds { "Normal", "Fast" }
+export enum Speeds { 
+    Normal = "Normal",
+    Fast   = "Fast" 
+}
 
 // .. declare State
 export type State = {

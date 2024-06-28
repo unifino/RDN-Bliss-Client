@@ -200,4 +200,34 @@ const store: TS.Store = useStore()
 
 </style>
 
+<style Fast>
+    .Fast .LoginPos {
+        animation           : LoginPos .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes LoginPos {
+        0%  { transform: translateY(0) scale(1) }
+        100%{ opacity: 1; transform: translateY(720px) rotate(90deg) }
+    }
+
+    .Fast .StandardPos {
+        animation           : StandardPos .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes StandardPos {
+        0%  { transform: translateY(720px) rotate(90deg) }
+        100%{ opacity: 1; transform: translateY(0) rotate(0deg) }
+    }
+
+    .Fast .X010_fall_Out_planB {
+        animation           : X010_fall_Out_planB .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes X010_fall_Out_planB {
+        0%  { transform: translateY(720px) rotate(90deg) }
+        100%{ transform: translate(0px, 1000px) scale(0.2) rotate(90deg) }
+    }
+
+</style>
+
 // -- =====================================================================================
