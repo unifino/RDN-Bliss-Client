@@ -27,12 +27,7 @@ const store: TS.Store = useStore()
 
 
     const lang = () => { console.log() }
-    const speed = () => {
-        if ( store.getters.animationSpeed === TS.Speeds.Normal )
-            store.dispatch( TS.Acts.SpeedChange, TS.Speeds.Fast )
-        else if ( store.getters.animationSpeed === TS.Speeds.Fast )
-            store.dispatch( TS.Acts.SpeedChange, TS.Speeds.Normal )
-    }
+    const speed = () => store.dispatch( TS.Acts.Flag_speed, !store.getters.Flag_speed )
 
     const logOut = () => {
         store.dispatch( TS.Acts.Flag_logged_in, false )

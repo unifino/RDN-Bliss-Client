@@ -112,7 +112,7 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         border: solid gray 1px;
         box-shadow: 0 0 1px 0px rgb(88 88 91);
         margin: 10px 0;
-        font-family: oswald;
+        font-family: Oswald;
         font-size: 17px;
         padding: 10px 20px;
         color: #081E2F;

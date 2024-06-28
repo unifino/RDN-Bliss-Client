@@ -18,6 +18,7 @@ const state: TS.State = {
 
     Flag_plan_B: false,
     Flag_logged_in: false,
+    Flag_speed: false,
 }
 
 // -- =================================================================== Mutations =======
@@ -31,6 +32,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
     [ TS.Mutates.SpeedChange ]      ( state, payload ) { state.animationSpeed = payload },
     [ TS.Mutates.Flag_plan_B ]      ( state, payload ) { state.Flag_plan_B = payload },
     [ TS.Mutates.Flag_logged_in ]   ( state, payload ) { state.Flag_logged_in = payload },
+    [ TS.Mutates.Flag_speed ]       ( state, payload ) { state.Flag_speed = payload },
 
 }
 
@@ -39,30 +41,13 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
 // .. define Actions
 const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
-    [ TS.Acts.ProcessChange ] ( commit, payload ) {
-        store.commit( TS.Mutates.ProcessChange, payload );
-    },
-
-    [ TS.Acts.LanguageChange ] ( commit, payload ) {
-        store.commit( TS.Mutates.LanguageChange, payload );
-    },
-
-    [ TS.Acts.OrtChange ] ( commit, payload ) {
-        store.commit( TS.Mutates.OrtChange, payload )
-    },
-
-    [ TS.Acts.SpeedChange ] ( commit, payload ) {
-        store.commit( TS.Mutates.SpeedChange, payload )
-    },
-
-    [ TS.Acts.Flag_plan_B ] ( commit, payload ) {
-        store.commit( TS.Mutates.Flag_plan_B, payload )
-    },
-
-    [ TS.Acts.Flag_logged_in ] ( commit, payload ) {
-        store.commit( TS.Mutates.Flag_logged_in, payload )
-    },
-
+    [ TS.Acts.ProcessChange ]  (c,p) { store.commit( TS.Mutates.ProcessChange, p ) },
+    [ TS.Acts.LanguageChange ] (c,p) { store.commit( TS.Mutates.LanguageChange, p ) },
+    [ TS.Acts.OrtChange ]      (c,p) { store.commit( TS.Mutates.OrtChange, p ) },
+    [ TS.Acts.SpeedChange ]    (c,p) { store.commit( TS.Mutates.SpeedChange, p ) },
+    [ TS.Acts.Flag_plan_B ]    (c,p) { store.commit( TS.Mutates.Flag_plan_B, p ) },
+    [ TS.Acts.Flag_logged_in ] (c,p) { store.commit( TS.Mutates.Flag_logged_in, p ) },
+    [ TS.Acts.Flag_speed ]     (c,p) { store.commit( TS.Mutates.Flag_speed, p ) },
 }
 
 // -- ===================================================================== Getters =======
@@ -74,6 +59,7 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     animationSpeed: (state) => (state.animationSpeed),
     Flag_plan_B: (state) => (state.Flag_plan_B),
     Flag_logged_in: (state) => (state.Flag_logged_in),
+    Flag_speed: (state) => (state.Flag_speed),
 }
 
 // -- ======================================================================= Setup =======

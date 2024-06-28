@@ -45,12 +45,17 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const _out = async ( opt?: string ) => {
-        if ( opt ) await new Promise( _ => setTimeout( _, 1 ) )
-        Tools.MainAnimation( h_010, "X010", "Out", 0, opt )
+    const _out = async () => {
+        const planB = store.getters.Flag_plan_B
+        if ( planB ) await new Promise( _ => setTimeout( _, 1 ) )
+        Tools.MainAnimation( h_010, "X010", "Out", 0, planB ? "_planB" : "" )
+        if ( planB ) store.dispatch( TS.Acts.Flag_plan_B, false )
     };
     const _in = () => Tools.MainAnimation( h_010, "X010", "In", Tools.speed() );
-    const _login = ( phase: "Login"|"Standard" ) => h_010.value.className = phase + "Pos"
+    const _login = ( phase: "Login"|"Standard" ) => {
+        h_010.value.className = phase + "Pos"
+        if ( phase === "Login" ) store.dispatch( TS.Acts.Flag_plan_B, true )
+    }
 
 // -- =====================================================================================
 
@@ -68,8 +73,7 @@ const store: TS.Store = useStore()
             if ( nV === TS.Processes.Login ) _login( "Login" )
             if ( nV === TS.Processes.Registering ) _out()
             // .. Exit from Home to other Orts from Registering State
-            if ( oV === TS.Processes.Login && store.getters.ort !== TS.Orts.Home )
-                _out( "_planB" )
+            if ( oV === TS.Processes.Login && store.getters.ort !== TS.Orts.Home ) _out()
             // .. Exit back to Home from Registering
             if
             ( 
@@ -162,7 +166,7 @@ const store: TS.Store = useStore()
     }
 
     .content{
-        font-family: oswald;
+        font-family: Oswald;
         font-size: 18px;
         font-weight: bold;
         max-width: 300px;

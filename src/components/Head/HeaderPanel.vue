@@ -1,7 +1,7 @@
 <template>
     <div id="Main_Header_Box">
 
-        <Header_Icons />
+        <myOrts />
         <div id="divider" />
         <myButtons />
 
@@ -14,12 +14,9 @@
 
 <script setup lang="ts">
 
-import Header_Icons                         from '@/components/Head/myIcons.vue'
+import myOrts                               from '@/components/Head/myOrts.vue'
 import myButtons                            from '@/components/Head/myButtons.vue'
 import myLogo                               from '@/components/Head/myLogo.vue'
-
-// -- =====================================================================================
-
 
 // -- =====================================================================================
 

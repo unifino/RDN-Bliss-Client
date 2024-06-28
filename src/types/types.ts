@@ -39,6 +39,7 @@ export type State = {
     // .. declare Flags
     Flag_plan_B: boolean
     Flag_logged_in: boolean
+    Flag_speed: boolean
 }
 
 // -- =====================================================================================
@@ -55,55 +56,60 @@ type AAC = Omit< ActionContext<State, State>, "commit" > & {
 
 // .. declare Mutation-Options
 export enum Mutates {
-    ProcessChange           = "Change_The_Process",
-    LanguageChange          = "Change_The_Language",
-    OrtChange               = "Change_The_Ort",
-    SpeedChange             = "Change_Animation_Speed",
-    Flag_plan_B             = "Change_Animation_Plan_B",
-    Flag_logged_in          = "Change_View_mode",
+    ProcessChange   = "ProcessChange",
+    LanguageChange  = "LanguageChange",
+    OrtChange       = "OrtChange",
+    SpeedChange     = "SpeedChange",
+    Flag_plan_B        = "x_plan_B",
+    Flag_logged_in     = "x_logged_in",
+    Flag_speed         = "x_speed",
 }
 
 // .. declare Mutations
 export type MyMutations<S = State> = {
     [ Mutates.ProcessChange ]   ( state: S, payload: Processes ): void;
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
-    [ Mutates.OrtChange ]       ( state: S, payload: Orts ): void;
-    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ): void;
-    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ): void;
-    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ): void;
+    [ Mutates.OrtChange ]       ( state: S, payload: Orts ):      void;
+    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):    void;
+    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):   void;
+    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):   void;
+    [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):   void;
 }
 
 // -- =====================================================================================
 
 // .. declare Action-Options
 export enum Acts {
-    ProcessChange   = "Change_The_Process",
-    LanguageChange  = "Change_The_Language",
-    OrtChange       = "Change_The_Ort",
-    SpeedChange     = "Change_Animation_Speed",
-    Flag_plan_B     = "Change_Animation_Plan_B",
-    Flag_logged_in  = "Change_View_mode",
+    ProcessChange   = "ProcessChange",
+    LanguageChange  = "LanguageChange",
+    OrtChange       = "OrtChange",
+    SpeedChange     = "SpeedChange",
+    Flag_plan_B        = "x_plan_B",
+    Flag_logged_in     = "x_logged_in",
+    Flag_speed         = "x_speed",
 }
 
 // .. declare Action Interface
 export interface MyActions {
     [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ): void;
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
-    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ): void;
-    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ): void;
-    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ): void;
-    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ): void;
+    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):      void;
+    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):    void;
+    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):   void;
+    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):   void;
+    [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):   void;
 }
 
 // -- =====================================================================================
 
 // .. declare Getters Options
 export type MyGetters = {
-    process ( state: State ): Processes,
-    ort ( state: State ): Orts,
-    animationSpeed ( state: State ): Speeds,
-    Flag_plan_B ( state: State ): boolean
-    Flag_logged_in ( state: State ): boolean
+    process             ( state: State ): Processes
+    ort                 ( state: State ): Orts
+    animationSpeed      ( state: State ): Speeds
+    Flag_plan_B         ( state: State ): boolean
+    Flag_logged_in      ( state: State ): boolean
+    Flag_speed ( state: State ): boolean
 }
 
 // -- =====================================================================================

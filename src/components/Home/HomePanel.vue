@@ -1,9 +1,18 @@
 <template>
     <div id="homePanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.Home)}`">
+        
         <Login />
+        
+        <div
+            class="full"
+            :style="`z-index: ${+(store.getters.process===TS.Processes.Registering)}`"
+        >
+            <H_Reg />
+        </div>
+        
         <div :class="'X100 ' + TS.Speeds[store.getters.animationSpeed]"><H_100 /></div>
         <div :class="'X010 ' + TS.Speeds[store.getters.animationSpeed]"><H_010 /></div>
-        <H_Reg />
+    
     </div>
 </template>
 
@@ -29,6 +38,13 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #homePanel{
+        height: 100%;
+        width: 100%;
+        bottom: 0px;
+        position: absolute;
+    }
+
+    .full{
         height: 100%;
         width: 100%;
         bottom: 0px;

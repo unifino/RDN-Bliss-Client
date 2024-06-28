@@ -2,7 +2,7 @@
     <div id="main_frame">
         <BG msg="Nutrition"/>
         <div id="MainBox_Flex">
-            <Main_Header />
+            <HeaderPanel />
             <MainPanel style="flex: 1" />
         </div>
     </div>
@@ -13,7 +13,7 @@
 <script setup lang="ts">
 
 import BG                                   from '@/components/BG.vue'
-import Main_Header                          from '@/components/Head/mainHeader.vue'
+import HeaderPanel                          from '@/components/Head/HeaderPanel.vue'
 import MainPanel                            from '@/components/MainPanel.vue'
 
 // -- ====================================================================================
@@ -34,7 +34,7 @@ import MainPanel                            from '@/components/MainPanel.vue'
     }
 
     @font-face {
-        font-family: 'oswald';
+        font-family: 'Oswald';
         src: url('../src/assets/Fonts/Oswald-ExtraLight.ttf');
     }
 
@@ -51,6 +51,31 @@ import MainPanel                            from '@/components/MainPanel.vue'
     @font-face {
         font-family : 'fas-6';
         src : url('../src/assets/Fonts/fa-solid-6-900.ttf');
+    }
+
+    @font-face { 
+        font-family : 'AllertaStencil'; 
+        src : url('../src/assets/Fonts/AllertaStencil-Regular.ttf')
+    }
+
+    @font-face { 
+        font-family : 'Vibur'; 
+        src : url('../src/assets/Fonts/Vibur-Regular.ttf')
+    }
+
+    @font-face { 
+        font-family : 'RalewayDots'; 
+        src : url('../src/assets/Fonts/RalewayDots-Regular.ttf')
+    }
+
+    @font-face { 
+        font-family : 'Thasadith'; 
+        src : url('../src/assets/Fonts/Thasadith-Regular.ttf')
+    }
+
+    @font-face { 
+        font-family : 'TsukimiRounded'; 
+        src : url('../src/assets/Fonts/TsukimiRounded-Regular.ttf')
     }
 
 </style>
