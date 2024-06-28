@@ -41,6 +41,14 @@ const store: TS.Store = useStore()
         position: absolute;
     }
 
+    .X100, .X010{
+        height: 100%;
+        position: relative;
+        float: left;
+    }
+    .X100{ width: 28%; margin-right: 1.5%; }
+    .X010{ width: 60% }
+
     .X100_fall_Out {
         animation           : X100_fall_Out 1.9s;
         animation-fill-mode : both;

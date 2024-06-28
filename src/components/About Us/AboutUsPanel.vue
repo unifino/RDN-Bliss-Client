@@ -1,7 +1,7 @@
 <template>
     <div id="aboutUsPanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.AboutUs)}`">
-        <A_100 />
-        <A_010 />
+        <div :class="'X100 ' + TS.Speeds[store.getters.animationSpeed]"><A_100 /></div>
+        <div :class="'X010 ' + TS.Speeds[store.getters.animationSpeed]"><A_010 /></div>
     </div>
 </template>
 

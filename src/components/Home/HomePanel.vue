@@ -1,8 +1,8 @@
 <template>
     <div id="homePanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.Home)}`">
         <Login />
-        <H_100 />
-        <H_010 />
+        <div :class="'X100 ' + TS.Speeds[store.getters.animationSpeed]"><H_100 /></div>
+        <div :class="'X010 ' + TS.Speeds[store.getters.animationSpeed]"><H_010 /></div>
         <H_Reg />
     </div>
 </template>

@@ -106,11 +106,14 @@ const store: TS.Store = useStore()
 
     #H_100_Box{
         background-color: #393a3b;
+        left: 0;
+        right: 0;
         height: 550px;
         width: 350px;
         border-radius: 23px;
         box-shadow: 0 0 7px #676a74 ;
-        margin: 120px 0 0 100px;
+        margin: auto;
+        margin-top: 120px;
         position: absolute;
         overflow: hidden;
     }
