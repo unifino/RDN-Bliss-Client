@@ -1,6 +1,7 @@
 <template>
-    <div id="bg_curtain" class="init" ref="curtain">
-        <div id="text">Applying New Settings</div>
+    <div id="bg_curtain" class="off" ref="curtain">
+        <div id="partA" ref="partA" />
+        <div id="partB" ref="partB"> <div id="text">Applying New Settings</div> </div>
     </div>
 </template>
 
@@ -18,6 +19,8 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const curtain = ref<HTMLElement>( {} as HTMLElement )
+    const partA = ref<HTMLElement>( {} as HTMLElement )
+    const partB = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
@@ -31,8 +34,17 @@ const store: TS.Store = useStore()
         _out()
     }
 
-    const _in = () => curtain.value.className = "Curtain_fall_In"
-    const _out = () => curtain.value.className = "Curtain_fall_Out"
+    const _in = () => {
+        curtain.value.className = ""
+        partA.value.className = "PartA_fall_In"
+        partB.value.className = "PartB_fall_In"
+    }
+    const _out = async () => {
+        partA.value.className = "PartA_fall_Out"
+        partB.value.className = "PartB_fall_Out"
+        await new Promise( _ => setTimeout( _, 300 ) )
+        curtain.value.className = "off"
+    }
 
 // -- =====================================================================================
 
@@ -50,54 +62,78 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #bg_curtain{
-        background-color: #2c2c34;
         margin: 0;
         padding: 0;
         top: 0;
         left: 0;
-        height: 120%;
-        margin-top: -20vh;
+        height: 100%;
         width: 100%;
         position: absolute;
         z-index: 2;
     }
 
-    .init{
+    .off{ visibility: collapse; }
+
+    #partA{
+        background-color: #1d2123;
+        height: 24%;
+        transform: translateY(-100%);
+    }
+
+    #partB{
+        background-color: #121516;
+        height: 76%;
         transform: translateY(100%);
     }
 
     #text{
         color: #108271;
-
-        font-family: AllertaStencil;
+        /* font-family: AllertaStencil; */
         font-family: Vibur;
         /* font-family: RalewayDots; */
         /* font-family: Thasadith; */
         /* font-family: TsukimiRounded; */
         /* font-family: PoiretOne; */
-
         font-size: 70px;
         text-align: center;
-        top: 50%;
+        top: 14%;
         width: 100%;
-        transform: translate(-2%,-130%);
+        transform: translateX(-2%);
         position: absolute;
     }
 
-    .Curtain_fall_In {
-        animation           : Curtain_fall_In .3s;
+    .PartA_fall_In {
+        animation           : PartA_fall_In .3s;
         animation-fill-mode : both;
     }
-    @keyframes Curtain_fall_In {
+    @keyframes PartA_fall_In {
+        0%  { transform: translateY(-100%) }
+        100%{ transform: translateY(0%)    }
+    }
+
+    .PartB_fall_In {
+        animation           : PartB_fall_In .3s;
+        animation-fill-mode : both;
+    }
+    @keyframes PartB_fall_In {
         0%  { transform: translateY(100%) }
         100%{ transform: translateY(0%)   }
     }
 
-    .Curtain_fall_Out {
-        animation           : Curtain_fall_Out .3s;
+    .PartA_fall_Out {
+        animation           : PartA_fall_Out .3s;
         animation-fill-mode : both;
     }
-    @keyframes Curtain_fall_Out {
+    @keyframes PartA_fall_Out {
+        0%  { transform: translateY(0%)    }
+        100%{ transform: translateY(-100%) }
+    }
+
+    .PartB_fall_Out {
+        animation           : PartB_fall_Out .3s;
+        animation-fill-mode : both;
+    }
+    @keyframes PartB_fall_Out {
         0%  { transform: translateY(0%)   }
         100%{ transform: translateY(100%) }
     }

@@ -78,7 +78,7 @@ const store: TS.Store = useStore()
         getters => getters.animationSpeed,
         () => {
             options.value[1].class = store.getters.animationSpeed
-            options.value[1].title = store.getters.animationSpeed + "Animation"
+            options.value[1].title = store.getters.animationSpeed + " Animation"
         }
     )
 

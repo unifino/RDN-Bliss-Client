@@ -8,8 +8,6 @@
             <AboutUsPanel :class="TS.Speeds[store.getters.animationSpeed]" />
             <UserPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             
-            <Curtain  />
-
         </div>
     </div>
 </template>
@@ -23,7 +21,6 @@ import HomePanel                            from '@/components/Home/HomePanel.vu
 import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
 import FAQsPanel                            from '@/components/FAQs/FAQsPanel.vue'
 import UserPanel                            from '@/components/UserPanel/UserPanel.vue'
-import Curtain                              from '@/components/MyCurtain.vue'
 import * as TS                              from '@/types/types'
 import { useStore }                         from 'vuex'
 

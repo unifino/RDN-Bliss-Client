@@ -1,10 +1,15 @@
 <template>
     <div id="main_frame">
+
         <BG msg="Nutrition"/>
+
         <div id="MainBox_Flex">
             <HeaderPanel />
             <MainPanel style="flex: 1" />
         </div>
+
+        <Curtain  />
+
     </div>
 </template>
 
@@ -15,6 +20,7 @@
 import BG                                   from '@/components/BG.vue'
 import HeaderPanel                          from '@/components/Head/HeaderPanel.vue'
 import MainPanel                            from '@/components/MainPanel.vue'
+import Curtain                              from '@/MyCurtain.vue'
 
 // -- ====================================================================================
 
