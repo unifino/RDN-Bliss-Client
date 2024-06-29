@@ -130,6 +130,24 @@ const store: TS.Store = useStore()
         opacity: 1;
     }
 
+    .U100_fall_Out {
+        animation           : U100_fall_Out .8s;
+        animation-fill-mode : both;
+    }
+    @keyframes U100_fall_Out {
+        0%  { transform: translate(0,-53%) scale(1) }
+        100%{ transform: translate(-200px,-53%) scale(.4) }
+    }
+
+    .U100_fall_In {
+        animation           : U100_fall_In .8s;
+        animation-fill-mode : both;
+    }
+    @keyframes U100_fall_In {
+        0%  { transform: translate(-200px,-53%) scale(1) }
+        100%{ transform: translate(0,-53%) scale(1) }
+    }
+
 </style>
 
 <style Fast>

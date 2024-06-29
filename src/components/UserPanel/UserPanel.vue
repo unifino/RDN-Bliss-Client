@@ -1,5 +1,5 @@
 <template>
-    <div id="userPanelBox" :style="`z-index: ${+(store.getters.Flag_logged_in)};`">
+    <div id="userPanelBox" :style="`z-index: ${+(store.getters.ort === TS.Orts.UserPanel)};`">
         <UserButtons />
     </div>
 </template>
