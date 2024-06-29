@@ -13,11 +13,11 @@ export const MainAnimation = async function (
 
 // -- =====================================================================================
 
-export const speed = () => {
+export const speed = ( extraTime?: boolean ) => {
     let speed = 0;
     switch (store.getters.animationSpeed) {
-        case TS.Speeds.Normal: speed = 900+860; break;
-        case TS.Speeds.Fast: speed = 600; break;
+        case TS.Speeds.Normal: speed = 900+860 + ( extraTime ? 1500 : 0 ); break;
+        case TS.Speeds.Fast: speed = 600 + ( extraTime ? 700 : 0 ); break;
     }
     return speed
 }

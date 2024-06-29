@@ -10,6 +10,7 @@ import * as TS                          from '@/types/types'
 
 // .. define  TS.State
 const state: TS.State = {
+
     process: TS.Processes.Reading,
     language: TS.Languages.EN,
     displayMode: TS.DisplayMode.Wide,
@@ -19,6 +20,7 @@ const state: TS.State = {
     Flag_plan_B: false,
     Flag_logged_in: false,
     Flag_speed: false,
+
 }
 
 // -- =================================================================== Mutations =======

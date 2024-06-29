@@ -1,7 +1,6 @@
 <template>
-    <div id="bg_curtain" class="off" ref="curtain">
-        <div id="partA" ref="partA" />
-        <div id="partB" ref="partB"> <div id="text">Applying New Settings</div> </div>
+    <div id="FAQsPanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.News)}`">
+        <!-- Hatef -->
     </div>
 </template>
 
@@ -19,32 +18,18 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const curtain = ref<HTMLElement>( {} as HTMLElement )
-    const partA = ref<HTMLElement>( {} as HTMLElement )
-    const partB = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     const changeSpeed = async () => {
         _in();
         await new Promise( _ => setTimeout( _, 300 ) )
-        const mode = store.getters.animationSpeed === TS.Speeds.Fast ? 
-            TS.Speeds.Normal : TS.Speeds.Fast
-        store.dispatch( TS.Acts.SpeedChange, mode )
-        await new Promise( _ => setTimeout( _, Tools.speed() ) )
-        _out()
     }
 
     const _in = () => {
         curtain.value.className = ""
-        partA.value.className = "PartA_fall_In"
-        partB.value.className = "PartB_fall_In"
     }
-    const _out = async () => {
-        partA.value.className = "PartA_fall_Out"
-        partB.value.className = "PartB_fall_Out"
-        await new Promise( _ => setTimeout( _, 300 ) )
-        curtain.value.className = "off"
-    }
+
 
 // -- =====================================================================================
 
@@ -101,41 +86,6 @@ const store: TS.Store = useStore()
         transform: translateX(-2%);
         position: absolute;
     }
-
-    .PartA_fall_In {
-        animation           : PartA_fall_In .3s;
-        animation-fill-mode : both;
-    }
-    .PartA_fall_Out {
-        animation           : PartA_fall_Out .3s;
-        animation-fill-mode : both;
-    }
-    @keyframes PartA_fall_In {
-        0%  { transform: translateY(-100%) }
-        100%{ transform: translateY(0%)    }
-    }
-    @keyframes PartA_fall_Out {
-        0%  { transform: translateY(0%)    }
-        100%{ transform: translateY(-100%) }
-    }
-
-    .PartB_fall_In {
-        animation           : PartB_fall_In .3s;
-        animation-fill-mode : both;
-    }
-    .PartB_fall_Out {
-        animation           : PartB_fall_Out .3s;
-        animation-fill-mode : both;
-    }
-    @keyframes PartB_fall_In {
-        0%  { transform: translateY(100%) }
-        100%{ transform: translateY(0%)   }
-    }
-    @keyframes PartB_fall_Out {
-        0%  { transform: translateY(0%)   }
-        100%{ transform: translateY(100%) }
-    }
-
 </style>
 
 // -- =====================================================================================

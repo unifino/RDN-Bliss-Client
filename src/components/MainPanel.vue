@@ -4,6 +4,7 @@
 
             <DecorPanel   :class="TS.Speeds[store.getters.animationSpeed]" />
             <HomePanel    :class="TS.Speeds[store.getters.animationSpeed]" />
+            <NewsPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             <FAQsPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             <AboutUsPanel :class="TS.Speeds[store.getters.animationSpeed]" />
             <UserPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
@@ -18,8 +19,9 @@
 
 import DecorPanel                           from '@/components/Decor/DecorPanel.vue'
 import HomePanel                            from '@/components/Home/HomePanel.vue'
-import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
+import NewsPanel                            from '@/components/News/NewsPanel.vue'
 import FAQsPanel                            from '@/components/FAQs/FAQsPanel.vue'
+import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
 import UserPanel                            from '@/components/UserPanel/UserPanel.vue'
 import * as TS                              from '@/types/types'
 import { useStore }                         from 'vuex'

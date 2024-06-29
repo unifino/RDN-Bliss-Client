@@ -37,7 +37,7 @@ const store: TS.Store = useStore()
     const logIn = async () => {
         if ( store.getters.ort !== TS.Orts.Home ) {
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
-            await new Promise( _ => setTimeout( _, Tools.speed()+ 1500 ) )
+            await new Promise( _ => setTimeout( _, Tools.speed( true ) ) )
         }
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
     }
