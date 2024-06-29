@@ -1,5 +1,11 @@
 <template>
+
+    <div style="visibility: collapse; display: none;">
+        <img v-for="(x,i) of pics()" :key="i" :src="pics()[i]" />
+    </div>
+    
     <img id="D_COR" ref="d_cor" :src="pics()[ picIndex ]" />
+
 </template>
 
 // -- =====================================================================================
@@ -15,7 +21,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const d_cor = ref<HTMLElement>( {} as HTMLElement )
-    const picIndex = ref(0)
+    const picIndex = ref( store.getters.ort )
 
     const pics = () => {
         return [

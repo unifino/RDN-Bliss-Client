@@ -1,6 +1,8 @@
 <template>
     <div id="FAQsPanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.News)}`">
-        <!-- Hatef -->
+        <!-- <div class="column"><div class="newsBox large"></div><div class="newsBox"></div><div class="newsBox large"></div><div class="newsBox"></div><div class="newsBox large"></div><div class="newsBox"></div></div>
+        <div class="column"><div class="newsBox medium"></div><div class="newsBox"></div><div class="newsBox medium"></div><div class="newsBox"></div><div class="newsBox large"></div><div class="newsBox large"></div><div class="newsBox"></div></div>
+        <div class="column"><div class="newsBox"></div><div class="newsBox"></div><div class="newsBox large"></div><div class="newsBox medium"></div><div class="newsBox"></div><div class="newsBox large"></div></div> -->
     </div>
 </template>
 
@@ -46,46 +48,34 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #bg_curtain{
-        margin: 0;
-        padding: 0;
-        top: 0;
-        left: 0;
+    #FAQsPanel {
+        width: 70vw;
         height: 100%;
-        width: 100%;
+        padding: 2vw;
         position: absolute;
-        z-index: 2;
+        overflow: auto;
     }
 
-    .off{ visibility: collapse; }
-
-    #partA{
-        background-color: #1d2123;
-        height: 24%;
-        transform: translateY(-100%);
+    .column {
+        width: 20vw;
+        height: 100%;
+        position: relative;
+        margin: .5vw;
+        float: left;
     }
 
-    #partB{
-        background-color: #121516;
-        height: 76%;
-        transform: translateY(100%);
+    .newsBox{
+        background-color: rgb(81, 170, 247);
+        height: 12vw;
+        width: 20vw;
+        position: relative;
+        margin-bottom: .9vw;
+        border-radius: 16px;
     }
 
-    #text{
-        color: #108271;
-        /* font-family: AllertaStencil; */
-        font-family: Vibur;
-        /* font-family: RalewayDots; */
-        /* font-family: Thasadith; */
-        /* font-family: TsukimiRounded; */
-        /* font-family: PoiretOne; */
-        font-size: 70px;
-        text-align: center;
-        top: 14%;
-        width: 100%;
-        transform: translateX(-2%);
-        position: absolute;
-    }
+    .medium { height: 16vw }
+    .large{ height: 30vw }
+
 </style>
 
 // -- =====================================================================================
