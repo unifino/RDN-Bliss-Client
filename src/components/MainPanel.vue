@@ -4,7 +4,7 @@
 
             <DecorPanel   :class="TS.Speeds[store.getters.animationSpeed]" />
 
-            <HomePanel    :class="TS.Speeds[store.getters.animationSpeed]" />
+            <!-- <HomePanel    :class="TS.Speeds[store.getters.animationSpeed]" /> -->
             <NewsPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             <FAQsPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             <AboutUsPanel :class="TS.Speeds[store.getters.animationSpeed]" />

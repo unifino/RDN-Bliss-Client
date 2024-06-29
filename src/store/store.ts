@@ -14,7 +14,7 @@ const state: TS.State = {
     process: TS.Processes.Reading,
     language: TS.Languages.EN,
     displayMode: TS.DisplayMode.Wide,
-    ort: TS.Orts.Home,
+    ort: TS.Orts.News,
     animationSpeed: TS.Speeds.Fast,
 
     Flag_plan_B: false,
