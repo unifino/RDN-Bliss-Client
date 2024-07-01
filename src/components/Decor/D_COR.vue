@@ -27,7 +27,7 @@ const store: TS.Store = useStore()
         return [
             require( "@/assets/Pics/plant.jpg" ),
             require( "@/assets/Pics/beauty.jpg" ),
-            require( "@/assets/Pics/books.jpg" ),
+            require( "@/assets/Pics/shelf.jpg" ),
             require( "@/assets/Pics/magazine.jpg" ),
             require( "@/assets/Pics/flower.jpg" ),
             // .. user
