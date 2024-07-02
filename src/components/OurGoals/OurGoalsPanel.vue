@@ -1,6 +1,6 @@
 <template>
-    <div id="NewsPanel" :style="`z-index: ${+(store.getters.ort === TS.Orts.News)}`">
-        <N_100 />
+    <div id="userPanelBox" :style="`z-index: ${+(store.getters.ort === TS.Orts.OurGoals)};`">
+        <GoalsSections :class="TS.Speeds[store.getters.animationSpeed]" />
     </div>
 </template>
 
@@ -8,9 +8,9 @@
 
 <script setup lang="ts">
 
-import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
-import N_100                                from '@/components/News/N_100.vue'
+import { useStore }                         from 'vuex'
+import GoalsSections                          from '@/components/OurGoals/goalsSections.vue'
 
 const store: TS.Store = useStore()
 
@@ -22,12 +22,10 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #NewsPanel {
-        width: 100vw;
+    #userPanelBox{
         height: 100%;
-        padding: 3vw 4vw;
+        width: 100%;
         position: absolute;
-        overflow: auto;
     }
 
 </style>

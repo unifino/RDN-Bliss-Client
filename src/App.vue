@@ -4,8 +4,8 @@
         <BG msg="Nutrition"/>
 
         <div id="MainBox_Flex">
-            <HeaderPanel />
-            <MainPanel style="flex: 1" />
+            <HeaderPanel style="z-index: 1" />
+            <MainPanel style="flex: 1"      />
         </div>
 
         <Curtain  />

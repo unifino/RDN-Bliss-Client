@@ -5,6 +5,7 @@
             <DecorPanel   :class="TS.Speeds[store.getters.animationSpeed]" />
 
             <HomePanel    :class="TS.Speeds[store.getters.animationSpeed]" />
+            <OurGoals     :class="TS.Speeds[store.getters.animationSpeed]" />
             <NewsPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             <FAQsPanel    :class="TS.Speeds[store.getters.animationSpeed]" />
             <AboutUsPanel :class="TS.Speeds[store.getters.animationSpeed]" />
@@ -21,6 +22,7 @@
 
 import DecorPanel                           from '@/components/Decor/DecorPanel.vue'
 import HomePanel                            from '@/components/Home/HomePanel.vue'
+import OurGoals                             from '@/components/OurGoals/OurGoalsPanel.vue'
 import NewsPanel                            from '@/components/News/NewsPanel.vue'
 import FAQsPanel                            from '@/components/FAQs/FAQsPanel.vue'
 import AboutUsPanel                         from '@/components/About Us/AboutUsPanel.vue'
@@ -60,7 +62,7 @@ const store: TS.Store = useStore()
     @keyframes X100_fall_Out {
         14% { transform: rotate(3deg) scale(1.07) }
         20% { transform: rotate(3deg) scale(1.07) }
-        100%{ transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2) }
+        100%{ transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2); opacity: 0; }
     }
 
     .X010_fall_Out {
@@ -78,7 +80,7 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes X100_fall_In {
-        0%  { transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2) }
+        0%  { transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2); opacity: 1; }
         66% { transform: translate(0px, 0px) rotate(3deg) scale(1.07) }
         70% { transform: rotate(3deg) scale(1.07) }
         100%{ transform: rotate(0deg) scale(1) }
@@ -112,7 +114,7 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes X010_fall_Out_Fast {
-        100%{ transform: translate(0px, 1000px) scale(0.2) }
+        100%{ transform: translate(0px, 1000px) scale(0.2); opacity: 0 }
     }
 
     .Fast> .X100_fall_In {
@@ -129,7 +131,7 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes X010_fall_In_Fast {
-        0%{ transform: translate(0px, 1000px) scale(0.2) }
+        0%{ transform: translate(0px, 1000px) scale(0.2); opacity: 1; }
         100%{ opacity: 1; transform: translate(0px, 0px) scale(1) }
     }
 
