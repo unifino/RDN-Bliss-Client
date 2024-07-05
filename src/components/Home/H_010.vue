@@ -1,7 +1,11 @@
 <template>
     <div id="H_010_Box" class="init" ref="h_010">
+
         <DotBox />
 
+        <div style="visibility: collapse; display: none;">
+            <img v-for="(x,i) of bgPath()" :key="i" :src="bgPath()[i]" />
+        </div>
         <div id="newsBox">
             <img id="bg" class="no_select" :src="bgPath()[store.getters.H010IDx]" />
             <div id="bgCover" ref="bgCover" />
@@ -67,11 +71,11 @@ const store: TS.Store = useStore()
 
     const bgPath = () => {
         return [
-            require( "@/assets/Pics/news/temp/1.jpg" ),
-            require( "@/assets/Pics/news/temp/2.jpg" ),
-            require( "@/assets/Pics/news/temp/3.jpg" ),
-            require( "@/assets/Pics/news/temp/4.jpg" ),
-            require( "@/assets/Pics/news/temp/5.jpg" ),
+            require( "@/assets/Pics/Home/1.jpg" ),
+            require( "@/assets/Pics/Home/2.jpg" ),
+            require( "@/assets/Pics/Home/3.jpg" ),
+            require( "@/assets/Pics/Home/4.jpg" ),
+            require( "@/assets/Pics/Home/5.jpg" ),
         ]
     }
 
@@ -82,6 +86,7 @@ const store: TS.Store = useStore()
         if ( planB ) await new Promise( _ => setTimeout( _, 1 ) )
         Tools.MainAnimation( h_010, "X010", "Out", 0, planB ? "_planB" : "" )
         if ( planB ) store.dispatch( TS.Acts.Flag_plan_B, false )
+        clearTimeout( timeOut )
     };
     const _in = () => Tools.MainAnimation( h_010, "X010", "In", Tools.speed() );
     const _login = ( phase: "Login"|"Standard" ) => {
@@ -112,11 +117,13 @@ const store: TS.Store = useStore()
         content.value.className = "fadeIn"
         bgCover.value.className = "fadeOut"
 
-        if ( store.getters.ort === TS.Orts.Home ) timeOut = setTimeout( newsSlider, 4000 )
+        timeOut = setTimeout( newsSlider, 4000 )
 
     }
 
 // -- =====================================================================================
+
+    store.watch( getters => getters.Flag_logged_in, () => clearTimeout( timeOut ) )
 
     store.watch(
         getters => getters.ort,
@@ -186,7 +193,7 @@ const store: TS.Store = useStore()
     #bg{
         bottom: 0;
         right: 0;
-        height: 95%;
+        height: 440px;
         width: auto;
         position: absolute;
         z-index: 0;
