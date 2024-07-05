@@ -89,7 +89,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const regSlider = async function ( phase: "In"|"Out" ) {
-        if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed()+ 500 ) )
+        if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed() * 1.4 ) )
         HRGBox.value.className = "XReg_fall_" + phase
     }
 
@@ -379,6 +379,26 @@ const store: TS.Store = useStore()
         }
     }
 
+</style>
+
+<style Fast>
+    .Fast> .XReg_fall_In {
+        animation           : XReg_fall_In_Fast .3s;
+        animation-fill-mode : both;
+    }
+    @keyframes XReg_fall_In_Fast {
+        0%  { transform: scale(.4);  opacity: 0;  visibility: hidden  }
+        100%{ transform: scale(1);   opacity: 1;  visibility: visible }
+    }
+
+    .Fast> .XReg_fall_Out {
+        animation           : XReg_fall_Out_Fast .3s;
+        animation-fill-mode : both;
+    }
+    @keyframes XReg_fall_Out_Fast {
+        0%  { transform: scale(1);   opacity: 1;  visibility: visible }
+        100%{ transform: scale(.5);   opacity: 0; visibility: hidden  }
+    }
 </style>
 
 // -- =====================================================================================

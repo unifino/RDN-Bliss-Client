@@ -1,5 +1,5 @@
 <template>
-    <div id="H_010_Box" ref="h_010">
+    <div id="H_010_Box" class="init" ref="h_010">
         <DotBox />
 
         <div id="newsBox">
@@ -8,10 +8,11 @@
             <div id="shadowBox_2" />
             <div id="shadowBox_1" />
             <div id="shadowBox_main">
-                <div id="contentBox">
-                    <div class="title" v-html="context.title" />
-                    <div class="content" v-text="context.text" />
+                <div @click="newsSlider()" id="contentBox" ref="contentBox">
+                    <div ref="title" class="title" v-html="myData[ myIDx ].title" />
+                    <div ref="content" class="content" v-text="myData[ myIDx ].text" />
                 </div>
+                <div id="border"></div>
             </div>
         </div>
 </div>
@@ -32,10 +33,33 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const h_010 = ref<HTMLElement>( {} as HTMLElement )
+    const title = ref<HTMLElement>( {} as HTMLElement )
+    const content = ref<HTMLElement>( {} as HTMLElement )
+    const myIDx = ref<number>(0)
 
-    let context = { title: "", text: "" }
-    context.title = "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health";
-    context.text = "A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans. \n\n On September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University."
+    const myData = [ 
+        {
+            title: "Do Doctors Really Listen to the Patient?",
+            text: "Last week I went to a new ENT doctor specializing in the nose and sinuses. I have had ongoing issues where my nose closes up at night and causes issues breathing with my cpap mask.\n\nNo response on that. Why would he not recommend a X-ray or better yet an MRI to see what could be going on? He then prescribed a different Fluticasone Propionate, Xhance, after I told him I had been using that steroid since 2012 with no noticeable good."
+        },
+        {
+            title: "How Can a Registered Dietitian Nutritionist (RDN) Help?",
+            text: "Lifestyle changes like following a healthy eating plan, achieving a healthy weight and regular physical activity can significantly improve your health, reduce risk of developing chronic illnesse. Working with a registered dietitian nutritionist (RDN) to make these changes can improve long term success.\n\nRDNs are food and nutrition experts who have graduated with at least a bachelor’s degree in nutrition, passed a national examination and who must complete ongoing continuing professional education requirements to maintain registration."
+        },
+        {
+            title: "Prednisone is like running UP a DOWN staircase",
+            text: " There are days I am able to continue in activities that keep me healthy, both physically and mentally.\n\nBut other days it's near impossible - either the brain fog wrestles with my physical energy, or the zeal and motivation are gone. I'm at 8.5 mg, a slow taper since April. Before PMR/ prednisone I was a young 75 years - very active physically and mentally."
+        },
+        {
+            title: "Is it kidney or back pain?",
+            text: "Thank you Danny. I'm sorry you have to suffer these things, as I do. I have had neurologist for years now, on gabapentin and extra strength Tylenol, so my liver and kidneys are taking a hit.\n\nI too have osteoarthritis in my hips and back just to make life interesting. Growing old is a real challenge! I.must admit I sick of going to doctors. Take care."
+        },
+        {
+            title: "Agricultural Science Center of Excellence for Nutrition and Diet (ASCEND) for Better Health",
+            text: "A virtual center that brings together scientists, partner organizations, and communities to deliver science-based solutions that promote and elevate food and nutrition security for all Americans.\n\nOn September 28th, USDA announced the launch of the first USDA Nutrition Hub in Baton Rouge, Louisiana, in partnership with Southern University."
+        }
+
+    ]
 
 // -- =====================================================================================
 
@@ -59,11 +83,37 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    const newsSlider = async () => {
+
+        content.value.className = "content"
+        title.value.className = "title"
+        await new Promise( _ => setTimeout( _, 10 ) )
+
+        content.value.className += " fadeOut"
+        await new Promise( _ => setTimeout( _, 100 ) )
+        title.value.className += " slideOut"
+        await new Promise( _ => setTimeout( _, 660 ) )
+
+        myIDx.value = (myIDx.value +1) % myData.length 
+
+        title.value.className += " slideIn"
+        await new Promise( _ => setTimeout( _, 200 ) )
+        content.value.className += " fadeIn"
+
+        if ( store.getters.ort === TS.Orts.Home ) setTimeout( newsSlider, 4000 )
+
+    }
+
+// -- =====================================================================================
+
     store.watch(
         getters => getters.ort,
         ( nV, oV ) => {
             if( oV === TS.Orts.Home ) _out()
-            if( nV === TS.Orts.Home ) _in()
+            if( nV === TS.Orts.Home ) {
+                _in()
+                newsSlider()
+            }
         }
     )
 
@@ -74,22 +124,9 @@ const store: TS.Store = useStore()
             if ( nV === TS.Processes.Registering ) _out()
             // .. Exit from Home to other Orts from Registering State
             if ( oV === TS.Processes.Login && store.getters.ort !== TS.Orts.Home ) _out()
-            // .. Exit back to Home from Registering
-            if
-            ( 
-                nV === TS.Processes.Reading && 
-                store.getters.ort === TS.Orts.Home && 
-                oV !== TS.Processes.Login 
-            )
-                _in()
-            // .. Exit back to Home from Login
-            if
-            ( 
-                nV === TS.Processes.Reading && 
-                store.getters.ort === TS.Orts.Home && 
-                oV === TS.Processes.Login 
-            )
-                _login( "Standard" )
+            // .. Exit back to Home from Login | Registering
+            if ( nV === TS.Processes.Reading && store.getters.ort === TS.Orts.Home )
+                oV !== TS.Processes.Login ? _in() : _login( "Standard" )
         }
     )
 
@@ -112,6 +149,10 @@ const store: TS.Store = useStore()
         overflow: hidden;
     }
 
+    .init{
+        transform: translate(0px, 1000px) scale(0.2)
+    }
+
     #newsBox{
         width: 55%;
         margin: 0 5%;
@@ -126,6 +167,16 @@ const store: TS.Store = useStore()
         width: auto;
         position: absolute;
         z-index: 0;
+    }
+
+    #border{
+        background-color: #eeefecec;
+        left: 0;
+        top: 0;
+        height: 100%;
+        border-left: 20px solid #eeefec;
+        width: 30px;
+        position: absolute;
     }
 
     #shadowBox_main, #shadowBox_1, #shadowBox_2, #shadowBox_3{
@@ -199,6 +250,41 @@ const store: TS.Store = useStore()
     @keyframes X010_fall_Out_planB {
         0%  { transform: translateY(720px) rotate(90deg) }
         100%{ transform: translate(0px, 1000px) scale(0.2) rotate(90deg) }
+    }
+
+
+    .slideOut {
+        animation           : slideOut .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes slideOut {
+        0%  { transform: translateX(0); opacity: 1 }
+        100%{ transform: translateX(-40%); opacity: 0 }
+    }
+    .slideIn {
+        animation           : slideIn .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes slideIn {
+        0%  { transform: translateX(60%); opacity: 0 }
+        100%{ transform: translateX(0); opacity: 1 }
+    }
+
+    .fadeOut {
+        animation           : fadeOut .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes fadeOut {
+        0%  { opacity: 1 }
+        100%{ opacity: 0 }
+    }
+    .fadeIn {
+        animation           : fadeIn .5s;
+        animation-fill-mode : both;
+    }
+    @keyframes fadeIn {
+        0%  { opacity: 0 }
+        100%{ opacity: 1 }
     }
 
 </style>

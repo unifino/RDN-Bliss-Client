@@ -9,6 +9,7 @@ export const OrtData: TS.OrtData = {
     [TS.Orts.FAQs]      : { name: "FAQs", text: "FAQs" },
     [TS.Orts.AboutUs]   : { name: "About Us", text: "About Us" },
     [TS.Orts.UserPanel] : { name: "User Panel", text: "Welcome" },
+    [TS.Orts.NoWhere]   : { name: "", text: "Hi There" },
 }
 
 // -- =====================================================================================

@@ -21,6 +21,17 @@ import BG                                   from '@/components/BG.vue'
 import HeaderPanel                          from '@/components/Head/HeaderPanel.vue'
 import MainPanel                            from '@/components/MainPanel.vue'
 import Curtain                              from '@/MyCurtain.vue'
+import { onMounted }                        from 'vue';
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+
+const store: TS.Store = useStore()
+
+// -- ====================================================================================
+
+    onMounted ( () => {
+        store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+    } )
 
 // -- ====================================================================================
 

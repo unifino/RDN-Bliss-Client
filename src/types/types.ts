@@ -16,7 +16,7 @@ export enum Languages { "EN", "FA", "UR" }
 export enum DisplayMode { "Wide", "Packed" }
 
 // .. declare Places
-export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, }
+export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, NoWhere }
 
 export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 

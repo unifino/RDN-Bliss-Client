@@ -77,33 +77,28 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.ort,
-        ( nV: TS.Orts, oV: TS.Orts ) => {
-            if (
-                nV !== oV ||
-                (
-                    nV === TS.Orts.Home &&
-                    store.getters.process === TS.Processes.Registering
-                )
-            )
-                textSlider()
+        ( nV, oV ) => {
+            if ( nV !== oV && oV !== TS.Orts.NoWhere ) textSlider()
+            else if ( 
+                nV === TS.Orts.Home && 
+                store.getters.process === TS.Processes.Registering 
+            )   textSlider()
         }
     )
 
     store.watch(
         getters => getters.process,
-        ( nV: TS.Processes, oV: TS.Processes ) => {
+        ( nV, oV ) => {
             if ( nV !== TS.Processes.Login )
-                if (
-                    store.getters.ort !== TS.Orts.Home ||
-                    nV !== TS.Processes.Reading || oV !== TS.Processes.Login
-                )
-                    textSlider()
+                if ( store.getters.ort !== TS.Orts.Home || nV !== TS.Processes.Reading || oV !== TS.Processes.Login )
+                    if ( !( store.getters.ort === TS.Orts.Home && oV === TS.Processes.Registering && !store.getters.Flag_speed ) )
+                        textSlider()
         }
     )
 
     store.watch(
         getters => getters.Flag_logged_in,
-        ( nV: boolean ) => { if (!nV) textSlider() }
+        nV => { if (!nV) textSlider() }
     )
 
 // -- =====================================================================================

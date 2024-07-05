@@ -1,5 +1,5 @@
 <template>
-    <div id="H_100_Box" ref="h_100">
+    <div id="H_100_Box" class="init" ref="h_100">
 <!-- ================================================================================== -->
         <div id="title" />
 <!-- ================================================================================== -->
@@ -116,6 +116,10 @@ const store: TS.Store = useStore()
         margin-top: 120px;
         position: absolute;
         overflow: hidden;
+    }
+
+    .init{
+        transform: translate(-700px, 1000px) rotate(-70deg) scale(0.2); opacity: 0;
     }
 
     #title{

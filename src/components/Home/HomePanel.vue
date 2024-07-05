@@ -4,7 +4,7 @@
         <Login />
         
         <div
-            class="full"
+            :class="'full ' + TS.Speeds[store.getters.animationSpeed]"
             :style="`z-index: ${+(store.getters.process===TS.Processes.Registering)}`"
         >
             <H_Reg />

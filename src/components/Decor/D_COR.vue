@@ -21,7 +21,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const d_cor = ref<HTMLElement>( {} as HTMLElement )
-    const picIndex = ref( store.getters.ort )
+    const picIndex = ref( 999 )
 
     const pics = () => {
         return [
