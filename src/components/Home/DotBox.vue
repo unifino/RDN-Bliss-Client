@@ -1,11 +1,11 @@
 <template>
     <div id="dotBox">
-        <div id="dots_wrapper">
-            <div class="dot" />
-            <div class="dot ey" />
-            <div class="dot ex" />
-            <div class="dot ey" />
-            <div class="dot" />
+        <div ref="dots" id="dots_wrapper">
+            <div @click=goTo(0) class="dot selected" />
+            <div @click=goTo(1) class="dot ey" />
+            <div @click=goTo(2) class="dot ex" />
+            <div @click=goTo(3) class="dot ey" />
+            <div @click=goTo(4) class="dot" />
         </div>
     </div>
 </template>
@@ -13,6 +13,40 @@
 // -- =====================================================================================
 
 <script setup lang="ts">
+
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+import { ref }                              from 'vue'
+
+const store: TS.Store = useStore()
+
+// -- =====================================================================================
+
+    const dots = ref<HTMLElement>( {} as HTMLElement )
+
+// -- =====================================================================================
+
+    const doter = (idx: number) => {
+        // .. reset ClassNames
+        for( let x of Object.values( dots.value.children ) ) 
+            x.className = x.className.replace( / selected/g, "" )
+        // .. Turn On this Dot
+        dots.value.children[ idx ].className += " selected"
+    }
+
+// -- =====================================================================================
+
+    const goTo = (idx: number) => {
+        store.dispatch( TS.Acts.H010Handy, true )
+        store.dispatch( TS.Acts.H010IDx, idx )        
+    }
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.H010IDx,
+        nV => doter( nV ) 
+    )
 
 // -- =====================================================================================
 
@@ -51,16 +85,20 @@
         cursor: pointer;
     }
 
-    .dot:hover{
-        background-color: orange;
+    .dot:hover{ 
+        border-color: orange;
+        background-color: orange 
     }
 
-    .ex{
-        margin-top: 13px;
-    }
+    .ex{ margin-top: 13px }
+    .ey{ margin-top: 12.5px }
 
-    .ey {
-        margin-top: 12.5px;
+    .selected{
+        animation           : selected .8s;
+        animation-fill-mode : both;
+    }
+    @keyframes selected {
+        100%{ background-color: #17a392; border-color: #17a392; }
     }
 
 </style>

@@ -30,11 +30,15 @@ export enum Speeds {
 
 // .. declare State
 export type State = {
-    process: Processes,
-    language: Languages,
-    displayMode: DisplayMode,
-    ort: Orts,
+    process: Processes
+    language: Languages
+    displayMode: DisplayMode
+    ort: Orts
     animationSpeed: Speeds
+
+    // .. declare minor data
+    H010IDx: number
+    H010Handy: boolean
 
     // .. declare Flags
     Flag_plan_B: boolean
@@ -60,9 +64,13 @@ export enum Mutates {
     LanguageChange  = "LanguageChange",
     OrtChange       = "OrtChange",
     SpeedChange     = "SpeedChange",
-    Flag_plan_B        = "x_plan_B",
-    Flag_logged_in     = "x_logged_in",
-    Flag_speed         = "x_speed",
+
+    H010IDx         = "H010Panel_ID",
+    H010Handy       = "H010HandControl",
+
+    Flag_plan_B     = "Flag_plan_B",
+    Flag_logged_in  = "Flag_logged_in",
+    Flag_speed      = "Flag_speed",
 }
 
 // .. declare Mutations
@@ -71,6 +79,10 @@ export type MyMutations<S = State> = {
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
     [ Mutates.OrtChange ]       ( state: S, payload: Orts ):      void;
     [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):    void;
+    
+    [ Mutates.H010IDx ]         ( state: S, payload: number ):    void;
+    [ Mutates.H010Handy ]       ( state: S, payload: boolean ):   void;
+
     [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):   void;
     [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):   void;
     [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):   void;
@@ -84,9 +96,13 @@ export enum Acts {
     LanguageChange  = "LanguageChange",
     OrtChange       = "OrtChange",
     SpeedChange     = "SpeedChange",
-    Flag_plan_B        = "x_plan_B",
-    Flag_logged_in     = "x_logged_in",
-    Flag_speed         = "x_speed",
+
+    H010IDx         = "H010Panel_ID",
+    H010Handy       = "H010HandControl",
+
+    Flag_plan_B     = "Flag_plan_B",
+    Flag_logged_in  = "Flag_logged_in",
+    Flag_speed      = "Flag_speed",
 }
 
 // .. declare Action Interface
@@ -95,6 +111,10 @@ export interface MyActions {
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
     [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):      void;
     [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):    void;
+
+    [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):    void;
+    [ Acts.H010Handy ]          ( {dispatch}: AAC, payload: boolean ):   void;
+
     [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):   void;
     [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):   void;
     [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):   void;
@@ -107,6 +127,10 @@ export type MyGetters = {
     process             ( state: State ): Processes
     ort                 ( state: State ): Orts
     animationSpeed      ( state: State ): Speeds
+
+    H010IDx             ( state: State ): number
+    H010Handy           ( state: State ): boolean
+
     Flag_plan_B         ( state: State ): boolean
     Flag_logged_in      ( state: State ): boolean
     Flag_speed ( state: State ): boolean

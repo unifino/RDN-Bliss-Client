@@ -3,14 +3,15 @@
         <DotBox />
 
         <div id="newsBox">
-            <img class="bg no_select" :src="bgPath()" />
+            <img id="bg" class="no_select" :src="bgPath()[store.getters.H010IDx]" />
+            <div id="bgCover" ref="bgCover" />
             <div id="shadowBox_3" />
             <div id="shadowBox_2" />
             <div id="shadowBox_1" />
             <div id="shadowBox_main">
-                <div @click="newsSlider()" id="contentBox" ref="contentBox">
-                    <div ref="title" class="title" v-html="myData[ myIDx ].title" />
-                    <div ref="content" class="content" v-text="myData[ myIDx ].text" />
+                <div id="contentBox" ref="contentBox">
+                    <div id="title" ref="title" v-html="myData[ store.getters.H010IDx ].title" />
+                    <div id="content" ref="content" v-text="myData[ store.getters.H010IDx ].text" />
                 </div>
                 <div id="border"></div>
             </div>
@@ -35,16 +36,17 @@ const store: TS.Store = useStore()
     const h_010 = ref<HTMLElement>( {} as HTMLElement )
     const title = ref<HTMLElement>( {} as HTMLElement )
     const content = ref<HTMLElement>( {} as HTMLElement )
-    const myIDx = ref<number>(0)
+    const bgCover = ref<HTMLElement>( {} as HTMLElement )
+    let timeOut: number;
 
     const myData = [ 
         {
-            title: "Do Doctors Really Listen to the Patient?",
-            text: "Last week I went to a new ENT doctor specializing in the nose and sinuses. I have had ongoing issues where my nose closes up at night and causes issues breathing with my cpap mask.\n\nNo response on that. Why would he not recommend a X-ray or better yet an MRI to see what could be going on? He then prescribed a different Fluticasone Propionate, Xhance, after I told him I had been using that steroid since 2012 with no noticeable good."
-        },
-        {
             title: "How Can a Registered Dietitian Nutritionist (RDN) Help?",
             text: "Lifestyle changes like following a healthy eating plan, achieving a healthy weight and regular physical activity can significantly improve your health, reduce risk of developing chronic illnesse. Working with a registered dietitian nutritionist (RDN) to make these changes can improve long term success.\n\nRDNs are food and nutrition experts who have graduated with at least a bachelor’s degree in nutrition, passed a national examination and who must complete ongoing continuing professional education requirements to maintain registration."
+        },
+        {
+            title: "Do Doctors Really Listen to the Patient?",
+            text: "Last week I went to a new ENT doctor specializing in the nose and sinuses. I have had ongoing issues where my nose closes up at night and causes issues breathing with my cpap mask.\n\nNo response on that. Why would he not recommend a X-ray or better yet an MRI to see what could be going on? He then prescribed a different Fluticasone Propionate, Xhance, after I told him I had been using that steroid since 2012 with no noticeable good."
         },
         {
             title: "Prednisone is like running UP a DOWN staircase",
@@ -64,7 +66,13 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const bgPath = () => {
-        return require( "@/assets/Pics/news/temp/2.jpg" )
+        return [
+            require( "@/assets/Pics/news/temp/1.jpg" ),
+            require( "@/assets/Pics/news/temp/2.jpg" ),
+            require( "@/assets/Pics/news/temp/3.jpg" ),
+            require( "@/assets/Pics/news/temp/4.jpg" ),
+            require( "@/assets/Pics/news/temp/5.jpg" ),
+        ]
     }
 
 // -- =====================================================================================
@@ -85,22 +93,26 @@ const store: TS.Store = useStore()
 
     const newsSlider = async () => {
 
-        content.value.className = "content"
-        title.value.className = "title"
+        // .. reset ClassNames
+        content.value.className = ""
+        title.value.className = ""
+        bgCover.value.className = ""
         await new Promise( _ => setTimeout( _, 10 ) )
 
-        content.value.className += " fadeOut"
+        bgCover.value.className = "fadeIn"
+        content.value.className = "fadeOut"
         await new Promise( _ => setTimeout( _, 100 ) )
-        title.value.className += " slideOut"
+        title.value.className = "slideOut"
         await new Promise( _ => setTimeout( _, 660 ) )
 
-        myIDx.value = (myIDx.value +1) % myData.length 
+        store.dispatch( TS.Acts.H010IDx, (store.getters.H010IDx +1) % myData.length )
 
-        title.value.className += " slideIn"
+        title.value.className = "slideIn"
         await new Promise( _ => setTimeout( _, 200 ) )
-        content.value.className += " fadeIn"
+        content.value.className = "fadeIn"
+        bgCover.value.className = "fadeOut"
 
-        if ( store.getters.ort === TS.Orts.Home ) setTimeout( newsSlider, 4000 )
+        if ( store.getters.ort === TS.Orts.Home ) timeOut = setTimeout( newsSlider, 4000 )
 
     }
 
@@ -112,7 +124,7 @@ const store: TS.Store = useStore()
             if( oV === TS.Orts.Home ) _out()
             if( nV === TS.Orts.Home ) {
                 _in()
-                newsSlider()
+                timeOut = setTimeout( newsSlider, 4000 )
             }
         }
     )
@@ -128,6 +140,17 @@ const store: TS.Store = useStore()
             if ( nV === TS.Processes.Reading && store.getters.ort === TS.Orts.Home )
                 oV !== TS.Processes.Login ? _in() : _login( "Standard" )
         }
+    )
+
+    store.watch( 
+        getters => getters.H010Handy,
+        nV => {
+            if (nV) {
+                clearTimeout( timeOut )
+                store.dispatch( TS.Acts.H010Handy, false )
+                timeOut = setTimeout( newsSlider, 6000 )
+            }
+        }  
     )
 
 // -- =====================================================================================
@@ -160,13 +183,21 @@ const store: TS.Store = useStore()
         padding: 10% 0;
     }
 
-    .bg{
+    #bg{
         bottom: 0;
         right: 0;
         height: 95%;
         width: auto;
         position: absolute;
         z-index: 0;
+    }
+
+    #bgCover{
+        height: 100%;
+        width: 100%;
+        background-color: #195549;
+        opacity: 0;
+        position: absolute;
     }
 
     #border{
@@ -209,14 +240,14 @@ const store: TS.Store = useStore()
         opacity: .35;
     }
 
-    .title{
+    #title{
         font-family: PoiretOne;
         font-weight: bold;
         font-size: 25px;
         margin-bottom: 52px;
     }
 
-    .content{
+    #content{
         font-family: Oswald;
         font-size: 18px;
         font-weight: bold;
