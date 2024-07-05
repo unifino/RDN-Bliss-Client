@@ -35,12 +35,12 @@
 
     #rdn{
         width: 100px;
-        background-image: url( "@/assets/Pics/RDN_txt_logo.png" );
+        background-image: url( "@/assets/Pics/Logo/RDN_txt_logo.png" );
     }
 
     #logo{
         width: 160px;
-        background-image: url( "@/assets/Pics/logo.png" );
+        background-image: url( "@/assets/Pics/Logo/logo.png" );
     }
 
 </style>

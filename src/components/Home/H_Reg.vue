@@ -208,7 +208,7 @@ const store: TS.Store = useStore()
     #p2{
         grid-row-start: 1;
         grid-row-end: 3;
-        background-image: url( "@/assets/Pics/RDN.png" );
+        background-image: url( "@/assets/Pics/Logo/RDN.png" );
         background-size: auto 114px;
     }
 

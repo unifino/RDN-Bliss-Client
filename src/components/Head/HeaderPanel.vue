@@ -28,7 +28,7 @@ import myLogo                               from '@/components/Head/myLogo.vue'
 
     #Main_Header_Box{
         background-color: #f3f3f3;
-        background-image: url( "@/assets/Pics/RDN.png" );
+        background-image: url( "@/assets/Pics/Logo/RDN.png" );
         background-size: auto 114px;
         border-bottom-width: 2px;
         height: 164px;

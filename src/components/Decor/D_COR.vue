@@ -25,16 +25,16 @@ const store: TS.Store = useStore()
 
     const pics = () => {
         return [
-            require( "@/assets/Pics/plant.jpg" ),
-            require( "@/assets/Pics/beauty.jpg" ),
-            require( "@/assets/Pics/shelf.jpg" ),
-            require( "@/assets/Pics/magazine.jpg" ),
-            require( "@/assets/Pics/flower.jpg" ),
+            require( "@/assets/Pics/Decor/plant.jpg" ),
+            require( "@/assets/Pics/Decor/beauty.jpg" ),
+            require( "@/assets/Pics/Decor/shelf.jpg" ),
+            require( "@/assets/Pics/Decor/magazine.jpg" ),
+            require( "@/assets/Pics/Decor/flower.jpg" ),
             // .. user
-            require( "@/assets/Pics/office-lobby.jpg" ),
+            require( "@/assets/Pics/Decor/office-lobby.jpg" ),
             // .. 6
-            require( "@/assets/Pics/whimsical.jpg" ),
-            require( "@/assets/Pics/blue-tit.jpg" ),
+            require( "@/assets/Pics/Decor/whimsical.jpg" ),
+            require( "@/assets/Pics/Decor/blue-tit.jpg" ),
         ]
     }
 
