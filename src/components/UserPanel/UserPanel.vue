@@ -1,12 +1,12 @@
 <template>
     <div id="userPanelBox" :style="`z-index: ${+(store.getters.ort === TS.Orts.UserPanel)};`">
 
-        <MyPatients />
-        <MyCalender />
-        <MyStats />
-        <MyDietPlans />
-        <MyMessage />
-        <MyProfile />
+        <MyPatients  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Patients)};`"/>
+        <MyCalender  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Calender)};`"/>
+        <MyStats     :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Stats)};`"/>
+        <MyDietPlans :style="`z-index: ${+(store.getters.userTool === TS.UserTools.DietPlans)};`"/>
+        <MyMessage   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Messages)};`"/>
+        <MyProfile   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Profile)};`"/>
 
         <UserButtons />
 

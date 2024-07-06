@@ -45,6 +45,9 @@ const store: TS.Store = useStore()
 
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, ortCode )
+        // .. reset userTool Selection
+        if ( ortCode !== TS.Orts.UserPanel ) 
+            store.dispatch( TS.Acts.userTool, TS.UserTools.null )
 
         fuse = false
         await new Promise( _ => setTimeout( _, Tools.speed() ) )

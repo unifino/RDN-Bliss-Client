@@ -56,14 +56,26 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const myAnimation = async ( phase: "In"|"Out", skip = false ) => {
+        
         if ( phase === "In" ) 
             if ( !skip ) 
                 await new Promise( _ => setTimeout( _, Tools.speed() *.8 ) )
+        
         calender.value.className = "Tool_fall_" + phase
+    
     }
 
 
 // -- =====================================================================================
+
+    store.watch(
+        getters => getters.ort,
+        ( nV, oV ) => { 
+            if ( oV === TS.Orts.UserPanel ) 
+                if ( store.getters.userTool === TS.UserTools.Calender )
+                    _out() 
+        }
+    )
 
     store.watch(
         getters => getters.userTool,

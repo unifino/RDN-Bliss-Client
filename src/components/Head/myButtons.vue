@@ -31,6 +31,7 @@ const store: TS.Store = useStore()
 
     const logOut = () => {
         store.dispatch( TS.Acts.Flag_logged_in, false )
+        store.dispatch( TS.Acts.userTool, TS.UserTools.null )
         if ( store.getters.ort === TS.Orts.UserPanel )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
     }

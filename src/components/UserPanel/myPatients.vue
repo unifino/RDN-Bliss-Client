@@ -37,6 +37,15 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     store.watch(
+        getters => getters.ort,
+        ( nV, oV ) => { 
+            if ( oV === TS.Orts.UserPanel ) 
+                if ( store.getters.userTool === TS.UserTools.Patients )
+                    _out() 
+        }
+    )
+
+    store.watch(
         getters => getters.userTool,
         ( nV, oV ) => {
             if ( nV !== oV ) {

@@ -1,9 +1,9 @@
 <template>
-    <div id="user_buttons_box" ref="u_100">
+    <div id="user_buttons_box" ref="userButtons">
         <div
             v-for="(opt,i) of options"
             :key=i
-            class="optionBox no_select"
+            :class="'optionBox no_select ' + ( opt.tool === store.getters.userTool ? 'selected' : '' )"
             @click="userTool( opt.tool )"
         >
             <div class="icon">{{opt.icon}}</div>
@@ -25,13 +25,21 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const u_100 = ref<HTMLElement>( {} as HTMLElement )
+    const userButtons = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
-    const lang = () => { console.log() }
-    const calender = () => { store.dispatch( TS.Acts.userTool, TS.UserTools.Calender ) }
-    const userTool = ( tool: TS.UserTools ) => store.dispatch( TS.Acts.userTool, tool )
+    let fuse = true;
+    const userTool = async ( tool: TS.UserTools ) => {
+    
+        if ( !fuse ) return
+        store.dispatch( TS.Acts.userTool, tool )
+
+        fuse = false
+        await new Promise( _ => setTimeout( _, Tools.speed() ) )
+        fuse = true
+    
+    }
 
     const _out = () => myAnimation( "Out" )
     const _in = () => myAnimation( "In" )
@@ -40,7 +48,7 @@ const store: TS.Store = useStore()
 
     const myAnimation = async ( phase: "In"|"Out" ) => {
         if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed() ) )
-        u_100.value.className = "U100_fall_" + phase
+        userButtons.value.className = "U100_fall_" + phase
     }
 
 // -- =====================================================================================
@@ -85,7 +93,7 @@ const store: TS.Store = useStore()
         box-shadow: 0 0 7px 1px #818181;
         margin: 0 0 0 50px;
         position: absolute;
-        z-index: 1;
+        z-index: 2;
     }
 
     .optionBox{
@@ -98,6 +106,15 @@ const store: TS.Store = useStore()
         background-color: #b6b8b53e;
         margin: 6px auto 6px auto;
         border-radius: 10px;
+    }
+
+    .selected{
+        background-color: #15a2a4;
+        color: whitesmoke;
+    }
+    
+    .selected:hover{
+        color: #e6eced !important
     }
 
     .icon{
