@@ -4,7 +4,7 @@
             v-for="(opt,i) of options"
             :key=i
             class="optionBox no_select"
-            @click="opt.fnc"
+            @click="userTool( opt.tool )"
         >
             <div class="icon">{{opt.icon}}</div>
             <div class="title">{{opt.title}}</div>
@@ -30,6 +30,8 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const lang = () => { console.log() }
+    const calender = () => { store.dispatch( TS.Acts.userTool, TS.UserTools.Calender ) }
+    const userTool = ( tool: TS.UserTools ) => store.dispatch( TS.Acts.userTool, tool )
 
     const _out = () => myAnimation( "Out" )
     const _in = () => myAnimation( "In" )
@@ -43,31 +45,24 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const options =  ref ( [{ title: "", icon: "", fnc: ()=>{true} }] )
+    const options =  ref ( [{ title: "", icon: "", tool: TS.UserTools.null }] )
 
     options.value = [
-        { title: "Patients" , icon: "", fnc: lang },
-        { title: "Calender" , icon: "", fnc: lang },
-        { title: "Week Stat", icon: "", fnc: lang },
-        { title: "Diet Plan", icon: "", fnc: lang },
-        { title: "Messages" , icon: "", fnc: lang },
-        { title: "Profile"  , icon: "", fnc: lang },
+        { title: "Patients" , tool: TS.UserTools.Patients,  icon: "" },
+        { title: "Calender" , tool: TS.UserTools.Calender,  icon: "" },
+        { title: "Week Stat", tool: TS.UserTools.Stats,     icon: "" },
+        { title: "Diet Plan", tool: TS.UserTools.DietPlans, icon: "" },
+        { title: "Messages" , tool: TS.UserTools.Messages,  icon: "" },
+        { title: "Profile"  , tool: TS.UserTools.Profile,   icon: "" },
     ]
 
 // -- =====================================================================================
 
     store.watch(
         getters => getters.ort,
-        ( nV: TS.Orts, oV: TS.Orts ) => {
+        ( nV, oV ) => {
             if( oV === TS.Orts.UserPanel ) _out()
             if( nV === TS.Orts.UserPanel ) _in()
-        }
-    )
-
-    store.watch(
-        getters => getters.Flag_logged_in,
-        (nV: boolean) => {
-            console.log(nV);
         }
     )
 
@@ -90,6 +85,7 @@ const store: TS.Store = useStore()
         box-shadow: 0 0 7px 1px #818181;
         margin: 0 0 0 50px;
         position: absolute;
+        z-index: 1;
     }
 
     .optionBox{

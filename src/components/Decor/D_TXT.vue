@@ -51,20 +51,20 @@ const store: TS.Store = useStore()
     // .. Home - About Us
     store.watch(
         getters => getters.ort,
-        ( nV: TS.Orts ) => myText.value = CD.OrtData[ nV ].text
+        nV => myText.value = CD.OrtData[ nV ].text
     )
 
     // .. Registering - Exit
     store.watch(
         getters => getters.process,
-        ( nV: TS.Processes ) => myText.value = nV === TS.Processes.Registering ?
+        nV => myText.value = nV === TS.Processes.Registering ?
             "Hey there!" : CD.OrtData[ store.getters.ort as TS.Orts ].text
     )
 
     // .. logOut
     store.watch(
         getters => getters.Flag_logged_in,
-        async ( nV: boolean, oV: boolean ) => { 
+        async ( nV, oV ) => { 
             if (!nV) myText.value = CD.OrtData[ store.getters.ort as TS.Orts ].text 
             if (oV) {
                 await new Promise( _ => setTimeout( _, 10 ) )

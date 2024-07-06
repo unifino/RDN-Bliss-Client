@@ -57,7 +57,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.ort,
-        ( nV: TS.Orts, oV: TS.Orts ) => {
+        ( nV, oV ) => {
             if( oV === TS.Orts.OurGoals ) _out()
             if( nV === TS.Orts.OurGoals ) _in()
         }

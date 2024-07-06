@@ -23,10 +23,10 @@ export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
-export enum Speeds { 
-    Normal = "Normal",
-    Fast   = "Fast" 
-}
+// .. declare UserTools
+export enum UserTools { "Patients", "Calender", "Stats", "DietPlans", "Messages", "Profile", null }
+
+export enum Speeds { Normal = "Normal", Fast = "Fast" }
 
 // .. declare State
 export type State = {
@@ -35,6 +35,9 @@ export type State = {
     displayMode: DisplayMode
     ort: Orts
     animationSpeed: Speeds
+
+    // .. declare User related States
+    userTool: UserTools
 
     // .. declare minor data
     H010IDx: number
@@ -65,6 +68,8 @@ export enum Mutates {
     OrtChange       = "OrtChange",
     SpeedChange     = "SpeedChange",
 
+    userTool        = "UserTools",
+    
     H010IDx         = "H010Panel_ID",
     H010Handy       = "H010HandControl",
 
@@ -79,6 +84,8 @@ export type MyMutations<S = State> = {
     [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
     [ Mutates.OrtChange ]       ( state: S, payload: Orts ):      void;
     [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):    void;
+    
+    [ Mutates.userTool ]        ( state: S, payload: UserTools ): void;
     
     [ Mutates.H010IDx ]         ( state: S, payload: number ):    void;
     [ Mutates.H010Handy ]       ( state: S, payload: boolean ):   void;
@@ -97,6 +104,8 @@ export enum Acts {
     OrtChange       = "OrtChange",
     SpeedChange     = "SpeedChange",
 
+    userTool        = "UserTools",
+
     H010IDx         = "H010Panel_ID",
     H010Handy       = "H010HandControl",
 
@@ -111,6 +120,8 @@ export interface MyActions {
     [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
     [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):      void;
     [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):    void;
+
+    [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ): void;
 
     [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):    void;
     [ Acts.H010Handy ]          ( {dispatch}: AAC, payload: boolean ):   void;
@@ -127,6 +138,8 @@ export type MyGetters = {
     process             ( state: State ): Processes
     ort                 ( state: State ): Orts
     animationSpeed      ( state: State ): Speeds
+
+    userTool            ( state: State ): UserTools
 
     H010IDx             ( state: State ): number
     H010Handy           ( state: State ): boolean

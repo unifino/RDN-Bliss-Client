@@ -51,7 +51,7 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.Flag_logged_in,
         // .. Bye Bye
-        ( nV: boolean, oV: boolean ) => { 
+        ( nV, oV ) => { 
             if( oV && store.getters.ort === TS.Orts.FAQs ) { _out(); _in() } 
         }
     )

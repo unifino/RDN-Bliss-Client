@@ -68,7 +68,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.Flag_logged_in,
-        (nV: boolean) => {
+        nV => {
             options.value.pop()
             options.value.push( loggingRelated[ nV ? 1 : 0] )
         }

@@ -34,7 +34,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.ort,
-        ( nV: TS.Orts, oV: TS.Orts ) => {
+        ( nV, oV ) => {
             if( oV === TS.Orts.AboutUs ) _out()
             if( nV === TS.Orts.AboutUs ) _in()
         }
@@ -43,7 +43,7 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.Flag_logged_in,
         // .. Bye Bye
-        ( nV: boolean, oV: boolean ) => { 
+        ( nV, oV ) => { 
             if( oV && store.getters.ort === TS.Orts.AboutUs ) { _out(); _in() } 
         }
     )
