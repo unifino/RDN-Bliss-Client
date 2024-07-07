@@ -101,6 +101,10 @@ const store: TS.Store = useStore()
         position: absolute;
     }
     
+    .init{
+        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
+    }
+    
     #myWrapper{
         height: calc( 100% - 30px );
         padding-top: 30px;
@@ -153,11 +157,6 @@ const store: TS.Store = useStore()
         font-size: 20px;
         right: 20px;
         position: absolute;
-    }
-
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
-        transform: translate(0%,-53%) scale(1); opacity: 1
     }
 
 </style>
