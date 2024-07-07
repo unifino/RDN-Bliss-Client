@@ -96,7 +96,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const newsSlider = async () => {
+    const newsSlider = async ( byHand = false ) => {
 
         // .. reset ClassNames
         content.value.className = ""
@@ -110,14 +110,16 @@ const store: TS.Store = useStore()
         title.value.className = "slideOut"
         await new Promise( _ => setTimeout( _, 660 ) )
 
-        store.dispatch( TS.Acts.H010IDx, (store.getters.H010IDx +1) % myData.length )
+        const idx = byHand ? 
+            store.getters.H010IDx : (store.getters.H010IDx +1) % myData.length
+        store.dispatch( TS.Acts.H010IDx, idx )
 
         title.value.className = "slideIn"
         await new Promise( _ => setTimeout( _, 200 ) )
         content.value.className = "fadeIn"
         bgCover.value.className = "fadeOut"
 
-        timeOut = setTimeout( newsSlider, 4000 )
+        timeOut = setTimeout( newsSlider, byHand ? 6000 : 4000 )
 
     }
 
@@ -155,7 +157,7 @@ const store: TS.Store = useStore()
             if (nV) {
                 clearTimeout( timeOut )
                 store.dispatch( TS.Acts.H010Handy, false )
-                timeOut = setTimeout( newsSlider, 6000 )
+                newsSlider( true )
             }
         }  
     )

@@ -36,8 +36,9 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const goTo = (idx: number) => {
+    const goTo =  async (idx: number) => {
         store.dispatch( TS.Acts.H010Handy, true )
+        await new Promise( _ => setTimeout( _, 500 ) )
         store.dispatch( TS.Acts.H010IDx, idx )        
     }
 
