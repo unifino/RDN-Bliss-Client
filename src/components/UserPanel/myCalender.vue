@@ -1,10 +1,10 @@
 <template>
     <div id="my_calender_box" class="init" ref="calender">
-        <div v-for="x in D" :key="x" class="days title">{{x}}</div>
+        <div v-for="x in D" :key="x" class="no_select days title">{{x}}</div>
         <div 
             v-for="(x,i) in N" 
             :key="i" 
-            :class="'days ' + x.class"
+            :class="'no_select days ' + x.class"
         >
                 {{ x.number }}
         </div>

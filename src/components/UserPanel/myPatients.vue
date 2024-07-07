@@ -65,7 +65,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #my_patients_box{
-        background-color: transparent;
+        background-color: #545454;
         height: 620px;
         width: 700px;
         top: 50%;
