@@ -135,6 +135,9 @@ const store: TS.Store = useStore()
         background-repeat: no-repeat;
     }
 
+    .patientBox.male:hover .name{ color: #08365c }
+    .patientBox.female:hover .name{ color: #58085c }
+
     .nameWrapper{
         text-align: right;
         background-color: #929292d5;
