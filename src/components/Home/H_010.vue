@@ -134,6 +134,7 @@ const store: TS.Store = useStore()
                 _in()
                 timeOut = setTimeout( newsSlider, 4000 )
             }
+            else clearTimeout( timeOut )
         }
     )
 
