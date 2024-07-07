@@ -65,7 +65,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #my_stats_box{
-        background-color: #17a914;
+        background-color: transparent;
         height: 620px;
         width: 700px;
         top: 50%;

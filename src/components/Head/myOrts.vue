@@ -26,7 +26,9 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    let fuse = true;
+    let fuse = false;
+    setTimeout( () => fuse = true, Tools.speed() *2 )
+
     const options = ref ( [ { code: TS.Orts.Home, class: "", icon: "" } ] )
 
     options.value = [

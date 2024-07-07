@@ -65,7 +65,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #my_profile_box{
-        background-color: #8d1e66;
+        background-color: transparent;
         height: 620px;
         width: 700px;
         top: 50%;

@@ -25,6 +25,10 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    let fuse = false;
+    setTimeout( () => fuse = true, Tools.speed() *2 )
+
+// -- =====================================================================================
 
     const lang = () => { console.log() }
     const speed = () => store.dispatch( TS.Acts.Flag_speed, !store.getters.Flag_speed )
@@ -36,6 +40,7 @@ const store: TS.Store = useStore()
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
     }
     const logIn = async () => {
+        if ( !fuse ) return
         if ( store.getters.ort !== TS.Orts.Home ) {
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
             await new Promise( _ => setTimeout( _, Tools.speed( true ) ) )

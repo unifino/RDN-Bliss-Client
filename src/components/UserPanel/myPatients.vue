@@ -1,4 +1,4 @@
-<template>
+        <template>
     <div id="my_patients_box" class="init" ref="message">
         
     </div>
@@ -65,7 +65,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #my_patients_box{
-        background-color: #ce931e;
+        background-color: transparent;
         height: 620px;
         width: 700px;
         top: 50%;

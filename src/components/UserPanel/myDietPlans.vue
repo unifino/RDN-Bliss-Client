@@ -65,7 +65,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #my_dietPlans_box{
-        background-color: #b70f0f;
+        background-color: transparent;
         height: 620px;
         width: 700px;
         top: 50%;
