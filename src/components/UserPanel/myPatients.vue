@@ -18,7 +18,9 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from "@/types/common";
 import * as Tools                           from '@/mixins/Tools';
+import axios                                from 'axios';
 
 const store: TS.Store = useStore()
 
@@ -33,21 +35,12 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const patients = [
-        { id: 0, sex:"male",   name: "Hatef" },
-        { id: 0, sex:"male",   name: "Ali" },
-        { id: 0, sex:"male",   name: "Rasul" },
-        { id: 0, sex:"female", name: "Fatemeh" },
-        { id: 0, sex:"female", name: "Sara" },
-        { id: 0, sex:"male",   name: "Farid" },
-        { id: 0, sex:"male",   name: "Javad" },
-        { id: 0, sex:"male",   name: "Saeed" },
-        { id: 0, sex:"female", name: "Leyla" },
-        { id: 0, sex:"male",   name: "HamidReza" },
-        { id: 0, sex:"male",   name: "Mohaddese" },
-        { id: 0, sex:"male",   name: "Karim" },
-        { id: 0, sex:"female", name: "Sima" },
-    ]
+    let patients: CTS.userData[] = []
+
+    axios.get( "http://localhost:5000/getPatients" ).then( res => {
+        patients = res.data.answer
+    } )
+    
 
 // -- =====================================================================================
 

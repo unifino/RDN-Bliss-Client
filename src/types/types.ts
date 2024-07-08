@@ -6,7 +6,6 @@ import {
 }                                       from 'vuex';
 import { WatchOptions }                 from "vue";
 
-
 // -- =====================================================================================
 
 // ..  declare Languages
