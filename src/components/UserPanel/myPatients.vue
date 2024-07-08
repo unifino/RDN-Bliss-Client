@@ -21,6 +21,7 @@ import * as TS                              from '@/types/types'
 import * as CTS                             from "@/types/common";
 import * as Tools                           from '@/mixins/Tools';
 import axios                                from 'axios';
+import * as CD                              from '@/mixins/commonData'
 
 const store: TS.Store = useStore()
 
@@ -36,10 +37,24 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const getData = async () => {
+    const getData = () => {
         
-        patients = ( await axios.get( "http://localhost:5000/getPatients" ) ).data.answer
-        
+        axios.get( CD.serverURL + "getPatients" )
+        .then( res => {
+            if  ( res.data.status === 200 ) patients = res.data.scc
+            // ! Consider it
+            else if ( res.data.status === 500 ) alert( res.data.err )
+            // ! Consider it
+            else alert( "Unknown STATUS ERR!" )
+        } )
+        // ! Consider it
+        .catch( err => alert( "Server Not Reachable" ) )
+    
+    }
+
+// -- =====================================================================================
+
+    const setNames = ( patients: CTS.Patients[] )  => {
         // .. set a name
         for ( let p of patients ) {
             if ( p.firstname || p.lastname ) {
@@ -48,8 +63,6 @@ const store: TS.Store = useStore()
             }
             else p.name = p.username || ( p.email.split( "@" )[0] ) 
         }
-        // .then( res => patients = res.data.answer )
-    
     }
 
 // -- =====================================================================================

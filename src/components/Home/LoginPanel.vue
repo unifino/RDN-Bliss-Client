@@ -16,8 +16,10 @@
 <script setup lang="ts">
 
 import { useStore }                         from 'vuex'
-import { ref }                              from 'vue'
+import { ref, Ref }                         from 'vue'
 import * as TS                              from '@/types/types'
+import axios                                from 'axios';
+import * as CD                              from '@/mixins/commonData'
 
 const store: TS.Store = useStore()
 
@@ -31,32 +33,52 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
     const login = () => {
 
-        // ! remove it
-        logging()
-
         // ..  checking the Form
         let parts = []
 
-        if ( usrmil.value.value.length < 4 ) parts.push( usrmil )
+        // ! remove it --- change 1 to 4 
+        if ( usrmil.value.value.length < 1 ) parts.push( usrmil )
+        if ( passwd.value.value.length < 1 ) parts.push( passwd )
 
-        if ( passwd.value.value.length < 4 ) parts.push( passwd )
-
-        // ! remove it
         // .. apply alert animation
-        // parts.forEach( async (x,i) => {
-            // await new Promise( _ => setTimeout( _, i*100 ) )
-            // x.value.className += " alert"
-            // await new Promise( _ => setTimeout( _, 700 ) )
-            // x.value.className = x.value.className.replace( /alert/g , '' )
-        // } )
-
-        if ( !parts.length ) logging()
+        parts.length ? alertMe( parts ) : logging()
 
     }
 
 // -- =====================================================================================
 
     const logging = () => {
+
+        axios.post( CD.serverURL + "logIn", {
+            username: usrmil.value.value,
+            password: passwd.value.value
+        } )
+        .then( async res => {
+            if  ( res.data.status === 200 ) successLogin()
+            else if ( res.data.status === 500 ) {
+                if ( res.data.err === "User Not Found" ) alertMe( [ usrmil, passwd ] )
+                // ! Consider it
+                else alert( res.data.err )
+            }
+            // ! Consider it
+            else alert( "Unknown STATUS ERR!" )
+        } )
+        // ! Consider it
+        .catch( err => alert( "Server Not Reachable" ) )
+    
+    }
+
+// -- =====================================================================================
+
+    const alertMe = async ( elx: Ref<HTMLInputElement>[] ) => {
+        for ( let el of elx ) el.value.className += " alert"
+        await new Promise( _ => setTimeout( _, 700 ) )
+        for ( let el of elx ) el.value.className = el.value.className.replace( /alert/g , '' )
+    }
+    
+// -- =====================================================================================
+
+    const successLogin = () => {
         store.dispatch( TS.Acts.Flag_logged_in, true )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
