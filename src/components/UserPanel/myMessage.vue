@@ -3,7 +3,7 @@
         <div id="messagesBox">
             <textarea />
         </div>
-        <div id="buttonsWrapper">
+        <div id="buttonsWrapper" class="no_select">
             <div class="button" v-for="(b,i) of buttons" :key="i">{{ b.title }}</div>
         </div>
     </div>
@@ -33,19 +33,10 @@ const store: TS.Store = useStore()
         { title: "Archive" },
     ]
 
-    const _out = () => myAnimation( "Out" )
-    const _in = ( skip = false ) => myAnimation( "In", skip )
-
-
 // -- =====================================================================================
 
-    const myAnimation = async ( phase: "In"|"Out", skip = false ) => {
-        if ( phase === "In" ) 
-            if ( !skip ) 
-                await new Promise( _ => setTimeout( _, Tools.speed() *.8 ) )
-        message.value.className = "Tool_fall_" + phase
-    }
-
+    const _out = () => Tools.userAnime( message, "Out" )
+    const _in = ( skip = false ) => Tools.userAnime( message, "In", skip )
 
 // -- =====================================================================================
 
@@ -79,8 +70,8 @@ const store: TS.Store = useStore()
 
     #my_message_box{
         background-color: transparent;
-        height: 700px;
-        width: 780px;
+        height: 620px;
+        width: 700px;
         top: 50%;
         left: 300px;
         position: absolute;
@@ -112,22 +103,24 @@ const store: TS.Store = useStore()
         border-radius: 9px;
         position: absolute;
     }
+
     #buttonsWrapper{
         width: 200px;
         position: relative;
         float: left;
-        margin-left: 20px;
-        margin-top: 50px;
+        border-left: #369797 7px;
+        border-radius: 5px;
+        border-left-style: solid;
+        margin-left: 40px;
+        margin-top: 50px;;
     }
-
     .button{
         color: #144444;
         font-family: Manrope;
         font-weight: 600;
-        margin: 12px;
+        margin: 12px 17px;
         cursor: pointer;
     }
-
     .button:hover{ color: #08cee0; }
 
 </style>

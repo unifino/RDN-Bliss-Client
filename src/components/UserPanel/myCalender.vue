@@ -50,21 +50,8 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const _out = () => myAnimation( "Out" )
-    const _in = ( skip = false ) => myAnimation( "In", skip )
-
-// -- =====================================================================================
-
-    const myAnimation = async ( phase: "In"|"Out", skip = false ) => {
-        
-        if ( phase === "In" ) 
-            if ( !skip ) 
-                await new Promise( _ => setTimeout( _, Tools.speed() *.8 ) )
-        
-        calender.value.className = "Tool_fall_" + phase
-    
-    }
-
+    const _out = () => Tools.userAnime( calender, "Out" )
+    const _in = ( skip = false ) => Tools.userAnime( calender, "In", skip )
 
 // -- =====================================================================================
 
@@ -147,6 +134,24 @@ const store: TS.Store = useStore()
     .title{
         background-color: transparent;
         color: #2a4d08;
+    }
+
+    .Tool_fall_In {
+        animation           : Tool_fall_In .7s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_In {
+        0%  { transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translate(0,-55%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+    }
+
+    .Tool_fall_Out {
+        animation           : Tool_fall_Out .7s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_Out {
+        0%  { transform: translate(0,-55%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
     }
 
 </style>

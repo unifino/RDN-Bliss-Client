@@ -45,4 +45,48 @@ const store: TS.Store = useStore()
 
 </style>
 
+<style>
+
+    .Tool_fall_In {
+        animation           : Tool_fall_In .7s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_In {
+        0%  { transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+    }
+
+    .Tool_fall_Out {
+        animation           : Tool_fall_Out .7s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_Out {
+        0%  { transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+    }
+
+</style>
+
+<style Fast>
+
+    .Fast> .Tool_fall_In {
+        animation           : Tool_fall_In_Fast .4s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_In_Fast {
+        0%  { transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+    }
+
+    .Fast> .Tool_fall_Out {
+        animation           : Tool_fall_Out_Fast .4s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_Out_Fast {
+        0%  { transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+    }
+
+</style>
+
 // -- =====================================================================================

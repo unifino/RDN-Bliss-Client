@@ -23,3 +23,23 @@ export const speed = ( extraTime?: boolean ) => {
 }
 
 // -- =====================================================================================
+
+const delay = () => {
+    let delay = 0;
+    switch (store.getters.animationSpeed) {
+        case TS.Speeds.Normal: delay = 900; break;
+        case TS.Speeds.Fast: delay = 500; break;
+    }
+    return delay
+}
+
+// -- =====================================================================================
+
+export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out", skip=false ) => {
+    if ( phase === "In" ) 
+        if ( !skip ) 
+            await new Promise( _ => setTimeout( _, delay() ) )
+    el.value.className = "Tool_fall_" + phase
+}
+
+// -- =====================================================================================

@@ -1,5 +1,5 @@
 <template>
-    <div id="my_dietPlans_box" class="init" ref="message">
+    <div id="my_dietPlans_box" class="init" ref="dietPlans">
         
     </div>
 </template>
@@ -17,22 +17,12 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const message = ref<HTMLElement>( {} as HTMLElement )
+    const dietPlans = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
-    const _out = () => myAnimation( "Out" )
-    const _in = ( skip = false ) => myAnimation( "In", skip )
-
-// -- =====================================================================================
-
-    const myAnimation = async ( phase: "In"|"Out", skip = false ) => {
-        if ( phase === "In" ) 
-            if ( !skip ) 
-                await new Promise( _ => setTimeout( _, Tools.speed() *.8 ) )
-        message.value.className = "Tool_fall_" + phase
-    }
-
+    const _out = () => Tools.userAnime( dietPlans, "Out" )
+    const _in = ( skip = false ) => Tools.userAnime( dietPlans, "In", skip )
 
 // -- =====================================================================================
 
