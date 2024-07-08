@@ -1,7 +1,7 @@
 <template>
     <div id="my_patients_box" class="init" ref="patientsBox">
         <div id="myWrapper">
-            <div :class="'patientBox ' + p.sex" v-for="p in patients" :key="p.id">
+            <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
                 <div class="nameWrapper">
                     <div class="name no_select">{{ p.name }}</div>
                 </div>
@@ -27,6 +27,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const patientsBox = ref<HTMLElement>( {} as HTMLElement )
+    let patients: CTS.Patients[] = []
 
 // -- =====================================================================================
 
@@ -35,12 +36,21 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    let patients: CTS.userData[] = []
-
-    axios.get( "http://localhost:5000/getPatients" ).then( res => {
-        patients = res.data.answer
-    } )
+    const getData = async () => {
+        
+        patients = ( await axios.get( "http://localhost:5000/getPatients" ) ).data.answer
+        
+        // .. set a name
+        for ( let p of patients ) {
+            if ( p.firstname || p.lastname ) {
+                p.name = ( p.firstname || "" ) + " " + ( p.lastname || "" )
+                p.name = p.name.trim();
+            }
+            else p.name = p.username || ( p.email.split( "@" )[0] ) 
+        }
+        // .then( res => patients = res.data.answer )
     
+    }
 
 // -- =====================================================================================
 
@@ -58,10 +68,14 @@ const store: TS.Store = useStore()
         ( nV, oV ) => {
             if ( nV !== oV ) {
                 if ( nV === TS.UserTools.Patients ) _in( oV === TS.UserTools.null )
-
                 if ( oV === TS.UserTools.Patients ) _out()
             }
         }
+    )
+
+    store.watch(
+        getters => getters.Flag_logged_in,
+        nV => { if(nV) getData() }
     )
 
 // -- =====================================================================================
