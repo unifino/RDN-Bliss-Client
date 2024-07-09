@@ -152,11 +152,11 @@ const store: TS.Store = useStore()
     )
 
     store.watch( 
-        getters => getters.H010Handy,
+        getters => getters.Flag_H010_Hand,
         nV => {
             if (nV) {
                 clearTimeout( timeOut )
-                store.dispatch( TS.Acts.H010Handy, false )
+                store.dispatch( TS.Acts.Flag_H010_Hand, false )
                 timeOut = setTimeout( () => newsSlider( true ), 0 )
             }
         }  

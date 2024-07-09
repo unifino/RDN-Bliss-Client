@@ -6,6 +6,7 @@
         <div id="LoginPanel" class="init" ref="loginBox">
             <input ref="usrmil" type="text" placeholder="username / e-mail" />
             <input ref="passwd" type="password" placeholder="password" />
+            <div id="forgot">Forgot Username | Password ?</div>
             <div id="loginButton" class="no_select" @click="login()">Log in</div>
         </div>
     </div>
@@ -32,16 +33,20 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 // -- =====================================================================================
 
     const login = () => {
-
+        
         // ..  checking the Form
         let parts = []
+
+        if ( store.getters.userType === TS.UserTypes.null )
+            store.dispatch( TS.Acts.Flag_H100_Alert, true )
 
         // ! remove it --- change 1 to 4 
         if ( usrmil.value.value.length < 1 ) parts.push( usrmil )
         if ( passwd.value.value.length < 1 ) parts.push( passwd )
 
         // .. apply alert animation
-        parts.length ? alertMe( parts ) : logging()
+        parts.length || store.getters.userType === TS.UserTypes.null ? 
+            alertMe( parts ) : logging()
 
     }
 
@@ -140,6 +145,17 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         color: #081E2F;
         font-weight: bold;
         background-color: #F0F0F0;
+    }
+
+    #forgot{
+        font-family: PoiretOne;
+        text-align: center;
+        color: #2a2929;
+        font-size: 15px;
+        /* background-color: #081E2F; */
+        margin: 9px 10px 30px 10px;
+        font-weight: bold;
+
     }
 
     #loginButton{

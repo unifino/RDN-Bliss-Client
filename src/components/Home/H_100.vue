@@ -10,8 +10,9 @@
                 :key=i
                 :class="'section no_select ' + ( x.selected? 'selected' : '' )"
                 @click="prepareToLogin(i)"
+                ref="userMode"
             >
-                <div class="icon"></div>
+                <div class="icon">{{ x.icon }}</div>
                 <div class="txt">{{ x.text }}</div>
             </div>
 <!-- ================================================================================== -->
@@ -38,8 +39,9 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const h_100 = ref<HTMLElement>( {} as HTMLElement )
+    const userMode = ref<HTMLElement[]>( [] as HTMLElement[] )
     const options = ref ( [ { text: "", selected: false, icon: "" } ] )
-
+    
     options.value = [
         { text: "I'm a Dietitian", selected: false,  icon: "", },
         { text: "I'm a Patient", selected: false, icon: "", },
@@ -54,6 +56,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const prepareToLogin = ( idx: number ) => {
+        store.dispatch( TS.Acts.userType, idx )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
         options.value.forEach( (x,i) => x.selected = i === idx )
     }
@@ -63,6 +66,14 @@ const store: TS.Store = useStore()
     const _out = () => Tools.MainAnimation( h_100, "X100", "Out" )
     const _in = () => Tools.MainAnimation( h_100, "X100", "In", Tools.speed() )
     const reset = () => options.value.forEach( x => x.selected = false )
+    const alert = async () => {
+        for ( let i in [0,1] ) userMode.value[i].className += " alert"
+        await new Promise( _ => setTimeout( _, 700 ) )
+        // .. reset
+        for ( let i in [0,1] ) 
+            userMode.value[i].className = userMode.value[i].className.replace( / alert/g , "" )
+        store.dispatch( TS.Acts.Flag_H100_Alert, false )
+    }
 
 // -- =====================================================================================
 
@@ -76,9 +87,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.process,
-        nV => {
-            if( nV === TS.Processes.Registering ) _out()
-        }
+        nV => { if( nV === TS.Processes.Registering ) _out() }
     )
 
     store.watch(
@@ -94,6 +103,11 @@ const store: TS.Store = useStore()
             )
                 _in()
         }
+    )
+
+    store.watch(
+        getters => getters.Flag_H100_Alert,
+        nV => { if( nV ) alert() }
     )
 
 // -- =====================================================================================
@@ -180,6 +194,14 @@ const store: TS.Store = useStore()
         color: #5AA2AF;
     }
 
+    .alert {
+        animation           : alert .7s;
+        animation-fill-mode : both;
+    }
+    @keyframes alert {
+        0%{ transform: scale(1) }
+        50%{ color: #ff2d53; transform: scale(1.07) }
+    }
 </style>
 
 // -- =====================================================================================
