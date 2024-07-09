@@ -41,7 +41,7 @@ const store: TS.Store = useStore()
         
         axios.get( CD.serverURL + "getPatients" )
         .then( res => {
-            if  ( res.data.status === 200 ) patients = res.data.scc
+            if  ( res.data.status === 200 ) setNames( patients = res.data.scc )
             // ! Consider it
             else if ( res.data.status === 500 ) alert( res.data.err )
             // ! Consider it
