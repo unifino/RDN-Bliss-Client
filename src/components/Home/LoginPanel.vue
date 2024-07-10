@@ -22,6 +22,7 @@ import * as TS                              from '@/types/types'
 import * as CTS                             from '@/types/common'
 import axios                                from 'axios';
 import * as CD                              from '@/mixins/commonData'
+import * as Tools                           from '@/mixins/Tools'
 
 const store: TS.Store = useStore()
 
@@ -64,14 +65,11 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
             if  ( res.data.status === 200 ) successLogin()
             else if ( res.data.status === 500 ) {
                 if ( res.data.err === "User Not Found" ) alertMe( [ usrmil, passwd ] )
-                // ! Consider it
-                else alert( res.data.err )
+                else Tools.err( res.data.err )
             }
-            // ! Consider it
-            else alert( "Unknown STATUS ERR!" )
+            else Tools.err( "Unknown STATUS ERR!" )
         } )
-        // ! Consider it
-        .catch( err => alert( "Server Not Reachable" ) )
+        .catch( err => Tools.err( "Server Not Reachable: " + err ) )
     
     }
 

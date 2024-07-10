@@ -48,7 +48,7 @@ const store: TS.Store = useStore()
             else alert( "Unknown STATUS ERR!" )
         } )
         // ! Consider it
-        .catch( err => alert( "Server Not Reachable" ) )
+        .catch( err => alert( "Server Not Reachable " + err ) )
     
     }
 
