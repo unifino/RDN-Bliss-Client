@@ -20,9 +20,7 @@ import { useStore }                         from 'vuex'
 import { ref, Ref }                         from 'vue'
 import * as TS                              from '@/types/types'
 import * as CTS                             from '@/types/common'
-import axios                                from 'axios';
-import * as CD                              from '@/mixins/commonData'
-import * as Tools                           from '@/mixins/Tools'
+import { post }                             from '@/mixins/Tools'
 
 const store: TS.Store = useStore()
 
@@ -56,20 +54,18 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
     const logging = () => {
 
-        axios.post( CD.serverURL + "logIn", {
+        const data = {
             userType: store.getters.userType,
             username: usrmil.value.value,
             password: passwd.value.value
-        } )
-        .then( async res => {
-            if  ( res.data.status === 200 ) successLogin()
-            else if ( res.data.status === 500 ) {
-                if ( res.data.err === "User Not Found" ) alertMe( [ usrmil, passwd ] )
-                else Tools.err( res.data.err )
-            }
-            else Tools.err( "Unknown STATUS ERR!" )
-        } )
-        .catch( err => Tools.err( "Server Not Reachable: " + err ) )
+        }
+
+        // .. Sending Request
+        post( CTS.Post.logIn, data )
+        // .. Receiving Answer
+        .then( answer => successLogin() )
+        // .. Handle Reported Problems
+        .catch( err => alertMe( [ usrmil, passwd ] ) )
     
     }
 

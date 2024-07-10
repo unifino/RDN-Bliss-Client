@@ -1,6 +1,9 @@
 import { Ref }                              from 'vue';
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
+import * as CD                              from '@/mixins/commonData'
 import { store }                            from '@/store/store'
+import axios                                from 'axios';
 
 // -- =====================================================================================
 
@@ -44,8 +47,62 @@ export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out", skip=f
 
 // -- =====================================================================================
 
-export const err = ( err: string ) => {
-    console.log( err );
+export const errHandler = ( err: string ) => {
+
+    if ( err.includes( "UNKNOWN") ) alert( err )
+    else alert( err )
+
+}
+
+// -- =====================================================================================
+
+export const post = ( subURL: CTS.Post, data: object ) => {
+
+    return new Promise( (rs, rx) => {
+
+        // .. Sending Request
+        axios.post( CD.serverURL + subURL, data )
+        // .. Receiving Answer
+        .then( res => {
+            // .. Login is Successful
+            if ( res.data.status === 200 ) rs( res.data.scc )
+            // .. Handle Reported Problems
+            else if ( res.data.status === 500 ) {
+                if ( res.data.err === "User Not Found" ) rx( res.data.err )
+                else errHandler( res.data.err )
+            }
+            // .. Handle Error
+            else errHandler( "UNKNOWN: 001: " + res.data )
+        } )
+        // .. NO Answer
+        .catch( err => errHandler( `Connection Error:\n${CD.serverURL+subURL}\n${err}` ) )
+    
+    } )
+
+}
+
+// -- =====================================================================================
+
+export const get = ( subURL: CTS.Get, data?: object ) => {
+
+    return new Promise( (rs, rx) => {
+
+        // .. Sending Request
+        axios.get( CD.serverURL + subURL )
+        // .. Receiving Answer
+        .then( res => {
+            // .. Login is Successful
+            if ( res.data.status === 200 ) rs( res.data.scc )
+            // .. Handle Reported Problems
+            else if ( res.data.status === 500 ) errHandler( res.data.err )
+            // .. Handle Error
+            else errHandler( "UNKNOWN: 001: " + res.data )
+        } )
+        // .. NO Answer
+        .catch( err => errHandler( `Connection Error:\n${CD.serverURL+subURL}\n${err}` ) )
+    
+    } )
+
 }
 
 // -- =====================================================================================

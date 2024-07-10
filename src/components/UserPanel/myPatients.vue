@@ -20,7 +20,7 @@ import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as CTS                             from "@/types/common";
 import * as Tools                           from '@/mixins/Tools';
-import axios                                from 'axios';
+import { get }                              from '@/mixins/Tools';
 import * as CD                              from '@/mixins/commonData'
 
 const store: TS.Store = useStore()
@@ -38,18 +38,10 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const getData = () => {
-        
-        axios.get( CD.serverURL + "getPatients" )
-        .then( res => {
-            if  ( res.data.status === 200 ) setNames( patients = res.data.scc )
-            // ! Consider it
-            else if ( res.data.status === 500 ) alert( res.data.err )
-            // ! Consider it
-            else alert( "Unknown STATUS ERR!" )
-        } )
-        // ! Consider it
-        .catch( err => alert( "Server Not Reachable " + err ) )
-    
+        // .. Sending Request
+        get( CTS.Get.getPatients )
+        // .. Receiving Answer
+        .then( answer => setNames( patients = answer as CTS.Patients[] ) )
     }
 
 // -- =====================================================================================
