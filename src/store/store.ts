@@ -5,6 +5,7 @@ import {
     createStore
 }                                       from 'vuex';
 import * as TS                          from '@/types/types'
+import * as CTS                         from '@/types/common'
 
 // -- ==================================================================== TS.State =======
 
@@ -19,7 +20,7 @@ const state: TS.State = {
 
     H010IDx: 0,
     
-    userType: TS.UserTypes.null,
+    userType: CTS.UserTypes.null,
     userTool: TS.UserTools.null,
     
     Flag_plan_B: false,

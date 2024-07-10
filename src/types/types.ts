@@ -5,6 +5,7 @@ import {
     DispatchOptions,
 }                                       from 'vuex';
 import { WatchOptions }                 from "vue";
+import * as CTS                         from '@/types/common'
 
 // -- =====================================================================================
 
@@ -22,9 +23,6 @@ export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
-// .. declare UserType
-export enum UserTypes { "Dietitian", "Patient", null }
-
 // .. declare UserTools
 export enum UserTools { "Patients", "Calender", "Stats", "DietPlans", "Messages", "Profile", null }
 
@@ -39,7 +37,7 @@ export type State = {
     animationSpeed: Speeds
 
     // .. declare User related States
-    userType: UserTypes
+    userType: CTS.UserTypes
     userTool: UserTools
 
     // .. declare minor data
@@ -87,21 +85,21 @@ export enum Mutates {
 
 // .. declare Mutations
 export type MyMutations<S = State> = {
-    [ Mutates.ProcessChange ]   ( state: S, payload: Processes ): void;
-    [ Mutates.LanguageChange ]  ( state: S, payload: Languages ): void;
-    [ Mutates.OrtChange ]       ( state: S, payload: Orts ):      void;
-    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):    void;
+    [ Mutates.ProcessChange ]   ( state: S, payload: Processes ):       void;
+    [ Mutates.LanguageChange ]  ( state: S, payload: Languages ):       void;
+    [ Mutates.OrtChange ]       ( state: S, payload: Orts ):            void;
+    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):          void;
     
-    [ Mutates.userType ]        ( state: S, payload: UserTypes ): void;
-    [ Mutates.userTool ]        ( state: S, payload: UserTools ): void;
+    [ Mutates.userType ]        ( state: S, payload: CTS.UserTypes ):   void;
+    [ Mutates.userTool ]        ( state: S, payload: UserTools ):       void;
     
-    [ Mutates.H010IDx ]         ( state: S, payload: number ):    void;
+    [ Mutates.H010IDx ]         ( state: S, payload: number ):          void;
     
-    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):   void;
-    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):   void;
-    [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):   void;
-    [ Mutates.Flag_H010_Hand ]  ( state: S, payload: boolean ):   void;
-    [ Mutates.Flag_H100_Alert ] ( state: S, payload: boolean ):   void;
+    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_H010_Hand ]  ( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_H100_Alert ] ( state: S, payload: boolean ):         void;
 }
 
 // -- =====================================================================================
@@ -127,21 +125,21 @@ export enum Acts {
 
 // .. declare Action Interface
 export interface MyActions {
-    [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ): void;
-    [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ): void;
-    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):      void;
-    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):    void;
-
-    [ Acts.userType ]           ( {dispatch}: AAC, payload: UserTypes ): void;
-    [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ): void;
-
-    [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):    void;
+    [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ):    void;
+    [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ):    void;
+    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):         void;
+    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):       void;
     
-    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):   void;
-    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):   void;
-    [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):   void;
-    [ Acts.Flag_H010_Hand ]     ( {dispatch}: AAC, payload: boolean ):   void;
-    [ Acts.Flag_H100_Alert ]    ( {dispatch}: AAC, payload: boolean ):   void;
+    [ Acts.userType ]           ( {dispatch}: AAC, payload: CTS.UserTypes ):void;
+    [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):    void;
+    
+    [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):       void;
+        
+    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_H010_Hand ]     ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_H100_Alert ]    ( {dispatch}: AAC, payload: boolean ):      void;
 }
 
 // -- =====================================================================================
@@ -152,7 +150,7 @@ export type MyGetters = {
     ort                 ( state: State ): Orts
     animationSpeed      ( state: State ): Speeds
 
-    userType            ( state: State ): UserTypes
+    userType            ( state: State ): CTS.UserTypes
     userTool            ( state: State ): UserTools
 
     H010IDx             ( state: State ): number

@@ -19,6 +19,7 @@
 import { useStore }                         from 'vuex'
 import { ref, Ref }                         from 'vue'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import axios                                from 'axios';
 import * as CD                              from '@/mixins/commonData'
 
@@ -37,7 +38,7 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         // ..  checking the Form
         let parts = []
 
-        if ( store.getters.userType === TS.UserTypes.null )
+        if ( store.getters.userType === CTS.UserTypes.null )
             store.dispatch( TS.Acts.Flag_H100_Alert, true )
 
         // ! remove it --- change 1 to 4 
@@ -45,7 +46,7 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         if ( passwd.value.value.length < 1 ) parts.push( passwd )
 
         // .. apply alert animation
-        parts.length || store.getters.userType === TS.UserTypes.null ? 
+        parts.length || store.getters.userType === CTS.UserTypes.null ? 
             alertMe( parts ) : logging()
 
     }
@@ -55,6 +56,7 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
     const logging = () => {
 
         axios.post( CD.serverURL + "logIn", {
+            userType: store.getters.userType,
             username: usrmil.value.value,
             password: passwd.value.value
         } )
