@@ -44,8 +44,19 @@
                 <input ref="frst_n" type="text" placeholder="First Name" />
                 <input ref="last_n" type="text" placeholder="Last Name" />
             </div>
+
             <div class="subpart">
-                <input ref="brth_d" type="text" placeholder="Birth Day" />
+                <div id="birth_date">
+                    <select ref="brth_y" type="text" id="brth_y">
+                        <option v-for="(y,i) in years" :key="i" :value="y">{{y}}</option>
+                    </select>
+                    <select ref="brth_m" type="text" id="brth_m">
+                        <option v-for="(m,i) in months" :key="i" :value="m">{{m}}</option>
+                    </select>
+                    <select ref="brth_d" type="text" id="brth_d">
+                        <option v-for="(d,i) in 31" :key="i" :value="d">{{d}}</option>
+                    </select>
+                </div>
                 <select ref="gender" type="text" placeholder="Gender" >
                     <option v-for="(g,i) of CTS.Gender" :key="i" :value="g">{{g}}</option>
                 </select>
@@ -80,6 +91,14 @@ const store: TS.Store = useStore()
     const last_n = ref<HTMLInputElement>( {} as HTMLInputElement )
     const brth_d = ref<HTMLInputElement>( {} as HTMLInputElement )
     const gender = ref<HTMLInputElement>( {} as HTMLInputElement )
+
+// -- =====================================================================================
+
+    const years: number[] = []
+    const thisYear = new Date().getFullYear();
+    for ( let i=0; i<100; i++ ) years.push(thisYear-i)
+
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 
 // -- =====================================================================================
 
@@ -324,7 +343,7 @@ const store: TS.Store = useStore()
         position: absolute;
     }
 
-    input, select{
+    input, select, #birth_date{
         height: 25px;
         width: 210px;
         border-radius: 7px;
@@ -337,12 +356,34 @@ const store: TS.Store = useStore()
         color: #081E2F;
         font-weight: bold;
         background-color: #F0F0F0;
+        float: right;
     }
 
-    select{
+    select, #birth_date{
         height: 45px;
         width: 250px;
     }
+
+    #birth_date{
+        height: 45px;
+        width: 250px;
+        padding: 0;
+        box-shadow: none;
+        border: none;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #birth_date select{
+        margin: 0;
+        position: relative;
+        padding: 0;
+        text-align: center;
+    }
+
+    #brth_y{ width: 29% }
+    #brth_m{ width: 44% }
+    #brth_d{ width: 24% }
 
     #regButton{
         right: 52px;
