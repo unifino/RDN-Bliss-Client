@@ -56,7 +56,7 @@ export const errHandler = ( err: string ) => {
 
 // -- =====================================================================================
 
-export const post = ( subURL: CTS.Post, data: object ) => {
+export const post = ( subURL: CTS.Post, data: object ): Promise<CTS.UserData> => {
 
     return new Promise( (rs, rx) => {
 
@@ -68,7 +68,7 @@ export const post = ( subURL: CTS.Post, data: object ) => {
             if ( res.data.status === 200 ) rs( res.data.scc )
             // .. Handle Reported Problems
             else if ( res.data.status === 500 ) {
-                if ( res.data.err === "User Not Found" ) rx( res.data.err )
+                if ( res.data.err === "User Not Found" ) rx()
                 else errHandler( res.data.err )
             }
             // .. Handle Error
@@ -85,10 +85,10 @@ export const post = ( subURL: CTS.Post, data: object ) => {
 
 export const get = ( subURL: CTS.Get, data?: object ) => {
 
-    return new Promise( (rs, rx) => {
+    return new Promise( rs => {
 
         // .. Sending Request
-        axios.get( CD.serverURL + subURL )
+        axios.get( CD.serverURL + subURL + "?" + JSON.stringify( data ) )
         // .. Receiving Answer
         .then( res => {
             // .. Login is Successful
@@ -103,6 +103,20 @@ export const get = ( subURL: CTS.Get, data?: object ) => {
     
     } )
 
+}
+
+// -- =====================================================================================
+
+export const setNames = ( users: CTS.UserData[] )  => {
+    // .. set a name
+    for ( const u of users ) {
+        if ( u.firstname || u.lastname ) {
+            u.name = ( u.firstname || "" ) + " " + ( u.lastname || "" )
+            u.name = u.name.trim();
+        }
+        else u.name = u.username || ( u.email.split( "@" )[0] ) 
+    }
+    return users;
 }
 
 // -- =====================================================================================

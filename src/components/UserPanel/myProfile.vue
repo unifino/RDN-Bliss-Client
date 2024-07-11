@@ -95,7 +95,7 @@ const store: TS.Store = useStore()
         width: 200px;
         position: relative;
         float: left;
-        border-left: #369797 7px;
+        border-left: #369797 5px;
         border-radius: 5px;
         border-left-style: solid;
         margin-left: 40px;
@@ -105,7 +105,7 @@ const store: TS.Store = useStore()
         color: #144444;
         font-family: Manrope;
         font-weight: 600;
-        margin: 12px 17px;
+        margin: 12px 15px;
         cursor: pointer;
     }
     .button:hover{ color: #08cee0; }

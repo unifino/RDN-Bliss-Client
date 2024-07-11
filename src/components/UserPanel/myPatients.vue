@@ -21,7 +21,6 @@ import * as TS                              from '@/types/types'
 import * as CTS                             from "@/types/common";
 import * as Tools                           from '@/mixins/Tools';
 import { get }                              from '@/mixins/Tools';
-import * as CD                              from '@/mixins/commonData'
 
 const store: TS.Store = useStore()
 
@@ -41,20 +40,7 @@ const store: TS.Store = useStore()
         // .. Sending Request
         get( CTS.Get.getPatients )
         // .. Receiving Answer
-        .then( answer => setNames( patients = answer as CTS.Patients[] ) )
-    }
-
-// -- =====================================================================================
-
-    const setNames = ( patients: CTS.Patients[] )  => {
-        // .. set a name
-        for ( let p of patients ) {
-            if ( p.firstname || p.lastname ) {
-                p.name = ( p.firstname || "" ) + " " + ( p.lastname || "" )
-                p.name = p.name.trim();
-            }
-            else p.name = p.username || ( p.email.split( "@" )[0] ) 
-        }
+        .then( answer => Tools.setNames( patients = answer as CTS.Patients[] ) )
     }
 
 // -- =====================================================================================

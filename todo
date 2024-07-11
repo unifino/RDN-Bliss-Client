@@ -1,0 +1,8 @@
+Login Waiting Animation
+Login Length Notification
+Login Cookie
+
+Major Error Screen: 
+    Connection Error:
+    http://localhost:5000/logIn
+    AxiosError: Network Error

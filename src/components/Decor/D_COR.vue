@@ -33,7 +33,7 @@ const store: TS.Store = useStore()
             // .. user
             require( "@/assets/Pics/Decor/office-lobby.jpg" ),
             // .. 6
-            require( "@/assets/Pics/Decor/whimsical.jpg" ),
+            require( "@/assets/Pics/Decor/tea.jpg" ),
             require( "@/assets/Pics/Decor/blue-tit.jpg" ),
         ]
     }

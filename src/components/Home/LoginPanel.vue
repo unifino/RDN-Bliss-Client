@@ -21,6 +21,7 @@ import { ref, Ref }                         from 'vue'
 import * as TS                              from '@/types/types'
 import * as CTS                             from '@/types/common'
 import { post }                             from '@/mixins/Tools'
+import * as Tools                           from '@/mixins/Tools'
 
 const store: TS.Store = useStore()
 
@@ -40,9 +41,8 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         if ( store.getters.userType === CTS.UserTypes.null )
             store.dispatch( TS.Acts.Flag_H100_Alert, true )
 
-        // ! remove it --- change 1 to 4 
-        if ( usrmil.value.value.length < 1 ) parts.push( usrmil )
-        if ( passwd.value.value.length < 1 ) parts.push( passwd )
+        if ( usrmil.value.value.length < 4 ) parts.push( usrmil )
+        if ( passwd.value.value.length < 4 ) parts.push( passwd )
 
         // .. apply alert animation
         parts.length || store.getters.userType === CTS.UserTypes.null ? 
@@ -63,9 +63,9 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         // .. Sending Request
         post( CTS.Post.logIn, data )
         // .. Receiving Answer
-        .then( answer => successLogin() )
-        // .. Handle Reported Problems
-        .catch( err => alertMe( [ usrmil, passwd ] ) )
+        .then( ( userData: CTS.UserData ) => successLogin( userData ) )
+        // .. Handle NOT Such a User Problem
+        .catch( () => alertMe( [ usrmil, passwd ] ) )
     
     }
 
@@ -79,7 +79,9 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
     
 // -- =====================================================================================
 
-    const successLogin = () => {
+    const successLogin = ( userData: CTS.UserData ) => {
+        // ! Consider it
+        Tools.setNames( [ userData ] )
         store.dispatch( TS.Acts.Flag_logged_in, true )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
