@@ -72,6 +72,7 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 // -- =====================================================================================
 
     const alertMe = async ( elx: Ref<HTMLInputElement>[] ) => {
+        store.dispatch( TS.Acts.Flag_H100_Alert, true )
         for ( let el of elx ) el.value.className += " alert"
         await new Promise( _ => setTimeout( _, 700 ) )
         for ( let el of elx ) el.value.className = el.value.className.replace( /alert/g , '' )

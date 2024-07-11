@@ -79,8 +79,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #sectionsWrapper{
-        width: 55vw;
-        height: 85%;
+        width: 1100px;
         top: 50px;
         left: 120px;
         position: absolute;

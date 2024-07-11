@@ -19,6 +19,7 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import * as CD                              from '@/mixins/commonData'
 import * as Tools                           from '@/mixins/Tools'
 
@@ -39,6 +40,8 @@ const store: TS.Store = useStore()
         { code:TS.Orts.AboutUs,  class: "AboutUs",  icon: "", },
     ]
 
+// -- =====================================================================================
+
     const changeOrt = async ( ortCode: TS.Orts ) => {
 
         // .. prevent double animation EXcept for Home as return to Base
@@ -47,6 +50,9 @@ const store: TS.Store = useStore()
 
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, ortCode )
+        // .. reset userType
+        if ( ortCode !== TS.Orts.Home && !store.getters.Flag_logged_in )
+            store.dispatch( TS.Acts.userType, CTS.UserTypes.null ) 
         // .. reset userTool Selection
         if ( ortCode !== TS.Orts.UserPanel ) 
             store.dispatch( TS.Acts.userTool, TS.UserTools.null )

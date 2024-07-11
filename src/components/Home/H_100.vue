@@ -8,7 +8,7 @@
             <div
                 v-for="(x,i) of options"
                 :key=i
-                :class="'section no_select ' + ( x.selected? 'selected' : '' )"
+                :class="'section no_select ' + ( store.getters.userType === i? 'selected' : '' )"
                 @click="prepareToLogin(i)"
                 ref="userMode"
             >
@@ -31,6 +31,7 @@
 
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import { ref }                              from 'vue'
 import * as Tools                           from '@/mixins/Tools'
 
@@ -40,16 +41,17 @@ const store: TS.Store = useStore()
 
     const h_100 = ref<HTMLElement>( {} as HTMLElement )
     const userMode = ref<HTMLElement[]>( [] as HTMLElement[] )
-    const options = ref ( [ { text: "", selected: false, icon: "" } ] )
+    const options = ref ( [ { text: "", icon: "" } ] )
     
     options.value = [
-        { text: "I'm a Dietitian", selected: false,  icon: "", },
-        { text: "I'm a Patient", selected: false, icon: "", },
+        { text: "I'm a Dietitian",  icon: "", },
+        { text: "I'm a Patient", icon: "", },
     ]
 
 // -- =====================================================================================
 
     const headToRegistration = () => {
+        store.dispatch( TS.Acts.userType, CTS.UserTypes.null )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Registering )
     }
 
@@ -57,20 +59,19 @@ const store: TS.Store = useStore()
 
     const prepareToLogin = ( idx: number ) => {
         store.dispatch( TS.Acts.userType, idx )
+        store.dispatch( TS.Acts.userType, idx )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
-        options.value.forEach( (x,i) => x.selected = i === idx )
     }
 
 // -- =====================================================================================
 
     const _out = () => Tools.MainAnimation( h_100, "X100", "Out" )
     const _in = () => Tools.MainAnimation( h_100, "X100", "In", Tools.speed() )
-    const reset = () => options.value.forEach( x => x.selected = false )
-    const alert = async () => {
-        for ( let i in [0,1] ) userMode.value[i].className += " alert"
+    const alert = async ( idx?: number[] ) => {
+        for ( let i of (idx || [0,1]) ) userMode.value[i].className += " alert"
         await new Promise( _ => setTimeout( _, 700 ) )
         // .. reset
-        for ( let i in [0,1] ) 
+        for ( let i of (idx || [0,1]) ) 
             userMode.value[i].className = userMode.value[i].className.replace( / alert/g , "" )
         store.dispatch( TS.Acts.Flag_H100_Alert, false )
     }
@@ -93,7 +94,6 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.process,
         ( nV, oV ) => {
-            if ( oV === TS.Processes.Login ) reset()
             // .. Exit back to Home from Registering
             if
             ( 
@@ -107,7 +107,11 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.Flag_H100_Alert,
-        nV => { if( nV ) alert() }
+        nV => { 
+            if( nV )
+                if ( store.getters.userType === CTS.UserTypes.null ) alert()
+                else  alert( [ store.getters.userType ] )
+        } 
     )
 
 // -- =====================================================================================

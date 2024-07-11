@@ -6,10 +6,10 @@
                 <div
                     v-for="(x,i) of userMode"
                     :key=i
-                    :class="'section no_select ' + (x.selected ? 'selected' : '')"
+                    :class="'section no_select ' + (store.getters.userType===i ? 'selected' : '')"
                     @click="selectUserMode(i)"
                 >
-                    <div class="check">{{ x.selected?"":"" }}</div>
+                    <div class="check">{{ store.getters.userType===i?"":"" }}</div>
                     <div class="icon">{{ x.icon }}</div>
                     <div class="txt">{{ x.text }}</div>
                 </div>
@@ -41,12 +41,14 @@
             <div id="optional">⬇ optional ⬇</div>
 
             <div class="subpart">
-                <input ref="" type="text" placeholder="First Name" />
-                <input ref="" type="text" placeholder="Last Name" />
+                <input ref="frst_n" type="text" placeholder="First Name" />
+                <input ref="last_n" type="text" placeholder="Last Name" />
             </div>
             <div class="subpart">
-                <input ref="" type="text" placeholder="Birth Day" />
-                <input ref="" type="text" placeholder="Gender" />
+                <input ref="brth_d" type="text" placeholder="Birth Day" />
+                <select ref="gender" type="text" placeholder="Gender" >
+                    <option v-for="(g,i) of CTS.Gender" :key="i" :value="g">{{g}}</option>
+                </select>
             </div>
 
         </div>
@@ -61,6 +63,7 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import * as Tools                           from '@/mixins/Tools'
 
 const store: TS.Store = useStore()
@@ -73,24 +76,47 @@ const store: TS.Store = useStore()
     const usrnme = ref<HTMLInputElement>( {} as HTMLInputElement )
     const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
+    const frst_n = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const last_n = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const brth_d = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const gender = ref<HTMLInputElement>( {} as HTMLInputElement )
+
 // -- =====================================================================================
 
     const userMode = ref ( [
-        { icon: "", text: "I'm a Dietitian", selected: false },
-        { icon: "", text: "I'm a Patient", selected: false }
+        { icon: "", text: "I'm a Dietitian" },
+        { icon: "", text: "I'm a Patient" }
     ] )
 
 // -- =====================================================================================
 
-    const selectUserMode = (idx: number) => {
-        userMode.value.forEach( (x,i) => x.selected = i === idx );
-    }
+    const selectUserMode = (idx: number) => store.dispatch( TS.Acts.userType, idx )
 
 // -- =====================================================================================
 
     const regSlider = async function ( phase: "In"|"Out" ) {
         if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed() * 1.4 ) )
         HRGBox.value.className = "XReg_fall_" + phase
+        // .. Unset UserType
+        if ( phase === "Out" ) store.dispatch( TS.Acts.userType, CTS.UserTypes.null )
+    }
+
+// -- =====================================================================================
+
+    const collect = () => {
+
+        const userData: CTS.UserData = {} as CTS.UserData
+        userData.userType   = store.getters.userType
+        userData.email      = e_mail.value.value
+        userData.username   = usrnme.value.value
+        userData.password   = passwd.value.value
+        userData.firstname  = frst_n.value.value
+        userData.lastname   = last_n.value.value
+        userData.age        = brth_d.value.value
+        userData.gender     = ( gender.value.value as CTS.Gender )
+
+        return userData
+    
     }
 
 // -- =====================================================================================
@@ -100,8 +126,7 @@ const store: TS.Store = useStore()
         // ..  check Form
         let parts = []
 
-        if ( !userMode.value[0].selected && !userMode.value[1].selected )
-            parts.push( part_1 )
+        if ( store.getters.userType === CTS.UserTypes.null ) parts.push( part_1 )
 
         if (
               !e_mail.value.value
@@ -129,10 +154,20 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const registering = async () => {
+        
+        const userData = collect()
+        console.log(userData);
+        
+        // success()
+    }
+
+// -- =====================================================================================
+
+    const success = async () => {
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
         await new Promise( _ => setTimeout( _, 10 ) )
-        HRGBox.value.className = "send";
+        HRGBox.value.className = "send"
     }
 
 // -- =====================================================================================
@@ -289,7 +324,7 @@ const store: TS.Store = useStore()
         position: absolute;
     }
 
-    input{
+    input, select{
         height: 25px;
         width: 210px;
         border-radius: 7px;
@@ -302,6 +337,11 @@ const store: TS.Store = useStore()
         color: #081E2F;
         font-weight: bold;
         background-color: #F0F0F0;
+    }
+
+    select{
+        height: 45px;
+        width: 250px;
     }
 
     #regButton{

@@ -19,6 +19,7 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import * as Tools                           from '@/mixins/Tools'
 
 const store: TS.Store = useStore()
@@ -34,6 +35,7 @@ const store: TS.Store = useStore()
     const speed = () => store.dispatch( TS.Acts.Flag_speed, !store.getters.Flag_speed )
 
     const logOut = () => {
+        store.dispatch( TS.Acts.userType, CTS.UserTypes.null )
         store.dispatch( TS.Acts.Flag_logged_in, false )
         store.dispatch( TS.Acts.userTool, TS.UserTools.null )
         if ( store.getters.ort === TS.Orts.UserPanel )

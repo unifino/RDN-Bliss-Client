@@ -1,8 +1,12 @@
 Login Waiting Animation
 Login Length Notification
 Login Cookie
+Login Multiple Attempt Restriction
 
 Major Error Screen: 
     Connection Error:
     http://localhost:5000/logIn
     AxiosError: Network Error
+
+
+ln -L -f ~/Documents/RDN\ Bliss/RDN\ Bliss\ Client/src/types/common.ts ~/Documents/RDN\ Bliss/RDN\ Bliss\ Server/src/types/
