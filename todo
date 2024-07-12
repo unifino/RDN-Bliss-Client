@@ -3,7 +3,10 @@ Login Length Notification
 Login Cookie
 Login Multiple Attempt Restriction
 
-Major Error Screen: 
+Registeration Waiting Animation
+
+
+Major Error Screen: <Registeration><Login>
     Connection Error:
     http://localhost:5000/logIn
     AxiosError: Network Error

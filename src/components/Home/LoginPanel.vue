@@ -61,7 +61,7 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         }
 
         // .. Sending Request
-        post( CTS.Post.logIn, data )
+        post( CTS.Post.Login, data )
         // .. Receiving Answer
         .then( ( userData: CTS.UserData ) => successLogin( userData ) )
         // .. Handle NOT Such a User Problem

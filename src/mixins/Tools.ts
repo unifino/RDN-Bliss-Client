@@ -59,7 +59,7 @@ export const errHandler = ( err: string ) => {
 export const post = ( subURL: CTS.Post, data: object ): Promise<CTS.UserData> => {
 
     return new Promise( (rs, rx) => {
-
+        
         // .. Sending Request
         axios.post( CD.serverURL + subURL, data )
         // .. Receiving Answer

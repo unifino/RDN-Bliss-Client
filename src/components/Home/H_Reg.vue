@@ -48,10 +48,10 @@
             <div class="subpart">
                 <div id="birth_date">
                     <select ref="brth_y" type="text" id="brth_y">
-                        <option v-for="(y,i) in years" :key="i" :value="y">{{y}}</option>
+                        <option v-for="(y,i) in ['Year',...years]" :key="i" :value="y">{{y}}</option>
                     </select>
                     <select ref="brth_m" type="text" id="brth_m">
-                        <option v-for="(m,i) in months" :key="i" :value="m">{{m}}</option>
+                        <option v-for="(m,i) in ['Month',...months]" :key="i" :value="m">{{m}}</option>
                     </select>
                     <select ref="brth_d" type="text" id="brth_d">
                         <option v-for="(d,i) in 31" :key="i" :value="d">{{d}}</option>
@@ -71,11 +71,12 @@
 
 <script setup lang="ts">
 
-import { ref }                              from 'vue'
+import { ref, Ref }                         from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as CTS                             from '@/types/common'
 import * as Tools                           from '@/mixins/Tools'
+import { post }                             from '@/mixins/Tools'
 
 const store: TS.Store = useStore()
 
@@ -89,8 +90,11 @@ const store: TS.Store = useStore()
 
     const frst_n = ref<HTMLInputElement>( {} as HTMLInputElement )
     const last_n = ref<HTMLInputElement>( {} as HTMLInputElement )
-    const brth_d = ref<HTMLInputElement>( {} as HTMLInputElement )
-    const gender = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const gender = ref<HTMLSelectElement>( {} as HTMLSelectElement )
+    const brth_y = ref<HTMLSelectElement>( {} as HTMLSelectElement )
+    const brth_m = ref<HTMLSelectElement>( {} as HTMLSelectElement )
+    const brth_d = ref<HTMLSelectElement>( {} as HTMLSelectElement )
+
 
 // -- =====================================================================================
 
@@ -122,6 +126,63 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    const submit = () => { if ( !check() ) registering() }
+
+// -- =====================================================================================
+
+    const check = () => {
+
+        // ..  check Form
+        let parts = []
+
+        if ( store.getters.userType === CTS.UserTypes.null ) parts.push( part_1 )
+
+        // if (
+        //     !e_mail.value.value
+        //     || e_mail.value.value.indexOf( "@" ) < 1
+        //     || e_mail.value.value.indexOf( "." ) < 3
+        // )
+        //     parts.push( e_mail )
+
+        // if ( usrnme.value.value.length < 4 ) parts.push( usrnme )
+
+        // if ( passwd.value.value.length < 4 ) parts.push( passwd )
+
+        // .. apply alert animation
+        alert( parts )
+
+        return parts.length
+
+    }
+
+// -- =====================================================================================
+
+    const alert = ( parts: Ref<HTMLElement>[] ) => {
+        parts.forEach( async (x,i) => {
+            await new Promise( _ => setTimeout( _, i*100 ) )
+            x.value.className += " alert"
+            await new Promise( _ => setTimeout( _, 700 ) )
+            x.value.className = x.value.className.replace( /alert/g , '' )
+        } )
+    }
+
+// -- =====================================================================================
+
+    const registering = async () => {
+        
+        const userData = collect()
+
+        // .. Sending Request
+        post( CTS.Post.Register, userData )
+        // .. Receiving Answer
+        .then( ( userData: CTS.UserData ) => success() )
+        // .. Handle NOT Such a User Problem
+        .catch( () => alert( [ HRGBox ] ) )
+        
+    }
+
+// -- =====================================================================================
+
     const collect = () => {
 
         const userData: CTS.UserData = {} as CTS.UserData
@@ -131,53 +192,15 @@ const store: TS.Store = useStore()
         userData.password   = passwd.value.value
         userData.firstname  = frst_n.value.value
         userData.lastname   = last_n.value.value
-        userData.age        = brth_d.value.value
         userData.gender     = ( gender.value.value as CTS.Gender )
+
+        const b_year        = parseInt( brth_y.value.value )
+        const b_month       = months.findIndex( x => x ===  brth_m.value.value )
+        const b_day         = parseInt( brth_d.value.value )
+        userData.birthday   = new Date( b_year, b_month, b_day ).toLocaleDateString()
 
         return userData
     
-    }
-
-// -- =====================================================================================
-
-    const submit = () => {
-
-        // ..  check Form
-        let parts = []
-
-        if ( store.getters.userType === CTS.UserTypes.null ) parts.push( part_1 )
-
-        if (
-              !e_mail.value.value
-            || e_mail.value.value.indexOf( "@" ) < 1
-            || e_mail.value.value.indexOf( "." ) < 3
-        )
-            parts.push( e_mail )
-
-        if ( usrnme.value.value.length < 4 ) parts.push( usrnme )
-
-        if ( passwd.value.value.length < 4 ) parts.push( passwd )
-
-        // .. apply alert animation
-        parts.forEach( async (x,i) => {
-            await new Promise( _ => setTimeout( _, i*100 ) )
-            x.value.className += " alert"
-            await new Promise( _ => setTimeout( _, 700 ) )
-            x.value.className = x.value.className.replace( /alert/g , '' )
-        } )
-
-        if ( !parts.length ) registering()
-
-    }
-
-// -- =====================================================================================
-
-    const registering = async () => {
-        
-        const userData = collect()
-        console.log(userData);
-        
-        // success()
     }
 
 // -- =====================================================================================
