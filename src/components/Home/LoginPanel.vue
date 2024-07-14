@@ -54,14 +54,14 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
 
     const logging = () => {
 
-        const data = {
-            userType: store.getters.userType,
-            username: usrmil.value.value,
-            password: passwd.value.value
-        }
+        const userData: CTS.UserData = {} as CTS.UserData;
+
+        userData.userType = store.getters.userType,
+        userData.username = usrmil.value.value,
+        userData.password = passwd.value.value
 
         // .. Sending Request
-        post( CTS.Post.Login, data )
+        post( CTS.Post.Login, userData )
         // .. Receiving Answer
         .then( ( userData: CTS.UserData ) => successLogin( userData ) )
         // .. Handle NOT Such a User Problem

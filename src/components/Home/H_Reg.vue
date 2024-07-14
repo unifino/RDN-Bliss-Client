@@ -217,6 +217,8 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const success = async ( userData: CTS.UserData ) => {
+        console.log( userData );
+        
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
         store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
         await new Promise( _ => setTimeout( _, 10 ) )
