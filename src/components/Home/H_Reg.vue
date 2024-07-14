@@ -137,16 +137,16 @@ const store: TS.Store = useStore()
 
         if ( store.getters.userType === CTS.UserTypes.null ) parts.push( part_1 )
 
-        // if (
-        //     !e_mail.value.value
-        //     || e_mail.value.value.indexOf( "@" ) < 1
-        //     || e_mail.value.value.indexOf( "." ) < 3
-        // )
-        //     parts.push( e_mail )
+        if (
+            !e_mail.value.value
+            || e_mail.value.value.indexOf( "@" ) < 1
+            || e_mail.value.value.indexOf( "." ) < 3
+        )
+            parts.push( e_mail )
 
-        // if ( usrnme.value.value.length < 4 ) parts.push( usrnme )
+        if ( usrnme.value.value.length < 4 ) parts.push( usrnme )
 
-        // if ( passwd.value.value.length < 4 ) parts.push( passwd )
+        if ( passwd.value.value.length < 4 ) parts.push( passwd )
 
         // .. apply alert animation
         myAlert( parts )
