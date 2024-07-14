@@ -149,7 +149,7 @@ const store: TS.Store = useStore()
         // if ( passwd.value.value.length < 4 ) parts.push( passwd )
 
         // .. apply alert animation
-        alert( parts )
+        myAlert( parts )
 
         return parts.length
 
@@ -157,7 +157,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const alert = ( parts: Ref<HTMLElement>[] ) => {
+    const myAlert = ( parts: Ref<HTMLElement>[] ) => {
         parts.forEach( async (x,i) => {
             await new Promise( _ => setTimeout( _, i*100 ) )
             x.value.className += " alert"
@@ -171,33 +171,44 @@ const store: TS.Store = useStore()
     const registering = async () => {
         
         const userData = collect()
-
+        
+        // ! handle it
+        if ( !userData ) { console.log("ERROR"); return }
+        
         // .. Sending Request
         post( CTS.Post.Register, userData )
         // .. Receiving Answer
-        .then( ( userData: CTS.UserData ) => success() )
-        // .. Handle NOT Such a User Problem
-        .catch( () => alert( [ HRGBox ] ) )
+        .then( ( userData: CTS.UserData ) => success( userData ) )
+        // .. Handle Email - User Existence
+        .catch( msg => { 
+            const parts = []            
+            if( msg.includes( "Email" ) ) parts.push( e_mail ) 
+            if( msg.includes( "User" ) ) parts.push( usrnme ) 
+            myAlert( parts ) 
+        } )
         
     }
 
 // -- =====================================================================================
 
     const collect = () => {
-
+        
         const userData: CTS.UserData = {} as CTS.UserData
-        userData.userType   = store.getters.userType
-        userData.email      = e_mail.value.value
-        userData.username   = usrnme.value.value
-        userData.password   = passwd.value.value
-        userData.firstname  = frst_n.value.value
-        userData.lastname   = last_n.value.value
-        userData.gender     = ( gender.value.value as CTS.Gender )
-
+        
         const b_year        = parseInt( brth_y.value.value )
         const b_month       = months.findIndex( x => x ===  brth_m.value.value )
         const b_day         = parseInt( brth_d.value.value )
-        userData.birthday   = new Date( b_year, b_month, b_day ).toLocaleDateString()
+        const birthDate     = new Date( b_year, b_month, b_day ).toLocaleDateString()
+        
+        userData.userType   = store.getters.userType
+        userData.email      = e_mail.value.value
+        userData.password   = passwd.value.value
+        userData.username   = usrnme.value.value
+        if ( frst_n.value.value ) userData.firstname = frst_n.value.value
+        if ( frst_n.value.value ) userData.lastname = last_n.value.value
+        if ( gender.value.value !== "Prefer not to Answer" )
+            userData.gender = ( gender.value.value as CTS.Gender )
+        if ( birthDate !== "Invalid Date" ) userData.birthday = birthDate
 
         return userData
     
@@ -205,11 +216,13 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const success = async () => {
-        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
-        store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
-        await new Promise( _ => setTimeout( _, 10 ) )
-        HRGBox.value.className = "send"
+    const success = async ( userData: CTS.UserData ) => {
+
+        alert( userData )
+        // store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
+        // store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+        // await new Promise( _ => setTimeout( _, 10 ) )
+        // HRGBox.value.className = "send"
     }
 
 // -- =====================================================================================

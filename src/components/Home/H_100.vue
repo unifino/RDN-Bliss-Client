@@ -97,10 +97,10 @@ const store: TS.Store = useStore()
             // .. Exit back to Home from Registering
             if
             ( 
-                nV === TS.Processes.Reading && 
+                ( nV === TS.Processes.Reading || nV === TS.Processes.Login ) && 
                 store.getters.ort === TS.Orts.Home && 
                 oV !== TS.Processes.Login 
-            )
+            )  
                 _in()
         }
     )
