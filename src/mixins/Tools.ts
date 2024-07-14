@@ -68,8 +68,6 @@ export const post = ( subURL: CTS.Post, data: object ): Promise<CTS.UserData> =>
             if ( res.data.status === 200 ) rs( res.data.scc )
             // .. Handle Reported Problems
             else if ( res.data.status === 500 ) {
-                console.log(res.data.err);
-                
                 if ( res.data.err === "User Not Found" ) rx()
                 else if ( res.data.err.includes( "Exists" ) ) rx( res.data.err )
                 else errHandler( res.data.err )
