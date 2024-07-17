@@ -146,6 +146,13 @@ const passwd = ref<HTMLInputElement>( {} as HTMLInputElement )
         background-color: #F0F0F0;
     }
 
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px #F0F0F0 inset !important;
+    }
+
     #forgot{
         font-family: PoiretOne;
         text-align: center;
