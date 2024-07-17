@@ -1,7 +1,7 @@
 <template>
     <div id="user_buttons_box" ref="userButtons">
         <div
-            v-for="(opt,i) of options"
+            v-for="(opt,i) of Options[ store.getters.userType ] "
             :key=i
             :class="'optionBox no_select ' + ( opt.tool === store.getters.userTool ? 'selected' : '' )"
             @click="userTool( opt.tool )"
@@ -19,6 +19,7 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import * as Tools                           from '@/mixins/Tools';
 
 const store: TS.Store = useStore()
@@ -53,16 +54,24 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const options =  ref ( [{ title: "", icon: "", tool: TS.UserTools.null }] )
+    const Options = ref ( {
+        [ CTS.UserTypes.Dietitian ]: [
+            { title: "Patients"  , tool: TS.UserTools.Patients,  icon: "" },
+            { title: "Calender"  , tool: TS.UserTools.Calender,  icon: "" },
+            { title: "Week Stat" , tool: TS.UserTools.Stats,     icon: "" },
+            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "" },
+            { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "" },
+            { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "" },
+        ],
+        [ CTS.UserTypes.Patient ]: [
+            { title: "Dietitians", tool: TS.UserTools.Patients,  icon: "" },
+            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "" },
+            { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "" },
+            { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "" },
+        ],
+        [ CTS.UserTypes.null ]: []
 
-    options.value = [
-        { title: "Patients" , tool: TS.UserTools.Patients,  icon: "" },
-        { title: "Calender" , tool: TS.UserTools.Calender,  icon: "" },
-        { title: "Week Stat", tool: TS.UserTools.Stats,     icon: "" },
-        { title: "Diet Plan", tool: TS.UserTools.DietPlans, icon: "" },
-        { title: "Messages" , tool: TS.UserTools.Messages,  icon: "" },
-        { title: "Profile"  , tool: TS.UserTools.Profile,   icon: "" },
-    ]
+    } )
 
 // -- =====================================================================================
 

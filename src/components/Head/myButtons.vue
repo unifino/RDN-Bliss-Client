@@ -55,14 +55,14 @@ const store: TS.Store = useStore()
     const options =  ref ( [{ title: "", icon: "", class: "", fnc: ()=>{true} }] )
 
     options.value = [
-        { title: "Language" , icon: "", class: "", fnc: lang },
+        // { title: "Language" , icon: "", class: "", fnc: lang },
         {
             title: store.getters.animationSpeed + " Animation", 
             icon: "", 
             class: store.getters.animationSpeed, 
             fnc: speed
         },
-        { title: "Theme"    , icon: "", class: "", fnc: lang },
+        // { title: "Theme"    , icon: "", class: "", fnc: lang },
     ]
 
     const loggingRelated = [

@@ -140,7 +140,7 @@ const store: TS.Store = useStore()
         if (
             !e_mail.value.value
             || e_mail.value.value.indexOf( "@" ) < 1
-            || e_mail.value.value.indexOf( "." ) < 3
+            || e_mail.value.value.lastIndexOf( "." ) < 3
         )
             parts.push( e_mail )
 
