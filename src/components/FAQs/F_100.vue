@@ -1,19 +1,7 @@
 <template>
     <div id="F_100_Box" class="init" ref="f_100">
         <div id="F_100_Box_Wrapper">
-            <div class="section">How Selestial works?</div>
-            <div class="section">What services do you offer?</div>
-            <div class="section">Who’s behind Selestial?</div>
-            <div class="section">How fast are requests completed?</div>
-            <div class="section">Refunds Policy.</div>
-            <div class="section">How much is a website?</div>
-            <div class="section">How long does it take to make such awesome websites?</div>
-            <div class="section">Can you also deal with bigger projects ?</div>
-            <div class="section">Are you a designer or developer?</div>
-            <div class="section">Is that really you in the framed picture above?</div>
-            <div class="section">How do I become as awesome as you?</div>
-            <div class="section">Did you use drugs while designing this website?</div>
-            <div class="section">What is the content of the infamous hidden section?</div>
+            <div class="section" v-for="(d,i) of myData" :key="i">{{ d.title }}</div>
         </div>
     </div>
 </template>
@@ -26,6 +14,7 @@ import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import { ref }                              from 'vue'
 import * as Tools                           from '@/mixins/Tools'
+import myData                               from "./data.json";
 
 const store: TS.Store = useStore()
 
