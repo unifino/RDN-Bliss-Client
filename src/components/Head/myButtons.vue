@@ -31,15 +31,16 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const lang = () => { console.log() }
     const speed = () => store.dispatch( TS.Acts.Flag_speed, !store.getters.Flag_speed )
 
-    const logOut = () => {
-        store.dispatch( TS.Acts.userType, CTS.UserTypes.null )
-        store.dispatch( TS.Acts.Flag_logged_in, false )
+    const logOut = async () => {
         store.dispatch( TS.Acts.userTool, TS.UserTools.null )
+        store.dispatch( TS.Acts.Flag_logged_in, false )
         if ( store.getters.ort === TS.Orts.UserPanel )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+        // .. wait a bit to prevent making UserToolsPanel empty
+        await new Promise( _ => setTimeout( _, Tools.speed( true ) ) )
+        store.dispatch( TS.Acts.userType, CTS.UserTypes.null )
     }
     const logIn = async () => {
         if ( !fuse ) return
