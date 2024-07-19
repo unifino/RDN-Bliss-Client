@@ -59,6 +59,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    const _in = () => Tools.MainAnimation( h_010, "X010", "In", Tools.speed() );
     const _out = async () => {
         const planB = store.getters.Flag_plan_B
         if ( planB ) await new Promise( _ => setTimeout( _, 1 ) )
@@ -66,10 +67,16 @@ const store: TS.Store = useStore()
         if ( planB ) store.dispatch( TS.Acts.Flag_plan_B, false )
         clearTimeout( timeOut )
     };
-    const _in = () => Tools.MainAnimation( h_010, "X010", "In", Tools.speed() );
-    const _login = ( phase: "Login"|"Standard" ) => {
-        h_010.value.className = phase + "Pos"
-        if ( phase === "Login" ) store.dispatch( TS.Acts.Flag_plan_B, true )
+
+    const _login = ( mode: TS.Processes, direction: "Go"|"Back" ) => {
+        if ( direction === "Go" ) {
+            if ( mode === TS.Processes.Reading ) h_010.value.className = "LoginPos"
+            if ( mode === TS.Processes.Registering ) h_010.value.className = "LoginPosInstant"
+        }
+        if ( direction === "Back" ) {
+            if ( mode === TS.Processes.Reading ) h_010.value.className = "StandardPos"
+        }
+        store.dispatch( TS.Acts.Flag_plan_B, direction === "Go" )
     }
 
 // -- =====================================================================================
@@ -119,13 +126,13 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.process,
         ( nV, oV ) => {
-            if ( nV === TS.Processes.Login ) _login( "Login" )
+            if ( nV === TS.Processes.Login ) _login( oV, "Go" )
             if ( nV === TS.Processes.Registering ) _out()
             // .. Exit from Home to other Orts from Registering State
             if ( oV === TS.Processes.Login && store.getters.ort !== TS.Orts.Home ) _out()
             // .. Exit back to Home from Login | Registering
             if ( nV === TS.Processes.Reading && store.getters.ort === TS.Orts.Home )
-                oV !== TS.Processes.Login ? _in() : _login( "Standard" )
+                oV !== TS.Processes.Login ? _in() : _login( nV, "Back" )
         }
     )
 
@@ -244,6 +251,10 @@ const store: TS.Store = useStore()
 
     .LoginPos {
         animation           : LoginPos .8s;
+        animation-fill-mode : both;
+    }
+    .LoginPosInstant {
+        animation           : LoginPos .0s;
         animation-fill-mode : both;
     }
     @keyframes LoginPos {
