@@ -14,6 +14,7 @@ export const OrtData: TS.OrtData = {
 
 // -- =====================================================================================
 
-export const serverURL = "http://localhost:5000"
+// export const serverURL = "http://a.ninotech.store:5007"
+export const serverURL = "http://localhost:5007"
 
 // -- =====================================================================================
