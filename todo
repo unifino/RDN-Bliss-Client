@@ -17,18 +17,3 @@ Major Error Screen: <Registeration><Login>
 ln -L -f ~/Documents/RDN\ Bliss/RDN\ Bliss\ Client/src/types/common.ts ~/Documents/RDN\ Bliss/RDN\ Bliss\ Server/src/types/
 
 
-npm -v     
-8.19.2
-node -v     ✔ 
-v16.18.0
-
-
-sudo -u postgres
-createuser -e RDN_Bliss
-psql
-ALTER ROLE "RDN_Bliss" Superuser Createrole CreateDB Replication BypassRLS Login;
-ALTER USER "RDN_Bliss" WITH PASSWORD 'RDN';
-# Alter ROLE "RDN_Bliss_Server" RENAME To "RDN-Bliss";
-psql -d template1 -U postgres
-CREATE DATABASE "RDN_Bliss_Server";
-GRANT ALL PRIVILEGES ON DATABASE "RDN_Bliss_Server" to "RDN_Bliss";
