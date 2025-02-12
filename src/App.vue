@@ -53,7 +53,7 @@ const store: TS.Store = useStore()
         // .. Handle NOT Such a User Problem
         .catch( () => alert( userData.username ) )
 
-        const successLogin = ( userData: CTS.UserData ) => {
+        const successLogin = async ( userData: CTS.UserData ) => {
             console.log(userData);
             
             // ! Consider it
@@ -61,6 +61,9 @@ const store: TS.Store = useStore()
             store.dispatch( TS.Acts.Flag_logged_in, true )
             store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
+            await new Promise( _ => setTimeout( _, 800 ) )
+            store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient )
+
         }
 
         
@@ -127,6 +130,92 @@ const store: TS.Store = useStore()
         font-family : 'TsukimiRounded'; 
         src : url('../src/assets/Fonts/TsukimiRounded-Regular.ttf')
     }
+
+    input{
+        height: 25px;
+        width: 210px;
+        border-radius: 7px;
+        border: solid gray 1px;
+        box-shadow: 0 0 1px 0px rgb(88 88 91);
+        margin: 10px 0;
+        font-family: Oswald;
+        font-size: 17px;
+        padding: 10px 20px;
+        color: #081E2F;
+        font-weight: bold;
+        background-color: #F0F0F0;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px #F0F0F0 inset !important;
+    }
+
+    .buttonsWrapper{
+        top: 0;
+        height: auto;
+        width: 250px;
+        border-left: #369797 5px;
+        border-radius: 5px;
+        border-left-style: solid;
+        margin-left: 40px;
+        margin-top: 50px;
+        position: relative;
+        float: right;
+    }
+    .button{
+        color: #144444;
+        font-family: Manrope;
+        font-weight: 600;
+        margin: 12px 15px;
+        cursor: pointer;
+        white-space: pre-wrap;
+    }
+    .button:hover{ color: #08cee0; }
+
+    .current_Page_R {
+        animation           : current_Page_R .5s;
+        animation-fill-mode : both;
+        z-index: 1;
+    }
+    @keyframes current_Page_R {
+        0%  { transform: translateX(70%); opacity: 0 }
+        100%{ transform: translateX(0); opacity: 1 }
+    }
+
+    .current_Page_L {
+        animation           : current_Page_L .5s;
+        animation-fill-mode : both;
+        z-index: 1;
+    }
+    @keyframes current_Page_L {
+        0%  { transform: translateX(-70%); opacity: 0 }
+        100%{ transform: translateX(0); opacity: 1 }
+    }
+
+    .next_Page {
+        animation           : next_Page .4s;
+        animation-fill-mode : both;
+        z-index: 0;
+    }
+    @keyframes next_Page {
+        0%  { transform: translateX(0); opacity: 1 }
+        100%{ transform: translateX(-70%); opacity: 0 }
+    }
+
+    .previous_Page {
+        animation           : previous_Page .4s;
+        animation-fill-mode : both;
+        z-index: 0;
+    }
+    @keyframes previous_Page {
+        0%  { transform: translateX(0); opacity: 1 }
+        100%{ transform: translateX(70%); opacity: 0 }
+    }
+    
+    .ppp{ transform: translateX(-70%); opacity: 0 }
 
 </style>
 

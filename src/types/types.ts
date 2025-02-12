@@ -20,11 +20,22 @@ export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, NoWhere }
 
 export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 
+export type PPP = { i: number, m: "R"|"L" }
+
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
 // .. declare UserTools
-export enum UserTools { "Patients", "Calender", "Stats", "DietPlans", "Messages", "Profile", null }
+export enum UserTools { 
+    "Patients",
+    "CreateNewPatient",
+    "Calender",
+    "Stats",
+    "DietPlans",
+    "Messages",
+    "Profile",
+    null
+}
 
 export enum Speeds { Normal = "Normal", Fast = "Fast" }
 
@@ -39,6 +50,7 @@ export type State = {
     // .. declare User related States
     userType: CTS.UserTypes
     userTool: UserTools
+    ppp: PPP
 
     // .. declare minor data
     H010IDx: number
@@ -73,6 +85,7 @@ export enum Mutates {
 
     userType        = "UserType",
     userTool        = "UserTools",
+    ppp             = "PatientProfilePart",
     
     H010IDx         = "H010Panel_ID",
     
@@ -92,6 +105,7 @@ export type MyMutations<S = State> = {
     
     [ Mutates.userType ]        ( state: S, payload: CTS.UserTypes ):   void;
     [ Mutates.userTool ]        ( state: S, payload: UserTools ):       void;
+    [ Mutates.ppp ]             ( state: S, payload: PPP ):             void;
     
     [ Mutates.H010IDx ]         ( state: S, payload: number ):          void;
     
@@ -113,6 +127,7 @@ export enum Acts {
 
     userType        = "UserType",
     userTool        = "UserTools",
+    ppp             = "PatientProfilePart",
 
     H010IDx         = "H010Panel_ID",
     
@@ -132,6 +147,7 @@ export interface MyActions {
     
     [ Acts.userType ]           ( {dispatch}: AAC, payload: CTS.UserTypes ):void;
     [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):    void;
+    [ Mutates.ppp ]             ( {dispatch}: AAC, payload: PPP ):          void;
     
     [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):       void;
         
@@ -152,6 +168,7 @@ export type MyGetters = {
 
     userType            ( state: State ): CTS.UserTypes
     userTool            ( state: State ): UserTools
+    ppp                 ( state: State ): PPP
 
     H010IDx             ( state: State ): number
     

@@ -3,7 +3,7 @@
         <div
             v-for="(opt,i) of Options[ store.getters.userType ] "
             :key=i
-            :class="'optionBox no_select ' + ( opt.tool === store.getters.userTool ? 'selected' : '' )"
+            :class="'optionBox no_select ' + ( [ opt.tool , ...opt.onExtra ].includes( store.getters.userTool ) ? 'selected' : '' )"
             @click="userTool( opt.tool )"
         >
             <div class="icon">{{opt.icon}}</div>
@@ -57,18 +57,19 @@ const store: TS.Store = useStore()
 
     const Options = ref ( {
         [ CTS.UserTypes.Dietitian ]: [
-            { title: "Patients"  , tool: TS.UserTools.Patients,  icon: "" },
-            { title: "Calender"  , tool: TS.UserTools.Calender,  icon: "" },
-            { title: "Week Stat" , tool: TS.UserTools.Stats,     icon: "" },
-            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "" },
-            { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "" },
-            { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "" },
+            { title: "Patients"  , tool: TS.UserTools.Patients,  icon: "", 
+                onExtra: [TS.UserTools.CreateNewPatient] },
+            { title: "Calender"  , tool: TS.UserTools.Calender,  icon: "", onExtra: [] },
+            { title: "Week Stat" , tool: TS.UserTools.Stats,     icon: "", onExtra: [] },
+            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "", onExtra: [] },
+            { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "", onExtra: [] },
+            { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "", onExtra: [] },
         ],
         [ CTS.UserTypes.Patient ]: [
-            { title: "Dietitians", tool: TS.UserTools.Patients,  icon: "" },
-            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "" },
-            { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "" },
-            { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "" },
+            { title: "Dietitians", tool: TS.UserTools.Patients,  icon: "", onExtra: [] },
+            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "", onExtra: [] },
+            { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "", onExtra: [] },
+            { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "", onExtra: [] },
         ],
         [ CTS.UserTypes.null ]: []
 

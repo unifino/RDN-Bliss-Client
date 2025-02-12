@@ -3,7 +3,7 @@
         <div id="messagesBox">
             <textarea />
         </div>
-        <div id="buttonsWrapper" class="no_select">
+        <div class="buttonsWrapper no_select">
             <div class="button" v-for="(b,i) of buttons" :key="i">{{ b.title }}</div>
         </div>
     </div>
@@ -71,7 +71,7 @@ const store: TS.Store = useStore()
     #my_message_box{
         background-color: transparent;
         height: 620px;
-        width: 700px;
+        width: 750px;
         top: 50%;
         left: 300px;
         position: absolute;
@@ -103,25 +103,6 @@ const store: TS.Store = useStore()
         border-radius: 9px;
         position: absolute;
     }
-
-    #buttonsWrapper{
-        width: 200px;
-        position: relative;
-        float: left;
-        border-left: #369797 5px;
-        border-radius: 5px;
-        border-left-style: solid;
-        margin-left: 40px;
-        margin-top: 50px;;
-    }
-    .button{
-        color: #144444;
-        font-family: Manrope;
-        font-weight: 600;
-        margin: 12px 15px;
-        cursor: pointer;
-    }
-    .button:hover{ color: #08cee0; }
 
 </style>
 

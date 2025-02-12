@@ -45,6 +45,11 @@ export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out", skip=f
     el.value.className = "Tool_fall_" + phase
 }
 
+export const pppAnime = ( oV: TS.PPP, nV: TS.PPP, i: number, part_x: Ref<HTMLElement> ) => {
+    if ( oV.i === i ) part_x.value.className = nV.m === "R" ? "next_Page" : "previous_Page" 
+    if ( nV.i === i ) part_x.value.className = "current_Page_" + nV.m 
+}
+
 // -- =====================================================================================
 
 export const errHandler = ( err: string ) => {

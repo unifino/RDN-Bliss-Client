@@ -1,31 +1,41 @@
 <template>
-    <div id="my_patients_box" class="init" ref="patientsBox">
-        <div id="myWrapper">
-<!--                                                                                    -->
-            <div id="emergencyWrapper">
+    <div id="wholeWrapper" class="init" ref="patientsBox">
 
-                <div id="emergencyTitle">Emergency Patients</div>
+        <div id="mainWrapper">
+            <div id="my_patients_box">
+    <!--                                                                                    -->
+                <div id="emergencyWrapper">
 
-                <!-- <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(0,3)" :key="p.id">
+                    <div id="emergencyTitle">Emergency Patients</div>
+
+                    <!-- <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(0,3)" :key="p.id">
+                        <div class="nameWrapper">
+                            <div class="name no_select">{{ p.name }}</div>
+                        </div>
+                    </div> -->
+
+                    <div id="noEmergencyHint">No Emergency Patients</div>
+                
+                </div>
+    <!--                                                                                    -->
+                <div class="divider"></div>
+    <!--                                                                                    -->
+                <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
                     <div class="nameWrapper">
                         <div class="name no_select">{{ p.name }}</div>
                     </div>
-                </div> -->
-
-                <div id="noEmergencyHint">No Emergency Patients</div>
-            
-            </div>
-<!--                                                                                    -->
-            <div class="divider"></div>
-<!--                                                                                    -->
-            <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
-                <div class="nameWrapper">
-                    <div class="name no_select">{{ p.name }}</div>
                 </div>
+    <!--                                                                                    -->
+                <div id="borderTop" />
             </div>
-<!--                                                                                    -->
         </div>
-        <div id="borderTop" />
+
+<!--                                                                                    -->
+
+        <div class="buttonsWrapper no_select">
+            <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
+        </div>  
+ 
     </div>
 </template>
 <!--                                                                                    -->
@@ -47,6 +57,13 @@ const store: TS.Store = useStore()
 
     const patientsBox = ref<HTMLElement>( {} as HTMLElement )
     let patients: CTS.Patients[] = []
+    
+    const buttons = [ 
+        { 
+            title: "Create New Patient", 
+            fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient ) 
+        },
+    ]
 
 // -- =====================================================================================
 
@@ -96,18 +113,33 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #my_patients_box{
-        background-color: #e6e3e3;
-        height: 620px;
-        width: 820px;
+    #wholeWrapper{
         top: 50%;
         left: 300px;
+        position: absolute;
+    }
+
+    #mainWrapper{
+        background-color: #e6e3e3;
+        height: 620px;
+        width: 825px;
         border: solid 40px #e6e3e3;
         border-width: 40px 20px;
         border-top-width: 10px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #babbbb;
-        position: absolute;
+        position: relative;
+        float: left;
+    }
+
+    #my_patients_box{
+        height: 100%;
+        padding-top: 30px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 0 20px;
+        float: right;
+        position: relative;
     }
 
     #emergencyWrapper {
@@ -138,15 +170,6 @@ const store: TS.Store = useStore()
     
     .init{
         transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
-    }
-    
-    #myWrapper{
-        height: calc( 100% - 30px );
-        padding-top: 30px;
-        border-bottom: solid 40px #e6e3e3;
-        overflow: auto;
-        padding: 0 20px;
-
     }
 
     #borderTop{
@@ -200,11 +223,12 @@ const store: TS.Store = useStore()
     }
 
     .divider{
-        background-color: #baccdb;
+        background-color: transparent;
         height: 2px;
         width: 100%;
         margin: 14px 0;
     }
+
 </style>
 
 // -- =====================================================================================

@@ -18,11 +18,12 @@ const state: TS.State = {
     ort: TS.Orts.NoWhere,
     animationSpeed: TS.Speeds.Fast,
 
-    H010IDx: 0,
-    
     userType: CTS.UserTypes.null,
     userTool: TS.UserTools.null,
+    ppp: { i: 0, m: "R" },
     
+    H010IDx: 0,
+
     Flag_plan_B: false,
     Flag_logged_in: false,
     Flag_speed: false,
@@ -43,6 +44,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
     
     [ TS.Mutates.userType ]         ( state, payload ) { state.userType = payload },
     [ TS.Mutates.userTool ]         ( state, payload ) { state.userTool = payload },
+    [ TS.Mutates.ppp ]              ( state, payload ) { state.ppp = payload },
 
     [ TS.Mutates.H010IDx ]          ( state, payload ) { state.H010IDx = payload },
     
@@ -66,6 +68,7 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
     
     [ TS.Acts.userType ]        (c,p) { store.commit( TS.Mutates.userType, p ) },
     [ TS.Acts.userTool ]        (c,p) { store.commit( TS.Mutates.userTool, p ) },
+    [ TS.Acts.ppp ]             (c,p) { store.commit( TS.Mutates.ppp, p ) },
 
     [ TS.Acts.H010IDx ]         (c,p) { store.commit( TS.Mutates.H010IDx, p ) },
     
@@ -88,6 +91,7 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
 
     userType:       state => state.userType,
     userTool:       state => state.userTool,
+    ppp:            state => state.ppp,
 
     H010IDx:        state => state.H010IDx,
     
