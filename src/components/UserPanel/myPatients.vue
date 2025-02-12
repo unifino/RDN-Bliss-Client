@@ -1,15 +1,34 @@
 <template>
     <div id="my_patients_box" class="init" ref="patientsBox">
         <div id="myWrapper">
+<!--                                                                                    -->
+            <div id="emergencyWrapper">
+
+                <div id="emergencyTitle">Emergency Patients</div>
+
+                <!-- <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(0,3)" :key="p.id">
+                    <div class="nameWrapper">
+                        <div class="name no_select">{{ p.name }}</div>
+                    </div>
+                </div> -->
+
+                <div id="noEmergencyHint">No Emergency Patients</div>
+            
+            </div>
+<!--                                                                                    -->
+            <div class="divider"></div>
+<!--                                                                                    -->
             <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
                 <div class="nameWrapper">
                     <div class="name no_select">{{ p.name }}</div>
                 </div>
             </div>
+<!--                                                                                    -->
         </div>
         <div id="borderTop" />
     </div>
 </template>
+<!--                                                                                    -->
 
 // -- =====================================================================================
 
@@ -80,14 +99,41 @@ const store: TS.Store = useStore()
     #my_patients_box{
         background-color: #e6e3e3;
         height: 620px;
-        width: 780px;
+        width: 820px;
         top: 50%;
         left: 300px;
         border: solid 40px #e6e3e3;
+        border-width: 40px 20px;
         border-top-width: 10px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #babbbb;
         position: absolute;
+    }
+
+    #emergencyWrapper {
+        background-color: #e90a0a;
+        height: auto;
+        width: 100%;
+        border-radius: 14px;
+        margin-top: 40px;
+        position: relative;
+        overflow: auto;
+    }
+
+    #emergencyTitle{
+        text-align: center;
+        color: whitesmoke;
+        padding: 30px 0 23px 0;
+        font-size: 27px;
+        font-family: AllertaStencil;
+    }
+
+    #noEmergencyHint{
+        text-align: center;
+        color: rgb(46, 43, 43);
+        font-size: 16px;
+        font-family: Manrope;
+        padding: 5px 0 35px 0;
     }
     
     .init{
@@ -99,6 +145,8 @@ const store: TS.Store = useStore()
         padding-top: 30px;
         border-bottom: solid 40px #e6e3e3;
         overflow: auto;
+        padding: 0 20px;
+
     }
 
     #borderTop{
@@ -151,6 +199,12 @@ const store: TS.Store = useStore()
         position: absolute;
     }
 
+    .divider{
+        background-color: #baccdb;
+        height: 2px;
+        width: 100%;
+        margin: 14px 0;
+    }
 </style>
 
 // -- =====================================================================================

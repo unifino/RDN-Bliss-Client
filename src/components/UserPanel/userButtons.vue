@@ -34,7 +34,8 @@ const store: TS.Store = useStore()
     const userTool = async ( tool: TS.UserTools ) => {
     
         if ( !fuse ) return
-        store.dispatch( TS.Acts.userTool, tool )
+        // .. Tool | Zurucksetzen
+        store.dispatch( TS.Acts.userTool, tool === store.state.userTool ? TS.UserTools.null : tool )
 
         fuse = false
         await new Promise( _ => setTimeout( _, Tools.speed() ) )

@@ -25,12 +25,45 @@ import { onMounted }                        from 'vue';
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 
+// .. Entferne es
+import * as CTS                             from '@/types/common'
+import { post }                             from '@/mixins/Tools'
+import * as Tools                           from '@/mixins/Tools'
+
 const store: TS.Store = useStore()
 
 // -- ====================================================================================
 
     onMounted ( () => {
-        store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+
+        
+        // store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+        
+        // .. Losche es
+        store.dispatch( TS.Acts.userType, CTS.UserTypes.Dietitian )
+        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
+        const userData: CTS.UserData = {} as CTS.UserData;
+        userData.userType = CTS.UserTypes.Dietitian,
+        userData.username = "unifino",
+        userData.password = "1111"
+        // .. Sending Request
+        post( CTS.Post.Login, userData )
+        // .. Receiving Answer
+        .then( ( userData: CTS.UserData ) => successLogin( userData ) )
+        // .. Handle NOT Such a User Problem
+        .catch( () => alert( userData.username ) )
+
+        const successLogin = ( userData: CTS.UserData ) => {
+            console.log(userData);
+            
+            // ! Consider it
+            Tools.setNames( [ userData ] )
+            store.dispatch( TS.Acts.Flag_logged_in, true )
+            store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
+            store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
+        }
+
+        
     } )
 
 // -- ====================================================================================

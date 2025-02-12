@@ -55,15 +55,18 @@ const store: TS.Store = useStore()
 
     const options =  ref ( [{ title: "", icon: "", class: "", fnc: ()=>{true} }] )
 
-    options.value = [
+    // .. init
+    options.value = [];
+
+    const animationRelated  = [
         // { title: "Language" , icon: "", class: "", fnc: lang },
         {
-            title: store.getters.animationSpeed + " Animation", 
+            title: store.getters.animationSpeed + " Animation",
             icon: "", 
-            class: store.getters.animationSpeed, 
+            class: store.getters.animationSpeed,
             fnc: speed
         },
-        // { title: "Theme"    , icon: "", class: "", fnc: lang },
+        // { title: "Theme"    , icon: "", class: "", fnc: () => { return } },
     ]
 
     const loggingRelated = [
@@ -71,6 +74,8 @@ const store: TS.Store = useStore()
         { title: "Exit"  ,    icon: "", class: "", fnc: logOut },
     ]
 
+    // .. embedding
+    options.value.push( ...animationRelated )
     options.value.push( loggingRelated[0] )
 
 // -- =====================================================================================
@@ -79,15 +84,15 @@ const store: TS.Store = useStore()
         getters => getters.Flag_logged_in,
         nV => {
             options.value.pop()
-            options.value.push( loggingRelated[ nV ? 1 : 0] )
+            options.value.push( loggingRelated[ nV ? 1 : 0 ] )
         }
     )
 
     store.watch(
         getters => getters.animationSpeed,
         () => {
-            options.value[1].class = store.getters.animationSpeed
-            options.value[1].title = store.getters.animationSpeed + " Animation"
+            options.value[0].class = store.getters.animationSpeed
+            options.value[0].title = store.getters.animationSpeed + " Animation"
         }
     )
 
