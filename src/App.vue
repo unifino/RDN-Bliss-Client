@@ -39,7 +39,7 @@ const store: TS.Store = useStore()
         
         // store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
         
-        // .. Losche es
+        // !  Losche es
         store.dispatch( TS.Acts.userType, CTS.UserTypes.Dietitian )
         store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
         const userData: CTS.UserData = {} as CTS.UserData;

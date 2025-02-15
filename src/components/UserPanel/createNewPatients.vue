@@ -50,7 +50,6 @@
 import { ref, onMounted }                   from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
-import * as CTS                             from "@/types/common";
 import * as Tools                           from '@/mixins/Tools';
 import Part_1                               from '@/components/UserPanel/Patient/Part_1.vue'
 import Part_2                               from '@/components/UserPanel/Patient/Part_2.vue'

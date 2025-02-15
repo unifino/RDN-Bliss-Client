@@ -10,10 +10,10 @@ import * as CTS                         from '@/types/common'
 // -- =====================================================================================
 
 // ..  declare Languages
-export enum Languages { "EN", "FA", "UR" }
+export enum Languages { EN, FA, UR }
 
 // .. declare Display Modes
-export enum DisplayMode { "Wide", "Packed" }
+export enum DisplayMode { Wide, Packed }
 
 // .. declare Places
 export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, NoWhere }
@@ -22,24 +22,18 @@ export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 
 export type PPP = { i: number, m: "R"|"L" }
 
-export enum GI_Functions { 
-    BowelMovement = "Bowel Movement",
-    Digestion = "Digestion",
-    Appetite ="Appetite" 
-}
-
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
 // .. declare UserTools
 export enum UserTools { 
-    "Patients",
-    "CreateNewPatient",
-    "Calender",
-    "Stats",
-    "DietPlans",
-    "Messages",
-    "Profile",
+    Patients,
+    CreateNewPatient,
+    Calender,
+    Stats,
+    DietPlans,
+    Messages,
+    Profile,
     null
 }
 
@@ -57,6 +51,7 @@ export type State = {
     userType: CTS.UserTypes
     userTool: UserTools
     ppp: PPP
+    newPatient: CTS.Patient
 
     // .. declare minor data
     H010IDx: number
@@ -175,6 +170,7 @@ export type MyGetters = {
     userType            ( state: State ): CTS.UserTypes
     userTool            ( state: State ): UserTools
     ppp                 ( state: State ): PPP
+    newPatient          ( state: State ): CTS.Patient
 
     H010IDx             ( state: State ): number
     

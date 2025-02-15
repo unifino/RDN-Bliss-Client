@@ -21,6 +21,22 @@ const state: TS.State = {
     userType: CTS.UserTypes.null,
     userTool: TS.UserTools.null,
     ppp: { i: 0, m: "R" },
+    newPatient: {
+        id: -1,
+        email: "",
+        username: "",
+        password: "",
+        firstname: "",
+        lastname: "",
+        birthday: "",
+        gender: CTS.Gender.null,
+
+        GI_F: {
+            [CTS.GI_Functions.BowelMovement]: [],
+            [CTS.GI_Functions.Digestion]: [],
+            [CTS.GI_Functions.Appetite]: []
+        },
+    },
     
     H010IDx: 0,
 
@@ -92,6 +108,7 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     userType:       state => state.userType,
     userTool:       state => state.userTool,
     ppp:            state => state.ppp,
+    newPatient:     state => state.newPatient,
 
     H010IDx:        state => state.H010IDx,
     

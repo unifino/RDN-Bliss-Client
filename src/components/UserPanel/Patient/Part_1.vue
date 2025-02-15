@@ -33,7 +33,7 @@ const store: TS.Store = useStore()
 
     const i = 0
     const part_x = ref<HTMLElement>( {} as HTMLElement )
-
+    
     const Genders = ref ( [
         { type: CTS.Gender.male, selected: false },
         { type: CTS.Gender.female, selected: false }

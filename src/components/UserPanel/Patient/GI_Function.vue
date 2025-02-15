@@ -7,14 +7,14 @@
             <div id="infoWrapper" >
 
                 <div class="symptomsWrapper" :class="G.addMode ? 'block' : 'none'">
-                    <div class="symptom" v-for="(S,j) in G.symptoms.filter( s => !newUser.GI_F[G.title].includes(s) )" :key="j" @click="add(i,G.title,S)">{{S}}</div>
+                    <div class="symptom option" v-for="(S,j) in G.symptoms.filter( s => !newPatient.GI_F[G.title].includes(s) )" :key="j" @click="add(i,G.title,S)">{{S}}</div>
                     <div class="add" @click="back(i)"><span class="note">Back</span></div>
                 </div>
 
                 <div class="symptomsWrapper" :class="!G.addMode ? 'block' : 'none'">
                     <div 
                         @mouseenter="trash($event,'in')" @mouseleave="trash($event,'out')" 
-                        class="symptom" v-for="(S,k) in G.symptoms.filter( s => newUser.GI_F[G.title].includes(s) )" :key="k">
+                        class="symptom" v-for="(S,k) in G.symptoms.filter( s => newPatient.GI_F[G.title].includes(s) )" :key="k">
                         {{S}}
                         <div ref="trashes" class="no_select trash" @click="remove(G.title,S)"></div>
                     </div>
@@ -37,6 +37,7 @@
 import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
 import * as Tools                           from '@/mixins/Tools';
 
 const store: TS.Store = useStore()
@@ -46,28 +47,16 @@ const store: TS.Store = useStore()
     const i = 5
     const part_x = ref<HTMLElement>( {} as HTMLElement )
 
-    const newUser: { 
-        GI_F : {
-            [TS.GI_Functions.BowelMovement]: string[]
-            [TS.GI_Functions.Digestion]: string[]
-            [TS.GI_Functions.Appetite]: string[]
-        }
-    } = {
-        GI_F: {
-            "Bowel Movement": [],
-            Digestion: [],
-            Appetite: []
-        }
-    };
+    const newPatient = store.getters.newPatient
 
     let Bowel_Movement_Symptoms = [ "Constipation", "Diarrhea", "IBS-Constipation", "IBS-Diarrhea", "Loose Watery Stool", "Steatorrhea", "Hematochezia", "Melena", "etc" ]
     let Digestion_Symptoms = [ "Nausea", "Vomiting", "Diarrhea", "Constipation", "Heartburn", "Ulces", "Fiatulence", "Bloating", "Xerostomia", "Mucositis", "Dysphagia", "Mouth Sores", "Difficulty Chewing or Swallowing|Dental Caries", "Abdominal Distention"  ]
     let Appetite_Symptoms = [ "Good-Poor Appetite", "Loss of Appetite", "Increase Desire to Eat", "Poor Oral Intake", "Food Intolerance" , "Food Allergy" ]
 
     const GI_F = ref([
-        { addMode: false, title: TS.GI_Functions.BowelMovement, symptoms: Bowel_Movement_Symptoms },
-        { addMode: false, title: TS.GI_Functions.Digestion, symptoms: Digestion_Symptoms },
-        { addMode: false, title: TS.GI_Functions.Appetite, symptoms: Appetite_Symptoms }
+        { addMode: false, title: CTS.GI_Functions.BowelMovement, symptoms: Bowel_Movement_Symptoms },
+        { addMode: false, title: CTS.GI_Functions.Digestion, symptoms: Digestion_Symptoms },
+        { addMode: false, title: CTS.GI_Functions.Appetite, symptoms: Appetite_Symptoms }
     ]);
 
     const trash = async ( event: MouseEvent, mode: 'in' | 'out' ) => {
@@ -85,13 +74,13 @@ const store: TS.Store = useStore()
     const list = ( target: number ) => GI_F.value[ target ].addMode = true
     const back = ( target: number ) => GI_F.value[ target ].addMode = false
 
-    const add = ( g: number, G: TS.GI_Functions, S: string ) => {
-        newUser.GI_F[G].push(S) 
+    const add = ( g: number, G: CTS.GI_Functions, S: string ) => {
+        newPatient.GI_F[G].push(S) 
         GI_F.value[ g ].addMode = false
     }
 
-    const remove = ( G: TS.GI_Functions, S: string ) => {
-        newUser.GI_F[G] = newUser.GI_F[G].filter( x => x !== S )
+    const remove = ( G: CTS.GI_Functions, S: string ) => {
+        newPatient.GI_F[G] = newPatient.GI_F[G].filter( x => x !== S )
         // .. ForceUpdate
         GI_F.value[0].addMode = !GI_F.value[0].addMode
         GI_F.value[0].addMode = !GI_F.value[0].addMode
@@ -153,9 +142,10 @@ const store: TS.Store = useStore()
         padding: 10px 20px;
         color: #081E2F;
         font-weight: bold;
-        cursor: pointer;
         overflow: hidden;
     }
+    .option{ cursor: pointer }
+    .option:hover{ background-color: #f5e3c2 }
 
     .add{
         color: #007f9b;
