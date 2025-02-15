@@ -1,5 +1,5 @@
 <template>  
-    <div id="part_5" class="ppp" ref="part_x">
+    <div id="part_x" class="ppp" ref="part_x">
         <div id="infoWrapper">
             <input ref="firstname" type="text" placeholder="Height" />
             <input ref="lastname" type="text" placeholder="Weight" />
@@ -46,8 +46,6 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
 <style scoped>
-
-    #part_5 { width: 100%; height: 100%; position: absolute; }
 
     #infoWrapper{
         height: auto;

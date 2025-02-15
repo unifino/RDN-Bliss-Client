@@ -8,11 +8,11 @@
             <Part_3 />
             <Part_4 />
             <Part_5 />
-            <Part_6 />
+            <GI_Function />
             <Part_7 />
 <!--                                                                                    -->
-            <div id="navigation_box">
-                <div class="nav no_select" style="float: left;"  @click="slider('P')">Previous</div>
+            <div id="navigation_box" class="no_select">
+                <div class="nav" style="float: left;"  @click="slider('P')">Previous</div>
                 <div id="titleBox">
                     <div 
                         v-for="(x,i) in Titles"
@@ -22,7 +22,7 @@
                             {{ x.focus ? x.title : "" }}
                     </div>
                 </div>
-                <div class="nav no_select" style="float: right;" @click="slider('N')">Next</div>
+                <div class="nav" style="float: right;" @click="slider('N')">Next</div>
             </div>
         </div>
 <!--                                                                                    -->
@@ -57,7 +57,7 @@ import Part_2                               from '@/components/UserPanel/Patient
 import Part_3                               from '@/components/UserPanel/Patient/Part_3.vue'
 import Part_4                               from '@/components/UserPanel/Patient/Part_4.vue'
 import Part_5                               from '@/components/UserPanel/Patient/Part_5.vue'
-import Part_6                               from '@/components/UserPanel/Patient/Part_6.vue'
+import GI_Function                               from '@/components/UserPanel/Patient/GI_Function.vue'
 import Part_7                               from '@/components/UserPanel/Patient/Part_7.vue'
 const store: TS.Store = useStore()
 
@@ -169,7 +169,7 @@ const store: TS.Store = useStore()
         transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
     }
 
-    #part_3,#part_4,#part_5,#part_6,#part_7,#part_8 { width: 100%; height: 100%; position: absolute; }
+    #part_3,#part_4,#part_5,#GI_Function,#part_7,#part_8 { width: 100%; height: 100%; position: absolute; }
 
     #infoWrapper{
         height: auto;

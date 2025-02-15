@@ -120,7 +120,7 @@ const store: TS.Store = useStore()
     }
 
     .icon{
-        font-family: "fas-6";
+        font-family: "fas";
         font-size: 31px;
         margin: 25px 20px 10px 20px;
         opacity: .7;

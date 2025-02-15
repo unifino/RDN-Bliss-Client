@@ -1,5 +1,5 @@
 <template>  
-    <div id="part_1" class="ppp" ref="part_x">
+    <div id="part_x" class="ppp" ref="part_x">
         <div 
             v-for="(x,i) in Genders"
             :key="i" 
@@ -61,8 +61,6 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
 <style scoped>
-
-    #part_1 { width: 100%; height: 100%; position: absolute; }
     
     .gender{
         width: 120px;

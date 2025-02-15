@@ -22,6 +22,12 @@ export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 
 export type PPP = { i: number, m: "R"|"L" }
 
+export enum GI_Functions { 
+    BowelMovement = "Bowel Movement",
+    Digestion = "Digestion",
+    Appetite ="Appetite" 
+}
+
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 

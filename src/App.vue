@@ -54,8 +54,6 @@ const store: TS.Store = useStore()
         .catch( () => alert( userData.username ) )
 
         const successLogin = async ( userData: CTS.UserData ) => {
-            console.log(userData);
-            
             // ! Consider it
             Tools.setNames( [ userData ] )
             store.dispatch( TS.Acts.Flag_logged_in, true )
@@ -63,7 +61,6 @@ const store: TS.Store = useStore()
             store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
             await new Promise( _ => setTimeout( _, 800 ) )
             store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient )
-
         }
 
         
@@ -102,7 +99,7 @@ const store: TS.Store = useStore()
     }
 
     @font-face {
-        font-family : 'fas-6';
+        font-family : 'fas';
         src : url('../src/assets/Fonts/fa-solid-6-900.ttf');
     }
 
@@ -215,6 +212,7 @@ const store: TS.Store = useStore()
         100%{ transform: translateX(70%); opacity: 0 }
     }
     
+    #part_x { width: 100%; height: 100%; position: absolute; }
     .ppp{ transform: translateX(-70%); opacity: 0 }
 
 </style>

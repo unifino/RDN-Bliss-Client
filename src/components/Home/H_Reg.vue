@@ -347,14 +347,14 @@ const store: TS.Store = useStore()
     }
 
     .icon{
-        font-family: fas-6;
+        font-family: fas;
         font-size: 50px;
         padding-left: 5px;
         margin-right: 7px;
     }
 
     .check{
-        font-family: fas-6;
+        font-family: fas;
         font-size: 25px;
         padding-right: 5px;
         position: relative;

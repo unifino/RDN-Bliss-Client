@@ -1,0 +1,232 @@
+<template>  
+    <div id="part_x" class="ppp" ref="part_x">
+        <div v-for="(G,i) in GI_F" :key="i" class="section">
+
+            <div class="title no_select"> {{ G.title }}</div>
+            
+            <div id="infoWrapper" >
+
+                <div class="symptomsWrapper" :class="G.addMode ? 'block' : 'none'">
+                    <div class="symptom" v-for="(S,j) in G.symptoms.filter( s => !newUser.GI_F[G.title].includes(s) )" :key="j" @click="add(i,G.title,S)">{{S}}</div>
+                    <div class="add" @click="back(i)"><span class="note">Back</span></div>
+                </div>
+
+                <div class="symptomsWrapper" :class="!G.addMode ? 'block' : 'none'">
+                    <div 
+                        @mouseenter="trash($event,'in')" @mouseleave="trash($event,'out')" 
+                        class="symptom" v-for="(S,k) in G.symptoms.filter( s => newUser.GI_F[G.title].includes(s) )" :key="k">
+                        {{S}}
+                        <div ref="trashes" class="no_select trash" @click="remove(G.title,S)"></div>
+                    </div>
+                </div>
+                
+                <div :class="'no_select add ' + ( G.addMode ? 'none' : 'block' )" @click="list(i)">
+                    <span class="note">Add New Symptom</span>
+                </div>
+            
+            </div>
+        
+        </div>
+    </div>
+</template>
+
+// -- =====================================================================================
+
+<script setup lang="ts">
+
+import { ref }                              from 'vue'
+import { useStore }                         from 'vuex'
+import * as TS                              from '@/types/types'
+import * as Tools                           from '@/mixins/Tools';
+
+const store: TS.Store = useStore()
+
+// -- =====================================================================================
+
+    const i = 5
+    const part_x = ref<HTMLElement>( {} as HTMLElement )
+
+    const newUser: { 
+        GI_F : {
+            [TS.GI_Functions.BowelMovement]: string[]
+            [TS.GI_Functions.Digestion]: string[]
+            [TS.GI_Functions.Appetite]: string[]
+        }
+    } = {
+        GI_F: {
+            "Bowel Movement": [],
+            Digestion: [],
+            Appetite: []
+        }
+    };
+
+    let Bowel_Movement_Symptoms = [ "Constipation", "Diarrhea", "IBS-Constipation", "IBS-Diarrhea", "Loose Watery Stool", "Steatorrhea", "Hematochezia", "Melena", "etc" ]
+    let Digestion_Symptoms = [ "Nausea", "Vomiting", "Diarrhea", "Constipation", "Heartburn", "Ulces", "Fiatulence", "Bloating", "Xerostomia", "Mucositis", "Dysphagia", "Mouth Sores", "Difficulty Chewing or Swallowing|Dental Caries", "Abdominal Distention"  ]
+    let Appetite_Symptoms = [ "Good-Poor Appetite", "Loss of Appetite", "Increase Desire to Eat", "Poor Oral Intake", "Food Intolerance" , "Food Allergy" ]
+
+    const GI_F = ref([
+        { addMode: false, title: TS.GI_Functions.BowelMovement, symptoms: Bowel_Movement_Symptoms },
+        { addMode: false, title: TS.GI_Functions.Digestion, symptoms: Digestion_Symptoms },
+        { addMode: false, title: TS.GI_Functions.Appetite, symptoms: Appetite_Symptoms }
+    ]);
+
+    const trash = async ( event: MouseEvent, mode: 'in' | 'out' ) => {
+        const myTrash = ( event.target as HTMLElement ).getElementsByClassName( "trash" )[0];
+        if ( myTrash ) myTrash.className = "no_select trash trash_" + mode
+        if ( mode === "out" ) {
+            await new Promise( _ => setTimeout( _, 150 ) )
+            myTrash.className = "no_select trash"
+        }
+    }
+
+
+// -- =====================================================================================
+
+    const list = ( target: number ) => GI_F.value[ target ].addMode = true
+    const back = ( target: number ) => GI_F.value[ target ].addMode = false
+
+    const add = ( g: number, G: TS.GI_Functions, S: string ) => {
+        newUser.GI_F[G].push(S) 
+        GI_F.value[ g ].addMode = false
+    }
+
+    const remove = ( G: TS.GI_Functions, S: string ) => {
+        newUser.GI_F[G] = newUser.GI_F[G].filter( x => x !== S )
+        // .. ForceUpdate
+        GI_F.value[0].addMode = !GI_F.value[0].addMode
+        GI_F.value[0].addMode = !GI_F.value[0].addMode
+    }
+
+// -- =====================================================================================
+
+    store.watch(
+        getters => getters.ppp,
+        ( nV, oV ) => Tools.pppAnime( oV, nV, i, part_x )
+    )
+    
+// -- =====================================================================================
+
+</script>
+
+
+// -- =====================================================================================
+
+<style scoped>
+
+    .section{
+        height: 90%;
+        width: 32%;
+        margin: 0 .66%;
+        position: relative;
+        float: left;
+    }
+
+    .title{
+        font-family: Oswald;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        padding: 10px 0;
+        border-bottom: 1px solid gray;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .none{ display: none }
+
+    .symptomsWrapper{
+        height: auto;
+        text-align: center;
+        visibility: visible;
+    }
+
+    .symptom {
+        background-color: #F0F0F0;
+        height: 27px;
+        width: 70%;
+        border-radius: 7px;
+        border: solid gray 1px;
+        box-shadow: 0 0 1px 0px rgb(88 88 91);
+        margin: 7px auto;
+        font-family: Oswald;
+        font-size: 17px;
+        padding: 10px 20px;
+        color: #081E2F;
+        font-weight: bold;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .add{
+        color: #007f9b;
+        text-align: center;
+        width: 70%;
+        margin: 5px auto;
+        font-family: fas;
+        font-size: 30px;
+        opacity: .7;
+        cursor: pointer;
+    }
+    .add:hover{
+        opacity: 1;
+    }
+
+    .trash{
+        color: #f80a0a;
+        text-align: center;
+        right: 0;
+        margin-right: -10px;
+        margin-left: -17px;
+        height: 27px;
+        width: 27px;
+        font-family: fas;
+        font-size: 27px;
+        cursor: pointer;
+        position: relative;
+        opacity: 0;
+        float: right;
+    }
+
+    .note{
+        color: #555555;
+        font-family: Manrope;
+        font-size: 14px;
+        font-weight: bold;
+        padding-left: 10px;
+        vertical-align: 25%;
+        position: relative;
+    }
+
+    #infoWrapper{
+        text-align: center;
+        height: 82%;
+        width: 100%;
+        position: relative;
+        float: right;
+        overflow-y: auto;
+
+    }
+
+    .trash_in {
+        animation           : trash_in .3s;
+        animation-fill-mode : both;
+        z-index: 1;
+    }
+    @keyframes trash_in {
+        0%  { transform: translateY(70%); opacity: 0 }
+        100%{ transform: translateY(0); opacity: 1 }
+    }
+
+    .trash_out {
+        animation           : trash_out .15s;
+        animation-fill-mode : both;
+        z-index: 1;
+    }
+    @keyframes trash_out {
+        0%  { transform: translateY(0); opacity: 1 }
+        100%{ transform: translateY(70%); opacity: 0 }
+    }
+    
+</style>
+
+// -- =====================================================================================

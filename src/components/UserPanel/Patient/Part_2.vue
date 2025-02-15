@@ -1,5 +1,5 @@
 <template>  
-    <div id="part_2" class="ppp" ref="part_x">
+    <div id="part_x" class="ppp" ref="part_x">
         <div id="infoWrapper">
             <input ref="firstname" type="text" placeholder="Medical Diagnosis" />
             <input ref="lastname" type="text" placeholder="Past Medical History" />
@@ -42,8 +42,6 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
 <style scoped>
-
-    #part_2 { width: 100%; height: 100%; position: absolute; }
 
     #infoWrapper{
         height: auto;

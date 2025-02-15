@@ -174,7 +174,7 @@ const store: TS.Store = useStore()
     }
 
     .icon{
-        font-family: fas-6;
+        font-family: fas;
         font-size: 60px;
         padding-left: 7px;
         margin-right: 20px;
