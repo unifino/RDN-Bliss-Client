@@ -87,7 +87,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    onMounted ( async() => { for( let i in Titles.value ) slider("P") } )
+    onMounted ( async() => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
 
 // -- =====================================================================================
 

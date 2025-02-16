@@ -30,8 +30,8 @@ const state: TS.State = {
         firstname: "",
         lastname: "",
         birthday: "",
-        ms: CTS.MS.Single,
-        education: "",
+        ms: undefined,
+        education: undefined,
 
         gender: CTS.Gender.null,
 
@@ -68,6 +68,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
     [ TS.Mutates.userTool ]         ( state, payload ) { state.userTool = payload },
     [ TS.Mutates.ppp ]              ( state, payload ) { state.ppp = payload },
     
+    [ TS.Mutates._np_Gender ]       ( state, payload ) { state.newPatient.gender = payload },
     [ TS.Mutates._np_FirstName ]    ( state, payload ) { state.newPatient.firstname = payload },
     [ TS.Mutates._np_LastName ]     ( state, payload ) { state.newPatient.lastname = payload },
     [ TS.Mutates._np_BirthDay ]     ( state, payload ) { state.newPatient.birthday = payload },
@@ -102,6 +103,7 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
     [ TS.Acts.userTool ]        (c,p) { store.commit( TS.Mutates.userTool, p ) },
     [ TS.Acts.ppp ]             (c,p) { store.commit( TS.Mutates.ppp, p ) },
 
+    [ TS.Acts._np_Gender ]      (c,p) { store.commit( TS.Mutates._np_Gender, p) },
     [ TS.Acts._np_FirstName ]   (c,p) { store.commit( TS.Mutates._np_FirstName, p) },
     [ TS.Acts._np_LastName ]    (c,p) { store.commit( TS.Mutates._np_LastName, p) },
     [ TS.Acts._np_BirthDay ]    (c,p) { store.commit( TS.Mutates._np_BirthDay, p) },

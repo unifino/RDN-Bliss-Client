@@ -205,7 +205,7 @@ const store: TS.Store = useStore()
         userData.username   = usrnme.value.value
         if ( frst_n.value.value ) userData.firstname = frst_n.value.value
         if ( frst_n.value.value ) userData.lastname = last_n.value.value
-        if ( gender.value.value !== "Prefer not to Answer" )
+        if ( gender.value.value !== "?" )
             userData.gender = ( gender.value.value as CTS.Gender )
         if ( birthDate !== "Invalid Date" ) userData.birthday = birthDate
 

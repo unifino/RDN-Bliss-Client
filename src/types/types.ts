@@ -90,6 +90,7 @@ export enum Mutates {
     userTool        = "UserTools",
     ppp             = "PatientProfilePart",
 
+    _np_Gender      = "New Patient Gender",
     _np_FirstName   = "New Patient First Name",
     _np_LastName    = "New Patient Last Name",
     _np_BirthDay    = "New Patient BirthDay",
@@ -122,6 +123,7 @@ export type MyMutations<S = State> = {
     [ Mutates.userTool ]        ( state: S, payload: UserTools ):       void;
     [ Mutates.ppp ]             ( state: S, payload: PPP ):             void;
     
+    [ Mutates._np_Gender ]      ( state: S, payload: CTS.Gender ):      void;
     [ Mutates._np_FirstName ]   ( state: S, payload: string ):          void;
     [ Mutates._np_LastName ]    ( state: S, payload: string ):          void;
     [ Mutates._np_BirthDay ]    ( state: S, payload: string ):          void;
@@ -154,6 +156,7 @@ export enum Acts {
     userTool        = "UserTools",
     ppp             = "PatientProfilePart",
 
+    _np_Gender      = "New Patient Gender",
     _np_FirstName   = "New Patient First Name",
     _np_LastName    = "New Patient Last Name",
     _np_BirthDay    = "New Patient BirthDay",
@@ -184,6 +187,7 @@ export interface MyActions {
     [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):    void;
     [ Acts.ppp ]                ( {dispatch}: AAC, payload: PPP ):          void;
     
+    [ Acts._np_Gender ]         ( {dispatch}: AAC, payload: CTS.Gender ):   void;
     [ Acts._np_FirstName ]      ( {dispatch}: AAC, payload: string ):       void;
     [ Acts._np_LastName ]       ( {dispatch}: AAC, payload: string ):       void;
     [ Acts._np_BirthDay ]       ( {dispatch}: AAC, payload: string ):       void;
