@@ -55,8 +55,8 @@ import Part_1                               from '@/components/UserPanel/Patient
 import Part_2                               from '@/components/UserPanel/Patient/Part_2.vue'
 import Part_3                               from '@/components/UserPanel/Patient/Part_3.vue'
 import Part_4                               from '@/components/UserPanel/Patient/Part_4.vue'
-import Part_5                               from '@/components/UserPanel/Patient/Part_5.vue'
-import GI_Function                               from '@/components/UserPanel/Patient/GI_Function.vue'
+import Part_5                               from '@/components/UserPanel/Patient/PatientAnthropometry.vue'
+import GI_Function                          from '@/components/UserPanel/Patient/GI_Function.vue'
 import Part_7                               from '@/components/UserPanel/Patient/Part_7.vue'
 const store: TS.Store = useStore()
 
@@ -87,7 +87,8 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    onMounted ( async() => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
+    // onMounted ( async() => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
+    onMounted ( async() => { for( let i=0; i<3; i++ ) slider("P") } )
 
 // -- =====================================================================================
 

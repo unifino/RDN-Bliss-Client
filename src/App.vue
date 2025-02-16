@@ -128,7 +128,7 @@ const store: TS.Store = useStore()
         src : url('../src/assets/Fonts/TsukimiRounded-Regular.ttf')
     }
 
-    input{
+    input, .field{
         background-color: #F0F0F0;
         font-family: Oswald;
         font-size: 17px;
