@@ -9,9 +9,9 @@
         <div id="infoWrapper">
             <input ref="firstname" type="text" placeholder="First Name" />
             <input ref="lastname" type="text" placeholder="Last Name" />
-            <input ref="age" type="text" placeholder="Birth Day" />
-            <input ref="martialStatus" type="text" placeholder="Martial Status" />
-            <input ref="educationalLevel" type="text" placeholder="Educational Level" />
+            <input ref="birthday" type="text" placeholder="Birth Day" />
+            <input ref="ms" type="text" placeholder="Martial Status" />
+            <input ref="education" type="text" placeholder="Educational Level" />
             <input ref="occupation" type="text" placeholder="Occupation" />
         </div>
     </div>
@@ -33,11 +33,36 @@ const store: TS.Store = useStore()
 
     const i = 0
     const part_x = ref<HTMLElement>( {} as HTMLElement )
+
+    const firstname = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const lastname = ref<HTMLInputElement>( {} as HTMLInputElement )
+    const birthday = ref<HTMLElement>( {} as HTMLElement )
+    const ms = ref<HTMLElement>( {} as HTMLElement )
+    const education = ref<HTMLElement>( {} as HTMLElement )
+    const occupation = ref<HTMLElement>( {} as HTMLElement )
+    
+    // const newPatient = store.getters.newPatient
     
     const Genders = ref ( [
         { type: CTS.Gender.male, selected: false },
         { type: CTS.Gender.female, selected: false }
     ] )
+
+// -- =====================================================================================
+
+    const myData = () => {
+        store.commit( TS.Mutates._np_FirstName, firstname.value.value )
+        store.commit( TS.Mutates._np_LastName, lastname.value.value )
+        
+    }
+
+    const myReset = () => {
+        firstname.value.value = ""
+        lastname.value.value = ""
+
+        myData()
+    }
+
 
 // -- =====================================================================================
 
@@ -51,6 +76,19 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.ppp,
         ( nV, oV ) => Tools.pppAnime( oV, nV, i, part_x )
+    )
+
+    store.watch(
+        getters => getters.Flag_resetForm,
+        () => myReset()
+    )
+
+    store.watch(
+        getters => getters.Flag_savePatient,
+        ( nV, oV ) => {
+            console.log(nV,oV);
+            
+            myData()}
     )
 
 // -- =====================================================================================

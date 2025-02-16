@@ -51,7 +51,7 @@ import { ref, onMounted }                   from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import Part_1                               from '@/components/UserPanel/Patient/Part_1.vue'
+import Part_1                               from '@/components/UserPanel/Patient/General_Info.vue'
 import Part_2                               from '@/components/UserPanel/Patient/Part_2.vue'
 import Part_3                               from '@/components/UserPanel/Patient/Part_3.vue'
 import Part_4                               from '@/components/UserPanel/Patient/Part_4.vue'
@@ -65,9 +65,9 @@ const store: TS.Store = useStore()
     const patientsBox = ref<HTMLElement>( {} as HTMLElement )
     
     const buttons = [ 
-        { title: "Save New Patient", fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.Patients ) },
+        { title: "Save New Patient", fnc: () => store.commit( TS.Mutates.Flag_savePatient, !store.getters.Flag_savePatient ) },
         { title: "Reset Form", fnc: () => resetForm() },
-        { title: "Back to Previous Menu", fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.Patients ), marin: true },
+        { title: "Back to Previous Menu", fnc: () => store.commit( TS.Mutates.userTool, TS.UserTools.Patients ), marin: true },
     ]
 
     const Titles = ref ( [
@@ -97,22 +97,22 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const slider = ( act: "N" | "P" ) => {
-
         const cfi = store.getters.ppp.i
         const nfi = ( cfi + ( act === "N" ? 1 : -1 ) + Titles.value.length ) % Titles.value.length
         Titles.value[ cfi ].focus = false
         Titles.value[ nfi ].focus = true
         const mov = act === "N" ? "R" : "L" 
         store.commit( TS.Mutates.ppp, { i: nfi, m: mov } )
-
     }
 
 // -- =====================================================================================
 
     const resetForm = async () => {
-        store.dispatch( TS.Acts.userTool, TS.UserTools.null )
-        await new Promise( _ => setTimeout( _, 150 ) )
-        store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient )
+        store.commit( TS.Mutates.userTool, TS.UserTools.null )
+        await new Promise( _ => setTimeout( _, 250 ) )
+        store.commit( TS.Mutates.Flag_resetForm, !store.getters.Flag_resetForm )
+        await new Promise( _ => setTimeout( _, 350 ) )
+        store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPatient )
     }
 
 // -- =====================================================================================
@@ -124,6 +124,11 @@ const store: TS.Store = useStore()
                 if ( store.getters.userTool === TS.UserTools.CreateNewPatient )
                     _out() 
         }
+    )
+
+    store.watch(
+        getters => getters.Flag_resetForm,
+        () => { while ( store.getters.ppp.i !== 0 ) slider("N") }
     )
 
     store.watch(

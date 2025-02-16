@@ -62,6 +62,8 @@ export type State = {
     Flag_speed: boolean
     Flag_H010_Hand: boolean
     Flag_H100_Alert: boolean
+    Flag_savePatient: boolean
+    Flag_resetForm: boolean
 
 }
 
@@ -87,7 +89,15 @@ export enum Mutates {
     userType        = "UserType",
     userTool        = "UserTools",
     ppp             = "PatientProfilePart",
-    
+
+    _np_FirstName   = "New Patient First Name",
+    _np_LastName    = "New Patient Last Name",
+    _np_BirthDay    = "New Patient BirthDay",
+    _np_MS          = "New Patient Martial Status",
+    _np_Education   = "New Patient Educational Level",
+    _np_Occupation  = "New Patient Occupation",
+    _np_GIF         = "New Patient GIFs",
+
     H010IDx         = "H010Panel_ID",
     
     Flag_plan_B     = "Flag_plan_B",
@@ -95,6 +105,10 @@ export enum Mutates {
     Flag_speed      = "Flag_speed",
     Flag_H010_Hand  = "H010HandControl",
     Flag_H100_Alert = "Flag_H100_AlertControl",
+    Flag_savePatient= "Flag_savePatient",
+    Flag_resetForm  = "Flag_resetForm",
+    
+
 }
 
 // .. declare Mutations
@@ -108,6 +122,14 @@ export type MyMutations<S = State> = {
     [ Mutates.userTool ]        ( state: S, payload: UserTools ):       void;
     [ Mutates.ppp ]             ( state: S, payload: PPP ):             void;
     
+    [ Mutates._np_FirstName ]   ( state: S, payload: string ):          void;
+    [ Mutates._np_LastName ]    ( state: S, payload: string ):          void;
+    [ Mutates._np_BirthDay ]    ( state: S, payload: string ):          void;
+    [ Mutates._np_MS ]          ( state: S, payload: CTS.MS ):          void;
+    [ Mutates._np_Education ]   ( state: S, payload: CTS.Education ):   void;
+    [ Mutates._np_Occupation ]  ( state: S, payload: string ):          void;
+    [ Mutates._np_GIF ]         ( state: S, payload: CTS.GI_F ):        void;
+    
     [ Mutates.H010IDx ]         ( state: S, payload: number ):          void;
     
     [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):         void;
@@ -115,6 +137,8 @@ export type MyMutations<S = State> = {
     [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):         void;
     [ Mutates.Flag_H010_Hand ]  ( state: S, payload: boolean ):         void;
     [ Mutates.Flag_H100_Alert ] ( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_savePatient ]( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_resetForm ]  ( state: S, payload: boolean ):         void;
 }
 
 // -- =====================================================================================
@@ -130,6 +154,14 @@ export enum Acts {
     userTool        = "UserTools",
     ppp             = "PatientProfilePart",
 
+    _np_FirstName   = "New Patient First Name",
+    _np_LastName    = "New Patient Last Name",
+    _np_BirthDay    = "New Patient BirthDay",
+    _np_MS          = "New Patient Martial Status",
+    _np_Education   = "New Patient Educational Level",
+    _np_Occupation  = "New Patient Occupation",
+    _np_GIF         = "New Patient GIFs",
+
     H010IDx         = "H010Panel_ID",
     
     Flag_plan_B     = "Flag_plan_B",
@@ -137,6 +169,8 @@ export enum Acts {
     Flag_speed      = "Flag_speed",
     Flag_H010_Hand  = "H010HandControl",
     Flag_H100_Alert = "Flag_H100_AlertControl",
+    Flag_savePatient= "Flag_savePatient",
+    Flag_resetForm  = "Flag_resetForm",
 }
 
 // .. declare Action Interface
@@ -148,8 +182,16 @@ export interface MyActions {
     
     [ Acts.userType ]           ( {dispatch}: AAC, payload: CTS.UserTypes ):void;
     [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):    void;
-    [ Mutates.ppp ]             ( {dispatch}: AAC, payload: PPP ):          void;
+    [ Acts.ppp ]                ( {dispatch}: AAC, payload: PPP ):          void;
     
+    [ Acts._np_FirstName ]      ( {dispatch}: AAC, payload: string ):       void;
+    [ Acts._np_LastName ]       ( {dispatch}: AAC, payload: string ):       void;
+    [ Acts._np_BirthDay ]       ( {dispatch}: AAC, payload: string ):       void;
+    [ Acts._np_MS ]             ( {dispatch}: AAC, payload: CTS.MS ):       void;
+    [ Acts._np_Education ]      ( {dispatch}: AAC, payload: CTS.Education ):void;
+    [ Acts._np_Occupation ]     ( {dispatch}: AAC, payload: string ):       void;
+    [ Acts._np_GIF ]            ( {dispatch}: AAC, payload: CTS.GI_F ):     void;
+
     [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):       void;
         
     [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):      void;
@@ -157,6 +199,8 @@ export interface MyActions {
     [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):      void;
     [ Acts.Flag_H010_Hand ]     ( {dispatch}: AAC, payload: boolean ):      void;
     [ Acts.Flag_H100_Alert ]    ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_savePatient ]   ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_resetForm ]     ( {dispatch}: AAC, payload: boolean ):      void;
 }
 
 // -- =====================================================================================
@@ -179,6 +223,8 @@ export type MyGetters = {
     Flag_speed          ( state: State ): boolean
     Flag_H010_Hand      ( state: State ): boolean
     Flag_H100_Alert     ( state: State ): boolean
+    Flag_savePatient    ( state: State ): boolean
+    Flag_resetForm      ( state: State ): boolean
 }
 
 // -- =====================================================================================

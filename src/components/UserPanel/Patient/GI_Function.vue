@@ -7,14 +7,14 @@
             <div id="infoWrapper" >
 
                 <div class="symptomsWrapper" :class="G.addMode ? 'block' : 'none'">
-                    <div class="symptom option" v-for="(S,j) in G.symptoms.filter( s => !newPatient.GI_F[G.title].includes(s) )" :key="j" @click="add(i,G.title,S)">{{S}}</div>
+                    <div class="symptom option" v-for="(S,j) in G.symptoms.filter( s => !myNewPatient_GIF[G.title].includes(s) )" :key="j" @click="add(i,G.title,S)">{{S}}</div>
                     <div class="add" @click="back(i)"><span class="note">Back</span></div>
                 </div>
 
                 <div class="symptomsWrapper" :class="!G.addMode ? 'block' : 'none'">
                     <div 
                         @mouseenter="trash($event,'in')" @mouseleave="trash($event,'out')" 
-                        class="symptom" v-for="(S,k) in G.symptoms.filter( s => newPatient.GI_F[G.title].includes(s) )" :key="k">
+                        class="symptom" v-for="(S,k) in G.symptoms.filter( s => myNewPatient_GIF[G.title].includes(s) )" :key="k">
                         {{S}}
                         <div ref="trashes" class="no_select trash" @click="remove(G.title,S)"></div>
                     </div>
@@ -47,7 +47,7 @@ const store: TS.Store = useStore()
     const i = 5
     const part_x = ref<HTMLElement>( {} as HTMLElement )
 
-    const newPatient = store.getters.newPatient
+    const myNewPatient_GIF: CTS.GI_F = JSON.parse( JSON.stringify( store.getters.newPatient.GI_F ) )
 
     let Bowel_Movement_Symptoms = [ "Constipation", "Diarrhea", "IBS-Constipation", "IBS-Diarrhea", "Loose Watery Stool", "Steatorrhea", "Hematochezia", "Melena", "etc" ]
     let Digestion_Symptoms = [ "Nausea", "Vomiting", "Diarrhea", "Constipation", "Heartburn", "Ulces", "Fiatulence", "Bloating", "Xerostomia", "Mucositis", "Dysphagia", "Mouth Sores", "Difficulty Chewing or Swallowing|Dental Caries", "Abdominal Distention"  ]
@@ -68,22 +68,35 @@ const store: TS.Store = useStore()
         }
     }
 
-
 // -- =====================================================================================
+
+    const myForceUpdate = () => {
+        // .. ForceUpdate
+        GI_F.value[0].addMode = !GI_F.value[0].addMode
+        GI_F.value[0].addMode = !GI_F.value[0].addMode
+    }
 
     const list = ( target: number ) => GI_F.value[ target ].addMode = true
     const back = ( target: number ) => GI_F.value[ target ].addMode = false
 
     const add = ( g: number, G: CTS.GI_Functions, S: string ) => {
-        newPatient.GI_F[G].push(S) 
+        myNewPatient_GIF[G].push(S)
+        store.commit( TS.Mutates._np_GIF, myNewPatient_GIF )
         GI_F.value[ g ].addMode = false
     }
 
     const remove = ( G: CTS.GI_Functions, S: string ) => {
-        newPatient.GI_F[G] = newPatient.GI_F[G].filter( x => x !== S )
-        // .. ForceUpdate
-        GI_F.value[0].addMode = !GI_F.value[0].addMode
-        GI_F.value[0].addMode = !GI_F.value[0].addMode
+        myNewPatient_GIF[G] = myNewPatient_GIF[G].filter( x => x !== S )
+        myForceUpdate()
+    }
+
+    const myReset = () => {
+        myNewPatient_GIF.Appetite = []
+        myNewPatient_GIF.Digestion = []
+        myNewPatient_GIF[ CTS.GI_Functions.BowelMovement ] = []
+        store.commit( TS.Mutates._np_GIF, myNewPatient_GIF )
+        myForceUpdate()
+        // myData()
     }
 
 // -- =====================================================================================
@@ -91,6 +104,11 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.ppp,
         ( nV, oV ) => Tools.pppAnime( oV, nV, i, part_x )
+    )
+
+    store.watch(
+        getters => getters.Flag_resetForm,
+        () => myReset()
     )
     
 // -- =====================================================================================
