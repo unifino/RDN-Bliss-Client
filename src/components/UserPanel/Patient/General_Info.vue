@@ -9,8 +9,40 @@
         <div id="infoWrapper">
             <input ref="firstname" type="text" placeholder="First Name" />
             <input ref="lastname" type="text" placeholder="Last Name" />
-            <input ref="birthday" type="text" placeholder="Birth Day" />
-            <input ref="ms" type="text" placeholder="Martial Status" />
+            
+           <div id="birthday">
+                <select class="date" v-model="selectedYear" @change="updateDays"><!-- Disabled label -->
+                    <option 
+                        v-for="year in years" :key="year"
+                        :value="year"
+                        :selected="year === 'Year' ? true : false"
+                        :disabled="year === 'Year' ? true : false"
+                    >
+                        {{ year }}
+                    </option>
+                </select>
+                <select class="date" v-model="selectedMonth" @change="updateDays">
+                    <option 
+                        v-for="month in months" :key="month.value" 
+                        :value="month.value"
+                        :selected="month.name === 'Month' ? true : false"
+                        :disabled="month.name === 'Month' ? true : false"
+                    >
+                        {{ month.name }}
+                    </option>
+                </select>
+                <select class="date" v-model="selectedDay" @change="setDateString">
+                    <option 
+                        v-for="day in days" :key="day" :value="day"
+                        :selected="day === 'Day' ? true : false"
+                        :disabled="day === 'Day' ? true : false"
+                    >
+                        {{ day }}
+                    </option>
+                </select>
+            </div>
+            
+           <input ref="ms" type="text" placeholder="Marital Status" />
             <input ref="education" type="text" placeholder="Educational Level" />
             <input ref="occupation" type="text" placeholder="Occupation" />
         </div>
@@ -21,7 +53,7 @@
 
 <script setup lang="ts">
 
-import { ref }                              from 'vue'
+import { ref,onMounted }                    from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as CTS                             from "@/types/common";
@@ -36,7 +68,6 @@ const store: TS.Store = useStore()
 
     const firstname = ref<HTMLInputElement>( {} as HTMLInputElement )
     const lastname = ref<HTMLInputElement>( {} as HTMLInputElement )
-    const birthday = ref<HTMLElement>( {} as HTMLElement )
     const ms = ref<HTMLElement>( {} as HTMLElement )
     const education = ref<HTMLElement>( {} as HTMLElement )
     const occupation = ref<HTMLElement>( {} as HTMLElement )
@@ -47,6 +78,82 @@ const store: TS.Store = useStore()
         { type: CTS.Gender.male, selected: false },
         { type: CTS.Gender.female, selected: false }
     ] )
+
+// -- =====================================================================================
+
+    onMounted( () => {
+        populateYears()
+        updateDays()
+    } )
+
+    // -- =====================================================================================
+
+    const selectedYear = ref("Year"); // Initialize to null
+    const selectedMonth = ref("Month"); // Initialize to null
+    const selectedDay = ref("Day"); // Initialize to null
+
+    const months = [
+        { name: "Month", value: "Month" },
+        { name: "January", value: "1" },
+        { name: "February", value: "2" },
+        { name: "March", value: "3" },
+        { name: "April", value: "4" },
+        { name: "May", value: "5" },
+        { name: "June", value: "6" },
+        { name: "July", value: "7" },
+        { name: "August", value: "8" },
+        { name: "September", value: "9" },
+        { name: "October", value: "10" },
+        { name: "November", value: "11" },
+        { name: "December", value: "12" }
+    ];
+    const days = ref<string[]>(["Day"])
+    const years = ref<string[]>(["Year"])
+
+    const populateYears = () => {
+        const currentYear = new Date().getFullYear()
+        for ( let y = currentYear; y >= currentYear - 100; y-- ) years.value.push( y+"" )
+        setDateString()
+    }
+
+    const updateDays = () => {
+        
+        days.value = [ "Day" ]
+        const month = selectedMonth.value
+        const year = selectedYear.value
+
+        if ( month && year ) {
+            let daysInMonth = 31
+            if ( month === "2" )
+                daysInMonth = (Number(year) % 4 === 0 && (Number(year) % 100 !== 0 || Number(year) % 400 === 0)) ? 29 : 28
+            else if ( ["4", "6", "9", "11"].includes(month) )
+                daysInMonth = 30
+
+            for ( let day = 1; day <= daysInMonth; day++) days.value.push(day+"")
+
+            if ( selectedDay.value && Number(selectedDay.value) > daysInMonth ) selectedDay.value = ""
+
+        }
+
+        setDateString()
+    
+    }
+
+    const setDateString = () => {
+        if ( 
+            selectedDay.value && selectedMonth.value && selectedYear.value && 
+            selectedDay.value !== "Day" && selectedMonth.value !== "Month" && selectedYear.value !== "Year"
+        ) {
+            const date = new Date(
+                Number( selectedYear.value ),
+                Number( selectedMonth.value ),
+                Number( selectedDay.value )
+            )
+            // Format as YYYY-MM-DD
+            store.commit( TS.Mutates._np_BirthDay, date.toISOString().split('T')[0] )
+        }
+        store.commit( TS.Mutates._np_BirthDay, "" ) 
+    }
 
 // -- =====================================================================================
 
@@ -125,6 +232,27 @@ const store: TS.Store = useStore()
     .gender:hover{
         -webkit-filter: none;
         filter: none;
+    }
+
+    #birthday{
+        display: flex;
+        justify-content: space-between;
+        width: calc( 100% + 2px);
+        margin: 10px 0;
+    }
+    .date{
+        background-color: #F0F0F0;
+        font-family: Oswald;
+        font-size: 17px;
+        font-weight: bold;
+        color: #62717c;
+        height: 45px;
+        width: auto;
+        border-radius: 7px;
+        border: solid gray 1px;
+        box-shadow: 0 0 1px 0px #58585b;
+        padding: 0 9px;
+        margin: 0;
     }
 
     #infoWrapper{

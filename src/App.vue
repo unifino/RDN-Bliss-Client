@@ -129,18 +129,18 @@ const store: TS.Store = useStore()
     }
 
     input{
+        background-color: #F0F0F0;
+        font-family: Oswald;
+        font-size: 17px;
+        font-weight: bold;
+        color: #081E2F;
         height: 25px;
         width: 210px;
+        padding: 10px 20px;
         border-radius: 7px;
         border: solid gray 1px;
         box-shadow: 0 0 1px 0px rgb(88 88 91);
         margin: 10px 0;
-        font-family: Oswald;
-        font-size: 17px;
-        padding: 10px 20px;
-        color: #081E2F;
-        font-weight: bold;
-        background-color: #F0F0F0;
     }
 
     input:-webkit-autofill,

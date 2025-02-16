@@ -6,7 +6,7 @@
     <!--                                                                                    -->
                 <div id="emergencyWrapper">
 
-                    <div id="emergencyTitle">Emergency Patients</div>
+                    <div id="emergencyTitle no_select">Emergency Patients</div>
 
                     <!-- <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(0,3)" :key="p.id">
                         <div class="nameWrapper">
@@ -14,7 +14,7 @@
                         </div>
                     </div> -->
 
-                    <div id="noEmergencyHint">No Emergency Patients</div>
+                    <div id="noEmergencyHint no_select">No Emergency Patients</div>
                 
                 </div>
     <!--                                                                                    -->
