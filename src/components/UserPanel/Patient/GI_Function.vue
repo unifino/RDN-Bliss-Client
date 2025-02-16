@@ -2,7 +2,7 @@
     <div id="part_x" class="ppp" ref="part_x">
         <div v-for="(G,i) in GI_F" :key="i" class="section">
 
-            <div class="title no_select"> {{ G.title }}</div>
+            <div class="title"> {{ G.title }}</div>
             
             <div id="infoWrapper" >
 
@@ -16,11 +16,11 @@
                         @mouseenter="trash($event,'in')" @mouseleave="trash($event,'out')" 
                         class="symptom" v-for="(S,k) in G.symptoms.filter( s => myNewPatient_GIF[G.title].includes(s) )" :key="k">
                         {{S}}
-                        <div ref="trashes" class="no_select trash" @click="remove(G.title,S)"></div>
+                        <div ref="trashes" class="trash" @click="remove(G.title,S)"></div>
                     </div>
                 </div>
                 
-                <div :class="'no_select add ' + ( G.addMode ? 'none' : 'block' )" @click="list(i)">
+                <div :class="'add ' + ( G.addMode ? 'none' : 'block' )" @click="list(i)">
                     <span class="note">Add New Symptom</span>
                 </div>
             
@@ -61,10 +61,10 @@ const store: TS.Store = useStore()
 
     const trash = async ( event: MouseEvent, mode: 'in' | 'out' ) => {
         const myTrash = ( event.target as HTMLElement ).getElementsByClassName( "trash" )[0];
-        if ( myTrash ) myTrash.className = "no_select trash trash_" + mode
+        if ( myTrash ) myTrash.className = "trash trash_" + mode
         if ( mode === "out" ) {
             await new Promise( _ => setTimeout( _, 150 ) )
-            myTrash.className = "no_select trash"
+            myTrash.className = "trash"
         }
     }
 

@@ -11,7 +11,7 @@
             <GI_Function />
             <Part_7 />
 <!--                                                                                    -->
-            <div id="navigation_box" class="no_select">
+            <div id="navigation_box">
                 <div class="nav" style="float: left;"  @click="slider('P')">Previous</div>
                 <div id="titleBox">
                     <div 
@@ -27,7 +27,7 @@
         </div>
 <!--                                                                                    -->
 
-        <div class="buttonsWrapper no_select">
+        <div class="buttonsWrapper">
             <div
                 class="button"
                 v-for="(b,i) of buttons"

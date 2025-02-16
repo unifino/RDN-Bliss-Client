@@ -6,7 +6,7 @@
                 <div
                     v-for="(x,i) of userMode"
                     :key=i
-                    :class="'section no_select ' + (store.getters.userType===i ? 'selected' : '')"
+                    :class="'section ' + (store.getters.userType===i ? 'selected' : '')"
                     @click="selectUserMode(i)"
                 >
                     <div class="check">{{ store.getters.userType===i?"":"" }}</div>
@@ -29,7 +29,6 @@
         <div id="p4" class="part">
             <div
                 id="regButton"
-                class="no_select"
                 @click="submit()"
             >
                 Register

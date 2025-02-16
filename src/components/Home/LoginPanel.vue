@@ -7,7 +7,7 @@
             <input ref="usrmil" type="text" placeholder="username / e-mail" />
             <input ref="passwd" type="password" placeholder="password" />
             <div id="forgot">Forgot Username | Password ?</div>
-            <div id="loginButton" class="no_select" @click="login()">Log in</div>
+            <div id="loginButton" @click="login()">Log in</div>
         </div>
     </div>
 </template>

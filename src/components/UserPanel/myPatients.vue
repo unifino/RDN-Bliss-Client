@@ -6,15 +6,15 @@
     <!--                                                                                    -->
                 <div id="emergencyWrapper">
 
-                    <div id="emergencyTitle no_select">Emergency Patients</div>
+                    <div id="emergencyTitle">Emergency Patients</div>
 
                     <!-- <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(0,3)" :key="p.id">
                         <div class="nameWrapper">
-                            <div class="name no_select">{{ p.name }}</div>
+                            <div class="name">{{ p.name }}</div>
                         </div>
                     </div> -->
 
-                    <div id="noEmergencyHint no_select">No Emergency Patients</div>
+                    <div id="noEmergencyHint">No Emergency Patients</div>
                 
                 </div>
     <!--                                                                                    -->
@@ -22,7 +22,7 @@
     <!--                                                                                    -->
                 <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
                     <div class="nameWrapper">
-                        <div class="name no_select">{{ p.name }}</div>
+                        <div class="name">{{ p.name }}</div>
                     </div>
                 </div>
     <!--                                                                                    -->
@@ -32,7 +32,7 @@
 
 <!--                                                                                    -->
 
-        <div class="buttonsWrapper no_select">
+        <div class="buttonsWrapper">
             <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
         </div>  
  

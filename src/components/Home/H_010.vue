@@ -7,7 +7,7 @@
             <img v-for="(x,i) of bgPath()" :key="i" :src="bgPath()[i]" />
         </div>
         <div id="newsBox">
-            <img id="bg" class="no_select" :src="bgPath()[store.getters.H010IDx]" />
+            <img id="bg" :src="bgPath()[store.getters.H010IDx]" />
             <div id="bgCover" ref="bgCover" />
             <div id="shadowBox_3" />
             <div id="shadowBox_2" />

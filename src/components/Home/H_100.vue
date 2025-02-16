@@ -8,7 +8,7 @@
             <div
                 v-for="(x,i) of options"
                 :key=i
-                :class="'section no_select ' + ( store.getters.userType === i? 'selected' : '' )"
+                :class="'section ' + ( store.getters.userType === i? 'selected' : '' )"
                 @click="prepareToLogin(i)"
                 ref="userMode"
             >
@@ -16,7 +16,7 @@
                 <div class="txt">{{ x.text }}</div>
             </div>
 <!-- ================================================================================== -->
-            <div class="section no_select mini" @click="headToRegistration">
+            <div class="section mini" @click="headToRegistration">
                 <div class="icon mini"></div>
                 <div class="txt">Create a new Account</div>
             </div>

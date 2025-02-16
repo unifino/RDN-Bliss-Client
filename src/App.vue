@@ -74,7 +74,7 @@ const store: TS.Store = useStore()
 
 <style>
 
-    .no_select {
+    *{
         -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;

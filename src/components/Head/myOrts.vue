@@ -1,6 +1,6 @@
 <template>
     <div id="header_icons_box">
-        <div v-for="(x,i) of options" :key=i class="optionBox no_select">
+        <div v-for="(x,i) of options" :key=i class="optionBox">
             <div 
                 @click="changeOrt(x.code)"
                 :class="store.getters.ort === x.code ? 'selected' : ''"

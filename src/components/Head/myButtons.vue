@@ -3,7 +3,7 @@
         <div
             v-for="(opt,i) of options"
             :key=i
-            class="optionBox no_select"
+            class="optionBox"
             @click="opt.fnc"
         >
             <div :class="'icon ' + opt.class">{{opt.icon}}</div>

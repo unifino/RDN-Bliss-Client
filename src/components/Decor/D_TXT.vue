@@ -1,5 +1,5 @@
 <template>
-    <div id="D_TXT" class="no_select" ref="d_txt">{{ myText }}</div>
+    <div id="D_TXT" ref="d_txt">{{ myText }}</div>
 </template>
 
 // -- =====================================================================================

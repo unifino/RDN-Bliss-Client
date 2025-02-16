@@ -2,7 +2,7 @@
     <div id="my_profile_box" class="init" ref="profile">
         <div id="infoBox">
         </div>
-        <div class="buttonsWrapper no_select">
+        <div class="buttonsWrapper">
             <div class="button" v-for="(b,i) of buttons" :key="i">{{ b.title }}</div>
         </div>
     </div>

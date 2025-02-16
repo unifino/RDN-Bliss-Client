@@ -3,7 +3,7 @@
         <div
             v-for="(opt,i) of Options[ store.getters.userType ] "
             :key=i
-            :class="'optionBox no_select ' + ( [ opt.tool , ...opt.onExtra ].includes( store.getters.userTool ) ? 'selected' : '' )"
+            :class="'optionBox ' + ( [ opt.tool , ...opt.onExtra ].includes( store.getters.userTool ) ? 'selected' : '' )"
             @click="userTool( opt.tool )"
         >
             <div class="icon">{{opt.icon}}</div>

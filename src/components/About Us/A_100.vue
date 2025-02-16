@@ -1,5 +1,5 @@
 <template>
-    <div id="A_100_Box" class="no_select init" ref="a_100">
+    <div id="A_100_Box" class="init" ref="a_100">
         <div id="sections_wrapper">
             <div class="section selected">Institute</div>
             <div class="section">Our Team</div>
