@@ -96,7 +96,6 @@ const store: TS.Store = useStore()
         myNewPatient_GIF[ CTS.GI_Functions.BowelMovement ] = []
         store.commit( TS.Mutates._np_GIF, myNewPatient_GIF )
         myForceUpdate()
-        // myData()
     }
 
 // -- =====================================================================================
