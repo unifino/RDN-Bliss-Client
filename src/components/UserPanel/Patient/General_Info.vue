@@ -353,16 +353,6 @@ const store: TS.Store = useStore()
         color: #35393c;
     }
 
-
-    #infoWrapper{
-        height: auto;
-        width: 250px;
-        margin-top: 90px;
-        margin-right: 90px;
-        position: relative;
-        float: right;
-    }
-
 </style>
 
 // -- =====================================================================================

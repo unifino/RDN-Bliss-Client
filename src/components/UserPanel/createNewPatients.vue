@@ -3,8 +3,8 @@
 
         <div id="mainWrapper">
 <!--                                                                                    -->
-            <Part_1 />
-            <Part_2 />
+            <General_Info />
+            <Nutritional_Assessment />
             <Part_3 />
             <Part_4 />
             <Part_5 />
@@ -51,8 +51,8 @@ import { ref, onMounted }                   from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import Part_1                               from '@/components/UserPanel/Patient/General_Info.vue'
-import Part_2                               from '@/components/UserPanel/Patient/Part_2.vue'
+import General_Info                         from '@/components/UserPanel/Patient/General_Info.vue'
+import Nutritional_Assessment               from '@/components/UserPanel/Patient/Nutritional_Assessment.vue'
 import Part_3                               from '@/components/UserPanel/Patient/Part_3.vue'
 import Part_4                               from '@/components/UserPanel/Patient/Part_4.vue'
 import Part_5                               from '@/components/UserPanel/Patient/PatientAnthropometry.vue'
@@ -88,7 +88,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     // onMounted ( async() => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
-    onMounted ( async() => { for( let i=0; i<3; i++ ) slider("P") } )
+    onMounted ( async() => { for( let i=0; i<6; i++ ) slider("P") } )
 
 // -- =====================================================================================
 
@@ -172,17 +172,6 @@ const store: TS.Store = useStore()
 
     .init{
         transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
-    }
-
-    #part_3,#part_4,#part_5,#GI_Function,#part_7,#part_8 { width: 100%; height: 100%; position: absolute; }
-
-    #infoWrapper{
-        height: auto;
-        width: 250px;
-        margin-top: 90px;
-        margin-right: 90px;
-        position: relative;
-        float: right;
     }
 
     input{

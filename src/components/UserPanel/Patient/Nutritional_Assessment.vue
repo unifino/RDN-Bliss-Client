@@ -8,6 +8,7 @@
             <input ref="educationalLevel" type="text" placeholder="Physical Activity Status" />
             <input ref="occupation" type="text" placeholder="Nutritional Deficiency" />
         </div>
+        <div id="infoWindow"></div>
     </div>
 </template>
 
@@ -43,13 +44,13 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #infoWrapper{
-        height: auto;
-        width: 250px;
-        margin-top: 90px;
-        margin-right: 90px;
-        position: relative;
-        float: right;
+    #infoWindow{
+        width: calc(100% - 420px);
+        height: 80%;
+        margin-top: 5%;
+        margin-left: 50px;
+        overflow-y: auto;
+        background-color: rgba(255, 166, 0, 0.044);
     }
     
 </style>

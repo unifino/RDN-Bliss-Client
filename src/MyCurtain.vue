@@ -88,12 +88,7 @@ const store: TS.Store = useStore()
 
     #text{
         color: #108271;
-        /* font-family: AllertaStencil; */
         font-family: Vibur;
-        /* font-family: RalewayDots; */
-        /* font-family: Thasadith; */
-        /* font-family: TsukimiRounded; */
-        /* font-family: PoiretOne; */
         font-size: 70px;
         text-align: center;
         top: 14%;

@@ -215,6 +215,15 @@ const store: TS.Store = useStore()
     #part_x { width: 100%; height: 100%; position: absolute; }
     .ppp{ transform: translateX(-70%); opacity: 0 }
 
+    #infoWrapper{
+        height: auto;
+        width: 250px;
+        margin-top: 85px;
+        margin-right: 75px;
+        position: relative;
+        float: right;
+    }
+
 </style>
 
 <style scoped>

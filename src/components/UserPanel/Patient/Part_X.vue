@@ -30,17 +30,6 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #part_2 { width: 100%; height: 100%; position: absolute; }
-
-    #infoWrapper{
-        height: auto;
-        width: 250px;
-        margin-top: 90px;
-        margin-right: 90px;
-        position: relative;
-        float: right;
-    }
-    
 </style>
 
 // -- =====================================================================================

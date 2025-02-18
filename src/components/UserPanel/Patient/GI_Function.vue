@@ -209,9 +209,8 @@ const store: TS.Store = useStore()
         text-align: center;
         height: 82%;
         width: 100%;
-        position: relative;
-        float: right;
         overflow-y: auto;
+        margin: 0;
 
     }
 
