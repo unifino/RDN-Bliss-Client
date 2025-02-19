@@ -178,22 +178,6 @@ const store: TS.Store = useStore()
         opacity: 1;
     }
 
-    .trash{
-        color: #f80a0a;
-        text-align: center;
-        right: 0;
-        margin-right: -10px;
-        margin-left: -17px;
-        height: 27px;
-        width: 27px;
-        font-family: fas;
-        font-size: 27px;
-        cursor: pointer;
-        position: relative;
-        opacity: 0;
-        float: right;
-    }
-
     .note{
         color: #555555;
         font-family: Manrope;
@@ -210,27 +194,6 @@ const store: TS.Store = useStore()
         width: 100%;
         overflow-y: auto;
         margin: 0;
-
-    }
-
-    .trash_in {
-        animation           : trash_in .3s;
-        animation-fill-mode : both;
-        z-index: 1;
-    }
-    @keyframes trash_in {
-        0%  { transform: translateY(70%); opacity: 0 }
-        100%{ transform: translateY(0); opacity: 1 }
-    }
-
-    .trash_out {
-        animation           : trash_out .15s;
-        animation-fill-mode : both;
-        z-index: 1;
-    }
-    @keyframes trash_out {
-        0%  { transform: translateY(0); opacity: 1 }
-        100%{ transform: translateY(70%); opacity: 0 }
     }
     
 </style>

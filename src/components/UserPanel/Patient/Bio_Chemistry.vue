@@ -43,18 +43,13 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const i = 1
+    const i = 2
     const part_x = ref<HTMLElement>( {} as HTMLElement )
     const iButton = ref<HTMLInputElement[]>( [{}] as HTMLInputElement[] )
     const window = ref<HTMLElement[]>( [{}] as HTMLElement[] )
 
     const sections: Ref<{ title: string; items: string[]; }[] > = ref([
-        { title: "Medical Diagnosis", items: [] },
-        { title: "Past Medical History", items: [] },
-        { title: "Recent Complains", items: [] },
-        { title: "Family History", items: [] },
-        { title: "Physical Activity Status", items: [] },
-        { title: "Nutritional Deficiency", items: [] },
+        { title: "Medical Labs", items: [] },
     ])
 
 // -- =====================================================================================

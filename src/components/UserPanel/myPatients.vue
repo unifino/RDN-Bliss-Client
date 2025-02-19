@@ -8,13 +8,13 @@
 
                     <div id="emergencyTitle">Emergency Patients</div>
 
-                    <!-- <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(0,3)" :key="p.id">
+                    <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(4,6)" :key="p.id">
                         <div class="nameWrapper">
                             <div class="name">{{ p.name }}</div>
                         </div>
-                    </div> -->
+                    </div>
 
-                    <div id="noEmergencyHint">No Emergency Patients</div>
+                    <!-- <div id="noEmergencyHint">No Emergency Patients</div> -->
                 
                 </div>
     <!--                                                                                    -->

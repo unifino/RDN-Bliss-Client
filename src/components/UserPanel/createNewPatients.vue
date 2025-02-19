@@ -5,7 +5,7 @@
 <!--                                                                                    -->
             <General_Info />
             <Nutritional_Assessment />
-            <Part_3 />
+            <Bio_Chemistry />
             <Part_4 />
             <Part_5 />
             <GI_Function />
@@ -53,7 +53,7 @@ import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
 import General_Info                         from '@/components/UserPanel/Patient/General_Info.vue'
 import Nutritional_Assessment               from '@/components/UserPanel/Patient/Nutritional_Assessment.vue'
-import Part_3                               from '@/components/UserPanel/Patient/Part_3.vue'
+import Bio_Chemistry                        from '@/components/UserPanel/Patient/Bio_Chemistry.vue'
 import Part_4                               from '@/components/UserPanel/Patient/Part_4.vue'
 import Part_5                               from '@/components/UserPanel/Patient/PatientAnthropometry.vue'
 import GI_Function                          from '@/components/UserPanel/Patient/GI_Function.vue'
