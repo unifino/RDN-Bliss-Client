@@ -6,10 +6,10 @@
             <General_Info />
             <Nutritional_Assessment />
             <Bio_Chemistry />
-            <Part_4 />
-            <Part_5 />
+            <Medications_Supplements />
+            <PatientAnthropometry />
             <GI_Function />
-            <Part_7 />
+            <Diet_History />
 <!--                                                                                    -->
             <div id="navigation_box">
                 <div class="nav" style="float: left;"  @click="slider('P')">Previous</div>
@@ -54,10 +54,10 @@ import * as Tools                           from '@/mixins/Tools';
 import General_Info                         from '@/components/UserPanel/Patient/General_Info.vue'
 import Nutritional_Assessment               from '@/components/UserPanel/Patient/Nutritional_Assessment.vue'
 import Bio_Chemistry                        from '@/components/UserPanel/Patient/Bio_Chemistry.vue'
-import Part_4                               from '@/components/UserPanel/Patient/Part_4.vue'
-import Part_5                               from '@/components/UserPanel/Patient/PatientAnthropometry.vue'
+import Medications_Supplements              from '@/components/UserPanel/Patient/Medications_Supplements.vue'
+import PatientAnthropometry                 from '@/components/UserPanel/Patient/PatientAnthropometry.vue'
 import GI_Function                          from '@/components/UserPanel/Patient/GI_Function.vue'
-import Part_7                               from '@/components/UserPanel/Patient/Part_7.vue'
+import Diet_History                         from '@/components/UserPanel/Patient/Diet_History.vue'
 const store: TS.Store = useStore()
 
 // -- =====================================================================================
