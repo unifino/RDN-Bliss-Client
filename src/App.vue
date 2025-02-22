@@ -54,13 +54,12 @@ const store: TS.Store = useStore()
         .catch( () => alert( userData.username ) )
 
         const successLogin = async ( userData: CTS.UserData ) => {
-            // ! Consider it
             Tools.setNames( [ userData ] )
             store.dispatch( TS.Acts.Flag_logged_in, true )
             store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
             await new Promise( _ => setTimeout( _, 800 ) )
-            store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient )
+            store.dispatch( TS.Acts.userTool, TS.UserTools.DietPlans )
         }
 
         

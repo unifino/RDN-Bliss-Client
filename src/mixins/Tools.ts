@@ -38,16 +38,21 @@ const delay = () => {
 
 // -- =====================================================================================
 
-export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out", skip=false ) => {
+export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out"|"In_Sent"|"Out_Sent", skip=false ) => {
     if ( phase === "In" ) 
         if ( !skip ) 
             await new Promise( _ => setTimeout( _, delay() ) )
     el.value.className = "Tool_fall_" + phase
 }
 
-export const pppAnime = ( oV: TS.PPP, nV: TS.PPP, i: number, part_x: Ref<HTMLElement> ) => {
+export const pageSlider = ( oV: TS.PPP, nV: TS.PPP, i: number, part_x: Ref<HTMLElement> ) => {
     if ( oV.i === i ) part_x.value.className = nV.m === "R" ? "next_Page" : "previous_Page" 
     if ( nV.i === i ) part_x.value.className = "current_Page_" + nV.m 
+}
+
+export const pageSlider2 = ( oV: TS.PageSlide, nV: TS.PageSlide, ipx: number, part_x: Ref<HTMLElement> ) => {
+    if ( oV.gpx === ipx ) part_x.value.className = nV.move === "R" ? "next_Page" : "previous_Page" 
+    if ( nV.gpx === ipx ) part_x.value.className = "current_Page_" + nV.move 
 }
 
 // -- =====================================================================================

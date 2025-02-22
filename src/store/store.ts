@@ -21,6 +21,7 @@ const state: TS.State = {
     userType: CTS.UserTypes.null,
     userTool: TS.UserTools.null,
     ppp: { i: 0, m: "R" },
+    padeSlide: { origin: TS.UserTools.null, gpx: 0, move: "R" },
 
     newPatient: {
         id: -1,
@@ -67,6 +68,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
     [ TS.Mutates.userType ]         ( state, payload ) { state.userType = payload },
     [ TS.Mutates.userTool ]         ( state, payload ) { state.userTool = payload },
     [ TS.Mutates.ppp ]              ( state, payload ) { state.ppp = payload },
+    [ TS.Mutates.pageSlide ]        ( state, payload ) { state.padeSlide = payload },
     
     [ TS.Mutates._np_Gender ]       ( state, payload ) { state.newPatient.gender = payload },
     [ TS.Mutates._np_FirstName ]    ( state, payload ) { state.newPatient.firstname = payload },
@@ -102,6 +104,7 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
     [ TS.Acts.userType ]        (c,p) { store.commit( TS.Mutates.userType, p ) },
     [ TS.Acts.userTool ]        (c,p) { store.commit( TS.Mutates.userTool, p ) },
     [ TS.Acts.ppp ]             (c,p) { store.commit( TS.Mutates.ppp, p ) },
+    [ TS.Acts.pageSlide ]       (c,p) { store.commit( TS.Mutates.pageSlide, p ) },
 
     [ TS.Acts._np_Gender ]      (c,p) { store.commit( TS.Mutates._np_Gender, p) },
     [ TS.Acts._np_FirstName ]   (c,p) { store.commit( TS.Mutates._np_FirstName, p) },
@@ -136,6 +139,7 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     userType:           state => state.userType,
     userTool:           state => state.userTool,
     ppp:                state => state.ppp,
+    pageSlide:          state => state.padeSlide,
     newPatient:         state => state.newPatient,
 
     H010IDx:            state => state.H010IDx,

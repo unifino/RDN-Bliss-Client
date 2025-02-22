@@ -35,7 +35,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.ppp,
-        ( nV, oV ) => Tools.pppAnime( oV, nV, i, part_x )
+        ( nV, oV ) => Tools.pageSlider( oV, nV, i, part_x )
     )
     
 // -- =====================================================================================

@@ -135,7 +135,10 @@ const store: TS.Store = useStore()
 
     const setGender = ( gender?: CTS.Gender ) => {
 
-        if ( gender ) Genders.value.filter( x => x.type === gender )[0].selected = true
+        if ( gender ) {
+            for ( let i=0; i<Genders.value.length; i++ ) Genders.value[i].selected = false
+            Genders.value.filter( x => x.type === gender )[0].selected = true
+        }
 
         const picked = Genders.value.filter( x => x.selected )
         if ( picked.length ) {
@@ -274,7 +277,7 @@ const store: TS.Store = useStore()
     
     store.watch(
         getters => getters.ppp,
-        ( nV, oV ) => Tools.pppAnime( oV, nV, i, part_x )
+        ( nV, oV ) => Tools.pageSlider( oV, nV, i, part_x )
     )
 
     store.watch(

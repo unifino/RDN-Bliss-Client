@@ -21,6 +21,7 @@ export enum Orts { Home, OurGoals, News, FAQs, AboutUs, UserPanel, NoWhere }
 export type OrtData = {[ K in Orts ]: { name: string, text: string } }
 
 export type PPP = { i: number, m: "R"|"L" }
+export type PageSlide = { origin: UserTools, gpx: number, move: "R"|"L" }
 
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
@@ -51,6 +52,7 @@ export type State = {
     userType: CTS.UserTypes
     userTool: UserTools
     ppp: PPP
+    padeSlide: PageSlide
     newPatient: CTS.Patient
 
     // .. declare minor data
@@ -89,6 +91,7 @@ export enum Mutates {
     userType        = "UserType",
     userTool        = "UserTools",
     ppp             = "PatientProfilePart",
+    pageSlide       = "pageSlideByUserTool",
 
     _np_Gender      = "New Patient Gender",
     _np_FirstName   = "New Patient First Name",
@@ -122,6 +125,7 @@ export type MyMutations<S = State> = {
     [ Mutates.userType ]        ( state: S, payload: CTS.UserTypes ):   void;
     [ Mutates.userTool ]        ( state: S, payload: UserTools ):       void;
     [ Mutates.ppp ]             ( state: S, payload: PPP ):             void;
+    [ Mutates.pageSlide ]       ( state: S, payload: PageSlide ):       void;
     
     [ Mutates._np_Gender ]      ( state: S, payload: CTS.Gender ):      void;
     [ Mutates._np_FirstName ]   ( state: S, payload: string ):          void;
@@ -155,6 +159,7 @@ export enum Acts {
     userType        = "UserType",
     userTool        = "UserTools",
     ppp             = "PatientProfilePart",
+    pageSlide       = "pageSlideByUserTool",
 
     _np_Gender      = "New Patient Gender",
     _np_FirstName   = "New Patient First Name",
@@ -186,6 +191,7 @@ export interface MyActions {
     [ Acts.userType ]           ( {dispatch}: AAC, payload: CTS.UserTypes ):void;
     [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):    void;
     [ Acts.ppp ]                ( {dispatch}: AAC, payload: PPP ):          void;
+    [ Acts.pageSlide ]          ( {dispatch}: AAC, payload: PageSlide ):    void;
     
     [ Acts._np_Gender ]         ( {dispatch}: AAC, payload: CTS.Gender ):   void;
     [ Acts._np_FirstName ]      ( {dispatch}: AAC, payload: string ):       void;
@@ -218,6 +224,7 @@ export type MyGetters = {
     userType            ( state: State ): CTS.UserTypes
     userTool            ( state: State ): UserTools
     ppp                 ( state: State ): PPP
+    pageSlide           ( state: State ): PageSlide
     newPatient          ( state: State ): CTS.Patient
 
     H010IDx             ( state: State ): number

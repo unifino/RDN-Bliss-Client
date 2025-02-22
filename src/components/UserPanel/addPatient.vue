@@ -55,7 +55,7 @@ import General_Info                         from '@/components/UserPanel/Patient
 import Nutritional_Assessment               from '@/components/UserPanel/Patient/Nutritional_Assessment.vue'
 import Bio_Chemistry                        from '@/components/UserPanel/Patient/Bio_Chemistry.vue'
 import Medications_Supplements              from '@/components/UserPanel/Patient/Medications_Supplements.vue'
-import PatientAnthropometry                 from '@/components/UserPanel/Patient/PatientAnthropometry.vue'
+import PatientAnthropometry                 from '@/components/UserPanel/Patient/Patient_Anthropometry.vue'
 import GI_Function                          from '@/components/UserPanel/Patient/GI_Function.vue'
 import Diet_History                         from '@/components/UserPanel/Patient/Diet_History.vue'
 const store: TS.Store = useStore()
@@ -80,15 +80,13 @@ const store: TS.Store = useStore()
         { focus: false, title: "Diet History" },
         // { focus: false, target: part_9 , title: "Food Diary" },
         // { focus: false, target: part_10 , title: "Planning" },
-        // { focus: false, target: part_11 , title: "Diet Plan" },
         // { focus: false, target: part_12 , title: "Recommendations" },
         // { focus: false, target: part_13 , title: "Follow-up" },
     ] )
 
 // -- =====================================================================================
 
-    // onMounted ( async() => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
-    onMounted ( async() => { for( let i=0; i<6; i++ ) slider("P") } )
+    onMounted ( () => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
 
 // -- =====================================================================================
 
@@ -108,6 +106,15 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    const savePatient = async() => {
+        while ( store.getters.ppp.i !== 0 ) slider("N")
+        await new Promise( _ => setTimeout( _, 350 ) )
+
+        Tools.userAnime( patientsBox, "Out_Sent" )
+        await new Promise( _ => setTimeout( _, 12750 ) )
+        Tools.userAnime( patientsBox, "In_Sent" )
+    }
+
     const resetForm = async () => {
         store.commit( TS.Mutates.userTool, TS.UserTools.null )
         await new Promise( _ => setTimeout( _, 250 ) )
@@ -125,6 +132,11 @@ const store: TS.Store = useStore()
                 if ( store.getters.userTool === TS.UserTools.CreateNewPatient )
                     _out() 
         }
+    )
+
+    store.watch(
+        getters => getters.Flag_savePatient,
+        () => savePatient()
     )
 
     store.watch(

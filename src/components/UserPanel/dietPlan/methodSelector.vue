@@ -1,7 +1,9 @@
 <template>
-    <div id="my_dietPlans_box" class="init" ref="dietPlans">
-        <methodSelector />
-        <planEditor />
+    <div ref="part_x" id="methodSelector">
+        <div id="title">Select your Planing Calculation Method:</div>
+        <div id="methodsWrapper">
+            <div class="method" v-for="(m,i) of methods" :key="i" @click="select(i)">{{ m }}</div>
+        </div>
     </div>
 </template>
 
@@ -9,58 +11,64 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted }                   from 'vue'
+import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import methodSelector                       from '@/components/UserPanel/dietPlan/methodSelector.vue'
-import planEditor                           from '@/components/UserPanel/dietPlan/planEditor.vue'
 
 const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const dietPlans = ref<HTMLElement>( {} as HTMLElement )
+    // const dietPlans = ref<HTMLElement>( {} as HTMLElement )
+    const ipx = 0
+    const part_x = ref<HTMLElement>( {} as HTMLElement )
     const methods = [ "WHO", "Miffin", "St. Gcov", "Harris-Benedid", "MSSE", "HBE" ]
 
 // -- =====================================================================================
 
-    onMounted ( async() => { 
-        // let ipx = 0
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, ipx, move: "R" } )
-        // ipx = 1
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, ipx, move: "R" } )
-        // ipx = 0
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, ipx, move: "L" } )
-        
-    } )
-    
+    const select = ( i: number ) => {
+        slider()
+    }
+
+    // const _out = () => Tools.userAnime( dietPlans, "Out" )
+    // const _in = ( skip = false ) => Tools.userAnime( dietPlans, "In", skip )
+
 // -- =====================================================================================
 
-    const _out = () => Tools.userAnime( dietPlans, "Out" )
-    const _in = ( skip = false ) => Tools.userAnime( dietPlans, "In", skip )
+    const slider = () => {
+        const gpx = ipx +1
+        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, gpx: ipx +1, move: "R" } )
+    }
 
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.ort,
+        getters => getters.padeSlide,
         ( nV, oV ) => { 
-            if ( oV === TS.Orts.UserPanel ) 
-                if ( store.getters.userTool === TS.UserTools.DietPlans )
-                    _out() 
+            if ( nV.origin === TS.UserTools.DietPlans )
+                Tools.pageSlider2( oV, nV, ipx, part_x )
         }
     )
+    // store.watch(
+    //     getters => getters.ort,
+    //     ( nV, oV ) => { 
+    //         if ( oV === TS.Orts.UserPanel ) 
+    //             if ( store.getters.userTool === TS.UserTools.DietPlans )
+    //                 _out() 
+    //     }
+    // )
 
-    store.watch(
-        getters => getters.userTool,
-        ( nV, oV ) => {
-            if ( nV !== oV ) {
-                if ( nV === TS.UserTools.DietPlans ) _in( oV === TS.UserTools.null )
+    // store.watch(
+    //     getters => getters.userTool,
+    //     ( nV, oV ) => {
+    //         if ( nV !== oV ) {
+    //             if ( nV === TS.UserTools.DietPlans ) _in( oV === TS.UserTools.null )
 
-                if ( oV === TS.UserTools.DietPlans ) _out()
-            }
-        }
-    )
+    //             if ( oV === TS.UserTools.DietPlans ) _out()
+    //         }
+    //     }
+    // )
 
 // -- =====================================================================================
 
@@ -69,22 +77,6 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
 <style scoped>
-
-    #my_dietPlans_box{
-        background-color: #e9e8e6;
-        height: 620px;
-        width: 700px;
-        top: 50%;
-        left: 300px;
-        padding: 40px;
-        border-radius: 23px;
-        box-shadow: 0 0 7px 1px #babbbb;
-        position: absolute;
-    }
-
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0
-    }
 
     #title{
         font-size: 23px;
