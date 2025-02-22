@@ -171,10 +171,13 @@ const store: TS.Store = useStore()
     }
     .button:hover{ color: #08cee0; }
 
+    .page_init{ display: none }
+    
     .current_Page_R {
         animation           : current_Page_R .5s;
         animation-fill-mode : both;
         z-index: 1;
+        /* display: block; */
     }
     @keyframes current_Page_R {
         0%  { transform: translateX(70%); opacity: 0 }
@@ -185,6 +188,7 @@ const store: TS.Store = useStore()
         animation           : current_Page_L .5s;
         animation-fill-mode : both;
         z-index: 1;
+        /* display: block; */
     }
     @keyframes current_Page_L {
         0%  { transform: translateX(-70%); opacity: 0 }
@@ -212,7 +216,6 @@ const store: TS.Store = useStore()
     }
     
     #part_x { width: 100%; height: 100%; position: absolute; }
-    .ppp{ transform: translateX(-70%); opacity: 0 }
 
     #infoWrapper{
         height: auto;

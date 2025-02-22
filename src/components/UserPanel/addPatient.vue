@@ -47,7 +47,7 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted }                   from 'vue'
+import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
@@ -86,28 +86,28 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    onMounted ( () => { for( let i=0; i<Titles.value.length; i++ ) slider("P") } )
-
-// -- =====================================================================================
-
     const _out = () => Tools.userAnime( patientsBox, "Out" )
-    const _in = ( skip = false ) => Tools.userAnime( patientsBox, "In", skip )
+    const _in = ( skip = false ) => {
+        Tools.userAnime( patientsBox, "In", skip )
+        for ( let i=0; i< Titles.value.length; i++ ) Titles.value[i].focus = false
+        Titles.value[0].focus = true
+    }
 
 // -- =====================================================================================
 
     const slider = ( act: "N" | "P" ) => {
-        const cfi = store.getters.ppp.i
+        const cfi = store.getters.pageSlide.gpx
         const nfi = ( cfi + ( act === "N" ? 1 : -1 ) + Titles.value.length ) % Titles.value.length
         Titles.value[ cfi ].focus = false
         Titles.value[ nfi ].focus = true
         const mov = act === "N" ? "R" : "L" 
-        store.commit( TS.Mutates.ppp, { i: nfi, m: mov } )
+        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.CreateNewPatient, gpx: nfi, move: mov } )
     }
 
 // -- =====================================================================================
 
     const savePatient = async() => {
-        while ( store.getters.ppp.i !== 0 ) slider("N")
+        while ( store.getters.pageSlide.gpx !== 0 ) slider("N")
         await new Promise( _ => setTimeout( _, 350 ) )
 
         Tools.userAnime( patientsBox, "Out_Sent" )
@@ -141,16 +141,26 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.Flag_resetForm,
-        () => { while ( store.getters.ppp.i !== 0 ) slider("N") }
+        () => { while ( store.getters.pageSlide.gpx !== 0 ) slider("N") }
     )
 
     store.watch(
         getters => getters.userTool,
         ( nV, oV ) => {
             if ( nV !== oV ) {
+
                 if ( nV === TS.UserTools.CreateNewPatient ) _in( oV === TS.UserTools.null )
                 if ( oV === TS.UserTools.CreateNewPatient ) _out()
+
+                // .. PageSlideResetting
+                if ( nV === TS.UserTools.CreateNewPatient ) {
+                    store.commit( 
+                        TS.Mutates.pageSlide, 
+                        { origin: TS.UserTools.CreateNewPatient, gpx: 0, move: "R" } 
+                    )
+                }
             }
+        
         }
     )
 
@@ -173,8 +183,7 @@ const store: TS.Store = useStore()
         height: 620px;
         width: 845px;
         border: solid 40px #e6e3e3;
-        border-width: 40px 20px 20px 20px;
-        border-top-width: 10px;
+        border-width: 10px 20px 20px 20px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #babbbb;
         position: relative;

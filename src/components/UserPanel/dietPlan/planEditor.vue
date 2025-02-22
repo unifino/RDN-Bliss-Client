@@ -1,5 +1,5 @@
 <template>
-    <div ref="part_x" id="planEditor" @click="back">
+    <div ref="part_x" id="part_x" @click="back">
             Hatef
     </div>
 </template>
@@ -39,23 +39,14 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.padeSlide,
-        ( nV, oV ) => { 
-            if ( nV.origin === TS.UserTools.DietPlans )
-                Tools.pageSlider2( oV, nV, ipx, part_x )
-        }
+        getters => getters.userTool,
+        () => part_x.value.classList.add( "page_init" )
     )
 
-    // store.watch(
-    //     getters => getters.userTool,
-    //     ( nV, oV ) => {
-    //         if ( nV !== oV ) {
-    //             if ( nV === TS.UserTools.DietPlans ) _in( oV === TS.UserTools.null )
-
-    //             if ( oV === TS.UserTools.DietPlans ) _out()
-    //         }
-    //     }
-    // )
+    store.watch(
+        getters => getters.pageSlide,
+        ( nV, oV ) => Tools.ifSlider( TS.UserTools.DietPlans, oV, nV, ipx, part_x )
+    )
 
 // -- =====================================================================================
 
@@ -65,15 +56,8 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #planEditor{
-        font-size: 23px;
-        font-weight: bold;
-        font-family: PoiretOne;
-        text-align: center;
-        padding: 55px;
-        margin-bottom: 30px;
-        background-color: aquamarine;
-        height: 100%;
+    #part_x{
+        background: rebeccapurple;
     }
 
   

@@ -45,14 +45,19 @@ export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out"|"In_Sen
     el.value.className = "Tool_fall_" + phase
 }
 
-export const pageSlider = ( oV: TS.PPP, nV: TS.PPP, i: number, part_x: Ref<HTMLElement> ) => {
-    if ( oV.i === i ) part_x.value.className = nV.m === "R" ? "next_Page" : "previous_Page" 
-    if ( nV.i === i ) part_x.value.className = "current_Page_" + nV.m 
-}
-
-export const pageSlider2 = ( oV: TS.PageSlide, nV: TS.PageSlide, ipx: number, part_x: Ref<HTMLElement> ) => {
+const pageSlider = ( oV: TS.PageSlide, nV: TS.PageSlide, ipx: number, part_x: Ref<HTMLElement> ) => {
     if ( oV.gpx === ipx ) part_x.value.className = nV.move === "R" ? "next_Page" : "previous_Page" 
     if ( nV.gpx === ipx ) part_x.value.className = "current_Page_" + nV.move 
+}
+
+export const ifSlider = ( 
+    myOrigin: TS.UserTools, 
+    oV: TS.PageSlide, 
+    nV: TS.PageSlide, 
+    ipx: number, 
+    part_x: Ref<HTMLElement> 
+) => {
+    if ( nV.origin === myOrigin ) pageSlider ( oV, nV, ipx, part_x )
 }
 
 // -- =====================================================================================

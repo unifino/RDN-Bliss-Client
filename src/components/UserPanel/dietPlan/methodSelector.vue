@@ -1,5 +1,5 @@
 <template>
-    <div ref="part_x" id="methodSelector">
+    <div ref="part_x" id="part_x">
         <div id="title">Select your Planing Calculation Method:</div>
         <div id="methodsWrapper">
             <div class="method" v-for="(m,i) of methods" :key="i" @click="select(i)">{{ m }}</div>
@@ -38,37 +38,20 @@ const store: TS.Store = useStore()
 
     const slider = () => {
         const gpx = ipx +1
-        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, gpx: ipx +1, move: "R" } )
+        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, gpx, move: "R" } )
     }
 
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.padeSlide,
-        ( nV, oV ) => { 
-            if ( nV.origin === TS.UserTools.DietPlans )
-                Tools.pageSlider2( oV, nV, ipx, part_x )
-        }
+        getters => getters.userTool,
+        () => part_x.value.classList.add( "page_init" )
     )
-    // store.watch(
-    //     getters => getters.ort,
-    //     ( nV, oV ) => { 
-    //         if ( oV === TS.Orts.UserPanel ) 
-    //             if ( store.getters.userTool === TS.UserTools.DietPlans )
-    //                 _out() 
-    //     }
-    // )
 
-    // store.watch(
-    //     getters => getters.userTool,
-    //     ( nV, oV ) => {
-    //         if ( nV !== oV ) {
-    //             if ( nV === TS.UserTools.DietPlans ) _in( oV === TS.UserTools.null )
-
-    //             if ( oV === TS.UserTools.DietPlans ) _out()
-    //         }
-    //     }
-    // )
+    store.watch(
+        getters => getters.pageSlide,
+        ( nV, oV ) => Tools.ifSlider( TS.UserTools.DietPlans, oV, nV, ipx, part_x )
+    )
 
 // -- =====================================================================================
 

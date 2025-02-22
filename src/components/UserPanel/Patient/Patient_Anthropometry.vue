@@ -1,5 +1,5 @@
 <template>  
-    <div id="part_x" class="ppp" ref="part_x">
+    <div id="part_x" ref="part_x">
         <div id="infoWrapper">
             <div class="field">Height<input ref="height" type="text" /><span class="unit">cm</span></div>
             <div class="field">Weight<input ref="weight" type="text" /><span class="unit">kg</span></div>
@@ -28,14 +28,19 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const i = 4
+    const ipx = 4
     const part_x = ref<HTMLElement>( {} as HTMLElement )
 
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.ppp,
-        ( nV, oV ) => Tools.pageSlider( oV, nV, i, part_x )
+        getters => getters.userTool,
+        () => part_x.value.classList.add( "page_init" )
+    )
+
+    store.watch(
+        getters => getters.pageSlide,
+        ( nV, oV ) => Tools.ifSlider( TS.UserTools.CreateNewPatient, oV, nV, ipx, part_x )
     )
     
 // -- =====================================================================================

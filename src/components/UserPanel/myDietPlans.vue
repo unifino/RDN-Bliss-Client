@@ -1,7 +1,9 @@
 <template>
     <div id="my_dietPlans_box" class="init" ref="dietPlans">
-        <methodSelector />
-        <planEditor />
+        <div id="mainWrapper">
+            <methodSelector />
+            <planEditor />
+        </div>
     </div>
 </template>
 
@@ -9,7 +11,7 @@
 
 <script setup lang="ts">
 
-import { ref, onMounted }                   from 'vue'
+import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
@@ -22,18 +24,6 @@ const store: TS.Store = useStore()
 
     const dietPlans = ref<HTMLElement>( {} as HTMLElement )
     const methods = [ "WHO", "Miffin", "St. Gcov", "Harris-Benedid", "MSSE", "HBE" ]
-
-// -- =====================================================================================
-
-    onMounted ( async() => { 
-        // let ipx = 0
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, ipx, move: "R" } )
-        // ipx = 1
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, ipx, move: "R" } )
-        // ipx = 0
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, ipx, move: "L" } )
-        
-    } )
     
 // -- =====================================================================================
 
@@ -55,9 +45,18 @@ const store: TS.Store = useStore()
         getters => getters.userTool,
         ( nV, oV ) => {
             if ( nV !== oV ) {
-                if ( nV === TS.UserTools.DietPlans ) _in( oV === TS.UserTools.null )
 
+                if ( nV === TS.UserTools.DietPlans ) _in( oV === TS.UserTools.null )
                 if ( oV === TS.UserTools.DietPlans ) _out()
+
+                // .. PageSlideResetting
+                if ( nV === TS.UserTools.DietPlans ) {
+                    store.commit( 
+                        TS.Mutates.pageSlide, 
+                        { origin: TS.UserTools.DietPlans, gpx: 0, move: "R" } 
+                    )
+                }
+
             }
         }
     )
@@ -72,15 +71,18 @@ const store: TS.Store = useStore()
 
     #my_dietPlans_box{
         background-color: #e9e8e6;
-        height: 620px;
-        width: 700px;
+        height: 680px;
+        width: 800px;
         top: 50%;
         left: 300px;
-        padding: 40px;
         border-radius: 23px;
+        border: solid 40px #e9e8e6;
+        border-width: 10px 20px 20px 20px;
         box-shadow: 0 0 7px 1px #babbbb;
         position: absolute;
+        overflow: hidden;
     }
+
 
     .init{
         transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0

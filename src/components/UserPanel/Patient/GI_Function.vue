@@ -1,5 +1,5 @@
 <template>  
-    <div id="part_x" class="ppp" ref="part_x">
+    <div id="part_x" ref="part_x">
         <div v-for="(G,i) in GI_F" :key="i" class="section">
 
             <div class="title"> {{ G.title }}</div>
@@ -44,7 +44,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const i = 5
+    const ipx = 5
     const part_x = ref<HTMLElement>( {} as HTMLElement )
 
     const myNewPatient_GIF: CTS.GI_F = JSON.parse( JSON.stringify( store.getters.newPatient.GI_F ) )
@@ -101,8 +101,13 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.ppp,
-        ( nV, oV ) => Tools.pageSlider( oV, nV, i, part_x )
+        getters => getters.userTool,
+        () => part_x.value.classList.add( "page_init" )
+    )
+
+    store.watch(
+        getters => getters.pageSlide,
+        ( nV, oV ) => Tools.ifSlider( TS.UserTools.CreateNewPatient, oV, nV, ipx, part_x )
     )
 
     store.watch(
