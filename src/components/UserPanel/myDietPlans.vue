@@ -50,12 +50,7 @@ const store: TS.Store = useStore()
                 if ( oV === TS.UserTools.DietPlans ) _out()
 
                 // .. PageSlideResetting
-                if ( nV === TS.UserTools.DietPlans ) {
-                    store.commit( 
-                        TS.Mutates.pageSlide, 
-                        { origin: TS.UserTools.DietPlans, gpx: 0, move: "R" } 
-                    )
-                }
+                if ( nV === TS.UserTools.DietPlans ) Tools.pageSlide_0( nV )
 
             }
         }

@@ -3,7 +3,7 @@
 
         <div id="mainWrapper">
             <div id="my_patients_box">
-    <!--                                                                                    -->
+<!--                                                                                    -->
                 <div id="emergencyWrapper">
 
                     <div id="emergencyTitle">Emergency Patients</div>
@@ -17,20 +17,16 @@
                     <!-- <div id="noEmergencyHint">No Emergency Patients</div> -->
                 
                 </div>
-    <!--                                                                                    -->
-                <div class="divider"></div>
-    <!--                                                                                    -->
+
                 <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
                     <div class="nameWrapper">
                         <div class="name">{{ p.name }}</div>
                     </div>
                 </div>
-    <!--                                                                                    -->
+<!--                                                                                    -->
                 <div id="borderTop" />
             </div>
         </div>
-
-<!--                                                                                    -->
 
         <div class="buttonsWrapper">
             <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
@@ -38,7 +34,6 @@
  
     </div>
 </template>
-<!--                                                                                    -->
 
 // -- =====================================================================================
 
@@ -56,7 +51,7 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const patientsBox = ref<HTMLElement>( {} as HTMLElement )
-    let patients: CTS.Patients[] = []
+    let patients: CTS.Patient[] = []
     
     const buttons = [ 
         { 
@@ -76,7 +71,7 @@ const store: TS.Store = useStore()
         // .. Sending Request
         get( CTS.Get.getPatients )
         // .. Receiving Answer
-        .then( answer => Tools.setNames( patients = answer as CTS.Patients[] ) )
+        .then( answer => Tools.setNames( patients = answer as CTS.Patient[] ) )
     }
 
 // -- =====================================================================================
@@ -147,7 +142,9 @@ const store: TS.Store = useStore()
         height: auto;
         width: 100%;
         border-radius: 14px;
-        margin-top: 40px;
+        border-bottom: 40px solid #a50707;
+        padding-bottom: 2px;
+        margin: 40px 0;
         position: relative;
         overflow: auto;
     }
@@ -220,13 +217,6 @@ const store: TS.Store = useStore()
         font-size: 20px;
         right: 20px;
         position: absolute;
-    }
-
-    .divider{
-        background-color: transparent;
-        height: 2px;
-        width: 100%;
-        margin: 14px 0;
     }
 
 </style>

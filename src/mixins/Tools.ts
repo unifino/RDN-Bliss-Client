@@ -136,3 +136,9 @@ export const setNames = ( users: CTS.UserData[] )  => {
 }
 
 // -- =====================================================================================
+
+export const pageSlide_0 = ( Origin: TS.UserTools ) => {
+    store.commit( TS.Mutates.pageSlide, { origin: Origin, gpx: 0, move: "R" } )
+}
+
+// -- =====================================================================================

@@ -2,7 +2,6 @@
     <div id="wholeWrapper" class="init" ref="patientsBox">
 
         <div id="mainWrapper">
-<!--                                                                                    -->
             <General_Info />
             <Nutritional_Assessment />
             <Bio_Chemistry />
@@ -10,38 +9,14 @@
             <PatientAnthropometry />
             <GI_Function />
             <Diet_History />
-<!--                                                                                    -->
-            <div id="navigation_box">
-                <div class="nav" style="float: left;"  @click="slider('P')">Previous</div>
-                <div id="titleBox">
-                    <div 
-                        v-for="(x,i) in Titles"
-                        :key="i"
-                        :class="'title' + ( x.focus? ' expanded' : '' )"
-                    >
-                            {{ x.focus ? x.title : "" }}
-                    </div>
-                </div>
-                <div class="nav" style="float: right;" @click="slider('N')">Next</div>
-            </div>
-        </div>
-<!--                                                                                    -->
 
-        <div class="buttonsWrapper">
-            <div
-                class="button"
-                v-for="(b,i) of buttons"
-                :key="i"
-                @click="b.fnc"
-                :style="b.marin ? 'margin-top:50px':''"
-            >
-                {{ b.title }}
-            </div>
-        </div>  
- 
+            <Navigator :Titels="Titles" :slider="slider" /> 
+        </div>
+        
+        <Buttons />
+
     </div>
 </template>
-<!--                                                                                    -->
 
 // -- =====================================================================================
 
@@ -51,24 +26,21 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import General_Info                         from '@/components/UserPanel/Patient/General_Info.vue'
-import Nutritional_Assessment               from '@/components/UserPanel/Patient/Nutritional_Assessment.vue'
-import Bio_Chemistry                        from '@/components/UserPanel/Patient/Bio_Chemistry.vue'
-import Medications_Supplements              from '@/components/UserPanel/Patient/Medications_Supplements.vue'
-import PatientAnthropometry                 from '@/components/UserPanel/Patient/Patient_Anthropometry.vue'
-import GI_Function                          from '@/components/UserPanel/Patient/GI_Function.vue'
-import Diet_History                         from '@/components/UserPanel/Patient/Diet_History.vue'
+import General_Info                         from '@/components/UserPanel/addPatient/General_Info.vue'
+import Nutritional_Assessment               from '@/components/UserPanel/addPatient/Nutritional_Assessment.vue'
+import Bio_Chemistry                        from '@/components/UserPanel/addPatient/Bio_Chemistry.vue'
+import Medications_Supplements              from '@/components/UserPanel/addPatient/Medications_Supplements.vue'
+import PatientAnthropometry                 from '@/components/UserPanel/addPatient/Patient_Anthropometry.vue'
+import GI_Function                          from '@/components/UserPanel/addPatient/GI_Function.vue'
+import Diet_History                         from '@/components/UserPanel/addPatient/Diet_History.vue'
+import Navigator                            from '@/components/UserPanel/addPatient/myNavigator.vue'
+import Buttons                              from '@/components/UserPanel/addPatient/myButtons.vue'
+
 const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
     const patientsBox = ref<HTMLElement>( {} as HTMLElement )
-    
-    const buttons = [ 
-        { title: "Save New Patient", fnc: () => store.commit( TS.Mutates.Flag_savePatient, !store.getters.Flag_savePatient ) },
-        { title: "Reset Form", fnc: () => resetForm() },
-        { title: "Back to Previous Menu", fnc: () => store.commit( TS.Mutates.userTool, TS.UserTools.Patients ), marin: true },
-    ]
 
     const Titles = ref ( [
         { focus: false, title: "General Information" },
@@ -111,16 +83,8 @@ const store: TS.Store = useStore()
         await new Promise( _ => setTimeout( _, 350 ) )
 
         Tools.userAnime( patientsBox, "Out_Sent" )
-        await new Promise( _ => setTimeout( _, 12750 ) )
+        await new Promise( _ => setTimeout( _, 1750 ) )
         Tools.userAnime( patientsBox, "In_Sent" )
-    }
-
-    const resetForm = async () => {
-        store.commit( TS.Mutates.userTool, TS.UserTools.null )
-        await new Promise( _ => setTimeout( _, 250 ) )
-        store.commit( TS.Mutates.Flag_resetForm, !store.getters.Flag_resetForm )
-        await new Promise( _ => setTimeout( _, 350 ) )
-        store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPatient )
     }
 
 // -- =====================================================================================
@@ -153,12 +117,7 @@ const store: TS.Store = useStore()
                 if ( oV === TS.UserTools.CreateNewPatient ) _out()
 
                 // .. PageSlideResetting
-                if ( nV === TS.UserTools.CreateNewPatient ) {
-                    store.commit( 
-                        TS.Mutates.pageSlide, 
-                        { origin: TS.UserTools.CreateNewPatient, gpx: 0, move: "R" } 
-                    )
-                }
+                if ( nV === TS.UserTools.CreateNewPatient ) Tools.pageSlide_0( nV )
             }
         
         }
@@ -198,65 +157,6 @@ const store: TS.Store = useStore()
     input{
         box-shadow: none;
         border: none;
-    }
-
-    .name{
-        color: white;
-        font-family: Oswald;
-        font-weight: bold;
-        font-size: 20px;
-        right: 20px;
-        position: absolute;
-    }
-
-    #navigation_box{
-        height: 60px;
-        width: 90%;
-        left: 5%;
-        position: absolute;
-        bottom: -20px;
-        margin: 14px 0;
-        z-index: 5;
-    }
-
-    .nav{
-        background-color: #d3d5d8;
-        color: #2f4e6a;
-        font-family: Manrope  ;
-        font-size: 20px;
-        text-align: center;
-        height: auto;
-        width: 130px;
-        padding: 8px 0;
-        border-radius: 7px;
-        cursor: pointer;
-    }
-    .nav:hover{
-        color: #4c7d04;
-        box-shadow: 0 1px 0px 1px #7bbf16;   
-    }
-    #titleBox{
-        width: 310px;
-        left: 0;
-        right: 0;
-        margin: auto;
-        position: absolute;
-    }
-    .title{
-        font-family: Manrope;
-        color: #2f4e6a;
-        text-align: center;
-        width: auto;
-        padding: 1px 4px 9px 4px;
-        border-bottom: 3px solid #dca305;   
-        margin: 2px;
-        position: relative;
-        float: left;
-        height: 20px;
-    }
-    .expanded{
-        border-bottom: 3px solid #7bbf16;   
-        width: 220px;
     }
 
 </style>
