@@ -1,9 +1,17 @@
 <template>
-    <div id="my_dietPlans_box" ref="dietPlans">
-        <div id="mainWrapper">
-            <methodSelector />
-            <planEditor />
+    <div id="wholeWrapper" ref="dietPlans">
+        
+        <div id="my_dietPlans_box">
+            <div id="mainWrapper">
+                <methodSelector />
+                <planEditor />
+            </div>
         </div>
+
+        <div class="buttonsWrapper">
+            <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
+        </div>  
+
     </div>
 </template>
 
@@ -15,16 +23,18 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import methodSelector                       from '@/components/UserPanel/dietPlan/methodSelector.vue'
-import planEditor                           from '@/components/UserPanel/dietPlan/planEditor.vue'
+import methodSelector                       from '@/components/UserPanel/DietPlan/methodSelector.vue'
+import planEditor                           from '@/components/UserPanel/DietPlan/planEditor.vue'
 
 const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
     const dietPlans = ref<HTMLElement>( {} as HTMLElement )
-    const methods = [ "WHO", "Miffin", "St. Gcov", "Harris-Benedid", "MSSE", "HBE" ]
-    
+    const buttons = [ 
+        { title: "Create New Plan", fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient ) },
+    ]
+
 // -- =====================================================================================
 
     const _out = () => Tools.userAnime( dietPlans, "Out" )
@@ -64,18 +74,23 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #my_dietPlans_box{
-        background-color: #e9e8e6;
-        height: 680px;
-        width: 800px;
+    #wholeWrapper{
         left: 300px;
-        border-radius: 23px;
-        border: solid 40px #e9e8e6;
-        border-width: 10px 20px 20px 20px;
-        box-shadow: 0 0 7px 1px #babbbb;
         position: absolute;
-        overflow: hidden;
         display: none;
+    }
+
+    #my_dietPlans_box{
+        background-color: #e6e3e3;
+        height: 620px;
+        width: 845px;
+        border: solid 40px #e6e3e3;
+        border-width: 10px 20px 20px 20px;
+        border-radius: 23px;
+        box-shadow: 0 0 7px 1px #babbbb;
+        position: relative;
+        float: left;
+        overflow: hidden;
     }
 
     #title{

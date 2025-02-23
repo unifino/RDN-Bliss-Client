@@ -20,10 +20,8 @@
 
 <script setup lang="ts">
 
-import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
-import * as Tools                           from '@/mixins/Tools';
 
 const store: TS.Store = useStore()
 
@@ -38,21 +36,8 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     store.watch(
-        getters => getters.ort,
-        ( nV, oV ) => { 
-            console.log();
-            
-        }
-    )
-
-    store.watch(
         getters => getters.userTool,
-        ( nV, oV ) => {
-            if ( nV !== oV ) {
-                console.log();
-                
-            }
-        }
+        ( nV, oV ) => { if ( nV !== oV ) { console.log() } }
     )
 
 // -- =====================================================================================

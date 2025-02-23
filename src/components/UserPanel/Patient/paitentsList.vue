@@ -1,37 +1,27 @@
 <template>
-    <div id="wholeWrapper" ref="patientsBox">
+    <div id="my_patients_box">
 
-        <div id="mainWrapper">
-            <div id="my_patients_box">
-<!--                                                                                    -->
-                <div id="emergencyWrapper">
+        <div id="emergencyWrapper">
 
-                    <div id="emergencyTitle">Emergency Patients</div>
+            <div id="emergencyTitle">Emergency Patients</div>
 
-                    <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(4,6)" :key="p.id">
-                        <div class="nameWrapper">
-                            <div class="name">{{ p.name }}</div>
-                        </div>
-                    </div>
-
-                    <!-- <div id="noEmergencyHint">No Emergency Patients</div> -->
-                
+            <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(4,6)" :key="p.id">
+                <div class="nameWrapper">
+                    <div class="name">{{ p.name }}</div>
                 </div>
-
-                <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
-                    <div class="nameWrapper">
-                        <div class="name">{{ p.name }}</div>
-                    </div>
-                </div>
-<!--                                                                                    -->
-                <div id="borderTop" />
             </div>
+
+            <!-- <div id="noEmergencyHint">No Emergency Patients</div> -->
+
         </div>
 
-        <div class="buttonsWrapper">
-            <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
-        </div>  
- 
+        <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
+            <div class="nameWrapper">
+                <div class="name">{{ p.name }}</div>
+            </div>
+        </div>
+        <div id="borderTop" />
+
     </div>
 </template>
 
@@ -39,7 +29,7 @@
 
 <script setup lang="ts">
 
-import { ref }                              from 'vue'
+import { ref,Ref }                          from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as CTS                             from "@/types/common";
@@ -50,20 +40,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const patientsBox = ref<HTMLElement>( {} as HTMLElement )
-    let patients: CTS.Patient[] = []
-    
-    const buttons = [ 
-        { 
-            title: "Create New Patient", 
-            fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient ) 
-        },
-    ]
-
-// -- =====================================================================================
-
-    const _out = () => Tools.userAnime( patientsBox, "Out" )
-    const _in = ( skip = false ) => Tools.userAnime( patientsBox, "In", skip )
+    let patients: Ref<CTS.Patient[]> = ref([])
 
 // -- =====================================================================================
 
@@ -71,29 +48,10 @@ const store: TS.Store = useStore()
         // .. Sending Request
         get( CTS.Get.getPatients )
         // .. Receiving Answer
-        .then( answer => Tools.setNames( patients = answer as CTS.Patient[] ) )
+        .then( answer => Tools.setNames( patients.value = answer as CTS.Patient[] ) )
     }
 
 // -- =====================================================================================
-
-    store.watch(
-        getters => getters.ort,
-        ( nV, oV ) => { 
-            if ( oV === TS.Orts.UserPanel ) 
-                if ( store.getters.userTool === TS.UserTools.Patients )
-                    _out() 
-        }
-    )
-
-    store.watch(
-        getters => getters.userTool,
-        ( nV, oV ) => {
-            if ( nV !== oV ) {
-                if ( nV === TS.UserTools.Patients ) _in( oV === TS.UserTools.null )
-                if ( oV === TS.UserTools.Patients ) _out()
-            }
-        }
-    )
 
     store.watch(
         getters => getters.Flag_logged_in,
@@ -108,32 +66,13 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #wholeWrapper{
-        left: 300px;
-        position: absolute;
-        display: none;
-    }
-
-    #mainWrapper{
-        background-color: #e6e3e3;
-        height: 620px;
-        width: 845px;
-        border: solid 40px #e6e3e3;
-        border-width: 10px 20px 20px 20px;
-        border-radius: 23px;
-        box-shadow: 0 0 7px 1px #babbbb;
-        position: relative;
-        float: left;
-        overflow: hidden;
-    }
-
     #my_patients_box{
         height: 100%;
         padding-top: 30px;
         overflow-y: auto;
         overflow-x: hidden;
         padding: 0 20px;
-        float: right;
+        float: left;
         position: relative;
     }
 
@@ -216,5 +155,3 @@ const store: TS.Store = useStore()
     }
 
 </style>
-
-// -- =====================================================================================

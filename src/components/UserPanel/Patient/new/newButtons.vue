@@ -30,7 +30,7 @@ const store: TS.Store = useStore()
         { title: "Back to Previous Menu", fnc: () => store.commit( TS.Mutates.userTool, TS.UserTools.Patients ), marin: true },
     ]
 
-    const props = defineProps( {
+    defineProps( {
         Titels: Object,
         slider: Function
     } )

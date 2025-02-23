@@ -21,11 +21,11 @@
 <script setup lang="ts">
 
 import UserButtons                          from '@/components/UserPanel/userButtons.vue'
-import MyPatients                           from '@/components/UserPanel/myPatients.vue'
-import CreateNP                             from '@/components/UserPanel/addPatient.vue'
+import MyPatients                           from '@/components/UserPanel/Patient/myTool.vue'
+import CreateNP                             from '@/components/UserPanel/Patient/addPatient.vue'
 import MyCalender                           from '@/components/UserPanel/myCalender.vue'
 import MyStats                              from '@/components/UserPanel/myStats.vue'
-import MyDietPlans                          from '@/components/UserPanel/myDietPlans.vue'
+import MyDietPlans                          from '@/components/UserPanel/DietPlan/myTool.vue'
 import MyMessage                            from '@/components/UserPanel/myMessage.vue'
 import MyProfile                            from '@/components/UserPanel/myProfile.vue'
 import HintBox                              from '@/components/UserPanel/hintBox.vue'
