@@ -5,7 +5,7 @@
 
         <div id="MainBox_Flex">
             <HeaderPanel style="z-index: 1" />
-            <MainPanel style="flex: 1"      />
+            <MainPanel style="flex: .95"     />
         </div>
 
         <Curtain  />
@@ -58,8 +58,8 @@ const store: TS.Store = useStore()
             store.dispatch( TS.Acts.Flag_logged_in, true )
             store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
-            await new Promise( _ => setTimeout( _, 800 ) )
-            store.dispatch( TS.Acts.userTool, TS.UserTools.DietPlans )
+            // await new Promise( _ => setTimeout( _, 800 ) )
+            // store.dispatch( TS.Acts.userTool, TS.UserTools.DietPlans )
         }
 
         

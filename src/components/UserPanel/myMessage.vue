@@ -1,5 +1,5 @@
 <template>
-    <div id="my_message_box" class="init" ref="message">
+    <div id="my_message_box" ref="message">
         <div id="messagesBox">
             <textarea />
         </div>
@@ -72,13 +72,9 @@ const store: TS.Store = useStore()
         background-color: transparent;
         height: 620px;
         width: 750px;
-        top: 50%;
         left: 300px;
         position: absolute;
-    }
-
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
+        display: none;
     }
 
     #messagesBox{

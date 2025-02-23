@@ -1,5 +1,5 @@
 <template>
-    <div id="wholeWrapper" class="init" ref="patientsBox">
+    <div id="wholeWrapper" ref="patientsBox">
 
         <div id="mainWrapper">
             <div id="my_patients_box">
@@ -109,22 +109,22 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #wholeWrapper{
-        top: 50%;
         left: 300px;
         position: absolute;
+        display: none;
     }
 
     #mainWrapper{
         background-color: #e6e3e3;
         height: 620px;
-        width: 825px;
+        width: 845px;
         border: solid 40px #e6e3e3;
-        border-width: 40px 20px;
-        border-top-width: 10px;
+        border-width: 10px 20px 20px 20px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #babbbb;
         position: relative;
         float: left;
+        overflow: hidden;
     }
 
     #my_patients_box{
@@ -163,10 +163,6 @@ const store: TS.Store = useStore()
         font-size: 16px;
         font-family: Manrope;
         padding: 5px 0 35px 0;
-    }
-    
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
     }
 
     #borderTop{

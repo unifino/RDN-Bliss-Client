@@ -1,5 +1,5 @@
 <template>
-    <div id="my_calender_box" class="init" ref="calender">
+    <div id="my_calender_box" ref="calender">
         <div v-for="x in D" :key="x" class="days title">{{x}}</div>
         <div 
             v-for="(x,i) in N" 
@@ -87,17 +87,13 @@ const store: TS.Store = useStore()
         background-color: #e9e8e6;
         height: 441px;
         width: 441px;
-        top: 50%;
         left: 370px;
         padding: 45px;
         padding-top: 18px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #babbbb;
         position: absolute;
-    }
-
-    .init{
-        transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
+        display: none;
     }
 
     .days{
@@ -141,8 +137,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_In {
-        0%  { transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
-        100%{ transform: translate(0,-55%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        0%  { transform: translateX(-30%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
     }
 
     .Tool_fall_Out {
@@ -150,8 +146,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_Out {
-        0%  { transform: translate(0,-55%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
-        100%{ transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        0%  { transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translateX(-30%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
     }
 
 </style>
@@ -163,8 +159,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_In_Fast {
-        0%  { transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
-        100%{ transform: translate(0,-55%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        0%  { transform: translateX(-30%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
     }
 
     .Fast> .Tool_fall_Out {
@@ -172,8 +168,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_Out_Fast {
-        0%  { transform: translate(0,-55%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
-        100%{ transform: translate(-30%,-55%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        0%  { transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translateX(-30%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
     }
 
 </style>

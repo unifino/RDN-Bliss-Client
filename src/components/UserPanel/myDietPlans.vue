@@ -1,5 +1,5 @@
 <template>
-    <div id="my_dietPlans_box" class="init" ref="dietPlans">
+    <div id="my_dietPlans_box" ref="dietPlans">
         <div id="mainWrapper">
             <methodSelector />
             <planEditor />
@@ -68,7 +68,6 @@ const store: TS.Store = useStore()
         background-color: #e9e8e6;
         height: 680px;
         width: 800px;
-        top: 50%;
         left: 300px;
         border-radius: 23px;
         border: solid 40px #e9e8e6;
@@ -76,11 +75,7 @@ const store: TS.Store = useStore()
         box-shadow: 0 0 7px 1px #babbbb;
         position: absolute;
         overflow: hidden;
-    }
-
-
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0
+        display: none;
     }
 
     #title{

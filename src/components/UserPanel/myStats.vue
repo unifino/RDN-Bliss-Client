@@ -1,5 +1,5 @@
 <template>
-    <div id="my_stats_box" class="init" ref="stats">
+    <div id="my_stats_box" ref="stats">
         
     </div>
 </template>
@@ -58,16 +58,12 @@ const store: TS.Store = useStore()
         background-color: transparent;
         height: 620px;
         width: 700px;
-        top: 50%;
         left: 300px;
         padding: 40px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #babbbb;
         position: absolute;
-    }
-
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0
+        display: none;
     }
 
 </style>

@@ -39,10 +39,18 @@ const delay = () => {
 // -- =====================================================================================
 
 export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out"|"In_Sent"|"Out_Sent", skip=false ) => {
+    
     if ( phase === "In" ) 
         if ( !skip ) 
             await new Promise( _ => setTimeout( _, delay() ) )
     el.value.className = "Tool_fall_" + phase
+    
+    if ( phase === "Out" || phase === "Out_Sent" ) {
+        await new Promise( _ => setTimeout( _, delay() ) )
+        el.value.style.display = 'none'
+    }
+    else el.value.style.display = 'block'
+        
 }
 
 const pageSlider = ( oV: TS.PageSlide, nV: TS.PageSlide, ipx: number, part_x: Ref<HTMLElement> ) => {

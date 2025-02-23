@@ -1,5 +1,5 @@
 <template>
-    <div id="myWindow" class="init">
+    <div id="myWindow">
         {{ msg }}
         <div class="anime" style="font-size: 50px; font-family: fas;">
             <!-- ○○○◉◉◉●●● -->
@@ -76,8 +76,6 @@ const store: TS.Store = useStore()
         white-space: pre;
         display: none;
     }
-
-    /* .init{ opacity: 0 } */
 
     .anime{
         text-align: center;

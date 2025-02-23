@@ -1,5 +1,5 @@
 <template>  
-    <div id="wholeWrapper" class="init" ref="patientsBox">
+    <div id="wholeWrapper" ref="patientsBox">
 
         <div id="mainWrapper">
             <General_Info />
@@ -132,9 +132,9 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #wholeWrapper{
-        top: 50%;
         left: 300px;
         position: absolute;
+        display: none;
     }
 
     #mainWrapper{
@@ -148,10 +148,6 @@ const store: TS.Store = useStore()
         position: relative;
         float: left;
         overflow: hidden;
-    }
-
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0;
     }
 
     input{

@@ -45,7 +45,9 @@ const store: TS.Store = useStore()
     #userPanelBox{
         height: 100%;
         width: 100%;
-        position: absolute;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
     }
 
 </style>
@@ -57,8 +59,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_In {
-        0%  { transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
-        100%{ transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        0%  { transform: translateX(-10%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
     }
 
     .Tool_fall_Out {
@@ -66,8 +68,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_Out {
-        0%  { transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
-        100%{ transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        0%  { transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translateX(-10%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
     }
 
 </style>
@@ -79,8 +81,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_In_Fast {
-        0%  { transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
-        100%{ transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        0%  { transform: translateX(-10%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        100%{ transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
     }
 
     .Fast> .Tool_fall_Out {
@@ -88,8 +90,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_Out_Fast {
-        0%  { transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
-        100%{ transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
+        0%  { transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translateX(-10%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
     }
 
 
@@ -98,8 +100,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_In_Sent {
-        0%  { transform: translate(-10%,-53%) perspective(900px) rotateY(-44deg) scale(.8); opacity: 0 }
-        100%{ transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        0%  { transform: translateX(-10%) perspective(900px) rotateY(-44deg) scale(.8); opacity: 0 }
+        100%{ transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
     }
 
     .Fast> .Tool_fall_Out_Sent {
@@ -107,8 +109,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes Tool_fall_Out_Sent {
-        0%  { transform: translate(0,-53%) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
-        100%{ transform: translate(-10%,-53%) perspective(900px) rotateY(-44deg) scale(.8); opacity: 0 }
+        0%  { transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
+        100%{ transform: translateX(-10%) perspective(900px) rotateY(-44deg) scale(.8); opacity: 0 }
     }
 
 </style>

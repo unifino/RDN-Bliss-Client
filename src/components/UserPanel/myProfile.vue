@@ -1,5 +1,5 @@
 <template>
-    <div id="my_profile_box" class="init" ref="profile">
+    <div id="my_profile_box" ref="profile">
         <div id="infoBox">
         </div>
         <div class="buttonsWrapper">
@@ -72,15 +72,11 @@ const store: TS.Store = useStore()
         background-color: transparent;
         height: 620px;
         width: 750px;
-        top: 50%;
         left: 300px;
         position: absolute;
+        display: none;
     }
 
-    .init{
-        transform: translate(-10%,-53%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0
-    }
-    
     #infoBox{
         background-color: #e9e8e6;
         height: 100%;

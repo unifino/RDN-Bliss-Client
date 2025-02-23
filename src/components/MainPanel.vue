@@ -41,12 +41,6 @@ const store: TS.Store = useStore()
 
 <style>
 
-    #mainPanelWrapper{
-        width: 100%;
-        height: 100%;
-        position: absolute;
-    }
-
     .X100, .X010{
         height: 100%;
         position: relative;
@@ -139,8 +133,13 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
-    #mainPanel{
+    #mainPanelWrapper{
+        width: 100%;
         height: 100%;
+        position: absolute;
+    }
+
+    #mainPanel{
         width: 100%;
         background-color: #fbfbfb;
         position: relative;

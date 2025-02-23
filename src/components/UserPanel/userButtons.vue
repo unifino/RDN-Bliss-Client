@@ -51,6 +51,8 @@ const store: TS.Store = useStore()
     const myAnimation = async ( phase: "In"|"Out" ) => {
         if ( phase === "In" ) await new Promise( _ => setTimeout( _, Tools.speed() ) )
         userButtons.value.className = "U100_fall_" + phase
+        if ( phase === "Out" ) await new Promise( _ => setTimeout( _, Tools.speed() ) )
+        userButtons.value.style.display = phase === "In" ? "block" : "block"
     }
 
 // -- =====================================================================================
@@ -97,14 +99,13 @@ const store: TS.Store = useStore()
         background-color: #e3e3e3;
         height: auto;
         width: 95px;
-        top: 50%;
-        transform: translate(-200px,-53%) scale(1);
         padding: 40px 20px;
         border-radius: 23px;
         box-shadow: 0 0 7px 1px #818181;
         margin: 0 0 0 50px;
         position: absolute;
         z-index: 2;
+        display: none;
     }
 
     .optionBox{
@@ -159,8 +160,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes U100_fall_Out {
-        0%  { transform: translate(0,-53%) scale(1) }
-        100%{ transform: translate(-200px,-53%) scale(.4) }
+        0%  { transform: translateX(0) scale(1) }
+        100%{ transform: translateX(-200px) scale(.4) }
     }
 
     .U100_fall_In {
@@ -168,8 +169,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes U100_fall_In {
-        0%  { transform: translate(-200px,-53%) scale(1) }
-        100%{ transform: translate(0,-53%) scale(1) }
+        0%  { transform: translateX(-200px) scale(1) }
+        100%{ transform: translateX(0) scale(1) }
     }
 
 </style>
@@ -181,8 +182,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes U100_fall_Out_Fast {
-        0%  { transform: translate(0,-53%) scale(1) }
-        100%{ transform: translate(-200px,-53%) scale(.4) }
+        0%  { transform: translateX(0) scale(1) }
+        100%{ transform: translateX(-200px) scale(.4) }
     }
 
     .Fast> .U100_fall_In {
@@ -190,8 +191,8 @@ const store: TS.Store = useStore()
         animation-fill-mode : both;
     }
     @keyframes U100_fall_In_Fast {
-        0%  { transform: translate(-200px,-53%) scale(1) }
-        100%{ transform: translate(0,-53%) scale(1) }
+        0%  { transform: translateX(-200px) scale(1) }
+        100%{ transform: translateX(0) scale(1) }
     }
 
 </style>
