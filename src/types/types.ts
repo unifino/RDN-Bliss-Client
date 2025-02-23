@@ -32,6 +32,7 @@ export enum UserTools {
     Calender,
     Stats,
     DietPlans,
+    CreateNewPlan,
     Messages,
     Profile,
     null
@@ -63,6 +64,7 @@ export type State = {
     Flag_H010_Hand: boolean
     Flag_H100_Alert: boolean
     Flag_savePatient: boolean
+    Flag_savePlan: boolean
     Flag_resetForm: boolean
 
 }
@@ -107,6 +109,7 @@ export enum Mutates {
     Flag_H010_Hand  = "H010HandControl",
     Flag_H100_Alert = "Flag_H100_AlertControl",
     Flag_savePatient= "Flag_savePatient",
+    Flag_savePlan   = "Flag_savePlan",
     Flag_resetForm  = "Flag_resetForm",
     
 
@@ -140,6 +143,7 @@ export type MyMutations<S = State> = {
     [ Mutates.Flag_H010_Hand ]  ( state: S, payload: boolean ):         void;
     [ Mutates.Flag_H100_Alert ] ( state: S, payload: boolean ):         void;
     [ Mutates.Flag_savePatient ]( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_savePlan ]   ( state: S, payload: boolean ):         void;
     [ Mutates.Flag_resetForm ]  ( state: S, payload: boolean ):         void;
 }
 
@@ -173,6 +177,7 @@ export enum Acts {
     Flag_H010_Hand  = "H010HandControl",
     Flag_H100_Alert = "Flag_H100_AlertControl",
     Flag_savePatient= "Flag_savePatient",
+    Flag_savePlan   = "Flag_savePlan",
     Flag_resetForm  = "Flag_resetForm",
 }
 
@@ -204,6 +209,7 @@ export interface MyActions {
     [ Acts.Flag_H010_Hand ]     ( {dispatch}: AAC, payload: boolean ):      void;
     [ Acts.Flag_H100_Alert ]    ( {dispatch}: AAC, payload: boolean ):      void;
     [ Acts.Flag_savePatient ]   ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_savePlan ]      ( {dispatch}: AAC, payload: boolean ):      void;
     [ Acts.Flag_resetForm ]     ( {dispatch}: AAC, payload: boolean ):      void;
 }
 
@@ -228,6 +234,7 @@ export type MyGetters = {
     Flag_H010_Hand      ( state: State ): boolean
     Flag_H100_Alert     ( state: State ): boolean
     Flag_savePatient    ( state: State ): boolean
+    Flag_savePlan       ( state: State ): boolean
     Flag_resetForm      ( state: State ): boolean
 }
 

@@ -1,6 +1,6 @@
 <template>
     <div ref="part_x" id="part_x" @click="back">
-            Hatef
+            ...
     </div>
 </template>
 
@@ -29,10 +29,10 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    store.watch(
-        getters => getters.userTool,
-        () => part_x.value.classList.add( "page_init" )
-    )
+    // store.watch(
+    //     getters => getters.userTool,
+    //     () => part_x.value.classList.add( "page_init" )
+    // )
 
     store.watch(
         getters => getters.pageSlide,

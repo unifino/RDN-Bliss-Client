@@ -45,10 +45,10 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    store.watch(
-        getters => getters.userTool,
-        () => part_x.value.classList.add( "page_init" )
-    )
+    // store.watch(
+    //     getters => getters.userTool,
+    //     () => part_x.value.classList.add( "page_init" )
+    // )
 
     store.watch(
         getters => getters.pageSlide,

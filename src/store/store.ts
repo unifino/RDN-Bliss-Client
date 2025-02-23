@@ -50,6 +50,7 @@ const state: TS.State = {
     Flag_H010_Hand: false,
     Flag_H100_Alert: false,
     Flag_savePatient: false,
+    Flag_savePlan: false,
     Flag_resetForm: false,
 
 }
@@ -85,6 +86,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
     [ TS.Mutates.Flag_H010_Hand ]   ( state, payload ) { state.Flag_H010_Hand = payload },
     [ TS.Mutates.Flag_H100_Alert ]  ( state, payload ) { state.Flag_H100_Alert = payload },
     [ TS.Mutates.Flag_savePatient ] ( state, payload ) { state.Flag_savePatient = payload },
+    [ TS.Mutates.Flag_savePlan ]    ( state, payload ) { state.Flag_savePlan = payload },
     [ TS.Mutates.Flag_resetForm ]   ( state, payload ) { state.Flag_resetForm = payload },
 
 }
@@ -120,6 +122,7 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
     [ TS.Acts.Flag_H010_Hand ]  (c,p) { store.commit( TS.Mutates.Flag_H010_Hand, p ) },
     [ TS.Acts.Flag_H100_Alert ] (c,p) { store.commit( TS.Mutates.Flag_H100_Alert, p ) },
     [ TS.Acts.Flag_savePatient ](c,p) { store.commit( TS.Mutates.Flag_savePatient, p ) },
+    [ TS.Acts.Flag_savePlan ]   (c,p) { store.commit( TS.Mutates.Flag_savePlan, p ) },
     [ TS.Acts.Flag_resetForm ]  (c,p) { store.commit( TS.Mutates.Flag_resetForm, p ) },
 
 }
@@ -146,6 +149,7 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     Flag_H010_Hand:     state => state.Flag_H010_Hand,
     Flag_H100_Alert:    state => state.Flag_H100_Alert,
     Flag_savePatient:   state => state.Flag_savePatient,
+    Flag_savePlan:      state => state.Flag_savePlan,
     Flag_resetForm:     state => state.Flag_resetForm,
 
 }

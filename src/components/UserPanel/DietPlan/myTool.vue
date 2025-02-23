@@ -2,10 +2,7 @@
     <div id="wholeWrapper" ref="dietPlans">
         
         <div id="my_dietPlans_box">
-            <div id="mainWrapper">
-                <methodSelector />
-                <planEditor />
-            </div>
+            <MyPlansList />
         </div>
 
         <div class="buttonsWrapper">
@@ -23,8 +20,7 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import methodSelector                       from '@/components/UserPanel/DietPlan/methodSelector.vue'
-import planEditor                           from '@/components/UserPanel/DietPlan/planEditor.vue'
+import MyPlansList                          from '@/components/UserPanel/DietPlan/plansList.vue'
 
 const store: TS.Store = useStore()
 
@@ -32,7 +28,7 @@ const store: TS.Store = useStore()
 
     const dietPlans = ref<HTMLElement>( {} as HTMLElement )
     const buttons = [ 
-        { title: "Create New Plan", fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPatient ) },
+        { title: "Create New Plan", fnc: () => store.dispatch( TS.Acts.userTool, TS.UserTools.CreateNewPlan ) },
     ]
 
 // -- =====================================================================================

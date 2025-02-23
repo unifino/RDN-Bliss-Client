@@ -2,10 +2,11 @@
     <div id="userPanelBox" :style="`z-index: ${+(store.getters.ort === TS.Orts.UserPanel)};`">
 
         <MyPatients  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Patients)};`"/>
-        <CreateNP    :style="`z-index: ${+(store.getters.userTool === TS.UserTools.CreateNewPatient)};`"/>
+        <CreateNPt   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.CreateNewPatient)};`"/>
         <MyCalender  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Calender)};`"/>
         <MyStats     :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Stats)};`"/>
         <MyDietPlans :style="`z-index: ${+(store.getters.userTool === TS.UserTools.DietPlans)};`"/>
+        <CreateNPlan :style="`z-index: ${+(store.getters.userTool === TS.UserTools.CreateNewPlan)};`"/>
         <MyMessage   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Messages)};`"/>
         <MyProfile   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Profile)};`"/>
 
@@ -22,10 +23,11 @@
 
 import UserButtons                          from '@/components/UserPanel/userButtons.vue'
 import MyPatients                           from '@/components/UserPanel/Patient/myTool.vue'
-import CreateNP                             from '@/components/UserPanel/Patient/addPatient.vue'
+import CreateNPt                            from '@/components/UserPanel/Patient/addPatient.vue'
 import MyCalender                           from '@/components/UserPanel/myCalender.vue'
 import MyStats                              from '@/components/UserPanel/myStats.vue'
 import MyDietPlans                          from '@/components/UserPanel/DietPlan/myTool.vue'
+import CreateNPlan                          from '@/components/UserPanel/DietPlan/addPlan.vue'
 import MyMessage                            from '@/components/UserPanel/myMessage.vue'
 import MyProfile                            from '@/components/UserPanel/myProfile.vue'
 import HintBox                              from '@/components/UserPanel/hintBox.vue'
