@@ -57,7 +57,7 @@ const store: TS.Store = useStore()
 <style scoped>
 
     #part_x{
-        background: rebeccapurple;
+        /* background: rebeccapurple; */
     }
 
   
