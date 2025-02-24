@@ -1,27 +1,27 @@
 <template>
-    <div id="my_patients_box">
+    <div id="mainWrapper">
+        <div id="my_patients_box">
+            <div id="emergencyWrapper">
 
-        <div id="emergencyWrapper">
+                <div id="emergencyTitle">Emergency Patients</div>
 
-            <div id="emergencyTitle">Emergency Patients</div>
+                <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(4,6)" :key="p.id">
+                    <div class="nameWrapper">
+                        <div class="name">{{ p.name }}</div>
+                    </div>
+                </div>
 
-            <div :class="'patientBox ' + p.gender" v-for="p in patients.slice(4,6)" :key="p.id">
+                <!-- <div id="noEmergencyHint">No Emergency Patients</div> -->
+
+            </div>
+
+            <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
                 <div class="nameWrapper">
                     <div class="name">{{ p.name }}</div>
                 </div>
             </div>
-
-            <!-- <div id="noEmergencyHint">No Emergency Patients</div> -->
-
-        </div>
-
-        <div :class="'patientBox ' + p.gender" v-for="p in patients" :key="p.id">
-            <div class="nameWrapper">
-                <div class="name">{{ p.name }}</div>
-            </div>
         </div>
         <div id="borderTop" />
-
     </div>
 </template>
 
@@ -66,17 +66,33 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
+    #mainWrapper{
+        background-color: #e6e3e3;
+        height: 620px;
+        width: 845px;
+        border: solid 40px #e6e3e3;
+        border-width: 10px 20px 20px 20px;
+        border-radius: 23px;
+        box-shadow: 0 0 7px 1px #babbbb;
+        position: relative;
+        float: left;
+        overflow: hidden;
+    }
+
     #my_patients_box{
         height: 100%;
-        padding-top: 30px;
+        padding: 30px 20px;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 0 20px;
         float: left;
         position: relative;
     }
 
     #emergencyWrapper {
+        background:
+            radial-gradient(#e90a0a 34%,#0000 36%) 0 0/32px 32px,
+            linear-gradient( 45deg,#0000 calc(125%/3),#e51212 0 calc(175%/3),#0000 0) calc(32px/2) calc(32px/2)/calc(2*32px) calc(2*32px),
+            linear-gradient(-45deg,#0000 calc(125%/3),#c41212 0 calc(175%/3),#0000 0) calc(32px/2) calc(32px/2)/calc(2*32px) calc(2*32px) #E4E4ED;
         background-color: #e90a0a;
         height: auto;
         width: 100%;

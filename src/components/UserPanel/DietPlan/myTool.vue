@@ -1,9 +1,7 @@
 <template>
     <div id="wholeWrapper" ref="dietPlans">
         
-        <div id="my_dietPlans_box">
-            <MyPlansList />
-        </div>
+        <MyPlansList />
 
         <div class="buttonsWrapper">
             <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
@@ -74,19 +72,6 @@ const store: TS.Store = useStore()
         left: 300px;
         position: absolute;
         display: none;
-    }
-
-    #my_dietPlans_box{
-        background-color: #e6e3e3;
-        height: 620px;
-        width: 845px;
-        border: solid 40px #e6e3e3;
-        border-width: 10px 20px 20px 20px;
-        border-radius: 23px;
-        box-shadow: 0 0 7px 1px #babbbb;
-        position: relative;
-        float: left;
-        overflow: hidden;
     }
 
     #title{

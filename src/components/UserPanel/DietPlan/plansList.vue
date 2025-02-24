@@ -1,13 +1,13 @@
 <template>
-    <div id="my_plans_box">
-
-        <div :class="'pBox ' + p.gender" v-for="p in plans" :key="p.id">
-            <div class="nameWrapper">
-                <div class="name">{{ "The Plan Name" }}</div>
+    <div id="mainWrapper">
+        <div id="my_plans_box">
+            <div :class="'pBox ' + p.gender" v-for="p in plans" :key="p.id">
+                <div class="nameWrapper">
+                    <div class="name">{{ "The Plan Name" }}</div>
+                </div>
             </div>
         </div>
         <div id="borderTop" />
-
     </div>
 </template>
 
@@ -52,12 +52,24 @@ const store: TS.Store = useStore()
 
 <style scoped>
 
+    #mainWrapper{
+        background-color: #e6e3e3;
+        height: 620px;
+        width: 845px;
+        border: solid 40px #e6e3e3;
+        border-width: 10px 20px 20px 20px;
+        border-radius: 23px;
+        box-shadow: 0 0 7px 1px #babbbb;
+        position: relative;
+        float: left;
+        overflow: hidden;
+    }
+
     #my_plans_box{
         height: 100%;
-        padding-top: 30px;
+        padding: 30px 20px;
         overflow-y: auto;
         overflow-x: hidden;
-        padding: 0 20px;
         float: left;
         position: relative;
     }
@@ -98,8 +110,8 @@ const store: TS.Store = useStore()
         padding: 3px 0px;
         position: absolute;
     }
-    .male{ background-image: url('@/assets/Pics/Avatars/ai-generated-1.png') }
-    .female{ background-image: url('@/assets/Pics/Avatars/ai-generated-2.png') }
+    .male{ background-image: url('@/assets/Pics/Avatars/Diet-plan2.png') }
+    .female{ background-image: url('@/assets/Pics/Avatars/Diet-plan2.png') }
     .male> div{ background-color: #67c3dcd5; }
     .female> div{ background-color: #e77fc1d5 }
     
