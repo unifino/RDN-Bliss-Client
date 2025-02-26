@@ -262,6 +262,57 @@ const store: TS.Store = useStore()
         100%{ transform: translateY(70%); opacity: 0 }
     }
 
+    .hw_Field{
+        background-color: #F0F0F0;
+        font-family: Oswald;
+        font-size: 17px;
+        font-weight: bold;
+        color: #081E2F;
+        height: 45px;
+        width: 250px;
+        border-radius: 7px;
+        border: solid gray 1px;
+        box-shadow: 0 0 1px 0px rgb(88 88 91);
+        position: relative;
+        left: 0;
+        margin: 10px 0;
+    }
+
+    .hw_title {
+        text-align: center;
+        float: left;
+        height: 25px;
+        padding: 10px 0;
+        width: 110px;
+    }
+
+    .hw_input {
+        color: #081E2F;
+        right: 0px;
+        height: 25px;
+        width: 118px;
+        font-family: Oswald;
+        font-size: 17px;
+        font-weight: bold;
+        padding: 10px;
+        border: none;
+        border-left: 1px gray solid;
+        border-radius: 0px 7px 7px 0;
+        box-shadow: 0 0 1px 0px rgb(88 88 91);
+        margin: 0;
+        float: right;
+    }
+
+    .hw_unit {
+        position: absolute;
+        height: 25px;
+        width: 50px;
+        padding: 10px 0;
+        float: right;
+        right: 0;
+        color: #96a984;
+    }
+
 </style>
 
 <style scoped>
