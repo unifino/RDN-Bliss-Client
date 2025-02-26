@@ -61,9 +61,9 @@ const store: TS.Store = useStore()
         [ CTS.UserTypes.Dietitian ]: [
             { title: "Patients"  , tool: TS.UserTools.Patients,  icon: "", 
                 onExtra: [TS.UserTools.CreateNewPatient] },
+            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "", onExtra: [] },
             { title: "Calender"  , tool: TS.UserTools.Calender,  icon: "", onExtra: [] },
             { title: "Week Stat" , tool: TS.UserTools.Stats,     icon: "", onExtra: [] },
-            { title: "Diet Plan" , tool: TS.UserTools.DietPlans, icon: "", onExtra: [] },
             { title: "Messages"  , tool: TS.UserTools.Messages,  icon: "", onExtra: [] },
             { title: "Profile"   , tool: TS.UserTools.Profile,   icon: "", onExtra: [] },
         ],

@@ -2,8 +2,8 @@
     <div id="wholeWrapper" ref="planBox">
         
         <div id="mainWrapper">
-            <methodSelector />
-            <planEditor />
+            <part_1 />
+            <part_2 />
             <!-- <Navigator :Titels="Titles" :slider="slider" />  -->
         </div>
         
@@ -20,9 +20,8 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
-import methodSelector                       from '@/components/UserPanel/DietPlan/new/methodSelector.vue'
-import planEditor                           from '@/components/UserPanel/DietPlan/new/planEditor.vue'
-import Navigator                            from '@/components/UserPanel/DietPlan/new/myNavigator.vue'
+import part_1                               from '@/components/UserPanel/DietPlan/new/part_1.vue'
+import part_2                               from '@/components/UserPanel/DietPlan/new/part_2.vue'
 import Buttons                              from '@/components/UserPanel/DietPlan/new/newButtons.vue'
 
 const store: TS.Store = useStore()

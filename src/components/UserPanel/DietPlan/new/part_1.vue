@@ -1,6 +1,10 @@
 <template>
     <div ref="part_x" id="part_x">
-        <div id="title">Select your Planing Calculation Method:</div>
+        <div id="nameWrapper">
+            <div id="title">Give it a Name</div> 
+            <input placeholder="Title" />
+        </div>
+        <div id="title">Select the Calori's Calculation Method:</div>
         <div id="methodsWrapper">
             <div class="method" v-for="(m,i) of methods" :key="i" @click="select(i)">{{ m }}</div>
         </div>
@@ -40,19 +44,19 @@ const store: TS.Store = useStore()
 
     const slider = () => {
         const gpx = ipx +1
-        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.DietPlans, gpx, move: "R" } )
+        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.CreateNewPlan, gpx, move: "R" } )
     }
 
 // -- =====================================================================================
 
-    // store.watch(
-    //     getters => getters.userTool,
-    //     () => part_x.value.classList.add( "page_init" )
-    // )
+    store.watch(
+        getters => getters.userTool,
+        () => part_x.value.classList.add( "page_init" )
+    )
 
     store.watch(
         getters => getters.pageSlide,
-        ( nV, oV ) => Tools.ifSlider( TS.UserTools.DietPlans, oV, nV, ipx, part_x )
+        ( nV, oV ) => Tools.ifSlider( TS.UserTools.CreateNewPlan, oV, nV, ipx, part_x )
     )
 
 // -- =====================================================================================
@@ -68,14 +72,17 @@ const store: TS.Store = useStore()
         font-weight: bold;
         font-family: PoiretOne;
         text-align: center;
-        padding: 55px;
-        margin-bottom: 30px;
+        padding: 95px 0 15px 0;
     }
 
-    #methodsWrapper{ 
-        margin: auto;
-        width: 250px;
-        text-align: center;
+    #methodsWrapper, #nameWrapper{ 
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #methodsWrapper{
+        margin-top: 30px;
     }
 
     .method{
