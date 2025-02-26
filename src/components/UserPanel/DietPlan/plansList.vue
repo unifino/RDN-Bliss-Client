@@ -6,6 +6,7 @@
                     <div class="name">{{ "The Plan Name" }}</div>
                 </div>
             </div>
+            <div id="bottomSpace" />
         </div>
         <div id="borderTop" />
     </div>
@@ -70,6 +71,14 @@ const store: TS.Store = useStore()
         padding: 30px 20px;
         overflow-y: auto;
         overflow-x: hidden;
+        float: left;
+        position: relative;
+    }
+
+    #bottomSpace{
+        background-color: transparent;
+        height: 140px;
+        width: 100%;
         float: left;
         position: relative;
     }

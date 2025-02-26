@@ -23,7 +23,7 @@ const store: TS.Store = useStore()
     // const dietPlans = ref<HTMLElement>( {} as HTMLElement )
     const ipx = 0
     const part_x = ref<HTMLElement>( {} as HTMLElement )
-    const methods = [ "WHO", "Miffin", "St. Gcov", "Harris-Benedid", "MSSE", "HBE" ]
+    const methods = [ "Mifflin-St. Jeor's", "Harris-Benedict" , "WHO" ]
 
 // -- =====================================================================================
 

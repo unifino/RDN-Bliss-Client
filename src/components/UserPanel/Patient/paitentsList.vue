@@ -20,6 +20,8 @@
                     <div class="name">{{ p.name }}</div>
                 </div>
             </div>
+
+            <div id="bottomSpace" />
         </div>
         <div id="borderTop" />
     </div>
@@ -99,7 +101,7 @@ const store: TS.Store = useStore()
         border-radius: 14px;
         border-bottom: 40px solid #a50707;
         padding-bottom: 2px;
-        margin: 40px 0;
+        margin: 25px 0;
         position: relative;
         overflow: auto;
     }
@@ -118,6 +120,14 @@ const store: TS.Store = useStore()
         font-size: 16px;
         font-family: Manrope;
         padding: 5px 0 35px 0;
+    }
+
+    #bottomSpace{
+        background-color: transparent;
+        height: 140px;
+        width: 100%;
+        float: left;
+        position: relative;
     }
 
     #borderTop{
