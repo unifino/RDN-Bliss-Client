@@ -40,6 +40,13 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    const myReset = () => {
+        console.log("reset");
+        
+    }
+
+// -- =====================================================================================
+
     store.watch(
         getters => getters.userTool,
         ( nV, oV ) => {
@@ -53,6 +60,11 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.pageSlide,
         ( nV, oV ) => Tools.ifSlider( TS.UserTools.CreateNewPlan, oV, nV, ipx, part_x )
+    )
+
+    store.watch(
+        getters => getters.Flag_resetForm,
+        () => myReset()
     )
 
 // -- =====================================================================================

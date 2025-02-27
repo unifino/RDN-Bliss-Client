@@ -26,7 +26,7 @@ const store: TS.Store = useStore()
 
     const buttons = [ 
         { title: "Save New Plan", fnc: () => store.commit( TS.Mutates.Flag_savePlan, !store.getters.Flag_savePlan ) },
-        // { title: "Reset Form", fnc: () => resetForm() },
+        { title: "Reset Form", fnc: () => resetForm() },
         { title: "Back to Previous Menu", fnc: () => store.commit( TS.Mutates.userTool, TS.UserTools.DietPlans ), marin: true },
     ]
 
@@ -35,13 +35,13 @@ const store: TS.Store = useStore()
         slider: Function
     } )
 
-    // const resetForm = async () => {
-    //     store.commit( TS.Mutates.userTool, TS.UserTools.null )
-    //     await new Promise( _ => setTimeout( _, 250 ) )
-    //     store.commit( TS.Mutates.Flag_resetForm, !store.getters.Flag_resetForm )
-    //     await new Promise( _ => setTimeout( _, 350 ) )
-    //     store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPatient )
-    // }
+    const resetForm = async () => {
+        store.commit( TS.Mutates.userTool, TS.UserTools.null )
+        await new Promise( _ => setTimeout( _, 250 ) )
+        store.commit( TS.Mutates.Flag_resetForm, !store.getters.Flag_resetForm )
+        await new Promise( _ => setTimeout( _, 350 ) )
+        store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPlan )
+    }
 
 </script>
 

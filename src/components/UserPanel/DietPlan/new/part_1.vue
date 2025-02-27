@@ -32,19 +32,22 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const select = ( i: number ) => {
-        console.log(i);
-        
+        i++
         slider()
     }
-
-    // const _out = () => Tools.userAnime( dietPlans, "Out" )
-    // const _in = ( skip = false ) => Tools.userAnime( dietPlans, "In", skip )
 
 // -- =====================================================================================
 
     const slider = () => {
         const gpx = ipx +1
         store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.CreateNewPlan, gpx, move: "R" } )
+    }
+
+// -- =====================================================================================
+
+    const myReset = () => {
+        console.log("reset");
+        
     }
 
 // -- =====================================================================================
@@ -57,6 +60,11 @@ const store: TS.Store = useStore()
     store.watch(
         getters => getters.pageSlide,
         ( nV, oV ) => Tools.ifSlider( TS.UserTools.CreateNewPlan, oV, nV, ipx, part_x )
+    )
+
+    store.watch(
+        getters => getters.Flag_resetForm,
+        () => myReset()
     )
 
 // -- =====================================================================================
