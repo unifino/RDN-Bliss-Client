@@ -69,7 +69,6 @@ const store: TS.Store = useStore()
         ( nV, oV ) => {
             if ( nV !== oV ) {
                 if ( nV === TS.UserTools.Calender ) _in( oV === TS.UserTools.null )
-
                 if ( oV === TS.UserTools.Calender ) _out()
             }
         }

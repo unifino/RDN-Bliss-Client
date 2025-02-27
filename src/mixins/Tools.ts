@@ -38,15 +38,20 @@ const delay = () => {
 
 // -- =====================================================================================
 
-export const userAnime = async ( el: Ref<HTMLElement>, phase: "In"|"Out"|"In_Sent"|"Out_Sent", skip=false ) => {
+export const userAnime = async ( 
+    el: Ref<HTMLElement>, 
+    phase: "In"|"Out"|"In_Sent"|"Out_Sent"|"In_Shop"|"Out_Shop", 
+    skip=false,
+    manual?:number
+) => {
     
-    if ( phase === "In" ) 
+    if ( phase === "In" || phase === "In_Shop" ) 
         if ( !skip ) 
-            await new Promise( _ => setTimeout( _, delay() ) )
+            await new Promise( _ => setTimeout( _, manual||delay() ) )
     el.value.className = "Tool_fall_" + phase
     
     if ( phase === "Out" || phase === "Out_Sent" ) {
-        await new Promise( _ => setTimeout( _, delay() ) )
+        await new Promise( _ => setTimeout( _, manual||delay() ) )
         el.value.style.display = 'none'
     }
     else el.value.style.display = 'block'

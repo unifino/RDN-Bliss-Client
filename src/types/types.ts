@@ -27,6 +27,7 @@ export enum Processes { "Reading", "Registering", "Login" }
 
 // .. declare UserTools
 export enum UserTools { 
+    Grocery,
     Patients,
     CreateNewPatient,
     Calender,
@@ -42,6 +43,7 @@ export enum Speeds { Normal = "Normal", Fast = "Fast" }
 
 // .. declare State
 export type State = {
+
     process: Processes
     language: Languages
     displayMode: DisplayMode
@@ -112,7 +114,6 @@ export enum Mutates {
     Flag_savePlan   = "Flag_savePlan",
     Flag_resetForm  = "Flag_resetForm",
     
-
 }
 
 // .. declare Mutations
@@ -179,6 +180,7 @@ export enum Acts {
     Flag_savePatient= "Flag_savePatient",
     Flag_savePlan   = "Flag_savePlan",
     Flag_resetForm  = "Flag_resetForm",
+
 }
 
 // .. declare Action Interface

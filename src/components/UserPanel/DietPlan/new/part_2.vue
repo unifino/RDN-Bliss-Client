@@ -1,5 +1,5 @@
 <template>
-    <div ref="part_x" id="part_x" @click="back">
+    <div ref="part_x" id="part_x">
         <div id="mainWrapper">
             
             <div class="item1">
@@ -83,13 +83,6 @@ const store: TS.Store = useStore()
             store.commit( TS.Mutates._np_Gender, selectedGender.type )
         }
 
-    }
-
-// -- =====================================================================================
-
-    const back = () => {
-        const gpx = ipx -1
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.CreateNewPlan, gpx, move: "L" } )
     }
 
 // -- =====================================================================================

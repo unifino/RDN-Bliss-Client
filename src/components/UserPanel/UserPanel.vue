@@ -1,6 +1,7 @@
 <template>
     <div id="userPanelBox" :style="`z-index: ${+(store.getters.ort === TS.Orts.UserPanel)};`">
 
+        <Glocery     :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Grocery)};`"/>
         <MyPatients  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Patients)};`"/>
         <CreateNPt   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.CreateNewPatient)};`"/>
         <MyCalender  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Calender)};`"/>
@@ -23,6 +24,7 @@
 
 import UserButtons                          from '@/components/UserPanel/userButtons.vue'
 import MyPatients                           from '@/components/UserPanel/Patient/myTool.vue'
+import Glocery                              from '@/components/UserPanel/Glocery/bigGlocery.vue'
 import CreateNPt                            from '@/components/UserPanel/Patient/addPatient.vue'
 import MyCalender                           from '@/components/UserPanel/myCalender.vue'
 import MyStats                              from '@/components/UserPanel/myStats.vue'
@@ -96,7 +98,6 @@ const store: TS.Store = useStore()
         100%{ transform: translateX(-10%) perspective(900px) rotateY(44deg) scale(.8); opacity: 0 }
     }
 
-
     .Fast> .Tool_fall_In_Sent {
         animation           : Tool_fall_In_Sent .4s;
         animation-fill-mode : both;
@@ -114,6 +115,25 @@ const store: TS.Store = useStore()
         0%  { transform: translateX(0) perspective(900px) rotateY(0deg) scale(1); opacity: 1 }
         100%{ transform: translateX(-10%) perspective(900px) rotateY(-44deg) scale(.8); opacity: 0 }
     }
+
+    .Fast> .Tool_fall_In_Shop {
+        animation           : Tool_fall_In_Shop .4s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_In_Shop {
+        0%  { transform: translateY(-30%) perspective(900px) rotateX(-54deg) scale(.8); opacity: 0 }
+        100%{ transform: translateY(0) perspective(900px) rotateX(0deg) scale(1); opacity: 1 }
+    }
+
+    .Fast> .Tool_fall_Out_Shop {
+        animation           : Tool_fall_Out_Shop .4s;
+        animation-fill-mode : both;
+    }
+    @keyframes Tool_fall_Out_Shop {
+        0%  { transform: translateY(0) perspective(900px) rotateX(0deg) scale(1); opacity: 1 }
+        100%{ transform: translateY(-30%) perspective(900px) rotateX(-54deg) scale(.8); opacity: 0 }
+    }
+
 
 </style>
 
