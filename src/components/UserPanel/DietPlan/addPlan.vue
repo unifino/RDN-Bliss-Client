@@ -4,7 +4,7 @@
         <div id="mainWrapper">
             <part_1 />
             <part_2 />
-            <!-- <Navigator :Titels="Titles" :slider="slider" />  -->
+            <Navigator :slider="slider" /> 
         </div>
         
         <Buttons />
@@ -23,12 +23,14 @@ import * as Tools                           from '@/mixins/Tools';
 import part_1                               from '@/components/UserPanel/DietPlan/new/part_1.vue'
 import part_2                               from '@/components/UserPanel/DietPlan/new/part_2.vue'
 import Buttons                              from '@/components/UserPanel/DietPlan/new/newButtons.vue'
+import Navigator                            from '@/components/UserPanel/DietPlan/new/myNavigator.vue'
 
 const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
     const planBox = ref<HTMLElement>( {} as HTMLElement )
+    const pageCount = 3
 
 // -- =====================================================================================
 
@@ -38,12 +40,10 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const slider = ( act: "N" | "P" ) => {
-        // const cfi = store.getters.pageSlide.gpx
-        // const nfi = ( cfi + ( act === "N" ? 1 : -1 ) + Titles.value.length ) % Titles.value.length
-        // Titles.value[ cfi ].focus = false
-        // Titles.value[ nfi ].focus = true
-        // const mov = act === "N" ? "R" : "L" 
-        // store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.CreateNewPatient, gpx: nfi, move: mov } )
+        const cfi = store.getters.pageSlide.gpx
+        const nfi = ( cfi + ( act === "N" ? 1 : -1 ) + pageCount ) % pageCount
+        const mov = act === "N" ? "R" : "L" 
+        store.commit( TS.Mutates.pageSlide, { origin: TS.UserTools.CreateNewPlan, gpx: nfi, move: mov } )
     }
 
 // -- =====================================================================================

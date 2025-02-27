@@ -72,7 +72,7 @@ const store: TS.Store = useStore()
         font-weight: bold;
         font-family: PoiretOne;
         text-align: center;
-        padding: 95px 0 15px 0;
+        padding: 75px 0 15px 0;
     }
 
     #methodsWrapper, #nameWrapper{ 

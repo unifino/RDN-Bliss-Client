@@ -11,20 +11,9 @@
                 />
             </div>
 
-            <div class="item2" >
-                <select v-model="selectedAge" :class="'date' + (selectedAge === 'Group Age' ? '' : ' set')" >
-                    <option 
-                        v-for="(a,i) in ageGroups" :key="i"
-                        :value="a"
-                        :selected="a === 'Group Age' ? true : false"
-                        :disabled="a === 'Group Age' ? true : false"
-                    >
-                        {{ a }}
-                    </option>
-                </select>
-            </div>
             <div class="item3">
-                <div>
+                
+                <div id="hw_Wrapper">
                     <div class="hw_Field">
                         <div class="hw_title">Height</div>
                         <input class="hw_input" ref="height" type="text" />
@@ -36,6 +25,18 @@
                         <div class="hw_unit">kg</div>
                     </div>
                 </div>
+
+                <select v-model="selectedAge" :class="'date' + (selectedAge === 'Group Age' ? '' : ' set')" >
+                    <option 
+                        v-for="(a,i) in ageGroups" :key="i"
+                        :value="a"
+                        :selected="a === 'Group Age' ? true : false"
+                        :disabled="a === 'Group Age' ? true : false"
+                    >
+                        {{ a }}
+                    </option>
+                </select>
+
             </div>
         </div>  
     </div>
@@ -114,7 +115,7 @@ const store: TS.Store = useStore()
     #mainWrapper{
         text-align: center;
         display: grid;
-        grid-template-columns: 1fr 1.1  fr; 
+        grid-template-columns: 1fr 1.3fr; 
         grid-template-rows: 1fr 1fr;
         height: 100%;
     }
@@ -133,13 +134,13 @@ const store: TS.Store = useStore()
     }
 
     .item2 {
-        grid-column: 2;
-        grid-row: 1;   
+        grid-column: 1;
+        grid-row: 2;   
     }
 
     .item3 {
         grid-column: 2;
-        grid-row: 2;
+        grid-row: 1;
         float: right;
     }
   
@@ -170,7 +171,9 @@ const store: TS.Store = useStore()
         filter: none;
     }
 
-    .item2>.date, .item2>.field{
+    #hw_Wrapper{ margin: 30px; padding-top: 65px; }
+
+    .item3>.date, .item3>.field{
         background-color: #F0F0F0;
         font-family: Oswald;
         font-size: 17px;
@@ -183,7 +186,7 @@ const store: TS.Store = useStore()
         box-shadow: 0 0 1px 0px #58585b;
         padding: 0 20px;
     }
-    .item2>.set, .item2> input:valid{
+    .item3>.set, .item2> input:valid{
         background-color: #a8d976;
         color: #35393c;
     } 
