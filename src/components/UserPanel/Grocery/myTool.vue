@@ -1,7 +1,7 @@
 <template>
-    <div id="wholeWrapper" ref="grocery">
+    <div id="wholeWrapper" ref="grocery" @click="exit">
         
-        <div id="mainWrapper" @click="exit">Hatef</div> 
+        <bigGrocery />
 
     </div>
 </template>
@@ -14,6 +14,7 @@ import { ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as Tools                           from '@/mixins/Tools';
+import bigGrocery                           from '@/components/UserPanel/Grocery/bigGrocery.vue'
 
 const store: TS.Store = useStore()
 
@@ -34,7 +35,7 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-store.watch(
+    store.watch(
         getters => getters.userTool,
         ( nV, oV ) => {
             if ( nV !== oV ) {
@@ -58,19 +59,6 @@ store.watch(
         display: none;
     }
 
-    #mainWrapper{
-        background-color: #e6e3e3;
-        height: 620px;
-        width: 845px;
-        border: solid 40px #e6e3e3;
-        border-width: 10px 20px 20px 20px;
-        border-radius: 23px;
-        box-shadow: 0 0 7px 1px #babbbb;
-        position: relative;
-        float: left;
-        overflow: hidden;
-    }
-
     .Fast> .Tool_fall_In {
         animation           : Tool_fall_In .4s;
         animation-fill-mode : both;
@@ -88,7 +76,6 @@ store.watch(
         0%  { transform: translateY(0) perspective(900px) rotateX(0deg) scale(1); opacity: 1 }
         100%{ transform: translateY(-30%) perspective(900px) rotateX(-54deg) scale(.8); opacity: 0 }
     }
-   
 
 </style>
 

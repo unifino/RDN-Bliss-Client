@@ -1,7 +1,6 @@
 <template>
     <div ref="part_x" id="part_x">
         <div id="tableWrapper">
-            
             <div class="item1" >Breakfast</div>
             <div class="item2" >Lunch</div>
             <div class="item3" >Snak</div>
@@ -77,7 +76,7 @@ const store: TS.Store = useStore()
 
     #tableWrapper{
         margin: auto;
-        margin-top: 4%;
+        margin-top: 3%;
         text-align: center;
         display: grid;
         grid-template-columns: 1fr 7fr; 
@@ -92,11 +91,10 @@ const store: TS.Store = useStore()
         display: flex;
         align-items: center;
         padding: 0 0 0 10px;
-        /* justify-content: center; */
         border-style: solid;
         border-color: #787775;
         color: #072622;
-
+        height: 100px;
     }
     .item1{
         border-width: 0 1px 1px 0;
@@ -168,6 +166,7 @@ const store: TS.Store = useStore()
         cursor: pointer;
     }
     .add:hover{ color: #1777bc }
+    
 </style>
 
 // -- =====================================================================================

@@ -1,7 +1,7 @@
 <template>
     <div id="userPanelBox" :style="`z-index: ${+(store.getters.ort === TS.Orts.UserPanel)};`">
 
-        <Glocery     :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Grocery)};`"/>
+        <Grocery     :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Grocery)};`"/>
         <MyPatients  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Patients)};`"/>
         <CreateNPt   :style="`z-index: ${+(store.getters.userTool === TS.UserTools.CreateNewPatient)};`"/>
         <MyCalender  :style="`z-index: ${+(store.getters.userTool === TS.UserTools.Calender)};`"/>
@@ -24,7 +24,7 @@
 
 import UserButtons                          from '@/components/UserPanel/userButtons.vue'
 import MyPatients                           from '@/components/UserPanel/Patient/myTool.vue'
-import Glocery                              from '@/components/UserPanel/Glocery/bigGlocery.vue'
+import Grocery                              from '@/components/UserPanel/Grocery/myTool.vue'
 import CreateNPt                            from '@/components/UserPanel/Patient/addPatient.vue'
 import MyCalender                           from '@/components/UserPanel/myCalender.vue'
 import MyStats                              from '@/components/UserPanel/myStats.vue'

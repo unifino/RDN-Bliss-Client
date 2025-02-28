@@ -24,16 +24,16 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
+    defineProps( {
+        Titels: Object,
+        slider: Function
+    } )
+
     const buttons = [ 
         { title: "Save New Plan", fnc: () => store.commit( TS.Mutates.Flag_savePlan, !store.getters.Flag_savePlan ) },
         { title: "Reset Form", fnc: () => resetForm() },
         { title: "Back to Previous Menu", fnc: () => store.commit( TS.Mutates.userTool, TS.UserTools.DietPlans ), marin: true },
     ]
-
-    defineProps( {
-        Titels: Object,
-        slider: Function
-    } )
 
     const resetForm = async () => {
         store.commit( TS.Mutates.userTool, TS.UserTools.null )

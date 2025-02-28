@@ -32,7 +32,8 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
     const select = ( i: number ) => {
-        i++
+        console.log(i);
+        
         slider()
     }
 
