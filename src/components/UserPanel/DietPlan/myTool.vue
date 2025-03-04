@@ -4,7 +4,7 @@
         <MyPlansList />
 
         <div class="buttonsWrapper">
-            <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }}</div>
+            <div class="button" v-for="(b,i) of buttons" :key="i" @click="b.fnc">{{ b.title }} </div>
         </div>  
 
     </div>

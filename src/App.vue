@@ -58,8 +58,8 @@ const store: TS.Store = useStore()
             store.dispatch( TS.Acts.Flag_logged_in, true )
             store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
             store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
-            // await new Promise( _ => setTimeout( _, 800 ) )
-            // store.dispatch( TS.Acts.userTool, TS.UserTools.DietPlans )
+            await new Promise( _ => setTimeout( _, 800 ) )
+            store.dispatch( TS.Acts.userTool, TS.UserTools.Grocery )
         }
 
         
@@ -170,6 +170,8 @@ const store: TS.Store = useStore()
         white-space: pre-wrap;
     }
     .button:hover{ color: #08cee0; }
+
+    .buttonHasMargin{ margin-top: 50px }
 
     .page_init{ display: none }
     

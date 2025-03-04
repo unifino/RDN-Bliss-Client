@@ -1,13 +1,11 @@
 <template>
         
     <div id="mainWrapper" ref="bigGrocery">
+        <div id="buttonsWrapper">
+            <Handler class="handler" v-for="(b,i) in CTS.Basket" :key="i" :basket="b" />
+        </div>
         <div id="basketsWrapper">
-            <oneBasket category="Protein" ext-class="first"/>
-            <oneBasket category="Vegtable" />
-            <oneBasket category="Fruit" />
-            <oneBasket category="Carbo" />
-            <oneBasket category="Fat" />
-            <oneBasket category="Beverage" ext-class="last" />
+            <oneBasket v-for="(b,i) in CTS.Basket" :key="i" :basket="b" />
         </div>
     </div> 
 
@@ -18,17 +16,13 @@
 <script setup lang="ts">
 
 import { ref }                              from 'vue'
-// import { useStore }                         from 'vuex'
-// import * as TS                              from '@/types/types'
+import * as CTS                             from '@/types/common'
+import Handler                              from '@/components/UserPanel/Grocery/basketHandler.vue'
 import oneBasket                            from '@/components/UserPanel/Grocery/oneBasket.vue'
-
-// const store: TS.Store = useStore()
 
 // -- =====================================================================================
     
     const bigGrocery = ref<HTMLElement>( {} as HTMLElement )
-
-// -- =====================================================================================
 
 </script>
 
@@ -46,15 +40,21 @@ import oneBasket                            from '@/components/UserPanel/Grocery
         box-shadow: 0 0 7px 1px #babbbb;
         position: relative;
         float: left;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
     }
 
+    #buttonsWrapper{
+        height: 96%;
+        width: 130px;
+        margin-top: 2%;
+        overflow-y: auto;
+        float: left;
+    }
     #basketsWrapper{
-        height: 87%;
+        height: 92%;
+        width: calc( 100% - 150px);
         margin-top: 3%;
         overflow-y: auto;
+        float: right;
     }
 
 </style>

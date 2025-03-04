@@ -43,6 +43,7 @@ const state: TS.State = {
     },
     
     H010IDx: 0,
+    GroceryBasket: undefined,
 
     Flag_plan_B: false,
     Flag_logged_in: false,
@@ -79,6 +80,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
     [ TS.Mutates._np_GIF ]          ( state, payload ) { state.newPatient.GI_F = payload },
 
     [ TS.Mutates.H010IDx ]          ( state, payload ) { state.H010IDx = payload },
+    [ TS.Mutates.GroceryBasket ]    ( state, payload ) { state.GroceryBasket = payload },
     
     [ TS.Mutates.Flag_plan_B ]      ( state, payload ) { state.Flag_plan_B = payload },
     [ TS.Mutates.Flag_logged_in ]   ( state, payload ) { state.Flag_logged_in = payload },
@@ -115,6 +117,7 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
     [ TS.Acts._np_GIF ]         (c,p) { store.commit( TS.Mutates._np_GIF, p) },
 
     [ TS.Acts.H010IDx ]         (c,p) { store.commit( TS.Mutates.H010IDx, p ) },
+    [ TS.Acts.GroceryBasket ]   (c,p) { store.commit( TS.Mutates.GroceryBasket, p ) },
     
     [ TS.Acts.Flag_plan_B ]     (c,p) { store.commit( TS.Mutates.Flag_plan_B, p ) },
     [ TS.Acts.Flag_logged_in ]  (c,p) { store.commit( TS.Mutates.Flag_logged_in, p ) },
@@ -142,6 +145,7 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
     newPatient:         state => state.newPatient,
 
     H010IDx:            state => state.H010IDx,
+    GroceryBasket:      state => state.GroceryBasket,
     
     Flag_plan_B:        state => state.Flag_plan_B,
     Flag_logged_in:     state => state.Flag_logged_in,

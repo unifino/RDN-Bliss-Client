@@ -58,6 +58,7 @@ export type State = {
 
     // .. declare minor data
     H010IDx: number
+    GroceryBasket: CTS.Basket|undefined
     
     // .. declare Flags
     Flag_plan_B: boolean
@@ -104,7 +105,8 @@ export enum Mutates {
     _np_GIF         = "New Patient GIFs",
 
     H010IDx         = "H010Panel_ID",
-    
+    GroceryBasket   = "GroceryBasket",
+
     Flag_plan_B     = "Flag_plan_B",
     Flag_logged_in  = "Flag_logged_in",
     Flag_speed      = "Flag_speed",
@@ -118,34 +120,35 @@ export enum Mutates {
 
 // .. declare Mutations
 export type MyMutations<S = State> = {
-    [ Mutates.ProcessChange ]   ( state: S, payload: Processes ):       void;
-    [ Mutates.LanguageChange ]  ( state: S, payload: Languages ):       void;
-    [ Mutates.OrtChange ]       ( state: S, payload: Orts ):            void;
-    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):          void;
+    [ Mutates.ProcessChange ]   ( state: S, payload: Processes ):                   void;
+    [ Mutates.LanguageChange ]  ( state: S, payload: Languages ):                   void;
+    [ Mutates.OrtChange ]       ( state: S, payload: Orts ):                        void;
+    [ Mutates.SpeedChange ]     ( state: S, payload: Speeds ):                      void;
     
-    [ Mutates.userType ]        ( state: S, payload: CTS.UserTypes ):   void;
-    [ Mutates.userTool ]        ( state: S, payload: UserTools ):       void;
-    [ Mutates.pageSlide ]       ( state: S, payload: PageSlide ):       void;
+    [ Mutates.userType ]        ( state: S, payload: CTS.UserTypes ):               void;
+    [ Mutates.userTool ]        ( state: S, payload: UserTools ):                   void;
+    [ Mutates.pageSlide ]       ( state: S, payload: PageSlide ):                   void;
     
-    [ Mutates._np_Gender ]      ( state: S, payload: CTS.Gender ):      void;
-    [ Mutates._np_FirstName ]   ( state: S, payload: string ):          void;
-    [ Mutates._np_LastName ]    ( state: S, payload: string ):          void;
-    [ Mutates._np_BirthDay ]    ( state: S, payload: string ):          void;
-    [ Mutates._np_MS ]          ( state: S, payload: CTS.MS ):          void;
-    [ Mutates._np_Education ]   ( state: S, payload: CTS.Education ):   void;
-    [ Mutates._np_Occupation ]  ( state: S, payload: string ):          void;
-    [ Mutates._np_GIF ]         ( state: S, payload: CTS.GI_F ):        void;
+    [ Mutates._np_Gender ]      ( state: S, payload: CTS.Gender ):                  void;
+    [ Mutates._np_FirstName ]   ( state: S, payload: string ):                      void;
+    [ Mutates._np_LastName ]    ( state: S, payload: string ):                      void;
+    [ Mutates._np_BirthDay ]    ( state: S, payload: string ):                      void;
+    [ Mutates._np_MS ]          ( state: S, payload: CTS.MS ):                      void;
+    [ Mutates._np_Education ]   ( state: S, payload: CTS.Education ):               void;
+    [ Mutates._np_Occupation ]  ( state: S, payload: string ):                      void;
+    [ Mutates._np_GIF ]         ( state: S, payload: CTS.GI_F ):                    void;
     
-    [ Mutates.H010IDx ]         ( state: S, payload: number ):          void;
+    [ Mutates.H010IDx ]         ( state: S, payload: number ):                      void;
+    [ Mutates.GroceryBasket ]   ( state: S, payload: CTS.Basket|undefined ):        void;
     
-    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_H010_Hand ]  ( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_H100_Alert ] ( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_savePatient ]( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_savePlan ]   ( state: S, payload: boolean ):         void;
-    [ Mutates.Flag_resetForm ]  ( state: S, payload: boolean ):         void;
+    [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_speed ]      ( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_H010_Hand ]  ( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_H100_Alert ] ( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_savePatient ]( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_savePlan ]   ( state: S, payload: boolean ):                     void;
+    [ Mutates.Flag_resetForm ]  ( state: S, payload: boolean ):                     void;
 }
 
 // -- =====================================================================================
@@ -171,6 +174,7 @@ export enum Acts {
     _np_GIF         = "New Patient GIFs",
 
     H010IDx         = "H010Panel_ID",
+    GroceryBasket   = "GroceryBasket",
     
     Flag_plan_B     = "Flag_plan_B",
     Flag_logged_in  = "Flag_logged_in",
@@ -185,34 +189,35 @@ export enum Acts {
 
 // .. declare Action Interface
 export interface MyActions {
-    [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ):    void;
-    [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ):    void;
-    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):         void;
-    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):       void;
+    [ Acts.ProcessChange ]      ( {dispatch}: AAC, payload: Processes ):            void;
+    [ Acts.LanguageChange ]     ( {dispatch}: AAC, payload: Languages ):            void;
+    [ Acts.OrtChange ]          ( {dispatch}: AAC, payload: Orts ):                 void;
+    [ Acts.SpeedChange ]        ( {dispatch}: AAC, payload: Speeds ):               void;
     
-    [ Acts.userType ]           ( {dispatch}: AAC, payload: CTS.UserTypes ):void;
-    [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):    void;
-    [ Acts.pageSlide ]          ( {dispatch}: AAC, payload: PageSlide ):    void;
+    [ Acts.userType ]           ( {dispatch}: AAC, payload: CTS.UserTypes ):        void;
+    [ Acts.userTool ]           ( {dispatch}: AAC, payload: UserTools ):            void;
+    [ Acts.pageSlide ]          ( {dispatch}: AAC, payload: PageSlide ):            void;
     
-    [ Acts._np_Gender ]         ( {dispatch}: AAC, payload: CTS.Gender ):   void;
-    [ Acts._np_FirstName ]      ( {dispatch}: AAC, payload: string ):       void;
-    [ Acts._np_LastName ]       ( {dispatch}: AAC, payload: string ):       void;
-    [ Acts._np_BirthDay ]       ( {dispatch}: AAC, payload: string ):       void;
-    [ Acts._np_MS ]             ( {dispatch}: AAC, payload: CTS.MS ):       void;
-    [ Acts._np_Education ]      ( {dispatch}: AAC, payload: CTS.Education ):void;
-    [ Acts._np_Occupation ]     ( {dispatch}: AAC, payload: string ):       void;
-    [ Acts._np_GIF ]            ( {dispatch}: AAC, payload: CTS.GI_F ):     void;
+    [ Acts._np_Gender ]         ( {dispatch}: AAC, payload: CTS.Gender ):           void;
+    [ Acts._np_FirstName ]      ( {dispatch}: AAC, payload: string ):               void;
+    [ Acts._np_LastName ]       ( {dispatch}: AAC, payload: string ):               void;
+    [ Acts._np_BirthDay ]       ( {dispatch}: AAC, payload: string ):               void;
+    [ Acts._np_MS ]             ( {dispatch}: AAC, payload: CTS.MS ):               void;
+    [ Acts._np_Education ]      ( {dispatch}: AAC, payload: CTS.Education ):        void;
+    [ Acts._np_Occupation ]     ( {dispatch}: AAC, payload: string ):               void;
+    [ Acts._np_GIF ]            ( {dispatch}: AAC, payload: CTS.GI_F ):             void;
 
-    [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):       void;
+    [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):               void;
+    [ Acts.GroceryBasket ]      ( {dispatch}: AAC, payload: CTS.Basket|undefined ): void;
         
-    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_H010_Hand ]     ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_H100_Alert ]    ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_savePatient ]   ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_savePlan ]      ( {dispatch}: AAC, payload: boolean ):      void;
-    [ Acts.Flag_resetForm ]     ( {dispatch}: AAC, payload: boolean ):      void;
+    [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_speed ]         ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_H010_Hand ]     ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_H100_Alert ]    ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_savePatient ]   ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_savePlan ]      ( {dispatch}: AAC, payload: boolean ):              void;
+    [ Acts.Flag_resetForm ]     ( {dispatch}: AAC, payload: boolean ):              void;
 }
 
 // -- =====================================================================================
@@ -229,6 +234,7 @@ export type MyGetters = {
     newPatient          ( state: State ): CTS.Patient
 
     H010IDx             ( state: State ): number
+    GroceryBasket       ( state: State ): CTS.Basket|undefined
     
     Flag_plan_B         ( state: State ): boolean
     Flag_logged_in      ( state: State ): boolean

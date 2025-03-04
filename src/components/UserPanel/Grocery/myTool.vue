@@ -1,8 +1,18 @@
 <template>
-    <div id="wholeWrapper" ref="grocery" @click="exit">
+    <div id="wholeWrapper" ref="grocery">
         
         <bigGrocery />
 
+        <div class="buttonsWrapper">
+            <div 
+                :class="'button' + ( b.marin ? ' buttonHasMargin' : '')"
+                v-for="(b,i) of buttons" :key="i" 
+                @click="b.fnc" 
+            >
+                {{ b.title }}
+            </div>
+        </div>
+        
     </div>
 </template>
 
@@ -23,15 +33,20 @@ const store: TS.Store = useStore()
     const grocery = ref<HTMLElement>( {} as HTMLElement )
     let from: TS.UserTools
 
+    const buttons = [ 
+        { title: "Add New Item", fnc: () => exit() },
+        { title: "Back to Previous Menu", fnc: () => exit(), marin: true },
+    ]
+
 // -- =====================================================================================
 
-    const _out = () => Tools.userAnime( grocery, "Out" )
+    const _out = () => {
+        Tools.userAnime( grocery, "Out" )
+        store.commit( TS.Mutates.GroceryBasket, undefined )
+    }
     const _in = async () => Tools.userAnime( grocery, "In", false, 200 )
 
-    const exit = () => {
-        store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPatient )
-        store.commit( TS.Mutates.userTool, from )
-    }
+    const exit = () => store.commit( TS.Mutates.userTool, from )
 
 // -- =====================================================================================
 

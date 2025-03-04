@@ -1,11 +1,9 @@
 <template>
     <div class="buttonsWrapper">
         <div
-            class="button"
-            v-for="(b,i) of buttons"
-            :key="i"
+            :class="'button' + ( b.marin ? ' buttonHasMargin' : '')"
+            v-for="(b,i) of buttons" :key="i"
             @click="b.fnc"
-            :style="b.marin ? 'margin-top:50px':''"
         >
             {{ b.title }}
         </div>
