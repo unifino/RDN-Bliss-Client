@@ -25,8 +25,6 @@ export type PageSlide = { origin: UserTools, gpx: number, move: "R"|"L" }
 // ..  declare Processes
 export enum Processes { "Reading", "Registering", "Login" }
 
-export type GBi = [ CTS.Basket, number ] 
-
 // .. declare UserTools
 export enum UserTools { 
     Grocery,
@@ -61,7 +59,7 @@ export type State = {
     // .. declare minor data
     H010IDx: number
     GroceryBasket: CTS.Basket|undefined
-    newGBi: GBi,
+    newGBi: CTS.GBi,
     
     // .. declare Flags
     Flag_plan_B: boolean
@@ -144,7 +142,7 @@ export type MyMutations<S = State> = {
     
     [ Mutates.H010IDx ]         ( state: S, payload: number ):                      void;
     [ Mutates.GroceryBasket ]   ( state: S, payload: CTS.Basket|undefined ):        void;
-    [ Mutates.newGBi ]          ( state: S, payload: GBi ):                         void;
+    [ Mutates.newGBi ]          ( state: S, payload: CTS.GBi ):                     void;
     
     [ Mutates.Flag_plan_B ]     ( state: S, payload: boolean ):                     void;
     [ Mutates.Flag_logged_in ]  ( state: S, payload: boolean ):                     void;
@@ -215,7 +213,7 @@ export interface MyActions {
 
     [ Acts.H010IDx ]            ( {dispatch}: AAC, payload: number ):               void;
     [ Acts.GroceryBasket ]      ( {dispatch}: AAC, payload: CTS.Basket|undefined ): void;
-    [ Acts.newGBi ]             ( {dispatch}: AAC, payload: GBi ):                  void;
+    [ Acts.newGBi ]             ( {dispatch}: AAC, payload: CTS.GBi ):              void;
         
     [ Acts.Flag_plan_B ]        ( {dispatch}: AAC, payload: boolean ):              void;
     [ Acts.Flag_logged_in ]     ( {dispatch}: AAC, payload: boolean ):              void;
@@ -242,7 +240,7 @@ export type MyGetters = {
 
     H010IDx             ( state: State ): number
     GroceryBasket       ( state: State ): CTS.Basket|undefined
-    newGBi              ( state: State ): GBi
+    newGBi              ( state: State ): CTS.GBi
             
     Flag_plan_B         ( state: State ): boolean
     Flag_logged_in      ( state: State ): boolean

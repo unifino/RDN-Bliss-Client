@@ -335,6 +335,7 @@ const store: TS.Store = useStore()
     .item:hover{ background-color: #edebdd }
 
     .BI_name{
+        text-align: left;
         font-size: 18px;
         padding: 10px 10px;
         overflow: auto;

@@ -34,7 +34,11 @@ const store: TS.Store = useStore()
 
     const show = ref<boolean>( false )
 
-    const addToPlan_1 = ( i: number ) => store.commit( TS.Mutates.newGBi, [ CTS.Basket[ props.basket ], i ] )
+    const addToPlan_1 = ( item: number ) => {
+        const meal = store.getters.newGBi.meal
+        const basket = CTS.Basket[ props.basket ]
+        store.commit( TS.Mutates.newGBi, { meal, basket, item } )
+    } 
 
 // -- =====================================================================================
 

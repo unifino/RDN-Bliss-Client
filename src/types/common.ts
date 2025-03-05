@@ -98,6 +98,8 @@ export enum UserTypes { "Dietitian", "Patient", null }
 
 // -- =====================================================================================
 
+export type GBi = { meal?: Meal, basket?: Basket, item?: number } 
+
 export enum Basket { 
     Protein = "Protein", 
     Vegtable = "Vegtable", 

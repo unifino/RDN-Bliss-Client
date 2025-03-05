@@ -44,7 +44,7 @@ const state: TS.State = {
     
     H010IDx: 0,
     GroceryBasket: undefined,
-    newGBi: [ CTS.Basket.Beverage, NaN ],
+    newGBi: {},
 
     Flag_plan_B: false,
     Flag_logged_in: false,

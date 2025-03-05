@@ -62,7 +62,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.newGBi,
-        () => exit()
+        ( nV ) => { if ( nV.basket !== undefined && nV.item !== undefined ) exit() }
     )
 
 // -- =====================================================================================

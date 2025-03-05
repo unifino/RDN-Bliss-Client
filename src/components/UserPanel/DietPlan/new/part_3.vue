@@ -2,13 +2,17 @@
     <div ref="part_x" id="part_x">
         <div id="tableWrapper">
 
-            <div v-for="(m,i,x) of CTS.Meal" class="mealRow" :key="i">
-                <div class="mealTitle">{{ m }}</div>
-                <div class="add" @click="add">+</div>
+            <div v-for="(meal,i,c) of CTS.Meal" class="mealRow" :key="i">
+                <div class="mealTitle">{{ meal }}</div>
+                <div class="add" @click="addToPlan_0(meal)">+</div>
                 <div class="rail">
-                    <div class="items" v-for="(x,i) of Breakfast" :key="i">{{ "x.name" }}</div>
+                    <div class="basketItem" v-for="(item,j) of ITEMS[meal]" :key="j">
+                        <div class="BI_name">{{ item.name }}</div>
+                        <div class="BI_size">{{ item.size }}</div>
+                        <div class="BI_cal">{{ item.cal }}</div>
+                    </div>
                 </div>
-                <div v-if="x<Object.keys(CTS.Meal).length-1" class="divider" />
+                <div v-if="c < Object.keys(CTS.Meal).length-1" class="divider" />
             </div>
         </div>  
     </div>
@@ -18,7 +22,7 @@
 
 <script setup lang="ts">
 
-import { ref }                              from 'vue'
+import { ref, Ref }                              from 'vue'
 import { useStore }                         from 'vuex'
 import * as TS                              from '@/types/types'
 import * as CTS                             from '@/types/common'
@@ -28,21 +32,115 @@ const store: TS.Store = useStore()
 
 // -- =====================================================================================
 
-    const ipx = 2
-    const part_x = ref<HTMLElement>( {} as HTMLElement )
-    const Breakfast = ref<string[]>([])
+const Baskets = {
+
+[ CTS.Basket.Protein ]: [
+{ icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+{ icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+{ icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+{ icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" },
+{ icon: "", name: "Egg", size: "1 pcs", cal: "120 kcal" },
+{ icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+{ icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+    { icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Egg", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+    { icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" }, { icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+    { icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Egg", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+    { icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" }, { icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+    { icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Egg", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Chicken", size: "100 g", cal: "30 kcal" },
+    { icon: "", name: "Fish", size: "90 g", cal: "10 kcal" },
+    { icon: "", name: "Hot Dog", size: "200 g", cal: "300 kcal" },
+    { icon: "", name: "Burger", size: "100 g", cal: "400 kcal" },
+    { icon: "", name: "Pizza", size: "50 g", cal: "40 kcal" },
+],
+[ CTS.Basket.Fruit ]: [
+    { icon: "", name: "Apple", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Lemon", size: "1 pcs", cal: "120 kcal" },
+
+],
+[ CTS.Basket.Vegtable ]: [
+    { icon: "", name: "Pepper", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Carrot", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Vegtable", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Vegtable", size: "1 pcs", cal: "120 kcal" },
+
+],
+[ CTS.Basket.Carbo ]: [
+    { icon: "", name: "Bread", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Cake", size: "200 g", cal: "350 kcal" },
+    { icon: "", name: "Soap", size: "1 pcs", cal: "120 kcal" },
+    { icon: "", name: "Other", size: "1 pcs", cal: "120 kcal" },
+
+],
+[ CTS.Basket.Fat ]: [
+    { icon: "", name: "Cheese", size: "10 g", cal: "120 kcal" },
+    { icon: "", name: "Oil", size: "10 g", cal: "120 kcal" },
+    { icon: "", name: "Ice Cream", size: "200 g", cal: "350 kcal" },
+],
+[ CTS.Basket.Beverage ]: [
+   { icon: "", name: "Water", size: "1 glass", cal: "0 kcal" },
+   { icon: "", name: "Coffee", size: "1 cup", cal: "0 kcal" },
+   { icon: "", name: "Tea", size: "1 cup", cal: "0 kcal" },
+   { icon: "", name: "Cola", size: "300 cc", cal: "100 kcal" },
+   { icon: "", name: "Juice", size: "300 cc", cal: "100 kcal" },
+   { icon: "", name: "Other", size: "300 cc", cal: "100 kcal" },
+]
+
+}
 
 // -- =====================================================================================
 
-    const add = async () => {
-       store.commit( TS.Mutates.userTool, TS.UserTools.Grocery )
+    const ipx = 2
+    const part_x = ref<HTMLElement>( {} as HTMLElement )
+    type item = { name: string, size: string, cal: string }
+    const ITEMS: Ref<{ [key in CTS.Meal]: item[] }> = ref( {
+        [ CTS.Meal.Breakfast ]: [],
+        [ CTS.Meal.Lunch ]: [],
+        [ CTS.Meal.Snak ]: [],
+        [ CTS.Meal.Dinner ]: [],
+        [ CTS.Meal.Bedtime ]: []
+    } )
+
+// -- =====================================================================================
+
+    const addToPlan_0 = async ( meal: CTS.Meal ) => {
+        store.commit( TS.Mutates.newGBi, { meal, basket: undefined, item: undefined } )
+        store.commit( TS.Mutates.userTool, TS.UserTools.Grocery )
     }
 
 // -- =====================================================================================
 
     const addToPlan_2 = () => {
-        console.log("reset");
-        Breakfast.value.push( "c" )
+        const myGBi = store.getters.newGBi
+        if ( myGBi.meal ) ITEMS.value[ myGBi.meal ].push( { 
+            name: Baskets[ myGBi.basket as CTS.Basket ][ myGBi.item as number ].name, 
+            size: Baskets[ myGBi.basket as CTS.Basket ][ myGBi.item as number ].size, 
+            cal: Baskets[ myGBi.basket as CTS.Basket ][ myGBi.item as number ].cal, 
+        } )
     }
 
     // -- =====================================================================================
@@ -76,7 +174,7 @@ const store: TS.Store = useStore()
 
     store.watch(
         getters => getters.newGBi,
-        () => addToPlan_2()
+        ( nV ) => { if ( nV.basket !== undefined && nV.item !== undefined ) addToPlan_2() }
     )
 
 // -- =====================================================================================
