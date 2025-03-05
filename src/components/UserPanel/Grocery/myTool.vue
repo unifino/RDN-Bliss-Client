@@ -60,6 +60,11 @@ const store: TS.Store = useStore()
         }
     )
 
+    store.watch(
+        getters => getters.newGBi,
+        () => exit()
+    )
+
 // -- =====================================================================================
 
 </script>

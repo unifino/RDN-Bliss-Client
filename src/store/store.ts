@@ -44,6 +44,7 @@ const state: TS.State = {
     
     H010IDx: 0,
     GroceryBasket: undefined,
+    newGBi: [ CTS.Basket.Beverage, NaN ],
 
     Flag_plan_B: false,
     Flag_logged_in: false,
@@ -81,6 +82,7 @@ const mutations: MutationTree<TS.State> & TS.MyMutations = {
 
     [ TS.Mutates.H010IDx ]          ( state, payload ) { state.H010IDx = payload },
     [ TS.Mutates.GroceryBasket ]    ( state, payload ) { state.GroceryBasket = payload },
+    [ TS.Mutates.newGBi ]           ( state, payload ) { state.newGBi = payload },
     
     [ TS.Mutates.Flag_plan_B ]      ( state, payload ) { state.Flag_plan_B = payload },
     [ TS.Mutates.Flag_logged_in ]   ( state, payload ) { state.Flag_logged_in = payload },
@@ -118,6 +120,7 @@ const actions: ActionTree<TS.State, TS.State> & TS.MyActions = {
 
     [ TS.Acts.H010IDx ]         (c,p) { store.commit( TS.Mutates.H010IDx, p ) },
     [ TS.Acts.GroceryBasket ]   (c,p) { store.commit( TS.Mutates.GroceryBasket, p ) },
+    [ TS.Acts.newGBi ]          (c,p) { store.commit( TS.Mutates.newGBi, p ) },
     
     [ TS.Acts.Flag_plan_B ]     (c,p) { store.commit( TS.Mutates.Flag_plan_B, p ) },
     [ TS.Acts.Flag_logged_in ]  (c,p) { store.commit( TS.Mutates.Flag_logged_in, p ) },
@@ -146,7 +149,8 @@ const getters: GetterTree<TS.State, TS.State> & TS.MyGetters = {
 
     H010IDx:            state => state.H010IDx,
     GroceryBasket:      state => state.GroceryBasket,
-    
+    newGBi:             state => state.newGBi,
+              
     Flag_plan_B:        state => state.Flag_plan_B,
     Flag_logged_in:     state => state.Flag_logged_in,
     Flag_speed:         state => state.Flag_speed,

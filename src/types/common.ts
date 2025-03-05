@@ -104,7 +104,15 @@ export enum Basket {
     Fruit = "Fruit", 
     Carbo = "Carbo", 
     Fat = "Fat", 
-    Beverage = "Beverage" 
+    Beverage = "Beverage",
+}
+
+export enum Meal {
+    Breakfast = "Breakfast",
+    Lunch = "Lunch",
+    Snak = "Snak",
+    Dinner = "Dinner",
+    Bedtime = "Bedtime",
 }
 
 // -- =====================================================================================

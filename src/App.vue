@@ -37,11 +37,11 @@ const store: TS.Store = useStore()
     onMounted ( () => {
 
         
-        // store.dispatch( TS.Acts.OrtChange, TS.Orts.Home )
+        // store.commit( TS.Mutates.OrtChange, TS.Orts.Home )
         
         // !  Losche es
-        store.dispatch( TS.Acts.userType, CTS.UserTypes.Dietitian )
-        store.dispatch( TS.Acts.ProcessChange, TS.Processes.Login )
+        store.commit( TS.Mutates.userType, CTS.UserTypes.Dietitian )
+        store.commit( TS.Mutates.ProcessChange, TS.Processes.Login )
         const userData: CTS.UserData = {} as CTS.UserData;
         userData.userType = CTS.UserTypes.Dietitian,
         userData.username = "unifino",
@@ -55,11 +55,12 @@ const store: TS.Store = useStore()
 
         const successLogin = async ( userData: CTS.UserData ) => {
             Tools.setNames( [ userData ] )
-            store.dispatch( TS.Acts.Flag_logged_in, true )
-            store.dispatch( TS.Acts.ProcessChange, TS.Processes.Reading )
-            store.dispatch( TS.Acts.OrtChange, TS.Orts.UserPanel )
-            await new Promise( _ => setTimeout( _, 800 ) )
-            store.dispatch( TS.Acts.userTool, TS.UserTools.Grocery )
+            store.commit( TS.Mutates.Flag_logged_in, true )
+            store.commit( TS.Mutates.ProcessChange, TS.Processes.Reading )
+            store.commit( TS.Mutates.OrtChange, TS.Orts.UserPanel )
+            await new Promise( _ => setTimeout( _, 600 ) )
+            store.commit( TS.Mutates.pageSlide, { gpx: 2, move: "R", origin: TS.UserTools.CreateNewPlan } )
+            store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPlan )
         }
 
         
@@ -314,6 +315,48 @@ const store: TS.Store = useStore()
         right: 0;
         color: #96a984;
     }
+
+    .basketItem{
+        color: #0a685b;
+        font-size: 14px;
+        width: 100px;
+        height: 70px;
+        border: solid #8d9294 2px;
+        border-radius: 8px;
+        margin: 3px;
+        cursor: pointer;
+        float: left;
+        font-family: Oswald;
+        font-weight: bold;
+        border: #dedede solid 2px;
+        background-color: #ededed;
+    }
+
+    .item:hover{ background-color: #edebdd }
+
+    .BI_name{
+        font-size: 18px;
+        padding: 10px 10px;
+        overflow: auto;
+        width: calc( 100% - 20px );
+    }
+    
+    .BI_size{
+        text-align: left;
+        width: 45%;
+        margin-left: 5%;
+        float: left;
+        color: #1777bc;
+    }
+
+    .BI_cal{
+        text-align: right;
+        margin-right: 5%;
+        width: 45%;
+        float: right;
+        color: chocolate;
+    }
+
 
 </style>
 

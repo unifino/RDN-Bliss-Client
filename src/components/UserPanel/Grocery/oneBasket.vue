@@ -1,10 +1,14 @@
 <template>
         
     <div id="basketWrapper">
-        <div :class="'item' + ( show ? ' show' : '' )" v-for="(x,i) of Baskets[ props.basket ]" :key="i">
-            <div class="name">{{ x.name }}</div>
-            <div class="size">{{ x.size }}</div>
-            <div class="cal">{{ x.cal }}</div>
+        <div
+            :class="'basketItem' + ( show ? ' show' : '' )"
+            v-for="(x,i) of Baskets[ props.basket ]" :key="i"
+            @click="addToPlan_1(i)"
+        >
+            <div class="BI_name">{{ x.name }}</div>
+            <div class="BI_size">{{ x.size }}</div>
+            <div class="BI_cal">{{ x.cal }}</div>
         </div>  
     </div>  
 
@@ -28,9 +32,11 @@ const store: TS.Store = useStore()
         extClass?: string
     }>()
 
-    // const myBasket = ref<HTMLElement>( {} as HTMLElement )
-    let from: TS.UserTools
     const show = ref<boolean>( false )
+
+    const addToPlan_1 = ( i: number ) => store.commit( TS.Mutates.newGBi, [ CTS.Basket[ props.basket ], i ] )
+
+// -- =====================================================================================
 
     const Baskets = {
 
@@ -111,21 +117,8 @@ const store: TS.Store = useStore()
         ]
 
     }
-// -- =====================================================================================
-
-    const exit = () => {
-        store.commit( TS.Mutates.userTool, TS.UserTools.CreateNewPatient )
-        store.commit( TS.Mutates.userTool, from )
-    }
 
 // -- =====================================================================================
-
-    store.watch(
-        getters => getters.userTool,
-        ( nV, oV ) => {
-            if ( nV !== oV ) if ( nV === TS.UserTools.Grocery ) from = oV
-        }
-    )
 
     store.watch(
         getters => getters.GroceryBasket,
@@ -142,49 +135,10 @@ const store: TS.Store = useStore()
 // -- =====================================================================================
 
 <style scoped>
+
+    .basketItem{ display: none }
     
-    .item{
-        color: #0a685b;
-        font-size: 14px;
-        width: 100px;
-        height: 70px;
-        border: solid #8d9294 2px;
-        border-radius: 8px;
-        margin: 3px;
-        cursor: pointer;
-        float: left;
-        font-family: Oswald;
-        font-weight: bold;
-        display: none;
-        border: #dedede solid 2px;
-        background-color: #ededed;
-    }
     .show{ display: block }
-
-    .item:hover{ background-color: #edebdd }
-
-    .name{
-        font-size: 18px;
-        padding: 10px 10px;
-        overflow: auto;
-        width: calc( 100% - 20px );
-    }
-    
-    .size{
-        text-align: left;
-        width: 45%;
-        margin-left: 5%;
-        float: left;
-        color: #1777bc;
-    }
-
-    .cal{
-        text-align: right;
-        margin-right: 5%;
-        width: 45%;
-        float: right;
-        color: chocolate;
-    }
 
 </style>
 
